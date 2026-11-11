@@ -55,13 +55,11 @@ Uzbek, Karakalpak, Russian and English interface.
 
 ## Building
 
-1. Get your own `api_id` and `api_hash` at https://my.telegram.org and set them in
-   `TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java`.
-2. Replace `TMessagesProj/google-services.json` and `TMessagesProj_App/google-services.json`
-   with your own Firebase config.
-3. Copy `local.properties.example` to `local.properties` and fill in the optional keys.
-4. Initialize submodules: `git submodule update --init --recursive`
-5. Open the project in Android Studio and build `TMessagesProj_App`.
+1. Copy `local.properties.example` to `local.properties`.
+2. Get your own `api_id` and `api_hash` at https://my.telegram.org and put them in
+   `TELEGRAM_APP_ID` and `TELEGRAM_APP_HASH`. Other keys are optional.
+3. Initialize submodules: `git submodule update --init --recursive`
+4. Open the project in Android Studio and build `TMessagesProj_App`.
 
 Please do not use the U message name and logo for your own builds.
 

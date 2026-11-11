@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Built-in U Message MTProto proxies. All proxy values live here and nowhere else. */
+/** Built-in U Message MTProto proxies. Real values come from local.properties. */
 public final class UMessageProxyConfig {
 
-    // ---- Built-in proxies (insert real values here) ----
-    private static final String PROXY_1_IP = "";
-    private static final int PROXY_1_PORT = 443;
-    private static final String PROXY_1_SECRET = "";
+    // ---- Built-in proxy: UM_PROXY_1_* in local.properties (never commit real values) ----
+    private static final String PROXY_1_IP = BuildConfig.UM_PROXY_1_IP;
+    private static final int PROXY_1_PORT = BuildConfig.UM_PROXY_1_PORT;
+    private static final String PROXY_1_SECRET = BuildConfig.UM_PROXY_1_SECRET;
 
     // To add more: declare PROXY_2_* and add a line to BUILT_IN below.
     private static final String[][] BUILT_IN = {

@@ -16,3 +16,12 @@ TMessagesProj_AppHuawei/afat/
 TMessagesProj/jni/ffmpeg/build_android
 .playwright-mcp/
 buildSrc/.kotlin/
+
+# U message: private parts live in ~/Desktop/umessage-dashboard (U-message/dashboard)
+server/
+umessage-premium-server/
+security/
+branding/
+.codex/
+U message Play Market*/
+*.quark.log

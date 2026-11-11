@@ -1,5 +1,14 @@
 sdk.dir=/path/to/Android/sdk
 
+# Required: your own Telegram API credentials from https://my.telegram.org
+TELEGRAM_APP_ID=
+TELEGRAM_APP_HASH=
+
+# Optional built-in MTProto proxy
+UM_PROXY_1_IP=
+UM_PROXY_1_PORT=443
+UM_PROXY_1_SECRET=
+
 # Optional keys (leave empty to disable the feature)
 SNAP_CAMERAKIT_TOKEN=
 SNAP_CAMERAKIT_TOKEN_PROD=

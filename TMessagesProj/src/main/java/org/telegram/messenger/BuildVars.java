@@ -26,8 +26,8 @@ public class BuildVars {
     public static boolean NO_SCOPED_STORAGE = Build.VERSION.SDK_INT <= 29;
     public static String BUILD_VERSION_STRING = BuildConfig.BUILD_VERSION_STRING;
 
-    public static int APP_ID = 0; // set your own api_id from https://my.telegram.org
-    public static String APP_HASH = ""; // set your own api_hash from https://my.telegram.org
+    public static int APP_ID = BuildConfig.TELEGRAM_APP_ID; // TELEGRAM_APP_ID in local.properties
+    public static String APP_HASH = BuildConfig.TELEGRAM_APP_HASH; // TELEGRAM_APP_HASH in local.properties
 
     // SafetyNet key for Google Identity SDK, set it to empty to disable
     public static String SAFETYNET_KEY = "AIzaSyDqt8P-7F7CPCseMkOiVRgb1LY8RN1bvH8";
