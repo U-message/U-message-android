@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message header: edit (square with a pencil) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M11,4.5 H7 A2.5,2.5 0,0 0,4.5 7 V17 A2.5,2.5 0,0 0,7 19.5 H17 A2.5,2.5 0,0 0,19.5 17 V13"
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path
+        android:pathData="M17.6,3.9 a1.6,1.6 0,0 1,2.3 2.3 L12.4,13.7 L9.5,14.5 L10.3,11.6 Z"
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" android:strokeLineJoin="round" />
+</vector>

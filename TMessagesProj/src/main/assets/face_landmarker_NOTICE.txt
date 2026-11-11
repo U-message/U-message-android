@@ -1,0 +1,9 @@
+MediaPipe Face Landmarker model bundle
+Copyright Google LLC
+Licensed under the Apache License, Version 2.0.
+
+Model source:
+https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+
+Project and license:
+https://github.com/google-ai-edge/mediapipe

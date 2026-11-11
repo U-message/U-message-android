@@ -1,0 +1,262 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.telegram.build-app-plugin'
+
+repositories {
+    maven {
+        url 'https://api.mapbox.com/downloads/v2/releases/maven'
+        authentication { basic(BasicAuthentication) }
+        credentials {
+            username = 'mapbox'
+            password = project.findProperty('MAPBOX_DOWNLOADS_TOKEN') ?: ''
+        }
+    }
+    mavenCentral()
+    google()
+}
+
+configurations {
+    compile.exclude module: 'support-v4'
+}
+
+configurations.all {
+    exclude group: 'com.google.firebase', module: 'firebase-core'
+    exclude group: 'androidx.recyclerview', module: 'recyclerview'
+}
+
+dependencies {
+    implementation project(':TMessagesProj')
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+    implementation files('../TMessagesProj/libs/libgsaverification-client.aar')
+    implementation files('../TMessagesProj/libs/sherpa-onnx-static-1.13.8.aar')
+}
+
+android {
+    packagingOptions {
+        jniLibs {
+            // dictation (sherpa-onnx) ships for ARM phones only; x86 builds would add ~57 MB
+            excludes += ['lib/x86/libsherpa-onnx-jni.so', 'lib/x86/libonnxruntime.so', 'lib/x86_64/libsherpa-onnx-jni.so', 'lib/x86_64/libonnxruntime.so']
+        }
+    }
+    compileSdkVersion 36
+    buildToolsVersion '36.0.0'
+
+    defaultConfig.applicationId = APP_PACKAGE
+
+
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+        disable 'BlockedPrivateApi'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+        coreLibraryDesugaringEnabled true
+    }
+
+    androidResources {
+        noCompress += "pack"
+        localeFilters += ["zz"]
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../TMessagesProj/config/release.keystore")
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+
+        release {
+            storeFile file("../TMessagesProj/config/release.keystore")
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".beta"
+            minifyEnabled false
+            shrinkResources false
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../TMessagesProj/proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
+        }
+
+        standalone {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+            applicationIdSuffix ".web"
+            minifyEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../TMessagesProj/proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
+        }
+
+        release {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+            // -PfastRelease keeps a real, signed and non-debuggable release while skipping slow local R8 work.
+            minifyEnabled !project.hasProperty('fastRelease')
+            shrinkResources !project.hasProperty('fastRelease')
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../TMessagesProj/proguard-rules.pro'
+            // Local device build: avoid multi-ABI native symbol archives on the nearly-full disk.
+            ndk.debugSymbolLevel = 'NONE'
+        }
+    }
+
+    sourceSets.debug {
+        manifest.srcFile '../TMessagesProj/config/debug/AndroidManifest.xml'
+    }
+
+    sourceSets.standalone {
+        manifest.srcFile '../TMessagesProj/config/release/AndroidManifest.xml'
+    }
+
+    sourceSets.release {
+        manifest.srcFile '../TMessagesProj/config/release/AndroidManifest.xml'
+    }
+
+    flavorDimensions "minApi"
+
+    productFlavors {
+        bundleAfat {
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            }
+            ext {
+                abiVersionCode = 1
+            }
+            buildConfigField "boolean", "BUNDLE", "true"
+        }
+        afat {
+            ndk {
+                abiFilters "arm64-v8a"
+            }
+            sourceSets.debug {
+                manifest.srcFile '../TMessagesProj/config/debug/AndroidManifest_SDK23.xml'
+            }
+            sourceSets.release {
+                manifest.srcFile '../TMessagesProj/config/release/AndroidManifest_SDK23.xml'
+            }
+            sourceSets.standalone {
+                manifest.srcFile '../TMessagesProj/config/release/AndroidManifest_standalone.xml'
+            }
+            ext {
+                abiVersionCode = 9
+            }
+            buildConfigField "boolean", "BUNDLE", "false"
+        }
+    }
+
+    defaultConfig.versionCode = Integer.parseInt(APP_VERSION_CODE)
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "app.apk"
+            output.versionCodeOverride = defaultConfig.versionCode * 10 + variant.productFlavors.get(0).abiVersionCode
+        }
+    }
+
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+        if (variant.buildType.name != "release" && !names.contains("afat")) {
+            setIgnore(true)
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 36
+        versionName APP_VERSION_NAME
+        ndkVersion "27.2.12479018"
+
+        multiDexEnabled true
+
+        vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
+
+        externalNativeBuild {
+            cmake {
+                version '3.22.1'
+                arguments '-DANDROID_STL=c++_static', '-DANDROID_PLATFORM=android-23' // , '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
+                targets 'tmessages.49'
+            }
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+    namespace 'org.telegram.messenger.regular'
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'
+
+// U message signing: release APKs are re-signed with APK Signature Scheme v3 key rotation, from Telegram's public
+// release.keystore (v1/v2, still needed so installed copies accept the update) to our private key (v3, Android 9+).
+// After one such update Android refuses APKs signed only with the old public key. Needs ~/.umessage/umessage.lineage
+// (apksigner rotate, see Tools/umessage-signing) and UMESSAGE_* in ~/.gradle/gradle.properties; without them nothing changes.
+// umessage-v2.lineage strips the old public signer's permission/auth/shared-uid capabilities (rotate-key.sh);
+// it is preferred when present, the original umessage.lineage is the fallback.
+def umLineageV2 = new File(System.getProperty('user.home'), '.umessage/umessage-v2.lineage')
+def umLineage = umLineageV2.exists() ? umLineageV2 : new File(System.getProperty('user.home'), '.umessage/umessage.lineage')
+// Step 2 (Tools/umessage-signing/rotate-to-javohir.sh): once umessage-v3.lineage and UMESSAGE_NEXT_* exist, releases
+// are signed with the personal key instead of the 7TECH-named one. Until then nothing changes.
+def umLineageV3 = new File(System.getProperty('user.home'), '.umessage/umessage-v3.lineage')
+def umUseNext = umLineageV3.exists() && project.hasProperty('UMESSAGE_NEXT_STORE_FILE')
+if (umUseNext) umLineage = umLineageV3
+def umStoreFile = { umUseNext ? UMESSAGE_NEXT_STORE_FILE : UMESSAGE_STORE_FILE }
+def umKeyAlias = { umUseNext ? UMESSAGE_NEXT_KEY_ALIAS : UMESSAGE_KEY_ALIAS }
+def umStorePass = { umUseNext ? UMESSAGE_NEXT_STORE_PASSWORD : UMESSAGE_STORE_PASSWORD }
+def umKeyPass = { umUseNext ? UMESSAGE_NEXT_KEY_PASSWORD : UMESSAGE_KEY_PASSWORD }
+afterEvaluate {
+    tasks.matching { it.name ==~ /assemble\w*Release/ }.configureEach { task ->
+        task.doLast {
+            if (!umLineage.exists() || !project.hasProperty('UMESSAGE_STORE_FILE')) {
+                logger.warn("U message: ${umLineage} missing, APK stays signed with the public Telegram key")
+                return
+            }
+            def apksigner = new File(android.sdkDirectory, 'build-tools').listFiles().sort { it.name }.reverse()
+                    .collect { new File(it, 'apksigner') }.find { it.exists() }
+            fileTree("${buildDir}/outputs/apk").matching { include '**/release/*.apk' }.each { apk ->
+                def cmd = [apksigner.absolutePath, 'sign',
+                           '--ks', file('../TMessagesProj/config/release.keystore').absolutePath, '--ks-key-alias', RELEASE_KEY_ALIAS,
+                           '--ks-pass', 'env:UM_OLD_PASS', '--key-pass', 'env:UM_OLD_KEY',
+                           '--next-signer',
+                           '--ks', umStoreFile(), '--ks-key-alias', umKeyAlias(),
+                           '--ks-pass', 'env:UM_NEW_PASS', '--key-pass', 'env:UM_NEW_KEY',
+                           '--lineage', umLineage.absolutePath,
+                           '--rotation-min-sdk-version', '28',
+                           apk.absolutePath]
+                def pb = new ProcessBuilder(cmd).redirectErrorStream(true)
+                pb.environment().putAll([UM_OLD_PASS: RELEASE_STORE_PASSWORD, UM_OLD_KEY: RELEASE_KEY_PASSWORD,
+                                         UM_NEW_PASS: umStorePass(), UM_NEW_KEY: umKeyPass()])
+                def p = pb.start()
+                def out = p.inputStream.text
+                if (p.waitFor() != 0) throw new GradleException("U message re-signing failed for ${apk}:\n${out}")
+                logger.lifecycle("U message: ${apk.name} signed with key rotation")
+            }
+        }
+    }
+}

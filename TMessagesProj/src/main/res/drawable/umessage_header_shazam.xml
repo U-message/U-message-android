@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message header: song recognition (sound bars in a ring) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M3,12 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0"
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" />
+    <path
+        android:pathData="M8,10.4 L8,13.6 M10.7,8 L10.7,16 M13.3,9.4 L13.3,14.6 M16,11 L16,13"
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" android:strokeLineCap="round" />
+</vector>

@@ -1,0 +1,14 @@
+open_nsfw2.tflite
+=================
+
+Source: bhky/opennsfw2 (Keras port of Yahoo's Open NSFW) - https://github.com/bhky/opennsfw2
+        weights "open_nsfw_weights.h5" (opennsfw2 0.x release), original model: https://github.com/yahoo/open_nsfw
+Modification: an input layer was added that turns RGB 0..255 into BGR minus the Caffe mean (104, 117, 123),
+              then converted to TensorFlow Lite with float16 post-training quantization (TensorFlow 2.18.1).
+              Weights/architecture unchanged.
+
+Input : float32 [1,224,224,3], RGB, 0..255 (the picture resized to 256x256, center 224x224 crop)
+Output: float32 [1,2] softmax, [sfw, nsfw]
+
+Licenses: opennsfw2 - MIT License, Copyright (c) 2020 Bosco Yung.
+          open_nsfw - BSD 2-Clause License, Copyright 2016, Yahoo Inc.

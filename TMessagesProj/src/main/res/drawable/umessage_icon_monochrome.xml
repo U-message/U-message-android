@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message mark: original mark + its twin rotated 180° about the ring centre -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:pivotX="525"
+        android:pivotY="224.5"
+        android:scaleX="0.0727"
+        android:scaleY="0.0727"
+        android:translateX="-471"
+        android:translateY="-170.5">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+        <group android:pivotX="525" android:pivotY="224.5" android:rotation="180">
+            <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+            <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+        </group>
+    </group>
+</vector>

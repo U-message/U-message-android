@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message logo (mark + its 180° twin), cropped to its bounds; tint with a color filter -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="17.2dp"
+    android:viewportWidth="740"
+    android:viewportHeight="425">
+    <group android:translateX="-155" android:translateY="-12">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+        <group android:pivotX="525" android:pivotY="224.5" android:rotation="180">
+            <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+            <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+        </group>
+    </group>
+</vector>

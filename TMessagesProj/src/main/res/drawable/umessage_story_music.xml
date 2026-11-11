@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message story camera: add sound (note with a wave) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M9,17.5 L9,5.6 L19,3.6 L19,15.5"
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="2" android:strokeLineJoin="round" android:strokeLineCap="round" />
+    <path android:pathData="M3.6,17.5 a2.7,2.7 0 1,0 5.4,0 a2.7,2.7 0 1,0 -5.4,0" android:fillColor="#FFFFFFFF" />
+    <path android:pathData="M13.6,15.5 a2.7,2.7 0 1,0 5.4,0 a2.7,2.7 0 1,0 -5.4,0" android:fillColor="#FFFFFFFF" />
+</vector>

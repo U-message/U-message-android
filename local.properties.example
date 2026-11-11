@@ -1,0 +1,11 @@
+sdk.dir=/path/to/Android/sdk
+
+# Optional keys (leave empty to disable the feature)
+SNAP_CAMERAKIT_TOKEN=
+SNAP_CAMERAKIT_TOKEN_PROD=
+SNAP_LENS_GROUP_ID=
+YANDEX_MAPKIT_KEY=
+
+# Mapbox: put these in ~/.gradle/gradle.properties
+# MAPBOX_DOWNLOADS_TOKEN=
+# MAPBOX_ACCESS_TOKEN=

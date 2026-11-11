@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+
+android {
+    namespace 'org.telegram.configuration'
+    compileSdk 36
+    defaultConfig { minSdk 21 }
+    buildFeatures { compose true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions { jvmTarget = '1.8' }
+}
+
+dependencies {
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
+    implementation 'androidx.core:core:1.16.0'
+    implementation 'androidx.compose.foundation:foundation:1.7.8'
+    implementation 'androidx.compose.material:material:1.7.8'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.8.7'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+}

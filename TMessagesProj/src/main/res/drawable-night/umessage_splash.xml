@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message splash: always the whole logo (mark + its 180° twin), which only settles in size.
+     Scale 0.185 keeps its corners inside the 160dp circle the system masks the icon with. -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="240dp"
+            android:height="240dp"
+            android:viewportWidth="240"
+            android:viewportHeight="240">
+            <!-- ring centre (525,224.5) -> (120,120) -->
+            <group
+                android:name="logo"
+                android:pivotX="525"
+                android:pivotY="224.5"
+                android:scaleX="0.185"
+                android:scaleY="0.185"
+                android:translateX="-405"
+                android:translateY="-104.5">
+                <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+                <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+                <group android:pivotX="525" android:pivotY="224.5" android:rotation="180">
+                    <path android:fillColor="#FFFFFFFF" android:pathData="M155,12h370v74h-370z" />
+                    <path android:fillColor="#FFFFFFFF" android:pathData="M525,12A212.5,212.5 0,0 0,525 437V363A138.5,138.5 0,0 1,525 86Z" />
+                </group>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="logo">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:duration="250" android:propertyName="scaleX"
+                    android:valueFrom="0.165" android:valueTo="0.185" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+                <objectAnimator android:duration="250" android:propertyName="scaleY"
+                    android:valueFrom="0.165" android:valueTo="0.185" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U message: login tokens must never leave the device through backup (Android 11 and lower). -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="saved_tokens.xml"/>
+    <exclude domain="sharedpref" path="saved_tokens_login.xml"/>
+</full-backup-content>
