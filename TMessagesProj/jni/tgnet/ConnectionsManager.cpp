@@ -136,26 +136,37 @@ ConnectionsManager::~ConnectionsManager() {
     pthread_mutex_destroy(&mutex);
 }
 
+#define CM_INSTANCE_CASE(n) case n: { static ConnectionsManager instance##n(n); return instance##n; }
 ConnectionsManager& ConnectionsManager::getInstance(int32_t instanceNum) {
+    // U message: 20 accounts (keep in sync with MAX_ACCOUNT_COUNT)
     switch (instanceNum) {
-        case 0:
-            static ConnectionsManager instance0(0);
-            return instance0;
-        case 1:
-            static ConnectionsManager instance1(1);
-            return instance1;
-        case 2:
-            static ConnectionsManager instance2(2);
-            return instance2;
-        case 3:
-            static ConnectionsManager instance3(3);
-            return instance3;
-        case 4:
-        default:
-            static ConnectionsManager instance4(4);
-            return instance4;
+        CM_INSTANCE_CASE(0)
+        CM_INSTANCE_CASE(1)
+        CM_INSTANCE_CASE(2)
+        CM_INSTANCE_CASE(3)
+        CM_INSTANCE_CASE(4)
+        CM_INSTANCE_CASE(5)
+        CM_INSTANCE_CASE(6)
+        CM_INSTANCE_CASE(7)
+        CM_INSTANCE_CASE(8)
+        CM_INSTANCE_CASE(9)
+        CM_INSTANCE_CASE(10)
+        CM_INSTANCE_CASE(11)
+        CM_INSTANCE_CASE(12)
+        CM_INSTANCE_CASE(13)
+        CM_INSTANCE_CASE(14)
+        CM_INSTANCE_CASE(15)
+        CM_INSTANCE_CASE(16)
+        CM_INSTANCE_CASE(17)
+        CM_INSTANCE_CASE(18)
+        case 19:
+        default: {
+            static ConnectionsManager instance19(19);
+            return instance19;
+        }
     }
 }
+#undef CM_INSTANCE_CASE
 
 int ConnectionsManager::callEvents(int64_t now) {
     if (!events.empty()) {
