@@ -321,7 +321,7 @@ public class UMessageSettingsActivity extends BaseFragment {
 
     private String getSectionTitle(int section) {
         switch (section) {
-            case SECTION_PRIVACY: return LocaleController.getString(R.string.UMessageSectionPrivacySecurity);
+            case SECTION_PRIVACY: return LocaleController.getString(R.string.UMessageSectionPrivacy);
             case SECTION_SECURITY: return LocaleController.getString(R.string.UMessageSectionSecurity);
             case SECTION_MESSAGES: return LocaleController.getString(R.string.UMessageSectionMessagesChats);
             case SECTION_REMINDER: return LocaleController.getString(R.string.UMessageSectionReminderFocus);
@@ -342,7 +342,7 @@ public class UMessageSettingsActivity extends BaseFragment {
     private void fillItems(ArrayList<UItem> items, UniversalAdapter adapter) {
         switch (section) {
             case SECTION_MAIN: fillMain(items); break;
-            case SECTION_PRIVACY: fillPrivacy(items); fillSecurity(items); break;
+            case SECTION_PRIVACY: fillPrivacy(items); break;
             case SECTION_SECURITY: fillSecurity(items); break;
             case SECTION_MESSAGES: fillMessages(items); fillReminder(items); fillFolders(items); fillData(items); break;
             case SECTION_REMINDER: fillReminder(items); break;
@@ -392,6 +392,7 @@ public class UMessageSettingsActivity extends BaseFragment {
             case USE_PROXY: return UMessageModernList.tile(R.drawable.msg_satellite, UMessageModernList.BLUE);
             case UM_PREMIUM: return UMessageModernList.tile(R.drawable.msg_premium_badge, UMessageModernList.PURPLE);
             case LOCAL_TG_PREMIUM: return UMessageModernList.tile(R.drawable.msg_premium_liststar, UMessageModernList.INDIGO);
+            case OPEN_SECTION_BASE + SECTION_SECURITY: return UMessageModernList.tile(R.drawable.msg_policy, UMessageModernList.RED);
             case OPEN_SECTION_BASE + SECTION_PRIVACY: return UMessageModernList.tile(R.drawable.settings_privacy, UMessageModernList.INDIGO);
             case OPEN_SECTION_BASE + SECTION_MESSAGES: return UMessageModernList.tile(R.drawable.settings_chat, UMessageModernList.GREEN);
             case OPEN_SECTION_BASE + SECTION_STORIES: return UMessageModernList.tile(R.drawable.settings_features, UMessageModernList.PINK);
@@ -480,7 +481,8 @@ public class UMessageSettingsActivity extends BaseFragment {
                 .setChecked(UMessagePremiumController.getInstance().isSelfEnabled()));
         items.add(UItem.asShadow(null));
 
-        // three categories only: a long list of options loses people
+        // four categories only: a long list of options loses people. Security first — it is on by default.
+        items.add(sectionCell(SECTION_SECURITY, IconBackgroundColors.RED, R.drawable.msg_policy, R.string.UMessageSectionSecurityInfo));
         items.add(sectionCell(SECTION_PRIVACY, IconBackgroundColors.GREEN, R.drawable.settings_privacy, R.string.UMessageSectionPrivacyInfo));
         items.add(sectionCell(SECTION_MESSAGES, IconBackgroundColors.ORANGE, R.drawable.settings_chat, R.string.UMessageSectionMessagesInfo));
         items.add(sectionCell(SECTION_STORIES, IconBackgroundColors.PURPLE, R.drawable.settings_features, R.string.UMessageSectionStoriesInfo));
@@ -541,12 +543,40 @@ public class UMessageSettingsActivity extends BaseFragment {
     }
 
     private void fillPrivacyRest(ArrayList<UItem> items) {
-        items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionProtection)));
-        if (on(org.telegram.messenger.UMessageRemoteFlags.PRIVACY_GUARD)) items.add(UItem.asButton(PRIVACY_GUARD, LocaleController.getString(R.string.PrivacyGuard),
-                LocaleController.getString(PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff)));
+        if (on(org.telegram.messenger.UMessageRemoteFlags.PRIVACY_GUARD)) {
+            items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionProtection)));
+            items.add(UItem.asButton(PRIVACY_GUARD, LocaleController.getString(R.string.PrivacyGuard),
+                    LocaleController.getString(PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff)));
+            items.add(UItem.asShadow(null));
+        }
+
+        if (on(org.telegram.messenger.UMessageRemoteFlags.CHAT_TRASH)) {
+            final int trashCount = org.telegram.messenger.UMessageChatTrash.getInstance(currentAccount).getCount();
+            items.add(UItem.asButton(CHAT_TRASH, R.drawable.msg_delete, LocaleController.getString(R.string.UMessageChatTrash), trashCount > 0 ? String.valueOf(trashCount) : ""));
+            items.add(UItem.asShadow(LocaleController.getString(R.string.UMessageChatTrashSettingsInfo)));
+        }
+
+        items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageHiddenChats)));
+        addToggle(items, UMessageConfig.KEY_HIDDEN_CHATS);
+        if (UMessageConfig.isHiddenChatsManageable()) {
+            items.add(UItem.asButton(HIDDEN_CHATS, LocaleController.getString(R.string.UMessageHiddenChats), String.valueOf(UMessageConfig.getHiddenChats(currentAccount).size())));
+            items.add(UItem.asButton(HIDDEN_FOLDERS, LocaleController.getString(R.string.UMessageHiddenFolders), String.valueOf(UMessageConfig.getHiddenFolders(currentAccount).size())));
+            items.add(UItem.asButton(HIDDEN_ACCESS, LocaleController.getString(R.string.UMessageHiddenAccess), getAccessName(UMessageConfig.getHiddenAccess())));
+            items.add(UItem.asButton(HIDDEN_PASSWORD, LocaleController.getString(UMessageConfig.hasHiddenPassword() ? R.string.UMessageHiddenPasswordChange : R.string.UMessageHiddenPasswordSet)));
+        }
+        items.add(UItem.asShadow(null));
+    }
+
+    /**
+     * User safety: protection against malware, scams, spam and unwanted content. These switches are on by default
+     * (UMessageConfig.isDefaultOn), every check runs on the device, and the user can turn each one off.
+     */
+    private void fillSecurity(ArrayList<UItem> items) {
+        items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionSecurity)));
+        addToggle(items, UMessageConfig.KEY_BLOCK_APK);
         if (on(org.telegram.messenger.UMessageRemoteFlags.NSFW_FILTER)) items.add(UItem.asButtonCheck(NSFW_FILTER, LocaleController.getString(R.string.UMessageNsfwFilter), LocaleController.getString(R.string.UMessageNsfwFilterInfo))
                 .setChecked(org.telegram.messenger.UMessageNsfwFilter.isEnabled()));
-        items.add(UItem.asShadow(null));
+        items.add(UItem.asShadow(LocaleController.getString(R.string.UMessageSecurityFooter)));
         if (org.telegram.messenger.UMessageNsfwFilter.isEnabled() && on(org.telegram.messenger.UMessageRemoteFlags.NSFW_FILTER)) {
             // Telegram-style level slider (like "Text size"), the shadow below explains the chosen level
             final int level = org.telegram.messenger.UMessageNsfwFilter.getLevel();
@@ -570,30 +600,12 @@ public class UMessageSettingsActivity extends BaseFragment {
             items.add(UItem.asShadow(LocaleController.getString(NSFW_LEVEL_INFOS[level])));
         }
 
-        if (on(org.telegram.messenger.UMessageRemoteFlags.CHAT_TRASH)) {
-            final int trashCount = org.telegram.messenger.UMessageChatTrash.getInstance(currentAccount).getCount();
-            items.add(UItem.asButton(CHAT_TRASH, R.drawable.msg_delete, LocaleController.getString(R.string.UMessageChatTrash), trashCount > 0 ? String.valueOf(trashCount) : ""));
-            items.add(UItem.asShadow(LocaleController.getString(R.string.UMessageChatTrashSettingsInfo)));
+        if (on(org.telegram.messenger.UMessageRemoteFlags.ACCOUNT_SWITCH_PINS)) {
+            items.add(UItem.asButton(ACCOUNT_AUTO_SWITCH,
+                    LocaleController.getString(R.string.UMessageAccountAutoSwitch),
+                    LocaleController.getString(UMessageConfig.hasAccountSwitchPins() ? R.string.UMessageConfigured : R.string.UMessageNotConfigured)));
+            items.add(UItem.asShadow(null));
         }
-
-        items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageHiddenChats)));
-        addToggle(items, UMessageConfig.KEY_HIDDEN_CHATS);
-        if (UMessageConfig.isHiddenChatsManageable()) {
-            items.add(UItem.asButton(HIDDEN_CHATS, LocaleController.getString(R.string.UMessageHiddenChats), String.valueOf(UMessageConfig.getHiddenChats(currentAccount).size())));
-            items.add(UItem.asButton(HIDDEN_FOLDERS, LocaleController.getString(R.string.UMessageHiddenFolders), String.valueOf(UMessageConfig.getHiddenFolders(currentAccount).size())));
-            items.add(UItem.asButton(HIDDEN_ACCESS, LocaleController.getString(R.string.UMessageHiddenAccess), getAccessName(UMessageConfig.getHiddenAccess())));
-            items.add(UItem.asButton(HIDDEN_PASSWORD, LocaleController.getString(UMessageConfig.hasHiddenPassword() ? R.string.UMessageHiddenPasswordChange : R.string.UMessageHiddenPasswordSet)));
-        }
-        items.add(UItem.asShadow(null));
-    }
-
-    private void fillSecurity(ArrayList<UItem> items) {
-        items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionSecurity)));
-        if (on(org.telegram.messenger.UMessageRemoteFlags.ACCOUNT_SWITCH_PINS)) items.add(UItem.asButton(ACCOUNT_AUTO_SWITCH,
-                LocaleController.getString(R.string.UMessageAccountAutoSwitch),
-                LocaleController.getString(UMessageConfig.hasAccountSwitchPins() ? R.string.UMessageConfigured : R.string.UMessageNotConfigured)));
-        addToggle(items, UMessageConfig.KEY_BLOCK_APK);
-        items.add(UItem.asShadow(null));
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionStrangers)));
         addToggle(items, UMessageConfig.KEY_STRANGER_PROTECTION);
@@ -603,7 +615,7 @@ public class UMessageSettingsActivity extends BaseFragment {
     }
 
     private void fillMessages(ArrayList<UItem> items) {
-        if (org.telegram.configuration.ConfigurationManager.isExtendedCacheEnabled()) {
+        if (!org.telegram.configuration.ConfigurationManager.isSafeModeActive()) {
             items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionSaved)));
             addToggle(items, UMessageConfig.KEY_SAVE_EDITED);
             addToggle(items, UMessageConfig.KEY_SAVE_DELETED);

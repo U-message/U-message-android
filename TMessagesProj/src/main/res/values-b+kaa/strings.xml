@@ -9,7 +9,7 @@
     <string name="UMessageSectionData">Kanallar hám maǵlıwmatlar</string>
     <string name="UMessageSectionMessagesChats">Xabarlar hám sáwbetler</string>
     <string name="UMessageSectionMessagesInfo">Saqlaw, tez juwaplar, eskertpeler, papkalar</string>
-    <string name="UMessageSectionPrivacyInfo">Arwaq rejimi, jasırın sáwbetler, filtr, qorǵaw</string>
+    <string name="UMessageSectionPrivacyInfo">Arwaq rejimi, júz benen qorǵaw, jasırın sáwbetler</string>
     <string name="UMessageSectionPrivacySecurity">Qupıyalıq hám qáwipsizlik</string>
     <string name="UMessageSectionProtection">Qorǵaw</string>
     <string name="UMessageSectionReminderFocus">Eskertpe hám dıqqat</string>
@@ -102,6 +102,8 @@
     <string name="UMessageSectionPrivacy">Qupıyalıq</string>
     <string name="UMessageSectionMessages">Xabarlar</string>
     <string name="UMessageSectionSecurity">Qáwipsizlik</string>
+    <string name="UMessageSecurityFooter">Bular sizdi zıyanlı programmalar, alaqshılıq, spam hám qolaysız kontentten qorǵaydı. Ádetki halatta qosılǵan, barlıq tekseriwler telefonıńızda boladı hám hesh nárse hesh jerge jiberilmeydi. Hár birin óshirip qoyıwıńız múmkin.</string>
+    <string name="UMessageSectionSecurityInfo">Zıyanlı programma, alaqshılıq hám spamnan qorǵaw</string>
     <string name="UMessageAccountAutoSwitch">PIN arqalı akkaunttı avtomat almastırıw</string>
     <string name="UMessageAccountAutoSwitchInfo">Qosımsha qulıp ekranında qálegen PIN kodtı kiritiń, oǵan baylanǵan akkaunt avtomat túrde ashıladı. Birinshi PIN qosımshanıń qulıp kodı da boladı.</string>
     <string name="UMessageAccountAutoSwitchNeedTwo">Bul funkciyanı sazlawdan aldın keminde eki Telegram akkauntın qosıń.</string>
@@ -195,7 +197,7 @@
     <string name="UMessageStrangerChatsInfo">Juwap bergenińizden keyin sáwbet qaytadan dizimge ótedi.</string>
     <string name="UMessageStrangerChatsEmpty">Biytanıslar menen sáwbetler joq.</string>
     <string name="UMessageBlockApk">APK fayllardı bloklaw</string>
-    <string name="UMessageBlockApkInfo">Kiris .apk fayllar sáwbetlerde kórsetilmeydi.</string>
+    <string name="UMessageBlockApkInfo">Kiris .apk fayllar zıyanlı programma ornatıwı yamasa akkawntıńızdı urlawı múmkin, sonıń ushın sáwbetlerde kórsetilmeydi.</string>
     <string name="UMessageApkGuardTitle">APK qáwipsizlik eskertiwi</string>
     <string name="UMessageApkGuardWarning">Ádette xakerler Telegram arqalı «Toyǵa mirát», «Sudqa shaqırıw» yamasa «Súwretlerińiz» degen atlı APK jiberedi. Abaylı bolıń.\n\nU message fayldı tekseredi, biraq hesh bir avtomat tekseriw 100% kepillik bermeydi.</string>
     <string name="UMessageCheckAndContinue">Tekseriw hám dawam etiw</string>

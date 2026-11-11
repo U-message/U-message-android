@@ -10,7 +10,7 @@
     <string name="UMessageSectionData">Kanallar va maʼlumotlar</string>
     <string name="UMessageSectionMessagesChats">Xabarlar va chatlar</string>
     <string name="UMessageSectionMessagesInfo">Saqlash, tezkor javoblar, eslatmalar, jildlar</string>
-    <string name="UMessageSectionPrivacyInfo">Arvoh rejimi, yashirin chatlar, filtr, himoya</string>
+    <string name="UMessageSectionPrivacyInfo">Arvoh rejimi, yuz bilan himoya, yashirin chatlar</string>
     <string name="UMessageSectionPrivacySecurity">Maxfiylik va xavfsizlik</string>
     <string name="UMessageSectionProtection">Himoya</string>
     <string name="UMessageSectionReminderFocus">Eslatma va diqqat</string>
@@ -106,6 +106,8 @@
     <string name="UMessageSectionPrivacy">Maxfiylik</string>
     <string name="UMessageSectionMessages">Xabarlar</string>
     <string name="UMessageSectionSecurity">Xavfsizlik</string>
+    <string name="UMessageSecurityFooter">Bular sizni zararli dasturlar, firibgarlik, spam va nomaqbul kontentdan himoya qiladi. Standart holatda yoqilgan, barcha tekshiruvlar telefoningizda bo‘ladi va hech narsa hech qayerga yuborilmaydi. Har birini o‘chirib qo‘yishingiz mumkin.</string>
+    <string name="UMessageSectionSecurityInfo">Zararli dastur, firibgarlik va spamdan himoya</string>
     <string name="UMessageAccountAutoSwitch">PIN orqali akkaunt almashtirish</string>
     <string name="UMessageAccountAutoSwitchInfo">Qulf ekranida qaysi PIN terilsa, unga biriktirilgan akkaunt avtomatik ochiladi. Birinchi PIN ilova qulf kodi sifatida ham ishlaydi.</string>
     <string name="UMessageAccountAutoSwitchNeedTwo">Bu funksiyani sozlash uchun kamida ikkita Telegram akkaunt qoʻshing.</string>
@@ -199,7 +201,7 @@
     <string name="UMessageStrangerChatsInfo">Javob yozsangiz, chat chatlar roʻyxatiga qaytadi.</string>
     <string name="UMessageStrangerChatsEmpty">Notanishlar bilan chatlar yoʻq.</string>
     <string name="UMessageBlockApk">APK fayllarni bloklash</string>
-    <string name="UMessageBlockApkInfo">Kelgan .apk fayllar chatlarda koʻrsatilmaydi.</string>
+    <string name="UMessageBlockApkInfo">Kelgan .apk fayllar zararli dastur o‘rnatishi yoki akkauntingizni o‘g‘irlashi mumkin, shuning uchun chatlarda ko‘rsatilmaydi.</string>
     <string name="UMessageFolderIcons">Jild ikonkalari</string>
     <string name="UMessageFolderIconsInfo">Jild yorliqlarini nomlar oʻrniga ikonkalar bilan koʻrsatadi.</string>
     <string name="UMessageHideFolderTabs">Jild yorliqlarini yashirish</string>

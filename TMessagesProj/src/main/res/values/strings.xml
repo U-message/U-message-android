@@ -9,7 +9,7 @@
     <string name="UMessageSectionData">Channels and data</string>
     <string name="UMessageSectionMessagesChats">Messages and chats</string>
     <string name="UMessageSectionMessagesInfo">Saving, quick replies, reminders, folders</string>
-    <string name="UMessageSectionPrivacyInfo">Ghost mode, hidden chats, filters, protection</string>
+    <string name="UMessageSectionPrivacyInfo">Ghost mode, face lock, hidden chats</string>
     <string name="UMessageSectionPrivacySecurity">Privacy and security</string>
     <string name="UMessageSectionProtection">Protection</string>
     <string name="UMessageSectionReminderFocus">Reminders and focus</string>
@@ -112,6 +112,8 @@
     <string name="UMessageSectionPrivacy">Privacy</string>
     <string name="UMessageSectionMessages">Messages</string>
     <string name="UMessageSectionSecurity">Security</string>
+    <string name="UMessageSecurityFooter">These protect you from malware, scams, spam and unwanted content. They are on by default, every check runs on your phone and nothing is sent anywhere. You can turn each one off.</string>
+    <string name="UMessageSectionSecurityInfo">Protection from malware, scams and spam</string>
     <string name="UMessageAccountAutoSwitch">Account auto-switch by PIN</string>
     <string name="UMessageAccountAutoSwitchInfo">Enter either PIN on the app lock screen to open its assigned account automatically. The first PIN also becomes the app lock code.</string>
     <string name="UMessageAccountAutoSwitchNeedTwo">Add at least two Telegram accounts before configuring this feature.</string>
@@ -205,7 +207,7 @@
     <string name="UMessageStrangerChatsInfo">Once you reply, a chat moves back to the chat list.</string>
     <string name="UMessageStrangerChatsEmpty">No chats with strangers.</string>
     <string name="UMessageBlockApk">Block APK files</string>
-    <string name="UMessageBlockApkInfo">Incoming .apk files are not shown in chats.</string>
+    <string name="UMessageBlockApkInfo">Incoming .apk files can install malware or steal your account, so they are not shown in chats.</string>
     <string name="UMessageApkGuardTitle">APK security warning</string>
     <string name="UMessageApkGuardWarning">Scammers often send APK files on Telegram named “Wedding invitation”, “Court summons” or “Your photos”. Be careful.\n\nU message will scan the file, but no automatic check is a 100% guarantee.</string>
     <string name="UMessageCheckAndContinue">Scan and continue</string>

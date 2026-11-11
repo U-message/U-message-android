@@ -21,41 +21,39 @@ class ConfigurationApiTest {
 
     @After fun finish() { server.shutdown() }
 
-    @Test fun `sends device context to existing endpoint`() = runBlocking {
-        server.enqueue(MockResponse().setBody("""{"stable_release":false}"""))
-        repository.refresh("uz-UZ", "1.0.9", "109")
-        assertFalse(repository.configuration.value.stable_release)
+    @Test fun `sends no device context`() = runBlocking {
+        server.enqueue(MockResponse().setBody("""{"stable_release":true}"""))
+        repository.refresh()
+        assertTrue(repository.configuration.value.safeMode)
         val request = server.takeRequest(1, TimeUnit.SECONDS)!!
         assertEquals("/api/settings?route=features", request.path)
-        assertEquals("uz-UZ", request.getHeader("Accept-Language"))
-        assertEquals("1.0.9", request.getHeader("X-App-Version"))
-        assertEquals("109", request.getHeader("X-App-Version-Code"))
+        assertNull(request.getHeader("X-App-Version"))
+        assertNull(request.getHeader("X-App-Version-Code"))
         assertEquals("no-cache, no-store", request.getHeader("Cache-Control"))
     }
 
-    @Test fun `invalid payloads never grant permission`() = runBlocking {
+    @Test fun `only a literal true turns safe mode on`() = runBlocking {
         for (body in listOf(
-            "{}", "null", "[]", "", "not-json",
-            """{"stable_release":true}""",
+            "{}", "null", "[]",
+            """{"stable_release":false}""",
             """{"stable_release":null}""",
-            """{"stable_release":"false"}""",
-            """{"stable_release":0}""",
+            """{"stable_release":"true"}""",
+            """{"stable_release":1}""",
             """{"stable_release":{}}"""
         )) {
-            server.enqueue(MockResponse().setBody("""{"stable_release":false}"""))
-            repository.refresh("uz", "1.0.9", "109")
-            assertFalse(repository.configuration.value.stable_release)
             server.enqueue(MockResponse().setBody(body))
-            repository.refresh("uz", "1.0.9", "109")
-            assertTrue("Must restrict: $body", repository.configuration.value.stable_release)
+            repository.refresh()
+            assertFalse("Must stay off: $body", repository.configuration.value.safeMode)
         }
     }
 
-    @Test fun `http errors and empty responses never grant permission`() = runBlocking {
+    @Test fun `http errors keep the current state`() = runBlocking {
+        server.enqueue(MockResponse().setBody("""{"stable_release":true}"""))
+        repository.refresh()
         for (code in listOf(204, 301, 401, 403, 500)) {
             server.enqueue(MockResponse().setResponseCode(code))
-            repository.refresh("uz", "1.0.9", "109")
-            assertTrue("Must restrict HTTP $code", repository.configuration.value.stable_release)
+            repository.refresh()
+            assertTrue("Must keep state on HTTP $code", repository.configuration.value.safeMode)
         }
     }
 }

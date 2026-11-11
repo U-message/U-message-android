@@ -2,10 +2,7 @@ package org.telegram.configuration
 
 import java.io.IOException
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Test
@@ -13,70 +10,43 @@ import org.junit.Test
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 class ConfigurationRepositoryTest {
     private class Api(var response: suspend () -> ConfigurationResponse) : ConfigurationApi {
-        override suspend fun getConfiguration(
-            deviceLanguage: String, appVersion: String, appVersionCode: String
-        ) = response()
+        override suspend fun getConfiguration() = response()
     }
 
-    @Test fun `starts restricted and applies server state`() = runTest {
-        val api = Api { ConfigurationResponse(false) }
+    @Test fun `starts with the app as shipped and applies the admin switch`() = runTest {
+        val api = Api { ConfigurationResponse(true) }
         val repository = ConfigurationRepository(api)
-        assertTrue(repository.configuration.value.stable_release)
-        repository.refresh("uz-UZ", "1.0.9", "109")
-        assertFalse(repository.configuration.value.stable_release)
-        api.response = { ConfigurationResponse(true) }
-        repository.refresh("uz-UZ", "1.0.9", "109")
-        assertTrue(repository.configuration.value.stable_release)
+        assertFalse(repository.configuration.value.safeMode)
+        repository.refresh()
+        assertTrue(repository.configuration.value.safeMode)
+        api.response = { ConfigurationResponse(false) }
+        repository.refresh()
+        assertFalse(repository.configuration.value.safeMode)
     }
 
-    @Test fun `network failure replaces previous permission`() = runTest {
-        val api = Api { ConfigurationResponse(false) }
+    @Test fun `network failure keeps the last answer`() = runTest {
+        val api = Api { ConfigurationResponse(true) }
         val repository = ConfigurationRepository(api)
-        repository.refresh("uz", "1.0.9", "109")
+        repository.refresh()
         api.response = { throw IOException("offline") }
-        repository.refresh("uz", "1.0.9", "109")
-        assertTrue(repository.configuration.value.stable_release)
+        repository.refresh()
+        assertTrue(repository.configuration.value.safeMode)
     }
 
-    @Test fun `refresh is restricted while waiting and timeout stays restricted`() = runTest {
-        val api = Api { ConfigurationResponse(false) }
+    @Test fun `timeout keeps the last answer`() = runTest {
+        val api = Api { delay(1_000); ConfigurationResponse(true) }
         val repository = ConfigurationRepository(api, timeoutMillis = 100)
-        repository.refresh("uz", "1.0.9", "109")
-        api.response = { delay(1_000); ConfigurationResponse(false) }
-        val job = launch { repository.refresh("uz", "1.0.9", "109") }
-        runCurrent()
-        assertTrue(repository.configuration.value.stable_release)
-        job.join()
-        assertTrue(repository.configuration.value.stable_release)
+        repository.refresh()
+        assertFalse(repository.configuration.value.safeMode)
     }
 
-    @Test fun `cancellation propagates and leaves restricted state`() = runTest {
-        val api = Api { throw CancellationException("cancelled") }
-        val repository = ConfigurationRepository(api)
+    @Test fun `cancellation propagates`() = runTest {
+        val repository = ConfigurationRepository(Api { throw CancellationException("cancelled") })
         try {
-            repository.refresh("uz", "1.0.9", "109")
+            repository.refresh()
             fail("Expected cancellation")
         } catch (expected: CancellationException) {
-            assertTrue(repository.configuration.value.stable_release)
+            assertFalse(repository.configuration.value.safeMode)
         }
-    }
-
-    @Test fun `concurrent refreshes cannot apply stale result last`() = runTest {
-        val pending = CompletableDeferred<Unit>()
-        var calls = 0
-        val api = Api {
-            if (++calls == 1) {
-                pending.await()
-                ConfigurationResponse(false)
-            } else ConfigurationResponse(true)
-        }
-        val repository = ConfigurationRepository(api)
-        val first = launch { repository.refresh("uz", "1.0.9", "109") }
-        runCurrent()
-        val second = launch { repository.refresh("uz", "1.0.9", "109") }
-        pending.complete(Unit)
-        first.join()
-        second.join()
-        assertTrue(repository.configuration.value.stable_release)
     }
 }

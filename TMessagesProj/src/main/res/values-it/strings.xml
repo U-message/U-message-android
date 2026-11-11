@@ -31,6 +31,8 @@
     <string name="UMessageSectionPrivacy">Privacy</string>
     <string name="UMessageSectionMessages">Messaggi</string>
     <string name="UMessageSectionSecurity">Sicurezza</string>
+    <string name="UMessageSecurityFooter">Queste funzioni ti proteggono da malware, truffe, spam e contenuti indesiderati. Sono attive per impostazione predefinita, ogni controllo avviene sul telefono e nulla viene inviato. Puoi disattivarle una per una.</string>
+    <string name="UMessageSectionSecurityInfo">Protezione da malware, truffe e spam</string>
     <string name="UMessageSectionFolders">Cartelle</string>
     <string name="UMessageSectionStories">Storie</string>
     <string name="UMessageSectionReminder">Promemoria messaggi</string>
@@ -89,7 +91,7 @@
     <string name="UMessageStrangerChatsInfo">Quando rispondi, la chat torna nell\'elenco delle chat.</string>
     <string name="UMessageStrangerChatsEmpty">Nessuna chat con sconosciuti.</string>
     <string name="UMessageBlockApk">Blocca file APK</string>
-    <string name="UMessageBlockApkInfo">I file .apk in arrivo non vengono mostrati nelle chat.</string>
+    <string name="UMessageBlockApkInfo">I file .apk ricevuti possono installare malware o rubare il tuo account, quindi non vengono mostrati nelle chat.</string>
     <string name="UMessageFolderIcons">Icone cartelle</string>
     <string name="UMessageFolderIconsInfo">Mostra le schede delle cartelle come icone invece dei nomi.</string>
     <string name="UMessageHideFolderTabs">Nascondi schede cartelle</string>
@@ -1912,7 +1914,7 @@
     <string name="UMessageSectionData">Canali e dati</string>
     <string name="UMessageSectionMessagesChats">Messaggi e chat</string>
     <string name="UMessageSectionMessagesInfo">Salvataggio, risposte rapide, promemoria, cartelle</string>
-    <string name="UMessageSectionPrivacyInfo">Modalità fantasma, chat nascoste, filtri, protezione</string>
+    <string name="UMessageSectionPrivacyInfo">Modalità fantasma, blocco con il volto, chat nascoste</string>
     <string name="UMessageSectionPrivacySecurity">Privacy e sicurezza</string>
     <string name="UMessageSectionProtection">Protezione</string>
     <string name="UMessageSectionReminderFocus">Promemoria e concentrazione</string>

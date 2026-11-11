@@ -9,25 +9,28 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Headers
 import java.util.concurrent.TimeUnit
 
-data class ConfigurationResponse(val stable_release: Boolean = true)
+/**
+ * Safe Mode: an emergency off-switch the admin flips for EVERY user at once. It never depends on who asks
+ * (no country, version or language targeting), and it can only turn features off: the app as shipped is
+ * the default, and an unknown or failed answer never changes it.
+ */
+data class ConfigurationResponse(val safeMode: Boolean = false)
 
-// Only a literal JSON boolean false can enable extended configuration.
+// Wire field "stable_release" is kept for installed versions. Only a literal JSON true turns Safe Mode on.
 internal class ConfigurationAdapter : TypeAdapter<ConfigurationResponse>() {
     override fun read(reader: JsonReader): ConfigurationResponse {
         val document = JsonParser.parseReader(reader)
         val value = if (document.isJsonObject) document.asJsonObject.get("stable_release") else null
-        val stable = value == null || !value.isJsonPrimitive ||
-            !value.asJsonPrimitive.isBoolean || value.asBoolean
-        return ConfigurationResponse(stable)
+        val on = value != null && value.isJsonPrimitive && value.asJsonPrimitive.isBoolean && value.asBoolean
+        return ConfigurationResponse(on)
     }
 
     override fun write(writer: JsonWriter, value: ConfigurationResponse?) {
         writer.beginObject()
-        writer.name("stable_release").value(value?.stable_release ?: true)
+        writer.name("stable_release").value(value?.safeMode ?: false)
         writer.endObject()
     }
 }
@@ -35,11 +38,7 @@ internal class ConfigurationAdapter : TypeAdapter<ConfigurationResponse>() {
 interface ConfigurationApi {
     @Headers("Cache-Control: no-cache, no-store")
     @GET("api/settings?route=features")
-    suspend fun getConfiguration(
-        @Header("Accept-Language") deviceLanguage: String,
-        @Header("X-App-Version") appVersion: String,
-        @Header("X-App-Version-Code") appVersionCode: String
-    ): ConfigurationResponse
+    suspend fun getConfiguration(): ConfigurationResponse
 }
 
 internal fun createConfigurationApi(baseUrl: String): ConfigurationApi {

@@ -22,7 +22,7 @@
     <string name="UMessageSectionData">Каналы и данные</string>
     <string name="UMessageSectionMessagesChats">Сообщения и чаты</string>
     <string name="UMessageSectionMessagesInfo">Сохранение, быстрые ответы, напоминания, папки</string>
-    <string name="UMessageSectionPrivacyInfo">Режим призрака, скрытые чаты, фильтры, защита</string>
+    <string name="UMessageSectionPrivacyInfo">Режим призрака, защита по лицу, скрытые чаты</string>
     <string name="UMessageSectionPrivacySecurity">Конфиденциальность и безопасность</string>
     <string name="UMessageSectionProtection">Защита</string>
     <string name="UMessageSectionReminderFocus">Напоминания и фокус</string>
@@ -126,6 +126,8 @@
     <string name="UMessageSectionPrivacy">Конфиденциальность</string>
     <string name="UMessageSectionMessages">Сообщения</string>
     <string name="UMessageSectionSecurity">Безопасность</string>
+    <string name="UMessageSecurityFooter">Эти функции защищают от вредоносных программ, мошенников, спама и нежелательного контента. Они включены по умолчанию, все проверки идут на телефоне и ничего никуда не отправляется. Каждую можно отключить.</string>
+    <string name="UMessageSectionSecurityInfo">Защита от вредоносных программ, мошенников и спама</string>
     <string name="UMessageSectionFolders">Иконки папок</string>
     <string name="UMessageSectionStories">Настройки историй</string>
     <string name="UMessageSectionReminder">Напоминание о сообщении</string>
@@ -203,7 +205,7 @@
     <string name="UMessageStrangerChatsInfo">Когда вы ответите, чат вернётся в список чатов.</string>
     <string name="UMessageStrangerChatsEmpty">Чатов с незнакомцами нет.</string>
     <string name="UMessageBlockApk">Блокировать APK-файлы</string>
-    <string name="UMessageBlockApkInfo">Входящие .apk-файлы не показываются в чатах.</string>
+    <string name="UMessageBlockApkInfo">Входящие .apk-файлы могут установить вредоносную программу или украсть аккаунт, поэтому они не показываются в чатах.</string>
     <string name="UMessageFolderIcons">Иконки папок</string>
     <string name="UMessageFolderIconsInfo">Показывает вкладки папок значками вместо названий.</string>
     <string name="UMessageHideFolderTabs">Скрыть вкладки папок</string>

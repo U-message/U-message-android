@@ -4,24 +4,16 @@ This Android library contains the Kotlin/Retrofit client, process-wide manager,
 testable repository and a Compose settings container. It uses the existing
 `GET /api/settings?route=features` backend. No deployment is required to build it.
 
-`Accept-Language` carries the system device language (BCP 47), `X-App-Version`
-carries the installed version name, and `X-App-Version-Code` carries its code.
-The backend derives the country from trusted hosting ingress, rather than a
-client-provided country. The current backend matches version names exactly.
+Safe Mode is an emergency off-switch: the admin turns it on or off for every user at
+once. The request carries no device data (no language, version or country) and the
+server answers the same for everyone. The app as shipped is the default: the state
+starts with Safe Mode off, only a literal JSON `true` turns it on, and errors,
+timeouts or malformed answers keep the last known state.
 
-The state starts with `stable_release = true` and resets to that value before
-every refresh. Only a successful response with a literal JSON boolean `false`
-enables extended settings. Missing fields, nulls, strings, malformed JSON, HTTP
-errors, cancellation and a 10-second timeout leave the state restricted.
-Permission is never restored from disk. Existing local user preferences are
-preserved but have no effect while remote configuration is restricted.
-
-`ApplicationLoader` refreshes on process start and on subsequent transitions
-from background to foreground. Opening settings or recomposing does not fetch.
-The native settings screen observes changes through a main-thread listener and
-removes the entire local retention section, including its heading and divider.
-Individual option pages cannot open while restricted and close when permission
-is withdrawn. `UMessageConfig.get/set` also enforce the current state.
+`ApplicationLoader` refreshes on process start and on returns to the foreground;
+`UMessageRemoteFlags` re-checks it with its poll. The native settings screen observes
+changes through a main-thread listener. Individual option pages close when Safe Mode
+turns on. `UMessageConfig.get/set` also enforce the current state.
 
 The existing native UI maps extended cache to the three local retention options:
 `KEY_SAVE_EDITED`, `KEY_SAVE_DELETED`, and `KEY_SAVE_VIEW_ONCE`. Adjust

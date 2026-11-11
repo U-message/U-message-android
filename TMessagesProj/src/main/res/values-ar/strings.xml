@@ -31,6 +31,8 @@
     <string name="UMessageSectionPrivacy">الخصوصية</string>
     <string name="UMessageSectionMessages">الرسائل</string>
     <string name="UMessageSectionSecurity">الأمان</string>
+    <string name="UMessageSecurityFooter">تحميك هذه الميزات من البرامج الضارة والاحتيال والرسائل المزعجة والمحتوى غير المرغوب. وهي مفعّلة افتراضيًا، وكل فحص يتم على هاتفك ولا يُرسل أي شيء. يمكنك إيقاف كل منها.</string>
+    <string name="UMessageSectionSecurityInfo">حماية من البرامج الضارة والاحتيال والرسائل المزعجة</string>
     <string name="UMessageSectionFolders">المجلدات</string>
     <string name="UMessageSectionStories">القصص</string>
     <string name="UMessageSectionReminder">تذكير بالرسائل</string>
@@ -93,7 +95,7 @@
     <string name="UMessageStrangerChatsInfo">بمجرد أن ترد، تعود المحادثة إلى قائمة المحادثات.</string>
     <string name="UMessageStrangerChatsEmpty">لا توجد محادثات مع غرباء.</string>
     <string name="UMessageBlockApk">حظر ملفات APK</string>
-    <string name="UMessageBlockApkInfo">لا تُعرض ملفات ‎.apk الواردة في المحادثات.</string>
+    <string name="UMessageBlockApkInfo">قد تثبّت ملفات ‎.apk الواردة برامج ضارة أو تسرق حسابك، لذلك لا تُعرض في المحادثات.</string>
     <string name="UMessageFolderIcons">أيقونات المجلدات</string>
     <string name="UMessageFolderIconsInfo">يعرض علامات تبويب المجلدات كأيقونات بدلًا من الأسماء.</string>
     <string name="UMessageHideFolderTabs">إخفاء علامات تبويب المجلدات</string>
@@ -1622,7 +1624,7 @@
     <string name="UMessageSectionData">القنوات والبيانات</string>
     <string name="UMessageSectionMessagesChats">الرسائل والمحادثات</string>
     <string name="UMessageSectionMessagesInfo">الحفظ، الردود السريعة، التذكيرات، المجلدات</string>
-    <string name="UMessageSectionPrivacyInfo">وضع الشبح، المحادثات المخفية، الفلاتر، الحماية</string>
+    <string name="UMessageSectionPrivacyInfo">وضع الشبح، القفل بالوجه، المحادثات المخفية</string>
     <string name="UMessageSectionPrivacySecurity">الخصوصية والأمان</string>
     <string name="UMessageSectionProtection">الحماية</string>
     <string name="UMessageSectionReminderFocus">التذكيرات والتركيز</string>

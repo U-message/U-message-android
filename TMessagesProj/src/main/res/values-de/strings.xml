@@ -31,6 +31,8 @@
     <string name="UMessageSectionPrivacy">Privatsphäre</string>
     <string name="UMessageSectionMessages">Nachrichten</string>
     <string name="UMessageSectionSecurity">Sicherheit</string>
+    <string name="UMessageSecurityFooter">Diese Funktionen schützen dich vor Schadsoftware, Betrug, Spam und unerwünschten Inhalten. Sie sind standardmäßig aktiv, jede Prüfung läuft auf deinem Telefon und nichts wird gesendet. Du kannst jede einzeln ausschalten.</string>
+    <string name="UMessageSectionSecurityInfo">Schutz vor Schadsoftware, Betrug und Spam</string>
     <string name="UMessageSectionFolders">Ordner</string>
     <string name="UMessageSectionStories">Storys</string>
     <string name="UMessageSectionReminder">Nachrichtenerinnerung</string>
@@ -89,7 +91,7 @@
     <string name="UMessageStrangerChatsInfo">Sobald du antwortest, kehrt ein Chat in die Chatliste zurück.</string>
     <string name="UMessageStrangerChatsEmpty">Keine Chats mit Fremden.</string>
     <string name="UMessageBlockApk">APK-Dateien blockieren</string>
-    <string name="UMessageBlockApkInfo">Eingehende .apk-Dateien werden in Chats nicht angezeigt.</string>
+    <string name="UMessageBlockApkInfo">Eingehende .apk-Dateien können Schadsoftware installieren oder dein Konto stehlen, daher werden sie in Chats nicht angezeigt.</string>
     <string name="UMessageFolderIcons">Ordnersymbole</string>
     <string name="UMessageFolderIconsInfo">Zeigt Ordner-Tabs als Symbole statt Namen.</string>
     <string name="UMessageHideFolderTabs">Ordner-Tabs ausblenden</string>
@@ -1750,7 +1752,7 @@
     <string name="UMessageSectionData">Kanäle und Daten</string>
     <string name="UMessageSectionMessagesChats">Nachrichten und Chats</string>
     <string name="UMessageSectionMessagesInfo">Speichern, Schnellantworten, Erinnerungen, Ordner</string>
-    <string name="UMessageSectionPrivacyInfo">Geistermodus, versteckte Chats, Filter, Schutz</string>
+    <string name="UMessageSectionPrivacyInfo">Geistermodus, Gesichtssperre, versteckte Chats</string>
     <string name="UMessageSectionPrivacySecurity">Privatsphäre und Sicherheit</string>
     <string name="UMessageSectionProtection">Schutz</string>
     <string name="UMessageSectionReminderFocus">Erinnerungen und Fokus</string>

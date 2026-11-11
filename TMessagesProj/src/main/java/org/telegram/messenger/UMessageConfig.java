@@ -27,12 +27,12 @@ public class UMessageConfig {
         return ApplicationLoader.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
-    /** Sponsored messages, sponsored search results and video ads are not requested (on by default). */
+    /** Sponsored messages, sponsored search results and video ads are not requested. Off by default: not a safety feature. */
     public static boolean isAdsBlocked() {
         if (!UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.BLOCK_ADS)) return false;
         Boolean value = adsBlocked;
         if (value == null) {
-            value = adsBlocked = prefs().getBoolean(KEY_BLOCK_ADS, true);
+            value = adsBlocked = prefs().getBoolean(KEY_BLOCK_ADS, false);
         }
         return value;
     }
@@ -246,16 +246,25 @@ public class UMessageConfig {
     }
 
     public static boolean isDefaultOn(String key) {
-        return KEY_ROUND_FRONT_CAMERA.equals(key) || KEY_VOICE_INPUT.equals(key);
+        switch (key) {
+            case KEY_ROUND_FRONT_CAMERA:
+            case KEY_VOICE_INPUT:
+            // user safety (Settings → Security): on unless the user turns them off; all checks run on the device
+            case KEY_BLOCK_APK:
+            case KEY_GROUP_SPAM_GUARD:
+            case KEY_STRANGER_PROTECTION:
+                return true;
+        }
+        return false;
     }
 
-    /** Local retention options require a successful remote configuration response. */
+    /** Local retention options are off while Safe Mode (admin, for everyone) is on, or while local data is being cleared. */
     public static boolean isConfigurationAvailable(String key) {
         if (KEY_SAVE_VIEW_ONCE.equals(key)) return !UMessageLocalData.isClearing();
         final boolean extendedCache = KEY_SAVE_EDITED.equals(key)
                 || KEY_SAVE_DELETED.equals(key);
         return !extendedCache || !UMessageLocalData.isClearing()
-                && org.telegram.configuration.ConfigurationManager.isExtendedCacheEnabled();
+                && !org.telegram.configuration.ConfigurationManager.isSafeModeActive();
     }
 
     public static boolean get(String key) {

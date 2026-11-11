@@ -356,7 +356,7 @@ public class ApplicationLoader extends Application {
                 if (wasInBackground) {
                     ensureCurrentNetworkGet(true);
                     if (hasStarted) {
-                        org.telegram.configuration.ConfigurationManager.refresh(applicationContext);
+                        org.telegram.configuration.ConfigurationManager.refresh();
                     }
                 }
                 hasStarted = true;
@@ -371,7 +371,7 @@ public class ApplicationLoader extends Application {
         }
 
         applicationHandler = new Handler(applicationContext.getMainLooper());
-        org.telegram.configuration.ConfigurationManager.refresh(applicationContext);
+        org.telegram.configuration.ConfigurationManager.refresh();
 
         AndroidUtilities.runOnUIThread(ApplicationLoader::startPushService);
 

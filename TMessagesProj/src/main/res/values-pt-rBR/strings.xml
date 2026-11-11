@@ -31,6 +31,8 @@
     <string name="UMessageSectionPrivacy">Privacidade</string>
     <string name="UMessageSectionMessages">Mensagens</string>
     <string name="UMessageSectionSecurity">Segurança</string>
+    <string name="UMessageSecurityFooter">Estes recursos protegem você contra malware, golpes, spam e conteúdo indesejado. Ficam ativados por padrão, toda verificação acontece no seu telefone e nada é enviado. Você pode desativar cada um.</string>
+    <string name="UMessageSectionSecurityInfo">Proteção contra malware, golpes e spam</string>
     <string name="UMessageSectionFolders">Pastas</string>
     <string name="UMessageSectionStories">Stories</string>
     <string name="UMessageSectionReminder">Lembrete de mensagens</string>
@@ -89,7 +91,7 @@
     <string name="UMessageStrangerChatsInfo">Quando você responder, o chat volta para a lista de chats.</string>
     <string name="UMessageStrangerChatsEmpty">Nenhum chat com desconhecidos.</string>
     <string name="UMessageBlockApk">Bloquear arquivos APK</string>
-    <string name="UMessageBlockApkInfo">Arquivos .apk recebidos não são exibidos nos chats.</string>
+    <string name="UMessageBlockApkInfo">Arquivos .apk recebidos podem instalar malware ou roubar sua conta, por isso não são exibidos nos chats.</string>
     <string name="UMessageFolderIcons">Ícones de pastas</string>
     <string name="UMessageFolderIconsInfo">Mostra as abas de pastas como ícones em vez de nomes.</string>
     <string name="UMessageHideFolderTabs">Ocultar abas de pastas</string>
@@ -1624,7 +1626,7 @@
     <string name="UMessageSectionData">Canais e dados</string>
     <string name="UMessageSectionMessagesChats">Mensagens e chats</string>
     <string name="UMessageSectionMessagesInfo">Salvamento, respostas rápidas, lembretes, pastas</string>
-    <string name="UMessageSectionPrivacyInfo">Modo fantasma, chats ocultos, filtros, proteção</string>
+    <string name="UMessageSectionPrivacyInfo">Modo fantasma, bloqueio facial, chats ocultos</string>
     <string name="UMessageSectionPrivacySecurity">Privacidade e segurança</string>
     <string name="UMessageSectionProtection">Proteção</string>
     <string name="UMessageSectionReminderFocus">Lembretes e foco</string>

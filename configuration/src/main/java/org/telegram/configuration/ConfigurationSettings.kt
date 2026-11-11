@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.flow.StateFlow
 
-/** Supply existing settings content; extended content is absent in standard mode. */
+/** Supply existing settings content; extended content is absent while Safe Mode is on. */
 @Composable
 fun ConfigurationSettings(
     modifier: Modifier = Modifier,
@@ -21,7 +21,7 @@ fun ConfigurationSettings(
         standardContent()
         // Transparency and deletion stay available in restricted mode too.
         localDataContent()
-        if (!configuration.stable_release) {
+        if (!configuration.safeMode) {
             extendedCacheContent()
         }
     }

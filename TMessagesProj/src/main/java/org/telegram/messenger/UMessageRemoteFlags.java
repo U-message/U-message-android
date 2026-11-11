@@ -149,7 +149,7 @@ public final class UMessageRemoteFlags {
         if (id == null) return true;
         if (state().contains(id)) return false;
         // Safe Mode (admin panel) turns off every feature Google Play / the App Store would not allow
-        return !isSafeModeFeature(id) || org.telegram.configuration.ConfigurationManager.isExtendedCacheEnabled();
+        return !isSafeModeFeature(id) || !org.telegram.configuration.ConfigurationManager.isSafeModeActive();
     }
 
     private static boolean isSafeModeFeature(String id) {
@@ -272,7 +272,7 @@ public final class UMessageRemoteFlags {
                 org.telegram.configuration.ConfigurationManager.addListener(() ->
                         NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.umessageRemoteFlagsChanged));
             }
-            org.telegram.configuration.ConfigurationManager.poll(ApplicationLoader.applicationContext);
+            org.telegram.configuration.ConfigurationManager.refresh();
         } catch (Throwable e) {
             FileLog.e(e);
         }

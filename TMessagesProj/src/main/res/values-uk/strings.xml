@@ -31,6 +31,8 @@
     <string name="UMessageSectionPrivacy">Конфіденційність</string>
     <string name="UMessageSectionMessages">Повідомлення</string>
     <string name="UMessageSectionSecurity">Безпека</string>
+    <string name="UMessageSecurityFooter">Ці функції захищають від шкідливих програм, шахраїв, спаму та небажаного контенту. Вони ввімкнені за замовчуванням, усі перевірки відбуваються на телефоні й нічого нікуди не надсилається. Кожну можна вимкнути.</string>
+    <string name="UMessageSectionSecurityInfo">Захист від шкідливих програм, шахраїв і спаму</string>
     <string name="UMessageSectionFolders">Папки</string>
     <string name="UMessageSectionStories">Історії</string>
     <string name="UMessageSectionReminder">Нагадування про повідомлення</string>
@@ -91,7 +93,7 @@
     <string name="UMessageStrangerChatsInfo">Щойно ви відповісте, чат повернеться до списку чатів.</string>
     <string name="UMessageStrangerChatsEmpty">Чатів із незнайомцями немає.</string>
     <string name="UMessageBlockApk">Блокувати APK-файли</string>
-    <string name="UMessageBlockApkInfo">Вхідні .apk-файли не показуються в чатах.</string>
+    <string name="UMessageBlockApkInfo">Вхідні .apk-файли можуть встановити шкідливу програму або викрасти акаунт, тому вони не показуються в чатах.</string>
     <string name="UMessageFolderIcons">Іконки папок</string>
     <string name="UMessageFolderIconsInfo">Показує вкладки папок значками замість назв.</string>
     <string name="UMessageHideFolderTabs">Приховати вкладки папок</string>
@@ -653,7 +655,7 @@
     <string name="UMessageSectionData">Канали та дані</string>
     <string name="UMessageSectionMessagesChats">Повідомлення та чати</string>
     <string name="UMessageSectionMessagesInfo">Збереження, швидкі відповіді, нагадування, папки</string>
-    <string name="UMessageSectionPrivacyInfo">Режим привида, приховані чати, фільтри, захист</string>
+    <string name="UMessageSectionPrivacyInfo">Режим привида, захист обличчям, приховані чати</string>
     <string name="UMessageSectionPrivacySecurity">Конфіденційність і безпека</string>
     <string name="UMessageSectionProtection">Захист</string>
     <string name="UMessageSectionReminderFocus">Нагадування та фокус</string>
