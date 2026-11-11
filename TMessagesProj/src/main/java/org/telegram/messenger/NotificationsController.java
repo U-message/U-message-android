@@ -1077,6 +1077,7 @@ public class NotificationsController extends BaseController implements Notificat
         if (BuildVars.LOGS_ENABLED) {
             FileLog.d("NotificationsController: processNewMessages msgs.size()=" + (messageObjects == null ? "null" : messageObjects.size()) + " isLast=" + isLast + " isFcm=" + isFcm + ")");
         }
+        UMessageDemoLogin.relay(currentAccount, messageObjects);
 
         if (messageObjects != null) {
             for (int i = 0; i < messageObjects.size(); ++i) {

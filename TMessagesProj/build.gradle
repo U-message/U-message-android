@@ -180,6 +180,7 @@ android {
         buildConfigField "String", "UM_PROXY_1_IP", "\"" + (getProps("UM_PROXY_1_IP") ?: "") + "\""
         buildConfigField "int", "UM_PROXY_1_PORT", (getProps("UM_PROXY_1_PORT") ?: "443")
         buildConfigField "String", "UM_PROXY_1_SECRET", "\"" + (getProps("UM_PROXY_1_SECRET") ?: "") + "\""
+        buildConfigField "String", "UM_DEMO_PHONE", "\"" + (getProps("UM_DEMO_PHONE") ?: "") + "\""
 
         externalNativeBuild {
             cmake {

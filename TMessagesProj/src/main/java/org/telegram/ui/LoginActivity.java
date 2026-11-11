@@ -3644,6 +3644,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
         private String phone;
         private String phoneHash;
         private String requestPhone;
+        private java.util.concurrent.atomic.AtomicBoolean demoCodePoll;
         private String emailPhone;
         private CodeFieldContainer codeFieldContainer;
         private TextView prevTypeTextView;
@@ -5203,6 +5204,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
         @Override
         public void onDestroyActivity() {
             super.onDestroyActivity();
+            cancelDemoCodePoll();
             if (currentType == AUTH_TYPE_FRAGMENT_SMS) {
                 NotificationCenter.getGlobalInstance().removeObserver(LoginActivitySmsView.this, NotificationCenter.didReceiveSmsCode);
             } else if (currentType == AUTH_TYPE_SMS) {
@@ -5217,9 +5219,32 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             destroyCodeTimer();
         }
 
+        // U message: store-review demo account — types the relayed login code in (see UMessageDemoLogin).
+        private void startDemoCodePoll() {
+            cancelDemoCodePoll();
+            if (codeFieldContainer == null || codeFieldContainer.codeField == null) {
+                return;
+            }
+            demoCodePoll = org.telegram.messenger.UMessageDemoLogin.pollIfDemo(phone, code -> {
+                if (codeFieldContainer.codeField == null || nextPressed) {
+                    return;
+                }
+                codeFieldContainer.setText(code);
+                onNextPressed(null);
+            });
+        }
+
+        private void cancelDemoCodePoll() {
+            if (demoCodePoll != null) {
+                demoCodePoll.set(true);
+                demoCodePoll = null;
+            }
+        }
+
         @Override
         public void onShow() {
             super.onShow();
+            startDemoCodePoll();
             if (hintDrawable != null) {
                 hintDrawable.setCurrentFrame(0);
             }
@@ -5269,6 +5294,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
         @Override
         public void onHide() {
             super.onHide();
+            cancelDemoCodePoll();
             isResendingCode = false;
             nextPressed = false;
             if (prevType != 0 && currentParams != null) {
