@@ -9,19 +9,26 @@ This repository contains the source code of the U message Android app.
 
 Everything you love in Telegram, plus features built for safety, privacy and everyday life.
 
+### 🛡️ Built with your safety in mind
+
+U message is designed to protect its users — especially in Uzbekistan — from harmful content, scams and legal risks.
+
+- **Banned sources warning** — U message recognizes channels and chats that are banned in Uzbekistan by the Supreme Court and **warns you before you open them**. You can enter only after confirming that you understand the risk, so nobody ends up in a prohibited source by accident.
+- **Inappropriate content filter** — NSFW photos and videos are detected and blurred right on the device, nothing is uploaded anywhere.
+- **Parental control** — a safe mode for children's accounts.
+- **Malicious APK protection** — warns about dangerous apps and files before you install them.
+- **Masked link warnings** — shows where a link really leads when its text pretends to be something else, protecting against phishing.
+- **Stranger protection** — messages from unknown people are filtered, so scammers can't reach you directly.
+- **Group spam guard** — automatically stops spam and scam bots in groups.
+
+### 🔐 Privacy
+- **Privacy Guard** — hides your chats when someone else looks at your screen (on-device face recognition)
+- **Hidden chats** behind a password
+- **PIN-protected account switching**
+
 ### 🌐 Works everywhere
 - **Built-in proxy** — connects automatically where Telegram is blocked or slow: works in **China, Russia and the UAE (Dubai)**
-- **Up to 20 accounts** in one app, with PIN protection when switching
-
-### 🛡️ Privacy & safety
-- **Privacy Guard** — hides your chats when someone else looks at your screen (on-device face recognition)
-- **Inappropriate content filter** — blurs and blocks NSFW photos and videos on the device
-- **Parental control** for children's accounts
-- **Hidden chats** behind a password
-- **Stranger protection** — messages from unknown people are filtered
-- **Malicious APK blocking** and **masked link warnings**
-- **Group spam guard**
-- **Banned sources warning** — alerts before opening sources banned by the Supreme Court of Uzbekistan
+- **Up to 20 accounts** in one app
 
 ### 🗺️ Friends & places
 - **Friend Map** — share your live location with friends on a 3D globe, request-and-accept only, encrypted
