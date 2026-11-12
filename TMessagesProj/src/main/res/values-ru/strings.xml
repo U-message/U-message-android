@@ -126,6 +126,11 @@
     <string name="UMessageSectionPrivacy">Конфиденциальность</string>
     <string name="UMessageSectionMessages">Сообщения</string>
     <string name="UMessageSectionSecurity">Безопасность</string>
+    <string name="UMessageDeleteServerData">Удалить мои данные U message</string>
+    <string name="UMessageDeleteServerDataInfo">Удаляет всё, что сервер U message хранит об этом аккаунте: name@u, U-истории, геопозицию «Люди рядом», подключение Instagram. Аккаунт Telegram и сообщения не затрагиваются.</string>
+    <string name="UMessageDeleteServerDataConfirm">Все данные U message этого аккаунта будут удалены с нашего сервера: ключ приложения, имя name@u, U-истории, геопозиция «Люди рядом» и подключение Instagram. Это нельзя отменить. Аккаунт Telegram и чаты останутся.</string>
+    <string name="UMessageDeleteServerDataDone">Ваши данные U message удалены</string>
+    <string name="UMessageDeleteServerDataFailed">Не удалось удалить. Проверьте соединение и повторите или напишите @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">Эти функции защищают от вредоносных программ, мошенников, спама и нежелательного контента. Они включены по умолчанию, все проверки идут на телефоне и ничего никуда не отправляется. Каждую можно отключить.</string>
     <string name="UMessageSectionSecurityInfo">Защита от вредоносных программ, мошенников и спама</string>
     <string name="UMessageSectionFolders">Иконки папок</string>
@@ -630,6 +635,12 @@
     <string name="UMessageFriendOkText">✅ Запрос на карту друзей принят</string>
     <string name="UMessageFriendMapBackground">Фоновый режим</string>
     <string name="UMessageFriendMapBackgroundInfo">Отправлять геопозицию, даже когда приложение закрыто</string>
+    <string name="UMessageFriendMapDisclosureTitle">Геопозиция для карты друзей</string>
+    <string name="UMessageFriendMapDisclosureText">U message использует вашу геопозицию, чтобы показать вас на карте друзей. Её видят только друзья, чей запрос вы приняли; она передаётся через сервер U message со сквозным шифрованием, сервер не может её прочитать. Саму карту рисует Mapbox. Прекратить передачу или удалить друга можно в любой момент.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Передавать геопозицию в фоне?</string>
+    <string name="UMessageFriendMapDisclosureBgText">В фоновом режиме U message собирает вашу геопозицию, даже когда приложение закрыто или не используется, и в зашифрованном виде отправляет её принятым друзьям. Всё это время видно уведомление. Отключить можно здесь в любой момент.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Продолжить</string>
+    <string name="UMessageFriendMapDisclosureDecline">Не сейчас</string>
     <string name="UMessageFriendUpgradeText">🔐 Карта друзей: переход на более безопасный обмен ключами</string>
     <string name="UMessageFriendSafetyCode">🔐 Код безопасности: %1$s</string>
     <string name="UMessageFriendSafetyCodeInfo">Сравните этот код с другом лично или во время звонка. Если на обоих телефонах цифры совпадают, никто не мог подменить ваши ключи.</string>
@@ -785,6 +796,7 @@
     <string name="UMessageUsernameAdd">Добавить имя U message</string>
     <string name="UMessageOfficialAccount">Официальный аккаунт</string>
     <string name="UMessageQrLoginButton">Войти по QR-коду</string>
+    <string name="UMessageLoginAuthNote">При входе ваш аккаунт также подтверждается для сервисов U message (подписью Telegram, в чаты ничего не отправляется).</string>
     <string name="UMessageQrLoginTitle">Вход по QR-коду</string>
     <string name="UMessageQrLoginHint">Откройте Telegram на другом устройстве, где вы вошли: Настройки → Устройства → Подключить устройство, и отсканируйте этот код.</string>
     <string name="UMessageQrLoginWaiting">Ожидание сканирования…</string>
@@ -1424,4 +1436,5 @@
     <string name="PrivacyGuardEnrollFillRing">Медленно поворачивайте голову, чтобы заполнить круг</string>
     <string name="PrivacyGuardEnrollFinish">Готово</string>
     <string name="PrivacyGuardTryAgain">Попробовать снова</string>
+    <string name="UMessageApkFromFiles">Приложения устанавливаются из Google Play. Чтобы установить этот APK, сохраните его в Загрузки и откройте в файловом менеджере.</string>
 </resources>

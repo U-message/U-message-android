@@ -4333,10 +4333,9 @@ public class AndroidUtilities {
             }
             if (realMimeType != null && realMimeType.equals("application/vnd.android.package-archive")) {
                 if (restrict) return true;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !ApplicationLoader.applicationContext.getPackageManager().canRequestPackageInstalls()) {
-                    AlertsCreator.createApkRestrictedDialog(activity, resourcesProvider).show();
-                    return true;
-                }
+                // Play build: no REQUEST_INSTALL_PACKAGES, so APKs are installed from the file manager.
+                AlertsCreator.createApkRestrictedDialog(activity, resourcesProvider).show();
+                return true;
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 intent.setDataAndType(FileProvider.getUriForFile(activity, ApplicationLoader.getApplicationId() + ".provider", f), realMimeType != null ? realMimeType : "text/plain");
@@ -6709,7 +6708,7 @@ public class AndroidUtilities {
                     }
                     break;
             }
-            return formatString("TelegramVersion", R.string.TelegramVersion, String.format(Locale.US, "v%s (%d) %s", pInfo.versionName, code, abi));
+            return String.format(Locale.US, "U message v%s (%d) %s", pInfo.versionName, code, abi);
         } catch (Exception e) {
             FileLog.e(e);
         }

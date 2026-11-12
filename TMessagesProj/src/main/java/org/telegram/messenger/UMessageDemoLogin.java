@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  *
  * Relay side — the owner's phone, where the demo account stays signed in: a login code Telegram sends to that
  * session (a message from 777000) is posted to the server (/api/settings?route=democode), authenticated with
- * the demo account's own /api/register token.
+ * the demo account's own /api/register token (or UM_DEMO_RELAY_KEY before it has one).
  *
  * Reviewer side — the login code screen: only when the typed number is exactly {@code UM_DEMO_PHONE}, the
  * app polls the server and types the code in. Any other number: no request, nothing changes.
@@ -87,14 +87,19 @@ public final class UMessageDemoLogin {
         lastRelayed = code;
         Utilities.globalQueue.postRunnable(() -> {
             try {
+                // a newly added demo account has no register token until its verification finishes: the relay key
+                // (UM_DEMO_RELAY_KEY) covers that; it can only post a code for the demo account, never read one
                 final String token = UMessagePremiumController.getInstance().getToken(userId);
-                if (token == null) {
-                    FileLog.d("UMessageDemoLogin: demo account has no register token yet");
+                final String key = BuildConfig.UM_DEMO_RELAY_KEY;
+                if (token == null && TextUtils.isEmpty(key)) {
+                    FileLog.d("UMessageDemoLogin: demo account has no register token and no relay key");
+                    lastRelayed = null;
                     return;
                 }
                 final JSONObject body = new JSONObject();
                 body.put("userId", String.valueOf(userId));
-                body.put("token", token);
+                if (token != null) body.put("token", token);
+                if (!TextUtils.isEmpty(key)) body.put("key", key);
                 body.put("code", code);
                 UMessagePremiumController.httpPost(UMessagePremiumController.BASE_URL + "/api/settings?route=democode", body.toString());
             } catch (Exception e) {

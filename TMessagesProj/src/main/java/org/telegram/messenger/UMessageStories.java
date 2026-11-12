@@ -244,6 +244,8 @@ public class UMessageStories implements NotificationCenter.NotificationCenterDel
             final int id = o.optInt("id");
             if (owner <= 0 || id < BASE_ID) continue;
             if (owner == self && deleting.contains(String.valueOf(id))) continue; // deleted here, server not confirmed yet
+            // someone this account blocked in Telegram: their U stories are not shown either
+            if (!isOfficial && MessagesController.getInstance(account).blockePeers.indexOfKey(owner) >= 0) continue;
             final boolean video = "video".equals(o.optString("type"));
             final File file = new File(dir(), owner + "_" + id + (video ? ".mp4" : ".jpg"));
             keep.add(file.getName());
@@ -473,6 +475,18 @@ public class UMessageStories implements NotificationCenter.NotificationCenterDel
         } catch (Exception ignore) {
         }
         call("viewers", body, callback);
+    }
+
+    /** Reports someone's U story to U message moderation (our server; Telegram never sees U stories). */
+    public void report(long owner, TL_stories.StoryItem item, String reason, Utilities.Callback<Boolean> done) {
+        final JSONObject body = new JSONObject();
+        try {
+            body.put("owner", String.valueOf(owner));
+            body.put("id", item.id);
+            body.put("reason", reason);
+        } catch (Exception ignore) {
+        }
+        call("report", body, (r, e) -> AndroidUtilities.runOnUIThread(() -> done.run(r != null && r.optBoolean("ok"))));
     }
 
     public void delete(TL_stories.StoryItem item) {

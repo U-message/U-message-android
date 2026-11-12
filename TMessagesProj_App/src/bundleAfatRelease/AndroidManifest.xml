@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Google Play build only (bundleAfat release; highest manifest priority).
+  READ_CALL_LOG: restricted SMS/Call Log permission, only Telegram's own default-handler exception covers it;
+  login falls back to an SMS or in-app code without it.
+  REQUEST_INSTALL_PACKAGES: already removed from the main manifest (no in-app updates); kept here as a safety net.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_CALL_LOG" tools:node="remove" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove" />
+</manifest>

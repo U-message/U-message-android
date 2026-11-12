@@ -2553,6 +2553,17 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
                 bottomMargin -= 40;
             }
 
+            if (activityMode == MODE_LOGIN) {
+                // U message: disclosure of the account check done after sign-in (UMessageTelegramAuth)
+                TextView authNote = new TextView(context);
+                authNote.setText(getString(R.string.UMessageLoginAuthNote));
+                authNote.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+                authNote.setGravity(Gravity.CENTER);
+                authNote.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText6));
+                addView(authNote, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP, 32, 10, 32, 0));
+                bottomMargin -= 34;
+            }
+
             final boolean allowTestBackend = false;
             if (allowTestBackend && activityMode == MODE_LOGIN) {
                 testBackendCheckBox = new CheckBoxCell(context, 2);

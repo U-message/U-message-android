@@ -35,7 +35,7 @@ public class UMessageHistory {
             if (ids == null || ids.isEmpty()) {
                 return false;
             }
-            if (!UMessageConfig.isSaveDeleted()) return false;
+            if (!UMessageConfig.isSaveDeleted(account)) return false;
             SharedPreferences.Editor editor = prefs(account).edit();
             for (Integer id : ids) {
                 editor.putBoolean("d_" + idSpace + "_" + id, true);
@@ -51,7 +51,7 @@ public class UMessageHistory {
         if (messageObject != null && messageObject.umPreviewDeleted) {
             return true;
         }
-        if (messageObject == null || messageObject.messageOwner == null || messageObject.getId() <= 0 || !UMessageConfig.isSaveDeleted()) {
+        if (messageObject == null || messageObject.messageOwner == null || messageObject.getId() <= 0 || !UMessageConfig.isSaveDeleted(account)) {
             return false;
         }
         return prefs(account).getBoolean("d_" + idSpace(messageObject.messageOwner) + "_" + messageObject.getId(), false);
@@ -74,7 +74,7 @@ public class UMessageHistory {
         final String newText = edited.message == null ? "" : edited.message;
         final MessagesStorage storage = MessagesStorage.getInstance(account);
         storage.getStorageQueue().postRunnable(() -> {
-            if (!UMessageConfig.isSaveEdited() || operationGeneration != UMessageLocalData.getGeneration()) return;
+            if (!UMessageConfig.isSaveEdited(account) || operationGeneration != UMessageLocalData.getGeneration()) return;
             SQLiteCursor cursor = null;
             try {
                 cursor = storage.getDatabase().queryFinalized("SELECT data FROM messages_v2 WHERE uid = " + dialogId + " AND mid = " + id + " LIMIT 1");
@@ -100,7 +100,7 @@ public class UMessageHistory {
 
     private static void addVersion(int account, long dialogId, int id, String text, int date, long operationGeneration) throws Exception {
         synchronized (UMessageLocalData.LOCK) {
-            if (!UMessageConfig.isSaveEdited() || operationGeneration != UMessageLocalData.getGeneration()) return;
+            if (!UMessageConfig.isSaveEdited(account) || operationGeneration != UMessageLocalData.getGeneration()) return;
             final SharedPreferences prefs = prefs(account);
             final String key = editKey(dialogId, id);
             JSONArray versions = new JSONArray(prefs.getString(key, "[]"));
@@ -110,7 +110,7 @@ public class UMessageHistory {
     }
 
     public static boolean hasEditHistory(int account, MessageObject messageObject) {
-        if (!UMessageConfig.isSaveEdited()) return false;
+        if (!UMessageConfig.isSaveEdited(account)) return false;
         if (messageObject == null || messageObject.messageOwner == null || messageObject.getId() <= 0) {
             return false;
         }
@@ -118,7 +118,7 @@ public class UMessageHistory {
     }
 
     private static JSONArray getVersions(int account, MessageObject messageObject) {
-        if (!UMessageConfig.isSaveEdited()) return new JSONArray();
+        if (!UMessageConfig.isSaveEdited(account)) return new JSONArray();
         try {
             return new JSONArray(prefs(account).getString(editKey(messageObject.getDialogId(), messageObject.getId()), "[]"));
         } catch (Exception e) {

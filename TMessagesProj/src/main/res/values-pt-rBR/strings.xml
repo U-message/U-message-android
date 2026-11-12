@@ -31,6 +31,11 @@
     <string name="UMessageSectionPrivacy">Privacidade</string>
     <string name="UMessageSectionMessages">Mensagens</string>
     <string name="UMessageSectionSecurity">Segurança</string>
+    <string name="UMessageDeleteServerData">Excluir meus dados do U message</string>
+    <string name="UMessageDeleteServerDataInfo">Exclui tudo o que o servidor do U message guarda sobre esta conta: name@u, histórias U, localização em «Pessoas próximas», conexão com o Instagram. Sua conta do Telegram e suas mensagens não são afetadas.</string>
+    <string name="UMessageDeleteServerDataConfirm">Todos os dados do U message desta conta serão excluídos do nosso servidor: chave do app, name@u, histórias U, localização em «Pessoas próximas» e conexão com o Instagram. Não é possível desfazer. Sua conta do Telegram e seus chats continuam.</string>
+    <string name="UMessageDeleteServerDataDone">Seus dados do U message foram excluídos</string>
+    <string name="UMessageDeleteServerDataFailed">Não foi possível excluir. Verifique a conexão e tente de novo ou escreva para @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">Estes recursos protegem você contra malware, golpes, spam e conteúdo indesejado. Ficam ativados por padrão, toda verificação acontece no seu telefone e nada é enviado. Você pode desativar cada um.</string>
     <string name="UMessageSectionSecurityInfo">Proteção contra malware, golpes e spam</string>
     <string name="UMessageSectionFolders">Pastas</string>
@@ -1432,6 +1437,12 @@
     <string name="UMessageFriendOkText">✅ Solicitação do mapa de amigos aceita</string>
     <string name="UMessageFriendMapBackground">Modo em segundo plano</string>
     <string name="UMessageFriendMapBackgroundInfo">Enviar sua localização mesmo com o app fechado</string>
+    <string name="UMessageFriendMapDisclosureTitle">Localização para o mapa de amigos</string>
+    <string name="UMessageFriendMapDisclosureText">O U message usa sua localização para mostrar você no mapa de amigos. Só os amigos cuja solicitação você aceitou a veem; ela é enviada com criptografia de ponta a ponta pelo servidor do U message, que não consegue lê-la. O mapa é desenhado pelo Mapbox. Você pode parar de compartilhar ou remover um amigo a qualquer momento.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Compartilhar localização em segundo plano?</string>
+    <string name="UMessageFriendMapDisclosureBgText">Com o modo em segundo plano, o U message coleta sua localização mesmo com o app fechado ou sem uso e a envia criptografada aos amigos aceitos. Enquanto isso, uma notificação fica visível. Você pode desativar aqui a qualquer momento.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Continuar</string>
+    <string name="UMessageFriendMapDisclosureDecline">Agora não</string>
     <string name="UMessageFriendMapBackgroundOn">Modo em segundo plano ativado</string>
     <string name="UMessageFriendMapBackgroundOnLater">O modo em segundo plano começará quando você tiver um amigo</string>
     <string name="UMessageFriendMapBackgroundOff">Modo em segundo plano desativado</string>
@@ -1884,6 +1895,7 @@
     <string name="UMessageUsernameAdd">Adicionar nome de usuário do U message</string>
     <string name="UMessageOfficialAccount">Conta oficial</string>
     <string name="UMessageQrLoginButton">Entrar com código QR</string>
+    <string name="UMessageLoginAuthNote">Ao entrar, sua conta também é confirmada para os serviços do U message (com a assinatura do Telegram; nada é enviado aos seus chats).</string>
     <string name="UMessageQrLoginTitle">Entrar com código QR</string>
     <string name="UMessageQrLoginHint">Abra o Telegram em outro dispositivo em que você está conectado: Configurações → Dispositivos → Conectar Telegram Desktop, e escaneie este código.</string>
     <string name="UMessageQrLoginWaiting">Aguardando leitura…</string>
@@ -1996,4 +2008,5 @@
     <string name="UMessageErrorReportsInfo">Detalhes de falhas e erros vão para o servidor do U message para correção. Número de telefone, ID de usuário, mensagens e links não são incluídos.</string>
     <string name="UMessageChatGuardShare">Compartilhar denúncias</string>
     <string name="UMessageChatGuardShareInfo">Enviar também ao servidor do U message os chats que você denuncia e os chats públicos que correspondem às palavras-chave do administrador, para proteger outros usuários. Desativado por padrão.</string>
+    <string name="UMessageApkFromFiles">Os apps são instalados pelo Google Play. Para instalar este APK, salve-o em Downloads e abra-o no gerenciador de arquivos.</string>
 </resources>

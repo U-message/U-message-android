@@ -413,7 +413,7 @@ public class MessagesController extends BaseController implements NotificationCe
      * so right after a send (and once a minute as a safety net) we report offline again.
      */
     public void ghostGoOffline() {
-        if (!UMessageGhostScope.isGhostOnline() || !getUserConfig().isClientActivated()) {
+        if (!UMessageGhostScope.isGhostOnline(currentAccount) || !getUserConfig().isClientActivated()) {
             return;
         }
         lastGhostOfflineTime = System.currentTimeMillis();
@@ -758,14 +758,16 @@ public class MessagesController extends BaseController implements NotificationCe
     public int transcribeButtonPressed;
     public boolean starsLocked;
 
+    // U message: Telegram Premium and Stars are never sold in the app (their purchase would run outside Google Play
+    // Billing). This is Telegram's own switch for regions without billing: buying UI hides, owned Premium keeps working.
     public boolean starsPurchaseAvailable() {
-        return !starsLocked;
+        return false;
     }
     public boolean premiumFeaturesBlocked() {
-        return premiumLocked && !getUserConfig().isPremium();
+        return !getUserConfig().isPremium();
     }
     public boolean premiumPurchaseBlocked() {
-        return premiumLocked;
+        return true;
     }
 
     public List<String> directPaymentsCurrency = new ArrayList<>();
@@ -10561,7 +10563,7 @@ public class MessagesController extends BaseController implements NotificationCe
 
         if (getUserConfig().isClientActivated()) {
             // U message ghost mode: never report being online
-            if (!ignoreSetOnline && !UMessageGhostScope.isGhostOnline() && getConnectionsManager().getPauseTime() == 0 && ApplicationLoader.isScreenOn && !ApplicationLoader.mainInterfacePausedStageQueue) {
+            if (!ignoreSetOnline && !UMessageGhostScope.isGhostOnline(currentAccount) && getConnectionsManager().getPauseTime() == 0 && ApplicationLoader.isScreenOn && !ApplicationLoader.mainInterfacePausedStageQueue) {
                 if (ApplicationLoader.mainInterfacePausedStageQueueTime != 0 && Math.abs(ApplicationLoader.mainInterfacePausedStageQueueTime - System.currentTimeMillis()) > 1000) {
                     if (statusSettingState != 1 && (lastStatusUpdateTime == 0 || Math.abs(System.currentTimeMillis() - lastStatusUpdateTime) >= 55000 || offlineSent)) {
                         statusSettingState = 1;
@@ -10605,7 +10607,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 });
             }
 
-            if (UMessageGhostScope.isGhostOnline() && Math.abs(System.currentTimeMillis() - lastGhostOfflineTime) >= 60000) {
+            if (UMessageGhostScope.isGhostOnline(currentAccount) && Math.abs(System.currentTimeMillis() - lastGhostOfflineTime) >= 60000) {
                 ghostGoOffline();
             }
             UMessageGhostScope.syncIfNeeded(currentAccount);
@@ -18915,7 +18917,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 dialogs_read_outbox_max.put(dialogId, Math.max(value, update.max_id));
             } else if (baseUpdate instanceof TL_update.TL_updateDeleteMessages) {
                 TL_update.TL_updateDeleteMessages update = (TL_update.TL_updateDeleteMessages) baseUpdate;
-                if (UMessageConfig.isSaveDeleted() && UMessageHistory.markDeleted(currentAccount, 0, update.messages)) {
+                if (UMessageConfig.isSaveDeleted(currentAccount) && UMessageHistory.markDeleted(currentAccount, 0, update.messages)) {
                     // U message: keep the messages and only mark them as deleted
                     continue;
                 }
@@ -19447,7 +19449,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d(baseUpdate + " channelId = " + update.channel_id);
                 }
-                if (UMessageConfig.isSaveDeleted() && UMessageHistory.markDeleted(currentAccount, -update.channel_id, update.messages)) {
+                if (UMessageConfig.isSaveDeleted(currentAccount) && UMessageHistory.markDeleted(currentAccount, -update.channel_id, update.messages)) {
                     continue;
                 }
                 if (deletedMessages == null) {
@@ -19583,7 +19585,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 }
 
                 MessageObject.getDialogId(message);
-                if (UMessageConfig.isSaveEdited() && !message.edit_hide) {
+                if (UMessageConfig.isSaveEdited(currentAccount) && !message.edit_hide) {
                     UMessageHistory.recordEdit(currentAccount, message);
                 }
 

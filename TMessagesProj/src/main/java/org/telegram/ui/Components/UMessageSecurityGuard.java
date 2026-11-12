@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.UMessageUpdater;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.R;
@@ -184,10 +183,15 @@ public final class UMessageSecurityGuard {
     /** Everything beyond the manifest. Also runs on a package a dropper already installed, whose code the manifest never shows. */
     public static void inspectContents(File file, String fileName, ApkReport report) {
         inspectLure(fileName, report);
-        if (hasEmbeddedPayload(file)) {
-            report.critical(LocaleController.getString(R.string.UMessageRiskEmbeddedPayload));
-        }
         inspectCode(file, report);
+        if (hasEmbeddedPayload(file)) {
+            // Big apps ship nested APKs legitimately (Wear OS companions, WebView stubs, dynamic features).
+            if (report.smallApp) {
+                report.critical(LocaleController.getString(R.string.UMessageRiskEmbeddedPayload));
+            } else {
+                report.info(LocaleController.getString(R.string.UMessageRiskEmbeddedPayload));
+            }
+        }
         applyVerdict(report);
     }
 
@@ -205,18 +209,20 @@ public final class UMessageSecurityGuard {
         boolean overlay = report.infoRisks.contains(LocaleController.getString(R.string.UMessageRiskOverlay));
         boolean hidden = report.has(R.string.UMessageRiskPacker) || report.has(R.string.UMessageRiskAntiAnalysis)
                 || report.has(R.string.UMessageRiskOldTarget);
-        boolean payload = report.has(R.string.UMessageRiskEmbeddedPayload)
+        boolean payload = report.has(R.string.UMessageRiskEmbeddedPayload) && report.smallApp
                 && (install || report.has(R.string.UMessageRiskDropperCode) || report.infoRisks.contains(LocaleController.getString(R.string.UMessageRiskDynamicCode)));
         // Permission combinations alone stay "risky": dialers, launchers and keyboards legitimately ask
         // for them. Malware needs a lure, a stealer pattern or code/packaging no honest app ships.
         // Public test keys also sign honest hobby builds, so the key alone stays "risky".
         boolean testKey = report.has(R.string.UMessageRiskTestKey) && (sms || install || accessibility || notifications || admin || lure || hidden);
-        if (payload || report.has(R.string.UMessageRiskDoubleExtension) || testKey
-                || sms && (lure || install || hidden)
+        // Capability combinations only convict a small app: Uzbek SMS stealers and droppers are tiny shells,
+        // while big honest apps (Google Messages: SMS + install, Photos: "photo" name + install) ship the same mix.
+        final boolean combo = sms && (lure || install || hidden)
                 || accessibility && (install || lure) && (sms || overlay || notifications || hidden || lure)
                 || install && (lure || hidden)
                 || notifications && lure
-                || hidden && lure) {
+                || hidden && lure;
+        if (payload || report.has(R.string.UMessageRiskDoubleExtension) || testKey || combo && report.smallApp) {
             report.malware = true;
         }
         // "Video Player" or "Photo Editor" alone is not a threat: the word only matters next to a real capability.
@@ -250,11 +256,11 @@ public final class UMessageSecurityGuard {
     }
 
     /**
-     * Only the fixed publisher list and our private certificate. Our own GET_SIGNATURES is NOT used: after the v3
+     * Only the fixed publisher list. Our own GET_SIGNATURES is NOT used: after the v3
      * key rotation it returns the oldest signer, the public Telegram key that anyone can sign with.
      */
     private static boolean isTrustedCert(String digest) {
-        return TRUSTED_CERTS.contains(digest) || UMessageUpdater.isOurCertDigest(digest);
+        return TRUSTED_CERTS.contains(digest);
     }
 
     /** Current signers (v3 rotation aware); the deprecated signatures field would report the oldest, public key. */
@@ -284,33 +290,38 @@ public final class UMessageSecurityGuard {
             return;
         }
         boolean trusted = true;
-        boolean ours = false;
         for (android.content.pm.Signature signature : signers) {
             byte[] der = signature.toByteArray();
             String digest = sha256(der);
             if (!isTrustedCert(digest)) {
                 trusted = false;
             }
-            if (UMessageUpdater.isOurCertDigest(digest)) {
-                ours = true;
-            }
-            try {
-                java.security.cert.X509Certificate cert = (java.security.cert.X509Certificate) java.security.cert.CertificateFactory.getInstance("X.509")
-                        .generateCertificate(new java.io.ByteArrayInputStream(der));
-                String subject = cert.getSubjectX500Principal().toString().toLowerCase(Locale.ROOT);
-                if (subject.contains("android@android.com") && subject.contains("o=android") && subject.contains("mountain view")) {
-                    report.critical(LocaleController.getString(R.string.UMessageRiskTestKey));
-                }
-            } catch (Throwable ignore) {
+            if (AOSP_TEST_KEYS.contains(digest)) {
+                report.critical(LocaleController.getString(R.string.UMessageRiskTestKey));
             }
         }
         // Our package name signed with any other certificate (including the public Telegram key) is a fake U message.
-        if (ourName && !ours) {
+        if (ourName) {
             trusted = false;
             report.malware(LocaleController.getString(R.string.UMessageRiskFakeUMessage));
         }
         report.trusted = trusted;
     }
+
+    /**
+     * SHA-256 of the public AOSP keys in build/target/product/security (testkey, platform, shared, media,
+     * networkstack, sdk_sandbox, bluetooth): anyone can sign with them. Matched by digest only: Google's own
+     * release keys (Gmail, YouTube) carry the very same name, O=Android / android@android.com, so a name match
+     * reported genuine Google apps as test-signed.
+     */
+    private static final Set<String> AOSP_TEST_KEYS = new HashSet<>(java.util.Arrays.asList(
+            "a40da80a59d170caa950cf15c18c454d47a39b26989d8b640ecd745ba71bf5dc",
+            "c8a2e9bccf597c2fb6dc66bee293fc13f2fc47ec77bc6b2b0d52c11f51192ab8",
+            "28bbfe4a7b97e74681dc55c2fbb6ccb8d6c74963733f6af6ae74d8c3a6e879fd",
+            "465983f7791f2abeb43ea2cbdc7f21a8260b72bc08a55c839fc1a43bc741a81e",
+            "e1dbadce60dc080d15b58a014b0dcf9400e24de23fa00b287a5a982bfebda2ee",
+            "abf21f9e2af1d881cc673fddcefa6ed9c269a437bd64b279cf45844cfd589126",
+            "a6ccc500ff0e7421200eb66a7fe174ef1b00e52ca91727070cbedf061ff76c35"));
 
     /** Shared by the pre-open scan and the post-install watcher. */
     public static ApkReport analyzePackage(PackageManager pm, PackageInfo info, ApkReport report) {
@@ -599,6 +610,9 @@ public final class UMessageSecurityGuard {
      */
     private static final int SMALL_APP_STRINGS = 5000;
 
+    /** A Bot API token ("123456789:AA…" with 35 token characters): stealers hard-code their bot's. */
+    private static final java.util.regex.Pattern BOT_TOKEN = java.util.regex.Pattern.compile("\\b\\d{8,10}:AA[A-Za-z0-9_-]{33}\\b");
+
     private static void inspectCode(File file, ApkReport report) {
         boolean dynamicLoad = false, crypto = false, installer = false, sms = false, telegramFiles = false,
                 root = false, packer = false, accessibilityControl = false, listApps = false;
@@ -659,10 +673,9 @@ public final class UMessageSecurityGuard {
                     if (value.length() > 120 && value.startsWith("L") && value.endsWith(";")) {
                         longNames++;
                     }
-                    if (value.contains("api.telegram.org") || value.contains("/sendMessage") && value.contains("bot") || value.contains("/sendDocument")) {
+                    if (value.contains("api.telegram.org/bot") || BOT_TOKEN.matcher(value).find()) {
                         telegramBot = true;
-                    } else if (value.toLowerCase(Locale.ROOT).contains("humocardbot") || value.toLowerCase(Locale.ROOT).contains("cardxabarbot")
-                            || value.toLowerCase(Locale.ROOT).contains("humocard")) {
+                    } else if (value.toLowerCase(Locale.ROOT).contains("humocardbot") || value.toLowerCase(Locale.ROOT).contains("cardxabarbot")) {
                         cardBot = true;
                     } else if (value.contains("sendUssdRequest") || value.contains("Ussd") || value.contains("tel:*") || value.contains("tel:%23") || value.contains("%23%23")) {
                         ussd = true;
@@ -713,7 +726,8 @@ public final class UMessageSecurityGuard {
         // MidnightDat (.dat + native XOR) and RoundRift (.key + Java AES + PackageInstaller session).
         // Games and media apps ship encrypted assets next to native code and ordinary crypto; only a small app doing so looks like a loader.
         final boolean smallApp = strings < SMALL_APP_STRINGS;
-        if (encryptedAsset && (installer || dynamicLoad || smallApp && (crypto || nativeLib))) {
+        report.smallApp = smallApp;
+        if (encryptedAsset && smallApp && (installer || dynamicLoad || crypto || nativeLib)) {
             report.malware(LocaleController.getString(R.string.UMessageRiskEncryptedAsset));
         }
         if (telegramBot) {
@@ -733,8 +747,9 @@ public final class UMessageSecurityGuard {
                 report.critical(LocaleController.getString(R.string.UMessageRiskUssd));
             }
         }
-        // Emulator strings and long class names alone are normal in big apps (Firebase, Compose).
-        if (frida || emulatorCheck && (sms || encryptedAsset)) {
+        // Emulator strings and long class names alone are normal in big apps (Firebase, Compose), and so are
+        // Frida/Xposed checks: Google apps and banks ship anti-tamper code. Only a small app hiding is suspicious.
+        if (smallApp && (frida || emulatorCheck && (sms || encryptedAsset))) {
             report.critical(LocaleController.getString(R.string.UMessageRiskAntiAnalysis));
         }
         if (longNames > 20) {
@@ -742,9 +757,9 @@ public final class UMessageSecurityGuard {
         }
         // A tiny loader that only runs hidden code is the dropper signature. Updaters, stores and file managers
         // install packages and use crypto too, so that mix in a normal-sized app only earns a warning.
-        if (dynamicLoad && (strings < 400 || encryptedAsset)) {
+        if (dynamicLoad && (strings < 400 || encryptedAsset && smallApp)) {
             report.malware(LocaleController.getString(R.string.UMessageRiskDropperCode));
-        } else if (dynamicLoad && installer) {
+        } else if (dynamicLoad && installer && smallApp) {
             report.critical(LocaleController.getString(R.string.UMessageRiskDropperCode));
         } else if (dynamicLoad) {
             report.info(LocaleController.getString(R.string.UMessageRiskDynamicCode));
@@ -752,10 +767,16 @@ public final class UMessageSecurityGuard {
         if (telegramFiles && !"org.telegram.messenger".equals(report.packageName)) {
             report.malware(LocaleController.getString(R.string.UMessageRiskSessionStealer));
         }
+        // Code strings are not permissions: without SEND_SMS / REQUEST_INSTALL_PACKAGES (checked in the manifest) an app
+        // cannot act on them, and big apps reference SmsManager or the APK mime type for ordinary reasons.
         if (sms) {
-            report.critical(LocaleController.getString(R.string.UMessageRiskSmsCode));
+            if (smallApp) {
+                report.critical(LocaleController.getString(R.string.UMessageRiskSmsCode));
+            } else {
+                report.info(LocaleController.getString(R.string.UMessageRiskSmsCode));
+            }
         }
-        if (installer) {
+        if (installer && smallApp) {
             report.critical(LocaleController.getString(R.string.UMessageRiskInstallApps));
         }
 
@@ -1250,6 +1271,11 @@ public final class UMessageSecurityGuard {
         public boolean trusted;
         /** A phone/dialer app (InCallService): calls and USSD are expected. */
         public boolean dialer;
+        /**
+         * Few DEX strings: droppers and loaders are tiny shells. Big apps (browsers, Google apps, games) legitimately
+         * ship nested APKs, high-entropy data files, dynamic code loading and anti-tamper checks.
+         */
+        public boolean smallApp = true;
 
         void malware(String risk) {
             critical(risk);

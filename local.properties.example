@@ -21,3 +21,5 @@ YANDEX_MAPKIT_KEY=
 
 # Store-review demo account: its login code is filled in automatically (see UMessageDemoLogin)
 UM_DEMO_PHONE=
+# Same value as DEMO_RELAY_KEY on the server: lets the demo account relay codes before it has a register token
+UM_DEMO_RELAY_KEY=

@@ -1881,4 +1881,5 @@
     <string name="UMessageErrorReportsInfo">충돌 및 오류 정보가 버그 수정을 위해 U message 서버로 전송됩니다. 전화번호, 사용자 ID, 메시지, 링크는 포함되지 않습니다.</string>
     <string name="UMessageChatGuardShare">신고 공유</string>
     <string name="UMessageChatGuardShareInfo">신고한 채팅과 관리자 키워드에 맞는 공개 채팅도 다른 사용자를 보호하기 위해 U message 서버로 보냅니다. 기본값은 꺼짐.</string>
+    <string name="UMessageApkFromFiles">앱은 Google Play에서 설치됩니다. 이 APK를 설치하려면 다운로드에 저장한 후 파일 관리자에서 여세요.</string>
 </resources>

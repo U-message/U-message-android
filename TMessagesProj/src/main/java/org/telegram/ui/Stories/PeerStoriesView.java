@@ -2196,6 +2196,12 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                         if (!unsupported) {
                             if (!UserObject.isService(dialogId) && !isBotsPreview()) {
                                 ActionBarMenuItem.addItem(popupLayout, R.drawable.msg_report, getString(R.string.ReportChat), false, resourcesProvider).setOnClickListener(v -> {
+                                    if (org.telegram.messenger.UMessageStories.isU(currentStory.storyItem)) {
+                                        // U stories live on U message's server: Telegram's report would never reach it
+                                        if (popupMenu != null) popupMenu.dismiss();
+                                        reportUStory(currentStory.storyItem);
+                                        return;
+                                    }
                                     if (storyViewer != null) storyViewer.setOverlayVisible(true);
                                     ReportBottomSheet.openStory(currentAccount, getContext(), currentStory.storyItem, BulletinFactory.of(storyContainer, resourcesProvider), resourcesProvider, status -> {
                                         if (storyViewer != null) storyViewer.setOverlayVisible(false);
@@ -8488,4 +8494,24 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
         return MessagesController.getInstance(currentAccount)
                 .getStoriesController();
     }
+
+    /** U story report: reason picker, then our server's moderation queue (several reports hide the story). */
+    private void reportUStory(TL_stories.StoryItem item) {
+        if (getContext() == null || item == null) return;
+        final String[] reasons = {"spam", "violence", "porn", "child", "other"};
+        final CharSequence[] titles = {
+                getString(R.string.ReportChatSpam), getString(R.string.ReportChatViolence),
+                getString(R.string.ReportChatPornography), getString(R.string.ReportChatChild), getString(R.string.ReportChatOther)};
+        if (storyViewer != null) storyViewer.setOverlayVisible(true);
+        new AlertDialog.Builder(getContext(), resourcesProvider)
+                .setTitle(getString(R.string.ReportChat))
+                .setItems(titles, (d, which) -> org.telegram.messenger.UMessageStories.getInstance(currentAccount).report(dialogId, item, reasons[which], ok ->
+                        BulletinFactory.of(storyContainer, resourcesProvider).createSimpleBulletin(ok ? R.raw.contact_check : R.raw.error,
+                                getString(ok ? R.string.ReportChatSent : R.string.ErrorOccurred)).show()))
+                .setOnDismissListener(d -> {
+                    if (storyViewer != null) storyViewer.setOverlayVisible(false);
+                })
+                .show();
+    }
+
 }

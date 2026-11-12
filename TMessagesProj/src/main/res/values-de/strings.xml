@@ -31,6 +31,11 @@
     <string name="UMessageSectionPrivacy">Privatsphäre</string>
     <string name="UMessageSectionMessages">Nachrichten</string>
     <string name="UMessageSectionSecurity">Sicherheit</string>
+    <string name="UMessageDeleteServerData">Meine U-message-Daten löschen</string>
+    <string name="UMessageDeleteServerDataInfo">Löscht alles, was der U-message-Server über dieses Konto speichert: name@u, U-Storys, Position bei „Leute in der Nähe“, Instagram-Verbindung. Dein Telegram-Konto und deine Nachrichten bleiben unberührt.</string>
+    <string name="UMessageDeleteServerDataConfirm">Alle U-message-Daten dieses Kontos werden von unserem Server gelöscht: App-Schlüssel, name@u, U-Storys, Position bei „Leute in der Nähe“ und Instagram-Verbindung. Das kann nicht rückgängig gemacht werden. Dein Telegram-Konto und deine Chats bleiben.</string>
+    <string name="UMessageDeleteServerDataDone">Deine U-message-Daten wurden gelöscht</string>
+    <string name="UMessageDeleteServerDataFailed">Löschen fehlgeschlagen. Prüfe die Verbindung und versuche es erneut oder schreibe an @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">Diese Funktionen schützen dich vor Schadsoftware, Betrug, Spam und unerwünschten Inhalten. Sie sind standardmäßig aktiv, jede Prüfung läuft auf deinem Telefon und nichts wird gesendet. Du kannst jede einzeln ausschalten.</string>
     <string name="UMessageSectionSecurityInfo">Schutz vor Schadsoftware, Betrug und Spam</string>
     <string name="UMessageSectionFolders">Ordner</string>
@@ -1558,6 +1563,12 @@
     <string name="UMessageFriendOkText">✅ Anfrage für die Freundeskarte angenommen</string>
     <string name="UMessageFriendMapBackground">Hintergrundmodus</string>
     <string name="UMessageFriendMapBackgroundInfo">Standort auch senden, wenn die App geschlossen ist</string>
+    <string name="UMessageFriendMapDisclosureTitle">Standort für die Freundeskarte</string>
+    <string name="UMessageFriendMapDisclosureText">U message verwendet deinen Standort, um dich auf der Freundeskarte zu zeigen. Nur Freunde, deren Anfrage du angenommen hast, sehen ihn; er wird Ende-zu-Ende-verschlüsselt über den U-message-Server gesendet, der ihn nicht lesen kann. Die Karte selbst stammt von Mapbox. Du kannst das Teilen oder einen Freund jederzeit beenden.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Standort im Hintergrund teilen?</string>
+    <string name="UMessageFriendMapDisclosureBgText">Mit Hintergrundfreigabe erfasst U message deinen Standort auch, wenn die App geschlossen ist oder nicht genutzt wird, und sendet ihn verschlüsselt an angenommene Freunde. Währenddessen ist eine Benachrichtigung sichtbar. Du kannst es hier jederzeit ausschalten.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Weiter</string>
+    <string name="UMessageFriendMapDisclosureDecline">Nicht jetzt</string>
     <string name="UMessageFriendMapBackgroundOn">Hintergrundmodus ist an</string>
     <string name="UMessageFriendMapBackgroundOnLater">Der Hintergrundmodus startet, sobald du einen Freund hast</string>
     <string name="UMessageFriendMapBackgroundOff">Hintergrundmodus ist aus</string>
@@ -2010,6 +2021,7 @@
     <string name="UMessageUsernameAdd">U message-Benutzernamen hinzufügen</string>
     <string name="UMessageOfficialAccount">Offizielles Konto</string>
     <string name="UMessageQrLoginButton">Per QR-Code anmelden</string>
+    <string name="UMessageLoginAuthNote">Mit der Anmeldung wird dein Konto auch für U-message-Dienste bestätigt (per Telegram-Signatur, an deine Chats wird nichts gesendet).</string>
     <string name="UMessageQrLoginTitle">Mit QR-Code anmelden</string>
     <string name="UMessageQrLoginHint">Öffne Telegram auf einem anderen Gerät, auf dem du angemeldet bist: Einstellungen → Geräte → Desktop-Gerät verbinden, und scanne diesen Code.</string>
     <string name="UMessageQrLoginWaiting">Warte auf Scan…</string>
@@ -2092,4 +2104,5 @@
     <string name="UMessageErrorReportsInfo">Absturz- und Fehlerdetails gehen zur Fehlerbehebung an den U message-Server. Telefonnummer, Nutzer-ID, Nachrichten und Links sind nicht enthalten.</string>
     <string name="UMessageChatGuardShare">Chat-Meldungen teilen</string>
     <string name="UMessageChatGuardShareInfo">Gemeldete Chats und öffentliche Chats, die zu den Stichwörtern des Admins passen, auch an den U message-Server senden, um andere zu schützen. Standardmäßig aus.</string>
+    <string name="UMessageApkFromFiles">Apps werden über Google Play installiert. Um diese APK zu installieren, speichere sie unter Downloads und öffne sie im Dateimanager.</string>
 </resources>

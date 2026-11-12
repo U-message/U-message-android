@@ -130,9 +130,8 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
                     if (packageName == null || packageName.equals(app.getPackageName())) {
                         continue;
                     }
-                    ApplicationInfo ai = pkg.applicationInfo;
-                    if (ai != null && (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 && (ai.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
-                        continue; // preinstalled system apps
+                    if (isSystemApp(pkg.applicationInfo)) {
+                        continue; // preinstalled system apps and their updates
                     }
                     long when = Math.max(pkg.firstInstallTime, pkg.lastUpdateTime);
                     if (now - when > RECENT_WINDOW) {
@@ -154,9 +153,23 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
         });
     }
 
+    /**
+     * Preinstalled system apps, including their updates (Chrome, Play services…): they are signed into the system
+     * image, a dropper cannot become one, and their normal files (ICU .dat data, split APKs) look like a dropper's.
+     */
+    private static boolean isSystemApp(ApplicationInfo ai) {
+        return ai != null && ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 || (ai.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
+    }
+
+    /** Installed from a computer over adb (a developer's own build): not something a chat or another app dropped. */
+    private static final String SHELL_INSTALLER = "com.android.shell";
+
     private static void inspect(Context context, String packageName) throws PackageManager.NameNotFoundException {
         PackageManager pm = context.getPackageManager();
         String installer = getInstaller(pm, packageName);
+        if (SHELL_INSTALLER.equals(installer) && !packageName.startsWith("uz.umessage.app")) {
+            return;
+        }
         boolean fromChatApk = UMessageSecurityGuard.wasOpenedFromChat(installer);
         // Store installs are not dropper stages; anything via the system installer or another app is inspected.
         // A package using our name is always inspected: its certificate decides whether it is a fake U message.
@@ -166,8 +179,8 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
             }
         }
         PackageInfo info = pm.getPackageInfo(packageName, UMessageSecurityGuard.INSPECT_FLAGS);
-        if (isOwnFamily(context, pm, packageName)) {
-            return; // our own app and its rebrand lineage are never the threat
+        if (isSystemApp(info.applicationInfo)) {
+            return;
         }
         UMessageSecurityGuard.ApkReport report = UMessageSecurityGuard.analyzePackage(pm, info, new UMessageSecurityGuard.ApkReport());
         if (report.trusted) {
@@ -188,21 +201,6 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
             return;
         }
         warn(context, pm, packageName, installer, report);
-    }
-
-    /**
-     * Our rebrand lineage: the package name alone can be copied by anyone, so its current signing certificate must be
-     * our private one. checkSignatures() is not enough: it also matches the public Telegram key from our rotation lineage.
-     */
-    private static boolean isOwnFamily(Context context, PackageManager pm, String packageName) {
-        if (!packageName.startsWith("uz.umessage.app") && !packageName.startsWith("org.telegram.messenger")) {
-            return false;
-        }
-        try {
-            return UMessageUpdater.hasOurCert(pm.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES).signingInfo);
-        } catch (Throwable e) {
-            return false;
-        }
     }
 
     private static final Set<String> SMS_PERMS = new HashSet<>(Arrays.asList(

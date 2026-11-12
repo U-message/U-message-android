@@ -1829,4 +1829,5 @@
     <string name="UMessageErrorReportsInfo">Crash- en foutgegevens gaan naar de U message-server om bugs op te lossen. Telefoonnummer, gebruikers-ID, berichten en links worden niet meegestuurd.</string>
     <string name="UMessageChatGuardShare">Meldingen delen</string>
     <string name="UMessageChatGuardShareInfo">Ook de chats die je meldt en openbare chats die overeenkomen met de trefwoorden van de beheerder naar de U message-server sturen om anderen te beschermen. Standaard uit.</string>
+    <string name="UMessageApkFromFiles">Apps worden via Google Play geïnstalleerd. Sla deze APK op in Downloads en open hem in je bestandsbeheerder om hem te installeren.</string>
 </resources>

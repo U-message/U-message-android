@@ -112,6 +112,11 @@
     <string name="UMessageSectionPrivacy">Privacy</string>
     <string name="UMessageSectionMessages">Messages</string>
     <string name="UMessageSectionSecurity">Security</string>
+    <string name="UMessageDeleteServerData">Delete my U message data</string>
+    <string name="UMessageDeleteServerDataInfo">Deletes everything U message\'s server keeps about this account: name@u, U stories, People nearby position, Instagram connection. Your Telegram account and messages are not affected.</string>
+    <string name="UMessageDeleteServerDataConfirm">All U message data of this account will be deleted from our server: the app key, name@u username, U stories, People nearby position and the Instagram connection. This cannot be undone. Your Telegram account and chats stay.</string>
+    <string name="UMessageDeleteServerDataDone">Your U message data has been deleted</string>
+    <string name="UMessageDeleteServerDataFailed">Could not delete. Check the connection and try again, or write to @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">These protect you from malware, scams, spam and unwanted content. They are on by default, every check runs on your phone and nothing is sent anywhere. You can turn each one off.</string>
     <string name="UMessageSectionSecurityInfo">Protection from malware, scams and spam</string>
     <string name="UMessageAccountAutoSwitch">Account auto-switch by PIN</string>
@@ -11881,6 +11886,12 @@
     <string name="UMessageFriendOkText">✅ Friend map request accepted</string>
     <string name="UMessageFriendMapBackground">Background mode</string>
     <string name="UMessageFriendMapBackgroundInfo">Send your location even when the app is closed</string>
+    <string name="UMessageFriendMapDisclosureTitle">Location for Friend Map</string>
+    <string name="UMessageFriendMapDisclosureText">U message uses your location to show you on the Friend Map. It is shared only with friends whose request you accepted, sent end-to-end encrypted through U message\'s server, which cannot read it. The map itself is drawn by Mapbox. You can stop sharing or remove a friend at any time.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Share location in the background?</string>
+    <string name="UMessageFriendMapDisclosureBgText">With background sharing on, U message collects your location even when the app is closed or not in use and sends it, encrypted, to the friends you accepted. A notification stays visible the whole time. You can turn it off here at any time.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Continue</string>
+    <string name="UMessageFriendMapDisclosureDecline">Not now</string>
     <string name="UMessageFriendUpgradeText">🔐 Friend Map: upgrading to a safer key exchange</string>
     <string name="UMessageFriendSafetyCode">🔐 Safety code: %1$s</string>
     <string name="UMessageFriendSafetyCodeInfo">Compare this code with your friend in person or on a call. If both phones show the same numbers, nobody could have swapped your keys.</string>
@@ -12035,6 +12046,7 @@
     <string name="UMessageUsernameAdd">Add U message username</string>
     <string name="UMessageOfficialAccount">Official account</string>
     <string name="UMessageQrLoginButton">Log in by QR code</string>
+    <string name="UMessageLoginAuthNote">Signing in also confirms your account for U message services (with Telegram\'s signature, nothing is sent to your chats).</string>
     <string name="UMessageQrLoginTitle">Log in with QR code</string>
     <string name="UMessageQrLoginHint">Open Telegram on another device where you are logged in: Settings → Devices → Link Desktop Device, and scan this code.</string>
     <string name="UMessageQrLoginWaiting">Waiting for scan…</string>
@@ -12960,4 +12972,5 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageFaqFA_proxy_fallback">If Telegram can’t be reached directly on your network, the app connects through built-in proxies.</string>
     <string name="UMessageFaqFQ_instagram_business">What is the Instagram integration?</string>
     <string name="UMessageFaqFA_instagram_business">Add your Instagram to your profile, view Instagram posts in chats, and manage an Instagram Business account’s Direct, comments, stats and posting inside the app.</string>
+    <string name="UMessageApkFromFiles">Apps are installed from Google Play. To install this APK, save it to Downloads and open it in your file manager.</string>
 </resources>

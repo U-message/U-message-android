@@ -31,6 +31,11 @@
     <string name="UMessageSectionPrivacy">الخصوصية</string>
     <string name="UMessageSectionMessages">الرسائل</string>
     <string name="UMessageSectionSecurity">الأمان</string>
+    <string name="UMessageDeleteServerData">حذف بيانات U message الخاصة بي</string>
+    <string name="UMessageDeleteServerDataInfo">يحذف كل ما يحتفظ به خادم U message عن هذا الحساب: name@u وقصص U وموقع «أشخاص بالقرب» وربط إنستغرام. لا يتأثر حسابك في تيليجرام ورسائلك.</string>
+    <string name="UMessageDeleteServerDataConfirm">ستُحذف كل بيانات U message لهذا الحساب من خادمنا: مفتاح التطبيق واسم name@u وقصص U وموقع «أشخاص بالقرب» وربط إنستغرام. لا يمكن التراجع عن ذلك. يبقى حسابك في تيليجرام ومحادثاتك.</string>
+    <string name="UMessageDeleteServerDataDone">تم حذف بيانات U message الخاصة بك</string>
+    <string name="UMessageDeleteServerDataFailed">تعذّر الحذف. تحقق من الاتصال وحاول مجددًا أو راسل @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">تحميك هذه الميزات من البرامج الضارة والاحتيال والرسائل المزعجة والمحتوى غير المرغوب. وهي مفعّلة افتراضيًا، وكل فحص يتم على هاتفك ولا يُرسل أي شيء. يمكنك إيقاف كل منها.</string>
     <string name="UMessageSectionSecurityInfo">حماية من البرامج الضارة والاحتيال والرسائل المزعجة</string>
     <string name="UMessageSectionFolders">المجلدات</string>
@@ -1430,6 +1435,12 @@
     <string name="UMessageFriendOkText">✅ تم قبول طلب خريطة الأصدقاء</string>
     <string name="UMessageFriendMapBackground">وضع الخلفية</string>
     <string name="UMessageFriendMapBackgroundInfo">إرسال موقعك حتى عندما يكون التطبيق مغلقًا</string>
+    <string name="UMessageFriendMapDisclosureTitle">الموقع لخريطة الأصدقاء</string>
+    <string name="UMessageFriendMapDisclosureText">يستخدم U message موقعك لعرضك على خريطة الأصدقاء. لا يراه إلا الأصدقاء الذين قبلت طلبهم، ويُرسل مشفرًا بين الطرفين عبر خادم U message الذي لا يستطيع قراءته. ترسم Mapbox الخريطة نفسها. يمكنك إيقاف المشاركة أو حذف صديق في أي وقت.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">مشاركة الموقع في الخلفية؟</string>
+    <string name="UMessageFriendMapDisclosureBgText">عند تفعيل المشاركة في الخلفية يجمع U message موقعك حتى عندما يكون التطبيق مغلقًا أو غير مستخدم، ويرسله مشفرًا إلى الأصدقاء المقبولين. يبقى إشعار ظاهرًا طوال الوقت. يمكنك إيقافها من هنا في أي وقت.</string>
+    <string name="UMessageFriendMapDisclosureContinue">متابعة</string>
+    <string name="UMessageFriendMapDisclosureDecline">ليس الآن</string>
     <string name="UMessageFriendMapBackgroundOn">تم تشغيل وضع الخلفية</string>
     <string name="UMessageFriendMapBackgroundOnLater">سيبدأ وضع الخلفية عندما يكون لديك صديق</string>
     <string name="UMessageFriendMapBackgroundOff">تم إيقاف وضع الخلفية</string>
@@ -1882,6 +1893,7 @@
     <string name="UMessageUsernameAdd">إضافة اسم مستخدم U message</string>
     <string name="UMessageOfficialAccount">حساب رسمي</string>
     <string name="UMessageQrLoginButton">تسجيل الدخول برمز QR</string>
+    <string name="UMessageLoginAuthNote">عند تسجيل الدخول يُؤكَّد حسابك أيضًا لخدمات U message (بتوقيع تيليجرام، ولا يُرسل شيء إلى محادثاتك).</string>
     <string name="UMessageQrLoginTitle">تسجيل الدخول برمز QR</string>
     <string name="UMessageQrLoginHint">افتح تيليجرام على جهاز آخر سجّلت الدخول فيه: الإعدادات ← الأجهزة ← ربط جهاز سطح المكتب، وامسح هذا الرمز.</string>
     <string name="UMessageQrLoginWaiting">في انتظار المسح…</string>
@@ -1964,4 +1976,5 @@
     <string name="UMessageErrorReportsInfo">تُرسل تفاصيل الأعطال والأخطاء إلى خادم U message لإصلاحها. لا تتضمن رقم الهاتف أو معرّف المستخدم أو الرسائل أو الروابط.</string>
     <string name="UMessageChatGuardShare">مشاركة البلاغات</string>
     <string name="UMessageChatGuardShareInfo">إرسال الدردشات التي تبلّغ عنها والدردشات العامة المطابقة لكلمات المشرف المفتاحية إلى خادم U message أيضًا لحماية المستخدمين الآخرين. معطّل افتراضيًا.</string>
+    <string name="UMessageApkFromFiles">تُثبَّت التطبيقات من Google Play. لتثبيت ملف APK هذا، احفظه في التنزيلات وافتحه في مدير الملفات.</string>
 </resources>

@@ -31,6 +31,11 @@
     <string name="UMessageSectionPrivacy">Конфіденційність</string>
     <string name="UMessageSectionMessages">Повідомлення</string>
     <string name="UMessageSectionSecurity">Безпека</string>
+    <string name="UMessageDeleteServerData">Видалити мої дані U message</string>
+    <string name="UMessageDeleteServerDataInfo">Видаляє все, що сервер U message зберігає про цей акаунт: name@u, U-історії, геопозицію «Люди поруч», підключення Instagram. Акаунт Telegram і повідомлення не зачіпаються.</string>
+    <string name="UMessageDeleteServerDataConfirm">Усі дані U message цього акаунта буде видалено з нашого сервера: ключ застосунку, name@u, U-історії, геопозицію «Люди поруч» і підключення Instagram. Це не можна скасувати. Акаунт Telegram і чати залишаться.</string>
+    <string name="UMessageDeleteServerDataDone">Ваші дані U message видалено</string>
+    <string name="UMessageDeleteServerDataFailed">Не вдалося видалити. Перевірте з\'єднання й спробуйте ще раз або напишіть @umessage_spambot.</string>
     <string name="UMessageSecurityFooter">Ці функції захищають від шкідливих програм, шахраїв, спаму та небажаного контенту. Вони ввімкнені за замовчуванням, усі перевірки відбуваються на телефоні й нічого нікуди не надсилається. Кожну можна вимкнути.</string>
     <string name="UMessageSectionSecurityInfo">Захист від шкідливих програм, шахраїв і спаму</string>
     <string name="UMessageSectionFolders">Папки</string>
@@ -461,6 +466,12 @@
     <string name="UMessageFriendOkText">✅ Запит на мапу друзів прийнято</string>
     <string name="UMessageFriendMapBackground">Фоновий режим</string>
     <string name="UMessageFriendMapBackgroundInfo">Надсилати геопозицію, навіть коли застосунок закрито</string>
+    <string name="UMessageFriendMapDisclosureTitle">Геопозиція для карти друзів</string>
+    <string name="UMessageFriendMapDisclosureText">U message використовує вашу геопозицію, щоб показати вас на карті друзів. Її бачать лише друзі, чий запит ви прийняли; вона передається через сервер U message з наскрізним шифруванням, сервер не може її прочитати. Саму карту малює Mapbox. Припинити передачу або видалити друга можна будь-коли.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Передавати геопозицію у фоні?</string>
+    <string name="UMessageFriendMapDisclosureBgText">У фоновому режимі U message збирає вашу геопозицію, навіть коли застосунок закритий або не використовується, і в зашифрованому вигляді надсилає її прийнятим друзям. Увесь цей час видно сповіщення. Вимкнути можна тут будь-коли.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Продовжити</string>
+    <string name="UMessageFriendMapDisclosureDecline">Не зараз</string>
     <string name="UMessageFriendMapBackgroundOn">Фоновий режим увімкнено</string>
     <string name="UMessageFriendMapBackgroundOnLater">Фоновий режим запуститься, коли з\'явиться друг</string>
     <string name="UMessageFriendMapBackgroundOff">Фоновий режим вимкнено</string>
@@ -913,6 +924,7 @@
     <string name="UMessageUsernameAdd">Додати ім\'я користувача U message</string>
     <string name="UMessageOfficialAccount">Офіційний акаунт</string>
     <string name="UMessageQrLoginButton">Увійти за QR-кодом</string>
+    <string name="UMessageLoginAuthNote">Під час входу ваш акаунт також підтверджується для сервісів U message (підписом Telegram, у чати нічого не надсилається).</string>
     <string name="UMessageQrLoginTitle">Вхід за QR-кодом</string>
     <string name="UMessageQrLoginHint">Відкрийте Telegram на іншому пристрої, де ви ввійшли: Налаштування → Пристрої → Під\'єднати комп\'ютер, і скануйте цей код.</string>
     <string name="UMessageQrLoginWaiting">Очікування сканування…</string>
@@ -995,4 +1007,5 @@
     <string name="UMessageErrorReportsInfo">Дані про збої та помилки надсилаються на сервер U message для виправлення. Номер телефону, ID користувача, повідомлення та посилання не передаються.</string>
     <string name="UMessageChatGuardShare">Ділитися скаргами</string>
     <string name="UMessageChatGuardShareInfo">Також надсилати на сервер U message чати, на які ви скаржитеся, і публічні чати, що збігаються з ключовими словами адміністратора, щоб захистити інших користувачів. Типово вимкнено.</string>
+    <string name="UMessageApkFromFiles">Застосунки встановлюються з Google Play. Щоб установити цей APK, збережіть його в Завантаження й відкрийте у файловому менеджері.</string>
 </resources>

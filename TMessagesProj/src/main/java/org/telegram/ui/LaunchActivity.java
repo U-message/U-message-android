@@ -7204,7 +7204,6 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         };
         org.telegram.messenger.UMessageParental.onAppResumed();
         checkUMessageBlocked();
-        org.telegram.messenger.UMessageUpdater.check(this);
         org.telegram.messenger.UMessageInstagramBusiness.onAppResumed();
         pipActivityHandler.onResume();
         if (onResumeStaticCallback != null) {

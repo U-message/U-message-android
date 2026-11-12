@@ -92,7 +92,7 @@ public class UMessageGhostScope {
 
     /** Whether ghost mode hides typing / read receipts / auto reply in this chat. */
     public static boolean isGhostFor(int account, long dialogId) {
-        if (!UMessageConfig.isGhostMode()) {
+        if (!UMessageConfig.isGhostMode(account)) {
             return false;
         }
         final int s = getScope();
@@ -111,6 +111,11 @@ public class UMessageGhostScope {
     /** Whether the client must keep reporting offline (only the "everyone" scope). */
     public static boolean isGhostOnline() {
         return UMessageConfig.isGhostMode() && getScope() == SCOPE_ALL;
+    }
+
+    /** Ghost online status for one account (switches are per account). */
+    public static boolean isGhostOnline(int account) {
+        return UMessageConfig.isGhostMode(account) && getScope() == SCOPE_ALL;
     }
 
     /** Ghost mode or its scope changed: the online privacy rule follows on every account. */
@@ -136,7 +141,7 @@ public class UMessageGhostScope {
     }
 
     private static boolean wantsRule(int account) {
-        if (!UMessageConfig.isGhostMode()) {
+        if (!UMessageConfig.isGhostMode(account)) {
             return false;
         }
         final int s = getScope();

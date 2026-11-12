@@ -129,7 +129,7 @@ public final class UMessageErrorReporter {
             if (!day.equals(p.getString("day", null))) {
                 p.edit().clear().putString("install", p.getString("install", null)).putString("day", day).apply();
             }
-            final String key = "s_" + sig + "_" + UMessageUpdater.currentVersionCode();
+            final String key = "s_" + sig + "_" + BuildConfig.VERSION_CODE;
             final int today = p.getInt("count", 0);
             if (p.getBoolean(key, false) || today >= MAX_PER_DAY) {
                 return;
@@ -215,7 +215,7 @@ public final class UMessageErrorReporter {
         meta.put("model", Build.MANUFACTURER + " " + Build.MODEL);
         meta.put("sdk", Build.VERSION.SDK_INT);
         meta.put("app", BuildVars.BUILD_VERSION_STRING);
-        meta.put("code", UMessageUpdater.currentVersionCode());
+        meta.put("code", BuildConfig.VERSION_CODE);
         meta.put("lang", java.util.Locale.getDefault().toString());
         body.put("meta", meta);
         body.put("errors", new JSONArray(items));

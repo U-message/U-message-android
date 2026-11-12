@@ -95,6 +95,7 @@ public class UMessageSettingsActivity extends BaseFragment {
     private static final int CHAT_GUARD_SHARE = 72;
     private static final int GHOST_SCOPE = 73;
     private static final int GHOST_USERS = 74;
+    private static final int DELETE_SERVER_DATA = 75;
     // Offline chat temporarily disabled; keep the id reserved for restoring it.
     // private static final int OFFLINE_CHAT = 61;
 
@@ -823,6 +824,9 @@ public class UMessageSettingsActivity extends BaseFragment {
             case HIDDEN_PASSWORD:
                 UMessageHiddenChats.changePassword(this);
                 break;
+            case DELETE_SERVER_DATA:
+                confirmDeleteServerData();
+                break;
             case HIDDEN_ACCESS:
                 showHiddenAccessPicker();
                 break;
@@ -1416,4 +1420,23 @@ public class UMessageSettingsActivity extends BaseFragment {
                     LocaleController.getString(success ? R.string.UMessageLocalDataCleared : R.string.UMessageLocalDataError)).show();
         });
     }
+
+    private void confirmDeleteServerData() {
+        if (getContext() == null) return;
+        AlertDialog dialog = new AlertDialog.Builder(getContext(), getResourceProvider())
+                .setTitle(LocaleController.getString(R.string.UMessageDeleteServerData))
+                .setMessage(LocaleController.getString(R.string.UMessageDeleteServerDataConfirm))
+                .setNegativeButton(LocaleController.getString(R.string.Cancel), null)
+                .setPositiveButton(LocaleController.getString(R.string.Delete), (d, w) ->
+                        UMessagePremiumController.getInstance().deleteServerData(currentAccount, ok -> {
+                            if (getParentActivity() == null) return;
+                            BulletinFactory.of(this).createSimpleBulletin(ok ? R.raw.contact_check : R.raw.error,
+                                    LocaleController.getString(ok ? R.string.UMessageDeleteServerDataDone : R.string.UMessageDeleteServerDataFailed)).show();
+                        }))
+                .create();
+        showDialog(dialog);
+        android.widget.TextView button = (android.widget.TextView) dialog.getButton(android.content.DialogInterface.BUTTON_POSITIVE);
+        if (button != null) button.setTextColor(Theme.getColor(Theme.key_text_RedBold));
+    }
+
 }

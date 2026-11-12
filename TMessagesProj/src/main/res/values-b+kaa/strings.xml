@@ -102,6 +102,11 @@
     <string name="UMessageSectionPrivacy">Qupıyalıq</string>
     <string name="UMessageSectionMessages">Xabarlar</string>
     <string name="UMessageSectionSecurity">Qáwipsizlik</string>
+    <string name="UMessageDeleteServerData">U message maǵlıwmatlarımdı óshiriw</string>
+    <string name="UMessageDeleteServerDataInfo">U message serveri usı akkawnt haqqında saqlaytuǵın barlıq nárseni óshiredi: name@u, U tariyxlar, “Átiraptaǵı adamlar” jaylasıwı, Instagram baylanısı. Telegram akkawntıńız hám xabarlarıńızǵa tásir etpeydi.</string>
+    <string name="UMessageDeleteServerDataConfirm">Usı akkawnttıń barlıq U message maǵlıwmatları serverimizden óshiriledi: baǵdarlama gilti, name@u, U tariyxlar, “Átiraptaǵı adamlar” jaylasıwı hám Instagram baylanısı. Bunı qaytarıp bolmaydı. Telegram akkawntıńız hám sáwbetlerińiz qaladı.</string>
+    <string name="UMessageDeleteServerDataDone">U message maǵlıwmatlarıńız óshirildi</string>
+    <string name="UMessageDeleteServerDataFailed">Óshirip bolmadı. Internetti tekserip qayta urınıp kóriń yamasa @umessage_spambot ǵa jazıń.</string>
     <string name="UMessageSecurityFooter">Bular sizdi zıyanlı programmalar, alaqshılıq, spam hám qolaysız kontentten qorǵaydı. Ádetki halatta qosılǵan, barlıq tekseriwler telefonıńızda boladı hám hesh nárse hesh jerge jiberilmeydi. Hár birin óshirip qoyıwıńız múmkin.</string>
     <string name="UMessageSectionSecurityInfo">Zıyanlı programma, alaqshılıq hám spamnan qorǵaw</string>
     <string name="UMessageAccountAutoSwitch">PIN arqalı akkaunttı avtomat almastırıw</string>
@@ -11659,6 +11664,12 @@
     <string name="UMessageFriendOkText">✅ Doslar kartası sorawı qabıl etildi</string>
     <string name="UMessageFriendMapBackground">Fon rejimi</string>
     <string name="UMessageFriendMapBackgroundInfo">Qosımsha jabıq bolsa da jaylasıw jiberiledi</string>
+    <string name="UMessageFriendMapDisclosureTitle">Doslar kartası ushın jaylasıw</string>
+    <string name="UMessageFriendMapDisclosureText">U message sizdi Doslar kartasında kórsetiw ushın jaylasıwıńızdan paydalanadı. Ol tek sorawın qabıl etken doslarıńızǵa kórinedi hám U message serveri arqalı basınan aqırına shekem shifrlanǵan halda jiberiledi, server onı oqıy almaydı. Kartanıń ózi Mapbox arqalı sızıladı. Ulasıwdı yamasa dostı qálegen waqıtta óshirip qoyıwıńız múmkin.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Jaylasıw fonda da ulasılsın ba?</string>
+    <string name="UMessageFriendMapDisclosureBgText">Fon rejimi qosılsa, U message baǵdarlama jabıq yamasa paydalanılmay turǵanda da jaylasıwıńızdı jıynaydı hám onı shifrlanǵan halda siz qabıl etken doslarıńızǵa jiberedi. Bul waqıtta xabarlama dayım kórinip turadı. Qálegen waqıtta usı jerden óshirip qoyıwıńız múmkin.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Dawam etiw</string>
+    <string name="UMessageFriendMapDisclosureDecline">Házir emes</string>
     <string name="UMessageFriendUpgradeText">🔐 Doslar kartası: qáwipsizirek gilt almasıwına ótilmekte</string>
     <string name="UMessageFriendSafetyCode">🔐 Qáwipsizlik kodı: %1$s</string>
     <string name="UMessageFriendSafetyCodeInfo">Bul kodtı dosıńız benen júzbe-júz yamasa qońıraw waqtında salıstırıń. Eki telefonda da sanlar birdey bolsa, giltlerińizdi hesh kim almastıra almaǵan.</string>
@@ -11827,6 +11838,7 @@
     <string name="UMessageUsernameAdd">U message atın qosıw</string>
     <string name="UMessageOfficialAccount">Rásmiy akkaunt</string>
     <string name="UMessageQrLoginButton">QR kod arqalı kiriw</string>
+    <string name="UMessageLoginAuthNote">Kiriw menen U message xızmetleri ushın akkawntıńız da tastıyıqlanadı (Telegram qolı arqalı, sáwbetlerińizge hesh nárse jiberilmeydi).</string>
     <string name="UMessageQrLoginTitle">QR kod arqalı kiriw</string>
     <string name="UMessageQrLoginHint">Kirgen basqa qurılmańızda Telegramdı ashıń: Sazlawlar → Qurılmalar → Kompyuterdi jalǵaw, hám usı kodtı skanerleń.</string>
     <string name="UMessageQrLoginWaiting">Skanerlew kútilmekte…</string>
@@ -12333,4 +12345,5 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageFaqFA_proxy_fallback">Tarmaǵıńızda Telegramǵa tuwrıdan-tuwrı jalǵanıp bolmasa, qosımsha ornatılǵan proksiler arqalı jalǵanadı.</string>
     <string name="UMessageFaqFQ_instagram_business">Instagram integraciyası degen ne?</string>
     <string name="UMessageFaqFA_instagram_business">Profilińizge Instagram siltewin qosıw, chatta Instagram postların kóriw hám Instagram Business akkauntıńızdı qosımsha ishinde basqarıw múmkin.</string>
+    <string name="UMessageApkFromFiles">Qosımshalar Google Play arqalı ornatıladı. Bul APK-nı ornatıw ushın onı Júklemelerge saqlań hám fayl menedjerinde ashıń.</string>
 </resources>

@@ -269,19 +269,11 @@ public class AlertsCreator {
                 .create();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Dialog createApkRestrictedDialog(Context ctx, Theme.ResourcesProvider resourcesProvider) {
         return new AlertDialog.Builder(ctx, resourcesProvider)
-                .setMessage(LocaleController.getString(R.string.ApkRestricted))
+                .setMessage(LocaleController.getString(R.string.UMessageApkFromFiles))
                 .setTopAnimation(R.raw.permission_request_apk, PERMISSIONS_REQUEST_TOP_ICON_SIZE, false, Theme.getColor(Theme.key_dialogTopBackground))
-                .setPositiveButton(LocaleController.getString(R.string.PermissionOpenSettings), (dialogInterface, i) -> {
-                    try {
-                        ctx.startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + ctx.getPackageName())));
-                    } catch (Exception e) {
-                        FileLog.e(e);
-                    }
-                })
-                .setNegativeButton(LocaleController.getString(R.string.ContactsPermissionAlertNotNow), null)
+                .setPositiveButton(LocaleController.getString(R.string.OK), null)
                 .create();
     }
 

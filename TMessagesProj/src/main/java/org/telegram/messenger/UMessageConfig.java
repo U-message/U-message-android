@@ -267,7 +267,54 @@ public class UMessageConfig {
                 && !org.telegram.configuration.ConfigurationManager.isSafeModeActive();
     }
 
+    /**
+     * Switches are per Telegram account: a newly added account starts from the defaults instead of inheriting
+     * the first account's choices. Device-level switches (camera, voice button, nearby share, hidden chats, whose
+     * password is app-wide) stay shared. Values saved before this change belong to the first signed-in account.
+     */
+    private static boolean isDeviceKey(String key) {
+        return KEY_ROUND_FRONT_CAMERA.equals(key) || KEY_VOICE_INPUT.equals(key) || KEY_HIDDEN_CHATS.equals(key);
+    }
+
+    private static final String LEGACY_OWNER = "per_account_legacy_owner";
+
+    private static String storageKey(int account, String key) {
+        if (isDeviceKey(key) || account < 0 || account >= UserConfig.MAX_ACCOUNT_COUNT) return key;
+        final long userId = UserConfig.getInstance(account).getClientUserId();
+        return userId == 0 ? key : key + "@" + userId;
+    }
+
+    /** The account that keeps the switches saved before they became per account: the first signed-in one. */
+    private static long legacyOwner() {
+        final SharedPreferences p = prefs();
+        long owner = p.getLong(LEGACY_OWNER, 0);
+        if (owner == 0) {
+            for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
+                if (UserConfig.getInstance(a).isClientActivated()) {
+                    owner = UserConfig.getInstance(a).getClientUserId();
+                    break;
+                }
+            }
+            if (owner != 0) p.edit().putLong(LEGACY_OWNER, owner).apply();
+        }
+        return owner;
+    }
+
+    private static boolean readStored(int account, String key) {
+        final SharedPreferences p = prefs();
+        final String storage = storageKey(account, key);
+        if (!storage.equals(key) && !p.contains(storage) && p.contains(key)
+                && UserConfig.getInstance(account).getClientUserId() == legacyOwner()) {
+            return p.getBoolean(key, isDefaultOn(key));
+        }
+        return p.getBoolean(storage, isDefaultOn(key));
+    }
+
     public static boolean get(String key) {
+        return get(UserConfig.selectedAccount, key);
+    }
+
+    public static boolean get(int account, String key) {
         if (!isConfigurationAvailable(key)) {
             return false;
         }
@@ -276,20 +323,23 @@ public class UMessageConfig {
         if (!KEY_HIDDEN_CHATS.equals(key) && !UMessageRemoteFlags.isKeyEnabled(key)) {
             return KEY_ROUND_FRONT_CAMERA.equals(key); // Telegram opens the round camera on the front side
         }
-        Boolean value = flags.get(key);
+        final String storage = storageKey(account, key);
+        Boolean value = flags.get(storage);
         if (value == null) {
-            value = prefs().getBoolean(key, isDefaultOn(key));
-            flags.put(key, value);
+            value = readStored(account, key);
+            flags.put(storage, value);
         }
         return value;
     }
 
+    /** Sets the switch for the selected account (Settings show the selected account's switches). */
     public static void set(String key, boolean value) {
         if (value && !isConfigurationAvailable(key)) {
             return;
         }
-        flags.put(key, value);
-        prefs().edit().putBoolean(key, value).apply();
+        final String storage = storageKey(UserConfig.selectedAccount, key);
+        flags.put(storage, value);
+        prefs().edit().putBoolean(storage, value).apply();
         version++;
         switch (key) {
             case KEY_HIDDEN_CHATS:
@@ -321,10 +371,13 @@ public class UMessageConfig {
     public static boolean isStoriesHidden() { return get(KEY_STORIES_HIDDEN); }
     public static boolean isStoriesDownload() { return get(KEY_STORIES_DOWNLOAD); }
     public static boolean isSaveEdited() { return get(KEY_SAVE_EDITED); }
+    public static boolean isSaveEdited(int account) { return get(account, KEY_SAVE_EDITED); }
     public static boolean isSaveDeleted() { return get(KEY_SAVE_DELETED); }
+    public static boolean isSaveDeleted(int account) { return get(account, KEY_SAVE_DELETED); }
     public static boolean isAutoDownloadStopped() { return get(KEY_STOP_AUTODOWNLOAD); }
     public static boolean isAutoReply() { return get(KEY_AUTO_REPLY); }
     public static boolean isGhostMode() { return get(KEY_GHOST_MODE); }
+    public static boolean isGhostMode(int account) { return get(account, KEY_GHOST_MODE); }
     public static void setGhostMode(boolean value) { set(KEY_GHOST_MODE, value); }
     public static boolean isGhostButton() { return get(KEY_GHOST_BUTTON); }
     public static boolean isHiddenChatsEnabled() { return get(KEY_HIDDEN_CHATS); }

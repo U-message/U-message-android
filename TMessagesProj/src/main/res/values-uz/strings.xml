@@ -106,6 +106,11 @@
     <string name="UMessageSectionPrivacy">Maxfiylik</string>
     <string name="UMessageSectionMessages">Xabarlar</string>
     <string name="UMessageSectionSecurity">Xavfsizlik</string>
+    <string name="UMessageDeleteServerData">U message maʼlumotlarimni oʻchirish</string>
+    <string name="UMessageDeleteServerDataInfo">U message serveri shu akkaunt haqida saqlaydigan hamma narsani oʻchiradi: name@u, U hikoyalar, “Atrofdagi odamlar” joylashuvi, Instagram ulanishi. Telegram akkauntingiz va xabarlaringizga taʼsir qilmaydi.</string>
+    <string name="UMessageDeleteServerDataConfirm">Shu akkauntning barcha U message maʼlumotlari serverimizdan oʻchiriladi: ilova kaliti, name@u username, U hikoyalar, “Atrofdagi odamlar” joylashuvi va Instagram ulanishi. Buni qaytarib boʻlmaydi. Telegram akkauntingiz va chatlaringiz qoladi.</string>
+    <string name="UMessageDeleteServerDataDone">U message maʼlumotlaringiz oʻchirildi</string>
+    <string name="UMessageDeleteServerDataFailed">Oʻchirib boʻlmadi. Internetni tekshirib qayta urining yoki @umessage_spambot ga yozing.</string>
     <string name="UMessageSecurityFooter">Bular sizni zararli dasturlar, firibgarlik, spam va nomaqbul kontentdan himoya qiladi. Standart holatda yoqilgan, barcha tekshiruvlar telefoningizda bo‘ladi va hech narsa hech qayerga yuborilmaydi. Har birini o‘chirib qo‘yishingiz mumkin.</string>
     <string name="UMessageSectionSecurityInfo">Zararli dastur, firibgarlik va spamdan himoya</string>
     <string name="UMessageAccountAutoSwitch">PIN orqali akkaunt almashtirish</string>
@@ -408,6 +413,12 @@
     <string name="UMessageFriendOkText">✅ Do\'stlar xaritasi so\'rovi qabul qilindi</string>
     <string name="UMessageFriendMapBackground">Fon rejimi</string>
     <string name="UMessageFriendMapBackgroundInfo">Ilova yopiq bo\'lsa ham joylashuv yuboriladi</string>
+    <string name="UMessageFriendMapDisclosureTitle">Do‘stlar xaritasi uchun joylashuv</string>
+    <string name="UMessageFriendMapDisclosureText">U message sizni Do‘stlar xaritasida ko‘rsatish uchun joylashuvingizdan foydalanadi. U faqat so‘rovini qabul qilgan do‘stlaringizga ko‘rinadi va U message serveri orqali boshidan oxirigacha shifrlangan holda yuboriladi, server uni o‘qiy olmaydi. Xaritaning o‘zi Mapbox orqali chiziladi. Ulashishni yoki do‘stni istalgan vaqtda o‘chirib qo‘yishingiz mumkin.</string>
+    <string name="UMessageFriendMapDisclosureBgTitle">Joylashuv fonda ham ulashilsinmi?</string>
+    <string name="UMessageFriendMapDisclosureBgText">Fon rejimi yoqilsa, U message ilova yopiq yoki ishlatilmayotgan paytda ham joylashuvingizni yig‘adi va uni shifrlangan holda siz qabul qilgan do‘stlaringizga yuboradi. Bu vaqtda bildirishnoma doim ko‘rinib turadi. Istalgan vaqtda shu yerdan o‘chirib qo‘yishingiz mumkin.</string>
+    <string name="UMessageFriendMapDisclosureContinue">Davom etish</string>
+    <string name="UMessageFriendMapDisclosureDecline">Hozir emas</string>
     <string name="UMessageFriendUpgradeText">🔐 Do\'stlar xaritasi: xavfsizroq kalit almashinuviga o\'tilmoqda</string>
     <string name="UMessageFriendSafetyCode">🔐 Xavfsizlik kodi: %1$s</string>
     <string name="UMessageFriendSafetyCodeInfo">Bu kodni do\'stingiz bilan yuzma-yuz yoki qo\'ng\'iroqda solishtiring. Ikkala telefonda raqamlar bir xil bo\'lsa, kalitlaringizni hech kim almashtira olmagan.</string>
@@ -562,6 +573,7 @@
     <string name="UMessageUsernameAdd">U message username qoʻshish</string>
     <string name="UMessageOfficialAccount">Rasmiy hisob</string>
     <string name="UMessageQrLoginButton">QR kod orqali kirish</string>
+    <string name="UMessageLoginAuthNote">Kirish bilan U message xizmatlari uchun hisobingiz ham tasdiqlanadi (Telegram imzosi orqali, chatlaringizga hech narsa yuborilmaydi).</string>
     <string name="UMessageQrLoginTitle">QR kod orqali kirish</string>
     <string name="UMessageQrLoginHint">Kirgan boshqa qurilmangizda Telegramni oching: Sozlamalar → Qurilmalar → Kompyuterni ulash, va shu kodni skanerlang.</string>
     <string name="UMessageQrLoginWaiting">Skanerlash kutilmoqda…</string>
@@ -1325,4 +1337,5 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="PrivacyGuardEnrollFillRing">Boshingizni sekin aylantirib, doirani to‘ldiring</string>
     <string name="PrivacyGuardEnrollFinish">Tayyor</string>
     <string name="PrivacyGuardTryAgain">Qayta urinish</string>
+    <string name="UMessageApkFromFiles">Ilovalar Google Play orqali o‘rnatiladi. Bu APK’ni o‘rnatish uchun uni Yuklanmalarga saqlang va fayl menejerida oching.</string>
 </resources>

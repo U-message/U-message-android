@@ -76,7 +76,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-datatransport:18.1.0'
     implementation 'com.google.firebase:firebase-appindexing:20.0.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.mapbox.maps:android:11.16.0'
+    // ndk27 variant: its native libraries are 16 KB page aligned (Play requirement since Android 15)
+    implementation 'com.mapbox.maps:android-ndk27:11.16.0'
     // U message: in-app routes (car/walk/transit/bike/scooter, traffic). Key: YANDEX_MAPKIT_KEY in local.properties
     implementation 'com.yandex.android:maps.mobile:4.45.0-full'
     // offline Uzbek speech recognition (sherpa-onnx); packaged by the app modules
@@ -181,6 +182,7 @@ android {
         buildConfigField "int", "UM_PROXY_1_PORT", (getProps("UM_PROXY_1_PORT") ?: "443")
         buildConfigField "String", "UM_PROXY_1_SECRET", "\"" + (getProps("UM_PROXY_1_SECRET") ?: "") + "\""
         buildConfigField "String", "UM_DEMO_PHONE", "\"" + (getProps("UM_DEMO_PHONE") ?: "") + "\""
+        buildConfigField "String", "UM_DEMO_RELAY_KEY", "\"" + (getProps("UM_DEMO_RELAY_KEY") ?: "") + "\""
 
         externalNativeBuild {
             cmake {

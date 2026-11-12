@@ -488,8 +488,17 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
     private void requestPermission() {
         if (!permissionAsked && Build.VERSION.SDK_INT >= 23 && getParentActivity() != null) {
             permissionAsked = true;
-            getParentActivity().requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+            // Google Play prominent disclosure: what is collected and where it goes, before the system dialog
+            withLocationDisclosure(false, () -> {
+                if (getParentActivity() != null) {
+                    getParentActivity().requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+                }
+            });
         }
+    }
+
+    private void withLocationDisclosure(boolean background, Runnable onAccept) {
+        UMessageFriendLocations.withDisclosure(getParentActivity(), background, onAccept, () -> permissionAsked = false);
     }
 
     private void enableMyLocation() {
@@ -1331,13 +1340,20 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
         row.addView(toggle, frame(37, 40, Gravity.RIGHT | Gravity.CENTER_VERTICAL, 0, 0, 18, 0));
         row.setOnClickListener(v -> {
             boolean enable = !UMessageFriendLocations.isBackgroundEnabled();
-            if (enable && !UMessageFriendLocations.hasPermission(ApplicationLoader.applicationContext)) {
-                pendingAction = () -> setBackground(true, toggle);
-                permissionAsked = false;
-                requestPermission();
+            if (!enable) {
+                setBackground(false, toggle);
                 return;
             }
-            setBackground(enable, toggle);
+            // background sharing gets its own disclosure (location is collected while the app is closed)
+            withLocationDisclosure(true, () -> {
+                if (!UMessageFriendLocations.hasPermission(ApplicationLoader.applicationContext)) {
+                    pendingAction = () -> setBackground(true, toggle);
+                    permissionAsked = false;
+                    requestPermission();
+                    return;
+                }
+                setBackground(true, toggle);
+            });
         });
         View line = new View(context);
         line.setBackgroundColor(cSeparator);

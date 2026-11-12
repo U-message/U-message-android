@@ -39,7 +39,6 @@ public final class UMessagePremiumController {
      * The only bot the app presses "/start v_<code>" in. A server reply naming any other bot is ignored, so a
      * compromised or misconfigured server can not make the app unblock and message an arbitrary bot.
      */
-    public static final String VERIFY_BOT = "umessage_spambot";
 
     private static volatile UMessagePremiumController instance;
 
@@ -77,24 +76,6 @@ public final class UMessagePremiumController {
     private volatile Boolean selfEnabled;
     private volatile Boolean localTelegramPremium;
     private final long[] lastRegister = new long[UserConfig.MAX_ACCOUNT_COUNT];
-    // Telegram verification of a key-less account (see umessage-premium-server/lib/verify.js); UI thread only
-    private final String[] verifyCode = new String[UserConfig.MAX_ACCOUNT_COUNT];
-    private final boolean[] verifyBusy = new boolean[UserConfig.MAX_ACCOUNT_COUNT];
-    private final int[] verifyPolls = new int[UserConfig.MAX_ACCOUNT_COUNT];
-    private final int[] verifyStarts = new int[UserConfig.MAX_ACCOUNT_COUNT];
-    private final long[] verifyWindow = new long[UserConfig.MAX_ACCOUNT_COUNT];
-    private final long[] verifyLastStart = new long[UserConfig.MAX_ACCOUNT_COUNT];
-    private final long[] verifyBotId = new long[UserConfig.MAX_ACCOUNT_COUNT];
-    private final boolean[] verifyHadHistory = new boolean[UserConfig.MAX_ACCOUNT_COUNT];
-    private final boolean[] verifyReblock = new boolean[UserConfig.MAX_ACCOUNT_COUNT];
-    // v2 verification: the bot answers our /start with "umv_<reply>" in this account's own chat; we send it back
-    private final String[] verifyReply = new String[UserConfig.MAX_ACCOUNT_COUNT];
-    private final long[] verifyPeer = new long[UserConfig.MAX_ACCOUNT_COUNT];
-    @SuppressWarnings("unchecked")
-    private final ArrayList<Integer>[] verifyReplyIds = new ArrayList[UserConfig.MAX_ACCOUNT_COUNT];
-    @SuppressWarnings("unchecked")
-    private final ArrayList<Integer>[] verifyMsgIds = new ArrayList[UserConfig.MAX_ACCOUNT_COUNT];
-
     private UMessagePremiumController() {
     }
 
@@ -216,37 +197,26 @@ public final class UMessagePremiumController {
         }
         lastRegister[account] = now;
         final TLRPC.User self = UserConfig.getInstance(account).getCurrentUser();
-        // Telegram verification (no key yet): send the code the bot has seen, or ask for a new one if allowed
-        final String sentCode = verifyCode[account];
-        final String sentReply = sentCode == null ? null : verifyReply[account];
-        final boolean askCode = sentCode == null && !verifyBusy[account] && canStartVerify(account, false);
         UMessageNet.run(() -> {
             try {
                 final JSONObject body = new JSONObject();
                 body.put("userId", String.valueOf(selfId));
                 if (getToken(selfId) == null) {
-                    // binds the code to this install (servers before v2 ignore it)
-                    body.put("verifySecret", verifySecret(selfId));
-                    if (sentCode != null) {
-                        body.put("verifyCode", sentCode);
-                        if (sentReply != null) {
-                            body.put("verifyReply", sentReply);
-                        }
-                    } else if (askCode) {
-                        body.put("verify", true);
+                    // no key yet: Telegram's signed authorisation of this account for our server (UMessageTelegramAuth),
+                    // disclosed on the login screen and in the privacy policy; nothing is sent to any chat
+                    final String authUrl = UMessageTelegramAuth.fetch(account);
+                    if (authUrl != null) {
+                        body.put("tgAuthUrl", authUrl);
                     }
                 }
                 body.put("enabled", isSelfEnabled());
-                body.put("device", org.telegram.ui.UMessageUnsupportedDeviceActivity.deviceModel());
-                body.put("appCode", UMessageUpdater.currentVersionCode());
+                body.put("appCode", BuildConfig.VERSION_CODE);
                 body.put("appVersion", BuildVars.BUILD_VERSION_STRING);
                 final String token = getToken(selfId);
                 if (token != null) {
                     body.put("token", token);
                 }
                 if (self != null) {
-                    body.put("firstName", self.first_name == null ? "" : self.first_name);
-                    body.put("lastName", self.last_name == null ? "" : self.last_name);
                     final String username = UserObject.getPublicUsername(self);
                     body.put("username", username == null ? "" : username);
                     // no phone number: the server has no use for it
@@ -255,16 +225,8 @@ public final class UMessagePremiumController {
                 if (r.has("token")) {
                     prefs().edit().putString("token_" + selfId, r.getString("token")).remove(KEY_VERIFY_SECRET + "_" + selfId).apply();
                     AndroidUtilities.runOnUIThread(() -> UMessageStories.getInstance(account).refresh(true));
-                    AndroidUtilities.runOnUIThread(() -> finishVerify(account));
                 } else if (token == null) {
-                    final String code = r.optString("verify", "");
-                    final String bot = r.optString("bot", "");
-                    final boolean waiting = r.optBoolean("pending", false);
-                    final boolean needReply = r.optBoolean("needReply", false);
-                    AndroidUtilities.runOnUIThread(() -> {
-                        lastRegister[account] = 0; // still no key: retry on next resume
-                        onVerifyReply(account, sentCode, code, bot, waiting, needReply);
-                    });
+                    AndroidUtilities.runOnUIThread(() -> lastRegister[account] = 0); // still no key: retry on next resume
                 }
                 applySelf(account, selfId, r);
                 if (r.has("deviceBlocked")) {
@@ -275,268 +237,11 @@ public final class UMessagePremiumController {
                     UMessageErrorReporter.sendDump(r.optLong("sendLogs"), selfId);
                 }
                 UMessageMusicBots.setBots(r.optJSONArray("musicBots"));
-                final JSONObject update = r.optJSONObject("update");
-                if (update != null) {
-                    AndroidUtilities.runOnUIThread(() -> UMessageUpdater.offer(update));
-                }
             } catch (Throwable ignore) {
                 // network/server failure: do not wait 6 h for the next attempt
                 AndroidUtilities.runOnUIThread(() -> lastRegister[account] = 0);
             }
         });
-    }
-
-    /**
-     * Key-less account (new user / admin "reset key"): the server gives a key only after the user proves
-     * they own this Telegram account. We press "/start v_<code>" in the server's bot from the user's own
-     * account (Telegram guarantees the sender id to the bot), then register again with the code.
-     * At most 3 attempts per hour, with growing gaps. UI thread.
-     */
-    private boolean canStartVerify(int account, boolean consume) {
-        final long now = System.currentTimeMillis();
-        if (now - verifyWindow[account] > 60 * 60 * 1000L) {
-            verifyWindow[account] = now;
-            verifyStarts[account] = 0;
-        }
-        if (verifyStarts[account] >= 3 || now - verifyLastStart[account] < 60_000L * verifyStarts[account]) {
-            return false;
-        }
-        if (consume) {
-            verifyStarts[account]++;
-            verifyLastStart[account] = now;
-        }
-        return true;
-    }
-
-    /** Per-install secret the verify code is bound to (kept until a key arrives). */
-    private static synchronized String verifySecret(long selfId) {
-        String s = prefs().getString(KEY_VERIFY_SECRET + "_" + selfId, null);
-        if (s == null || s.length() < 32) {
-            final byte[] b = new byte[32];
-            new java.security.SecureRandom().nextBytes(b);
-            s = android.util.Base64.encodeToString(b, android.util.Base64.URL_SAFE | android.util.Base64.NO_PADDING | android.util.Base64.NO_WRAP);
-            prefs().edit().putString(KEY_VERIFY_SECRET + "_" + selfId, s).apply();
-        }
-        return s;
-    }
-
-    private static boolean isPinnedBot(String bot) {
-        return bot != null && VERIFY_BOT.equalsIgnoreCase(bot.trim().replace("@", ""));
-    }
-
-    /** register() reply without a key. sentCode: the code we sent (or null); code/bot: the server's verify request. */
-    private void onVerifyReply(int account, String sentCode, String code, String bot, boolean waiting, boolean needReply) {
-        if (sentCode != null && waiting && needReply && sentCode.equals(code) && sentCode.equals(verifyCode[account])) {
-            // v2: the bot has seen our /start and answered in this chat; read "umv_…" and send it back
-            if (verifyReply[account] == null && ++verifyPolls[account] <= 5) {
-                readVerifyReply(account, sentCode);
-            } else {
-                cleanupVerifyChat(account, true);
-            }
-            return;
-        }
-        if (sentCode != null && waiting && sentCode.equals(code)) {
-            // the bot has not seen our /start yet (webhook delay): ask again a few times
-            if (sentCode.equals(verifyCode[account]) && ++verifyPolls[account] <= 3) {
-                scheduleVerifyPoll(account, 3000L * (verifyPolls[account] + 1));
-            } else {
-                cleanupVerifyChat(account, true);
-            }
-            return;
-        }
-        if (sentCode != null) {
-            cleanupVerifyChat(account, true); // expired or rejected
-        }
-        if (!TextUtils.isEmpty(code) && isPinnedBot(bot)) {
-            startVerify(account, code, VERIFY_BOT);
-        } else if (!TextUtils.isEmpty(code)) {
-            FileLog.e("U message: verification bot " + bot + " is not the pinned one, ignored");
-        }
-    }
-
-    /** Looks for the bot's "umv_<reply>" answer in the last messages of its chat; registers again with it. UI thread. */
-    private void readVerifyReply(int account, String code) {
-        final long peer = verifyPeer[account];
-        if (peer == 0) {
-            cleanupVerifyChat(account, true);
-            return;
-        }
-        final MessagesController mc = MessagesController.getInstance(account);
-        final TLRPC.TL_messages_getHistory req = new TLRPC.TL_messages_getHistory();
-        req.peer = mc.getInputPeer(peer);
-        req.limit = 10;
-        ConnectionsManager.getInstance(account).sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
-            if (!code.equals(verifyCode[account])) {
-                return;
-            }
-            String found = null;
-            final ArrayList<Integer> ids = new ArrayList<>();
-            if (response instanceof TLRPC.messages_Messages) {
-                final java.util.regex.Pattern p = java.util.regex.Pattern.compile("umv_([A-Za-z0-9_-]{16})");
-                for (TLRPC.Message m : ((TLRPC.messages_Messages) response).messages) {
-                    if (m == null || m.out || m.message == null || MessageObject.getFromChatId(m) != peer) {
-                        continue;
-                    }
-                    final java.util.regex.Matcher matcher = p.matcher(m.message);
-                    if (matcher.find()) {
-                        if (found == null) {
-                            found = matcher.group(1); // newest first
-                        }
-                        ids.add(m.id);
-                    }
-                }
-            }
-            if (found != null) {
-                verifyReply[account] = found;
-                verifyReplyIds[account] = ids;
-                lastRegister[account] = 0;
-                register(account);
-            } else {
-                scheduleVerifyPoll(account, 3000L * (verifyPolls[account] + 1));
-            }
-        }));
-    }
-
-    private void scheduleVerifyPoll(int account, long delay) {
-        AndroidUtilities.runOnUIThread(() -> {
-            lastRegister[account] = 0;
-            register(account);
-        }, delay);
-    }
-
-    private void startVerify(int account, String code, String bot) {
-        if (verifyBusy[account] || !canStartVerify(account, true)) {
-            return;
-        }
-        verifyBusy[account] = true;
-        final MessagesController mc = MessagesController.getInstance(account);
-        mc.getUserNameResolver().resolve(bot, peerId -> AndroidUtilities.runOnUIThread(() -> {
-            final TLRPC.User user = peerId == null || peerId <= 0 ? null : mc.getUser(peerId);
-            if (user == null || !user.bot || !isPinnedBot(UserObject.getPublicUsername(user))) {
-                verifyBusy[account] = false;
-                return;
-            }
-            // did the user already chat with this bot? then only our own message is removed afterwards
-            final TLRPC.TL_messages_getHistory req = new TLRPC.TL_messages_getHistory();
-            req.peer = mc.getInputPeer(user.id);
-            req.limit = 1;
-            ConnectionsManager.getInstance(account).sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
-                if (!(response instanceof TLRPC.messages_Messages)) {
-                    verifyBusy[account] = false;
-                    return;
-                }
-                final boolean hadHistory = !((TLRPC.messages_Messages) response).messages.isEmpty();
-                final boolean blocked = mc.blockePeers.indexOfKey(user.id) >= 0;
-                if (blocked) {
-                    verifyReblock[account] = true;
-                    mc.unblockPeer(user.id, () -> sendVerifyStart(account, user, code, hadHistory, true));
-                } else {
-                    sendVerifyStart(account, user, code, hadHistory, false);
-                }
-            }));
-        }));
-    }
-
-    private void sendVerifyStart(int account, TLRPC.User user, String code, boolean hadHistory, boolean unblocked) {
-        final MessagesController mc = MessagesController.getInstance(account);
-        final TLRPC.TL_messages_startBot req = new TLRPC.TL_messages_startBot();
-        req.bot = mc.getInputUser(user);
-        req.peer = mc.getInputPeer(user.id);
-        req.start_param = "v_" + code;
-        req.random_id = Utilities.random.nextLong();
-        ConnectionsManager.getInstance(account).sendRequest(req, (response, error) -> {
-            final ArrayList<Integer> ids = new ArrayList<>();
-            if (response instanceof TLRPC.Updates) {
-                final TLRPC.Updates updates = (TLRPC.Updates) response;
-                for (int i = 0; i < updates.updates.size(); i++) {
-                    final TLRPC.Update u = updates.updates.get(i);
-                    if (u instanceof org.telegram.tgnet.tl.TL_update.TL_updateNewMessage && ((org.telegram.tgnet.tl.TL_update.TL_updateNewMessage) u).message != null) {
-                        ids.add(((org.telegram.tgnet.tl.TL_update.TL_updateNewMessage) u).message.id);
-                    }
-                }
-                if (updates instanceof TLRPC.TL_updateShortSentMessage) {
-                    ids.add(updates.id);
-                }
-                mc.processUpdates(updates, false);
-            }
-            AndroidUtilities.runOnUIThread(() -> {
-                if (response instanceof TLRPC.Updates) {
-                    verifyCode[account] = code;
-                    verifyReply[account] = null;
-                    verifyReplyIds[account] = null;
-                    verifyPeer[account] = user.id;
-                    verifyBotId[account] = user.id;
-                    verifyHadHistory[account] = hadHistory;
-                    verifyMsgIds[account] = ids;
-                    verifyPolls[account] = 0;
-                    verifyBusy[account] = false;
-                    scheduleVerifyPoll(account, 3000);
-                    // the bot already has the code (Telegram delivered it): remove our copy at once, posted after
-                    // processUpdates' own UI work, so the chat never shows up in the list
-                    cleanupVerifyChat(account, false);
-                } else if (!unblocked && error != null && "YOU_BLOCKED_USER".equals(error.text)) {
-                    verifyReblock[account] = true;
-                    mc.unblockPeer(user.id, () -> sendVerifyStart(account, user, code, hadHistory, true));
-                } else {
-                    verifyBusy[account] = false;
-                    if (verifyReblock[account]) {
-                        verifyReblock[account] = false;
-                        mc.blockPeer(user.id);
-                    }
-                }
-            });
-        });
-    }
-
-    /** Key received (or the attempt gave up): hide the verification chat again. UI thread. */
-    private void finishVerify(int account) {
-        cleanupVerifyChat(account, true);
-    }
-
-    /**
-     * Deletes the "/start" we sent (only for us); when done also the bot's "umv_…" answer, and re-blocks the bot
-     * if we unblocked it (not earlier: a blocked bot could not send the answer). done=false keeps the code for polling.
-     */
-    private void cleanupVerifyChat(int account, boolean done) {
-        final long botId = verifyBotId[account];
-        final ArrayList<Integer> ids = verifyMsgIds[account];
-        final boolean hadHistory = verifyHadHistory[account];
-        final long peer = verifyPeer[account];
-        final ArrayList<Integer> replyIds = verifyReplyIds[account];
-        verifyBotId[account] = 0;
-        verifyMsgIds[account] = null;
-        final MessagesController mc = MessagesController.getInstance(account);
-        if (botId != 0) {
-            if (!hadHistory) {
-                mc.deleteDialog(botId, 0); // the chat did not exist before: remove it for this user only
-            } else if (ids != null && !ids.isEmpty()) {
-                mc.deleteMessages(ids, null, null, botId, 0, false, 0);
-            }
-        }
-        if (!done) {
-            return;
-        }
-        final boolean reblock = verifyReblock[account];
-        verifyReblock[account] = false;
-        verifyCode[account] = null;
-        verifyPolls[account] = 0;
-        verifyReply[account] = null;
-        verifyReplyIds[account] = null;
-        verifyPeer[account] = 0;
-        final long chat = peer != 0 ? peer : botId;
-        if (chat == 0) {
-            return;
-        }
-        if (peer != 0) {
-            if (!hadHistory) {
-                mc.deleteDialog(peer, 0); // the bot's answer recreated the chat
-            } else if (replyIds != null && !replyIds.isEmpty()) {
-                mc.deleteMessages(replyIds, null, null, peer, 0, false, 0);
-            }
-        }
-        if (reblock) {
-            mc.blockPeer(chat);
-        }
     }
 
     private void applySelf(int account, long selfId, JSONObject r) {
@@ -555,6 +260,33 @@ public final class UMessagePremiumController {
             if (blocked != wasBlocked) {
                 NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.umessageBlockedChanged, account);
             }
+        });
+    }
+
+    /**
+     * "Delete my U message data": the server removes everything it keeps about this account (lib/account-delete.js),
+     * then the local key goes too, so the next launch registers from scratch. done(true) on success, on the UI thread.
+     */
+    public void deleteServerData(int account, Utilities.Callback<Boolean> done) {
+        final long selfId = UserConfig.getInstance(account).getClientUserId();
+        final String token = getToken(selfId);
+        UMessageNet.run(() -> {
+            boolean ok;
+            try {
+                final JSONObject body = new JSONObject();
+                body.put("action", "delete");
+                body.put("userId", String.valueOf(selfId));
+                if (token != null) body.put("token", token);
+                ok = new JSONObject(httpPost(BASE_URL + "/api/register", body.toString())).optBoolean("ok", false);
+            } catch (Throwable e) {
+                FileLog.e(e);
+                ok = false;
+            }
+            if (ok) {
+                prefs().edit().remove("token_" + selfId).remove(KEY_VERIFY_SECRET + "_" + selfId).apply();
+            }
+            final boolean result = ok;
+            AndroidUtilities.runOnUIThread(() -> done.run(result));
         });
     }
 

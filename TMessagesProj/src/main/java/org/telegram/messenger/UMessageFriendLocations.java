@@ -1084,14 +1084,40 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
             if (!anyFriends) return;
             launchPermissionAsked = true;
         }
-        try {
-            activity.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST);
-        } catch (Throwable e) {
-            FileLog.e(e);
-        }
+        withDisclosure(activity, false, () -> {
+            try {
+                activity.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST);
+            } catch (Throwable e) {
+                FileLog.e(e);
+            }
+        }, null);
     }
 
     public static final int PERMISSION_REQUEST = 0x7f1;
+
+    /**
+     * Google Play prominent disclosure before any location permission request (and before background sharing):
+     * what is collected, who receives it and how to stop it. Shown until the user continues once per kind.
+     */
+    public static void withDisclosure(android.app.Activity activity, boolean background, Runnable onAccept, Runnable onDecline) {
+        final String key = background ? "umfriend_disclosure_bg" : "umfriend_disclosure_fg";
+        if (MessagesController.getGlobalMainSettings().getBoolean(key, false)) {
+            onAccept.run();
+            return;
+        }
+        if (activity == null || activity.isFinishing()) return;
+        AndroidUtilities.runOnUIThread(() -> new org.telegram.ui.ActionBar.AlertDialog.Builder(activity)
+                .setTitle(LocaleController.getString(background ? R.string.UMessageFriendMapDisclosureBgTitle : R.string.UMessageFriendMapDisclosureTitle))
+                .setMessage(LocaleController.getString(background ? R.string.UMessageFriendMapDisclosureBgText : R.string.UMessageFriendMapDisclosureText))
+                .setPositiveButton(LocaleController.getString(R.string.UMessageFriendMapDisclosureContinue), (d, w) -> {
+                    MessagesController.getGlobalMainSettings().edit().putBoolean(key, true).apply();
+                    onAccept.run();
+                })
+                .setNegativeButton(LocaleController.getString(R.string.UMessageFriendMapDisclosureDecline), (d, w) -> {
+                    if (onDecline != null) onDecline.run();
+                })
+                .show());
+    }
 
     /** Re-evaluates tracking after a permission grant or a new friend. */
     public static void restartTracking() {

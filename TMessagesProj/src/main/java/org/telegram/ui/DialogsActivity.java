@@ -4161,6 +4161,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         } else {
                             hideActionMode(true);
                         }
+                    } else if (umHiddenMode) {
+                        goHomeFromHidden();
                     } else if (onlySelect || folderId != 0 || communityId != 0) {
                         finishFragment();
                     }
@@ -7651,6 +7653,17 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             return false;
         }
         return super.onBackPressed(invoked);
+    }
+
+    /** Hidden chats home button: drops every page between the main screen and this one, then closes. */
+    private void goHomeFromHidden() {
+        if (parentLayout != null) {
+            java.util.List<BaseFragment> stack = new ArrayList<>(parentLayout.getFragmentStack());
+            for (int i = stack.size() - 2; i >= 1; i--) {
+                parentLayout.removeFragmentFromStack(stack.get(i));
+            }
+        }
+        finishFragment();
     }
 
     @Override
