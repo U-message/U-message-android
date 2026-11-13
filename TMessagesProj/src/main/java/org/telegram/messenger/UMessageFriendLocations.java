@@ -455,7 +455,7 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
         }
     }
 
-    /** True when any friend has an active zone (the background service then polls positions). */
+    /** True when any friend has an active zone (checked while the app is open). */
     public boolean hasActiveZones() {
         for (Friend f : friends.values()) {
             if (f.zone != null && f.zone.state == ZONE_ACTIVE) return true;
@@ -626,7 +626,7 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
 
     /**
      * Tells every friend's phone "I am looking at you right now" (encrypted flag on the relay, valid 6 min).
-     * Their phone picks it up on its next poll (instantly when open, within 2 min in the background)
+     * Their phone picks it up on its next poll (only while their app is open, like Instagram's map)
      * and switches to precise 1-second GPS until the flag runs out. Called while our map is open.
      */
     public void watchFriends() {
@@ -854,7 +854,7 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
         }
     };
 
-    /** Uploads a fresh fix for every logged-in account (also used by the background service). */
+    /** Uploads a fresh fix for every logged-in account (only while the app is open). */
     public static void dispatchLocation(Location location) {
         if (!org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.FRIEND_MAP)) return;
         if (location == null) return;
@@ -875,9 +875,7 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
         }
     }
 
-    // ---------------------------------------------------------------- background mode
-
-    private static boolean serviceRunning;
+    // ---------------------------------------------------------------- settings
 
     private static SharedPreferences globalPrefs() {
         return ApplicationLoader.applicationContext.getSharedPreferences("umfriends_global", Context.MODE_PRIVATE);
@@ -917,10 +915,6 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
         });
     }
 
-    public static boolean isBackgroundEnabled() {
-        return globalPrefs().getBoolean("background", false); // off until the user turns it on
-    }
-
     /** One switch that stops every upload of our position (friends, people nearby, live mode) until turned back on. */
     public static boolean isSharingPaused() {
         return globalPrefs().getBoolean("paused", false);
@@ -952,34 +946,6 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
         restartTracking();
     }
 
-    public static void setBackgroundEnabled(boolean enabled) {
-        globalPrefs().edit().putBoolean("background", enabled).apply();
-        updateService();
-    }
-
-    /** Runs the background service only while it is wanted, allowed and useful. */
-    private static void updateService() {
-        Context context = ApplicationLoader.applicationContext;
-        boolean anyFriends = false;
-        for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
-            if (instances[a] != null && instances[a].hasFriends()) anyFriends = true;
-        }
-        boolean want = isBackgroundEnabled() && !isSharingPaused() && anyFriends && hasPermission(context)
-                && UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.FRIEND_MAP);
-        if (want && !serviceRunning && appForeground) {
-            serviceRunning = true;
-            UMessageFriendLocationService.start(context);
-        } else if (!want) {
-            serviceRunning = false;
-            UMessageFriendLocationService.stop(context);
-        }
-    }
-
-    /** The service stopped on its own (refused by the system or the notification's Stop): start it again next time. */
-    static void onServiceStopped() {
-        serviceRunning = false;
-    }
-
     public static Location getLastLocation() {
         return lastLocation;
     }
@@ -1008,14 +974,12 @@ public class UMessageFriendLocations implements NotificationCenter.NotificationC
 
     @SuppressLint("MissingPermission")
     private static void updateTracking() {
-        updateService();
         boolean anyFriends = false;
         for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
             if (instances[a] != null && instances[a].hasFriends()) anyFriends = true;
         }
         boolean sharing = anyFriends && !isSharingPaused();
-        // 3 = a friend is watching (only while the app is open: a watcher never keeps the background service on
-        // high accuracy), 2 = our map is open (our own dot, even when sharing is paused)
+        // 3 = a friend is watching (only while the app is open), 2 = our map is open (our own dot, even when sharing is paused)
         int mode = !appForeground ? 0 : sharing && isLive() ? 3 : mapOpen ? 2 : sharing ? 1 : 0;
         if (!UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.FRIEND_MAP)) mode = 0; // switched off from the admin panel
         Context context = ApplicationLoader.applicationContext;

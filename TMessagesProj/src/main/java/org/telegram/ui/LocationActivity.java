@@ -200,7 +200,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
     private FrameLayout lastPressedMarkerView;
 
     private boolean checkPermission = true;
-    private boolean checkBackgroundPermission = true;
+    private boolean checkBackgroundPermission = false; // U message: no background location; live location runs in a foreground service started from the open app
     private int askWithRadius;
 
     private boolean searching;

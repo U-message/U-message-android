@@ -75,7 +75,6 @@ import java.util.ArrayList;
 public class UMessageFriendMapActivity extends BaseFragment implements UMessageFriendLocations.Listener {
 
     private static final int PERMISSION_CODE = 2;
-    private static final int NOTIFICATION_PERMISSION_CODE = 0x7f2; // 3 is the camera/mic code in BasePermissionsActivity
     private static final String HI = "👋";
 
     private UMessageFriendLocations controller;
@@ -489,7 +488,7 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
         if (!permissionAsked && Build.VERSION.SDK_INT >= 23 && getParentActivity() != null) {
             permissionAsked = true;
             // Google Play prominent disclosure: what is collected and where it goes, before the system dialog
-            withLocationDisclosure(false, () -> {
+            withLocationDisclosure(() -> {
                 if (getParentActivity() != null) {
                     getParentActivity().requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
                 }
@@ -497,8 +496,8 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
         }
     }
 
-    private void withLocationDisclosure(boolean background, Runnable onAccept) {
-        UMessageFriendLocations.withDisclosure(getParentActivity(), background, onAccept, () -> permissionAsked = false);
+    private void withLocationDisclosure(Runnable onAccept) {
+        UMessageFriendLocations.withDisclosure(getParentActivity(), false, onAccept, () -> permissionAsked = false);
     }
 
     private void enableMyLocation() {
@@ -1092,7 +1091,7 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
             }
         }
         UMessageFriendLocations.Friend focused = controller.get(focusUserId);
-        sig.append(focused == null ? -1 : focused.state).append(UMessageFriendLocations.isNearbyEnabled(currentAccount)).append(UMessageFriendLocations.isBackgroundEnabled()).append(UMessageFriendLocations.isSharingPaused()).append(all.isEmpty());
+        sig.append(focused == null ? -1 : focused.state).append(UMessageFriendLocations.isNearbyEnabled(currentAccount)).append(UMessageFriendLocations.isSharingPaused()).append(all.isEmpty());
         String signature = sig.toString();
         if (signature.equals(listSignature)) {
             // same rows: refresh distances and times in place instead of recreating the list (no flicker)
@@ -1116,7 +1115,6 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
             listLayout.addView(createInviteCard(context, focusUserId, focused), LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 14, 4, 14, 10));
         }
         listLayout.addView(createPauseRow(context));
-        listLayout.addView(createBackgroundRow(context));
         listLayout.addView(createNearbyRow(context));
         if (!incoming.isEmpty()) {
             listLayout.addView(sectionHeader(context, R.string.UMessageFriendMapRequests));
@@ -1318,61 +1316,6 @@ public class UMessageFriendMapActivity extends BaseFragment implements UMessageF
     }
 
     /** Background mode switch: keep sending our position while the app is closed. */
-    private View createBackgroundRow(Context context) {
-        FrameLayout row = new FrameLayout(context);
-        row.setBackground(Theme.getSelectorDrawable(false));
-        ImageView icon = new ImageView(context);
-        icon.setScaleType(ImageView.ScaleType.CENTER);
-        icon.setImageResource(R.drawable.live_loc);
-        icon.setColorFilter(0xffffffff);
-        GradientDrawable iconBg = new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{0xff64d2ff, 0xff0a84ff});
-        iconBg.setCornerRadius(dp(9));
-        icon.setBackground(iconBg);
-        row.addView(icon, frame(32, 32, Gravity.LEFT | Gravity.CENTER_VERTICAL, 18, 0, 0, 0));
-        TextView title = text(context, 16, cText, false);
-        title.setText(LocaleController.getString(R.string.UMessageFriendMapBackground));
-        row.addView(title, frame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 64, 11, 70, 0));
-        TextView sub = text(context, 13, cSecondary, false);
-        sub.setText(LocaleController.getString(R.string.UMessageFriendMapBackgroundInfo));
-        row.addView(sub, frame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 64, 33, 70, 0));
-        org.telegram.ui.Components.Switch toggle = new org.telegram.ui.Components.Switch(context);
-        toggle.setChecked(UMessageFriendLocations.isBackgroundEnabled(), false);
-        row.addView(toggle, frame(37, 40, Gravity.RIGHT | Gravity.CENTER_VERTICAL, 0, 0, 18, 0));
-        row.setOnClickListener(v -> {
-            boolean enable = !UMessageFriendLocations.isBackgroundEnabled();
-            if (!enable) {
-                setBackground(false, toggle);
-                return;
-            }
-            // background sharing gets its own disclosure (location is collected while the app is closed)
-            withLocationDisclosure(true, () -> {
-                if (!UMessageFriendLocations.hasPermission(ApplicationLoader.applicationContext)) {
-                    pendingAction = () -> setBackground(true, toggle);
-                    permissionAsked = false;
-                    requestPermission();
-                    return;
-                }
-                setBackground(true, toggle);
-            });
-        });
-        View line = new View(context);
-        line.setBackgroundColor(cSeparator);
-        row.addView(line, frame(LayoutHelper.MATCH_PARENT, 1f / AndroidUtilities.density, Gravity.BOTTOM, 64, 0, 0, 0));
-        row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(60)));
-        return row;
-    }
-
-    private void setBackground(boolean enable, org.telegram.ui.Components.Switch toggle) {
-        if (enable && Build.VERSION.SDK_INT >= 33 && getParentActivity() != null
-                && getParentActivity().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-            getParentActivity().requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_CODE);
-        }
-        UMessageFriendLocations.setBackgroundEnabled(enable);
-        toggle.setChecked(enable, true);
-        BulletinFactory.of(this).createSimpleBulletin(enable ? R.raw.contact_check : R.raw.chats_infotip,
-                LocaleController.getString(enable ? (controller.hasFriends() ? R.string.UMessageFriendMapBackgroundOn : R.string.UMessageFriendMapBackgroundOnLater) : R.string.UMessageFriendMapBackgroundOff)).show();
-    }
-
     private void updateCharacterButton() {
         if (characterButton == null) return;
         characterButton.clearColorFilter();
