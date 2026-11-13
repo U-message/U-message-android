@@ -129,7 +129,7 @@ public final class UMessageErrorReporter {
             if (!day.equals(p.getString("day", null))) {
                 p.edit().clear().putString("install", p.getString("install", null)).putString("day", day).apply();
             }
-            final String key = "s_" + sig + "_" + BuildConfig.VERSION_CODE;
+            final String key = "s_" + sig + "_" + appVersionCode();
             final int today = p.getInt("count", 0);
             if (p.getBoolean(key, false) || today >= MAX_PER_DAY) {
                 return;
@@ -179,6 +179,19 @@ public final class UMessageErrorReporter {
     }
 
     /** The admin pressed "Qurilmadan so‘rash" (delivered in the /api/register reply as sendLogs). */
+    private static long versionCode;
+
+    /** This install's versionCode (the library module's BuildConfig has none). */
+    public static long appVersionCode() {
+        if (versionCode != 0) return versionCode;
+        try {
+            android.content.pm.PackageInfo info = ApplicationLoader.applicationContext.getPackageManager().getPackageInfo(ApplicationLoader.applicationContext.getPackageName(), 0);
+            return versionCode = Build.VERSION.SDK_INT >= 28 ? info.getLongVersionCode() : info.versionCode;
+        } catch (Throwable e) {
+            return 0;
+        }
+    }
+
     public static void sendDump(long requestTs, long userId) {
         if (requestTs <= 0 || requestTs == lastDumpRequest || !installed || !isEnabled()) {
             return;
@@ -215,7 +228,7 @@ public final class UMessageErrorReporter {
         meta.put("model", Build.MANUFACTURER + " " + Build.MODEL);
         meta.put("sdk", Build.VERSION.SDK_INT);
         meta.put("app", BuildVars.BUILD_VERSION_STRING);
-        meta.put("code", BuildConfig.VERSION_CODE);
+        meta.put("code", appVersionCode());
         meta.put("lang", java.util.Locale.getDefault().toString());
         body.put("meta", meta);
         body.put("errors", new JSONArray(items));

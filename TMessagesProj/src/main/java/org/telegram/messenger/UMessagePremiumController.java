@@ -210,7 +210,7 @@ public final class UMessagePremiumController {
                     }
                 }
                 body.put("enabled", isSelfEnabled());
-                body.put("appCode", BuildConfig.VERSION_CODE);
+                body.put("appCode", UMessageErrorReporter.appVersionCode());
                 body.put("appVersion", BuildVars.BUILD_VERSION_STRING);
                 final String token = getToken(selfId);
                 if (token != null) {
