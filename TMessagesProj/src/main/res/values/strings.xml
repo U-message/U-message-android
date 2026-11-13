@@ -40,6 +40,7 @@
     <string name="UMessageShazamNotFound">Couldn\'t recognize the song. Try again</string>
     <string name="UMessageShazamError">No connection to U Music</string>
     <string name="UMessageShazamSend">Send to chat</string>
+    <string name="UMessageShazamSearchTelegram">Search in Telegram</string>
     <string name="UMessageShazamDownloading">Downloading…</string>
     <string name="UMessageShazamSent">Song sent</string>
     <string name="UMessageShazamMic">Allow microphone access to recognize songs</string>

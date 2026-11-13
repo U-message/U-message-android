@@ -72,7 +72,7 @@ public class UMessageShazamActivity extends BaseFragment {
     private LogoParticlesView logoView;
     private TextView statusTitle, statusSub;
     private LinearLayout resultView;
-    private TextView titleView, artistView, sendButton, againButton;
+    private TextView titleView, artistView, sendButton, searchButton, againButton;
 
     private final ExecutorService recognizer = Executors.newSingleThreadExecutor();
     /** Bumped to cancel the running listen; threads drop their results once it no longer matches. */
@@ -199,6 +199,13 @@ public class UMessageShazamActivity extends BaseFragment {
         sendButton.setOnClickListener(v -> pickChatAndSend());
         resultView.addView(sendButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 52));
 
+        if (org.telegram.messenger.ApplicationLoader.isPlayStoreBuild()) {
+            // Play: no song files; the user looks the song up in Telegram's own music search
+            searchButton = createButton(context, LocaleController.getString(R.string.UMessageShazamSearchTelegram), false);
+            searchButton.setOnClickListener(v -> searchInTelegram());
+            resultView.addView(searchButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48, 0, 10, 0, 0));
+        }
+
         againButton = createButton(context, LocaleController.getString(R.string.UMessageShazamAgain), false);
         againButton.setOnClickListener(v -> startListening());
         resultView.addView(againButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48, 0, 10, 0, 0));
@@ -304,6 +311,11 @@ public class UMessageShazamActivity extends BaseFragment {
 
     private static Prepared prepare(int account, UMessageShazam.Track result) {
         final Prepared prepared = new Prepared(result);
+        if (org.telegram.messenger.ApplicationLoader.isPlayStoreBuild()) {
+            // Play policy: no copyrighted audio is fetched or sent, only the song's name and links (see send())
+            prepared.finish();
+            return prepared;
+        }
         org.telegram.messenger.UMessageMusicBots.find(account, result.title, result.artist, song -> {
             if (song != null && song.document != null) {
                 prepared.document = song.document;
@@ -364,6 +376,14 @@ public class UMessageShazamActivity extends BaseFragment {
     }
 
     private static void send(int account, Prepared prepared, java.util.ArrayList<Long> dialogs, boolean notify) {
+        if (org.telegram.messenger.ApplicationLoader.isPlayStoreBuild()) {
+            final String text = prepared.track.shareText();
+            for (long dialogId : dialogs) {
+                org.telegram.messenger.SendMessagesHelper.getInstance(account).sendMessage(org.telegram.messenger.SendMessagesHelper.SendMessageParams.of(text, dialogId,
+                        null, null, null, true, null, null, null, notify, 0, 0, null, false));
+            }
+            return;
+        }
         if (prepared.done) {
             sendPrepared(account, prepared, dialogs, null, notify);
             return;
@@ -483,6 +503,18 @@ public class UMessageShazamActivity extends BaseFragment {
             }
         }
         org.telegram.messenger.NotificationCenter.getInstance(account).postNotificationName(org.telegram.messenger.NotificationCenter.messagesDeleted, ids, channelId, false);
+    }
+
+    /** Telegram's global search on its Music tab, filled with the song: results come from the user's chats and public channels. */
+    private void searchInTelegram() {
+        final Prepared song = prepared;
+        if (song == null) {
+            return;
+        }
+        final DialogsActivity search = new DialogsActivity(null);
+        search.setInitialSearchString(song.track.query());
+        search.setInitialSearchType(org.telegram.ui.Adapters.FiltersView.FILTER_TYPE_MUSIC);
+        presentFragment(search);
     }
 
     private void openLink(String url) {
@@ -652,6 +684,7 @@ public class UMessageShazamActivity extends BaseFragment {
         rise(titleView, 1000);
         rise(artistView, 1100);
         rise(sendButton, 1200);
+        if (searchButton != null) rise(searchButton, 1200);
         rise(againButton, 1200);
         loadVideo(result);
     }

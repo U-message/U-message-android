@@ -133,6 +133,11 @@ public class ApplicationLoader extends Application {
         return applicationLoaderInstance.isStandalone();
     }
 
+    /** The Google Play bundle (bundleAfat flavor): features Play policy does not allow stay out of it. */
+    public static boolean isPlayStoreBuild() {
+        return applicationLoaderInstance.isPlayStore();
+    }
+
     public static boolean isBetaBuild() {
         return applicationLoaderInstance.isBeta();
     }
@@ -150,6 +155,10 @@ public class ApplicationLoader extends Application {
     }
 
     protected boolean isBeta() {
+        return false;
+    }
+
+    protected boolean isPlayStore() {
         return false;
     }
 

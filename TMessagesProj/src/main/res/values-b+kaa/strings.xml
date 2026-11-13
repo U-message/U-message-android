@@ -37,6 +37,7 @@
     <string name="UMessageShazamNotFound">Qosıq anıqlanbadı. Qayta urınıp kóriń</string>
     <string name="UMessageShazamError">U Music menen baylanıs joq</string>
     <string name="UMessageShazamSend">Sáwbetke jiberiw</string>
+    <string name="UMessageShazamSearchTelegram">Telegram’da izlew</string>
     <string name="UMessageShazamDownloading">Júklenbekte…</string>
     <string name="UMessageShazamSent">Qosıq jiberildi</string>
     <string name="UMessageShazamMic">Qosıqtı anıqlaw ushın mikrofonǵa ruxsat beriń</string>

@@ -52,6 +52,7 @@
     <string name="UMessageShazamNotFound">Не удалось распознать песню. Попробуйте ещё раз</string>
     <string name="UMessageShazamError">Нет связи с U Music</string>
     <string name="UMessageShazamSend">Отправить в чат</string>
+    <string name="UMessageShazamSearchTelegram">Найти в Telegram</string>
     <string name="UMessageShazamDownloading">Загрузка…</string>
     <string name="UMessageShazamSent">Песня отправлена</string>
     <string name="UMessageShazamMic">Разрешите доступ к микрофону для распознавания песен</string>

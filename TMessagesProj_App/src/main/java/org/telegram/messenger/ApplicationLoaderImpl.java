@@ -7,4 +7,9 @@ public class ApplicationLoaderImpl extends ApplicationLoader {
     protected String onGetApplicationId() {
         return BuildConfig.APPLICATION_ID;
     }
+
+    @Override
+    protected boolean isPlayStore() {
+        return BuildConfig.BUNDLE;
+    }
 }

@@ -40,6 +40,7 @@
     <string name="UMessageShazamNotFound">Qo‘shiq aniqlanmadi. Qayta urinib ko‘ring</string>
     <string name="UMessageShazamError">U Music bilan aloqa yo‘q</string>
     <string name="UMessageShazamSend">Chatga yuborish</string>
+    <string name="UMessageShazamSearchTelegram">Telegram’da qidirish</string>
     <string name="UMessageShazamDownloading">Yuklanmoqda…</string>
     <string name="UMessageShazamSent">Qo‘shiq yuborildi</string>
     <string name="UMessageShazamMic">Qo‘shiqni aniqlash uchun mikrofonga ruxsat bering</string>
