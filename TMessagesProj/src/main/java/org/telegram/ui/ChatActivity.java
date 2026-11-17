@@ -30944,6 +30944,10 @@ public class ChatActivity extends BaseFragment implements
     public void onResume() {
         super.onResume();
         checkShowBlur(false);
+        if (chatMode == 0) {
+            // U message: read during ghost mode and opened now with it off: the sender sees it read
+            getMessagesController().sendGhostHeldRead(dialog_id);
+        }
         if (privacyGuardShield != null) {
             privacyGuardShield.attach();
         }

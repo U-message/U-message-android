@@ -14652,11 +14652,76 @@ public class MessagesController extends BaseController implements NotificationCe
         }
     }
 
-    private void completeReadTask(ReadTask task) {
-        if (UMessageGhostScope.isGhostFor(currentAccount, task.dialogId) && !ChatObject.isChannelAndNotMegaGroup(getChat(-task.dialogId))) {
-            // U message ghost mode: read locally, the sender does not get the read receipt
+    private android.content.SharedPreferences ghostReadPrefs() {
+        return ApplicationLoader.applicationContext.getSharedPreferences("umessage_ghost_reads" + currentAccount, android.content.Context.MODE_PRIVATE);
+    }
+
+    /** U message: a chat read during ghost mode is marked read on the server once it is opened with ghost mode off. */
+    public void sendGhostHeldRead(long dialogId) {
+        if (dialogId == 0 || UMessageGhostScope.isGhostFor(currentAccount, dialogId)) {
             return;
         }
+        final String key = String.valueOf(dialogId);
+        final String held = ghostReadPrefs().getString(key, null);
+        if (held == null) {
+            return;
+        }
+        ghostReadPrefs().edit().remove(key).apply();
+        try {
+            final String[] parts = held.split(":");
+            final ReadTask task = new ReadTask();
+            task.dialogId = dialogId;
+            task.maxId = Integer.parseInt(parts[0]);
+            task.maxDate = Integer.parseInt(parts[1]);
+            completeReadTask(task);
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    private void completeReadTask(ReadTask task) {
+        if (UMessageGhostScope.isGhostFor(currentAccount, task.dialogId) && !ChatObject.isChannelAndNotMegaGroup(getChat(-task.dialogId))) {
+            // U message ghost mode: read locally, the sender does not get the read receipt. The read is kept and
+            // goes out when the chat is opened again with ghost mode off (sendGhostHeldRead).
+            if (task.replyId == 0 && task.monoForumPeerId == 0) {
+                final String key = String.valueOf(task.dialogId);
+                final String held = ghostReadPrefs().getString(key, null);
+                int maxId = task.maxId, maxDate = task.maxDate;
+                if (held != null) {
+                    try {
+                        final String[] parts = held.split(":");
+                        maxId = Math.max(maxId, Integer.parseInt(parts[0]));
+                        maxDate = Math.max(maxDate, Integer.parseInt(parts[1]));
+                    } catch (Exception ignore) {}
+                }
+                ghostReadPrefs().edit().putString(key, maxId + ":" + maxDate).apply();
+            }
+            return;
+        }
+        sendReadRequest(task);
+    }
+
+    /** U message: a reply or a reaction in ghost mode reads the chat up to that message on the server. */
+    public void markReadUpTo(long dialogId, int msgId) {
+        if (dialogId == 0 || msgId <= 0 || DialogObject.isEncryptedDialog(dialogId) || !UMessageGhostScope.isGhostFor(currentAccount, dialogId)) {
+            return;
+        }
+        final String key = String.valueOf(dialogId);
+        final String held = ghostReadPrefs().getString(key, null);
+        if (held != null) {
+            try {
+                if (Integer.parseInt(held.split(":")[0]) <= msgId) {
+                    ghostReadPrefs().edit().remove(key).apply();
+                }
+            } catch (Exception ignore) {}
+        }
+        final ReadTask task = new ReadTask();
+        task.dialogId = dialogId;
+        task.maxId = msgId;
+        sendReadRequest(task);
+    }
+
+    private void sendReadRequest(ReadTask task) {
         if (task.replyId != 0 && task.monoForumPeerId == 0) {
             TLRPC.TL_messages_readDiscussion req = new TLRPC.TL_messages_readDiscussion();
             req.msg_id = (int) task.replyId;

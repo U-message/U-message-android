@@ -4268,6 +4268,10 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         if (messageObject == null || parentFragment == null) {
             return;
         }
+        if (addedReaction != null && !messageObject.isOut() && messageObject.getId() > 0) {
+            // U message ghost mode: reacting reads the chat up to this message
+            getMessagesController().markReadUpTo(messageObject.getDialogId(), messageObject.getId());
+        }
         TLRPC.TL_messages_sendReaction req = new TLRPC.TL_messages_sendReaction();
         if (messageObject.messageOwner.isThreadMessage && messageObject.messageOwner.fwd_from != null) {
             req.peer = getMessagesController().getInputPeer(messageObject.getFromChatId());
@@ -4721,6 +4725,10 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         long peer = sendMessageParams.peer;
         String path = sendMessageParams.path;
         MessageObject replyToMsg = sendMessageParams.replyToMsg;
+        if (replyToMsg != null && sendMessageParams.scheduleDate == 0 && !replyToMsg.isOut() && replyToMsg.getId() > 0 && replyToMsg.getDialogId() == sendMessageParams.peer) {
+            // U message ghost mode: replying reads the chat up to the replied message
+            getMessagesController().markReadUpTo(sendMessageParams.peer, replyToMsg.getId());
+        }
         MessageObject replyToTopMsg = sendMessageParams.replyToTopMsg;
         TLRPC.WebPage webPage = sendMessageParams.webPage;
         TLRPC.TL_messageMediaWebPage mediaWebPage = sendMessageParams.mediaWebPage;
