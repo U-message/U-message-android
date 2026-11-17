@@ -2070,8 +2070,9 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
                 if (lastColor != color) {
                     lastColor = color;
                     int textColor = type == TYPE_DIALOGS ? getThemedColor(Theme.key_actionBarDefaultTitle) : getThemedColor(Theme.key_actionBarDefaultArchivedTitle);//getThemedColor(Theme.key_actionBarDefaultTitle);
-                    verifyDrawable.setColorFilter(new PorterDuffColorFilter(ColorUtils.blendARGB(textColor , color, 0.1f), PorterDuff.Mode.MULTIPLY));
-                    checkDrawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+                    // U message: the verified badge is Telegram blue with a white check
+                    verifyDrawable.setColorFilter(new PorterDuffColorFilter(Theme.isCurrentThemeDark() ? 0xff4c9be6 : 0xff3a8dd5, PorterDuff.Mode.MULTIPLY));
+                    checkDrawable.setColorFilter(new PorterDuffColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY));
                 }
                 super.draw(canvas);
             }

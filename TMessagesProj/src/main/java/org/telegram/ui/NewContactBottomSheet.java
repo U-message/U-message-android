@@ -583,7 +583,7 @@ public class NewContactBottomSheet extends BottomSheet implements AdapterView.On
         phoneOutlineView.addView(phoneStatusView, LayoutHelper.createFrame(24, 24, Gravity.CENTER_VERTICAL | Gravity.RIGHT, 0, 0, 12, 0));
 
         checkBox = new CheckBox2(context, 21, resourcesProvider);
-        checkBox.setColor(Theme.key_radioBackgroundChecked, Theme.key_checkboxDisabled, Theme.key_checkboxCheck);
+        checkBox.setColor(Theme.key_windowBackgroundWhiteBlackText, Theme.key_checkboxDisabled, Theme.key_windowBackgroundWhite); // ink theme: dark check on light circle in day, light on dark at night
         checkBox.setDrawUnchecked(true);
         checkBox.setChecked(false, false);
         checkBox.setDrawBackgroundAsArc(10);

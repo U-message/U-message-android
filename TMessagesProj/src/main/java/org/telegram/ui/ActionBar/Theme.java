@@ -868,6 +868,8 @@ public class Theme {
             if (inMsgLink == 0) {
                 inMsgLink = getColor(key_chat_messageLinkIn);
             }
+            // U message: links, phone numbers and mentions in outgoing messages are blue, not the bubble's text color
+            currentColors.put(key_chat_messageLinkOut, ColorUtils.calculateLuminance(outBubble) < 0.5 ? 0xff7cc0f8 : 0xff1a73d6);
             int outMsgLink = currentColors.get(key_chat_messageLinkOut);
             if (outMsgLink == 0) {
                 outMsgLink = getColor(key_chat_messageLinkOut);

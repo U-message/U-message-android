@@ -17015,7 +17015,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         {
             PremiumFeatureCell cell = new PremiumFeatureCell(context, resourcesProvider);
             cell.title.setText(getString(R.string.StarRatingTitle1));
-            cell.description.setText(LocaleController.formatSpannable(R.string.StarRatingDescription1, createNewSpan(getString(R.string.StarRatingAdded), Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider))));
+            cell.description.setText(LocaleController.formatSpannable(R.string.StarRatingDescription1, createNewSpan(getString(R.string.StarRatingAdded), Theme.isCurrentThemeDark() ? 0xff3e88d0 : 0xff3a8dd5)));
             cell.nextIcon.setVisibility(View.GONE);
             cell.imageView.setImageResource(R.drawable.menu_gift);
             cell.imageView.setColorFilter(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider));
@@ -17024,7 +17024,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         {
             PremiumFeatureCell cell = new PremiumFeatureCell(context, resourcesProvider);
             cell.title.setText(getString(R.string.StarRatingTitle2));
-            cell.description.setText(LocaleController.formatSpannable(R.string.StarRatingDescription2, createNewSpan(getString(R.string.StarRatingAdded), Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider))));
+            cell.description.setText(LocaleController.formatSpannable(R.string.StarRatingDescription2, createNewSpan(getString(R.string.StarRatingAdded), Theme.isCurrentThemeDark() ? 0xff3e88d0 : 0xff3a8dd5)));
             cell.nextIcon.setVisibility(View.GONE);
             cell.imageView.setImageResource(R.drawable.menu_stars_gift);
             cell.imageView.setColorFilter(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider));
@@ -17043,6 +17043,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             ButtonWithCounterView button = new ButtonWithCounterView(context, resourcesProvider);
             button.setOnClickListener(v -> dismiss.run());
             button.setText(replaceUnderstood(getString(R.string.Understood)), false);
+            // U message: Telegram's blue here, like the rating bar
+            button.setColor(Theme.isCurrentThemeDark() ? 0xff3e88d0 : 0xff3a8dd5);
+            button.setTextColor(0xffffffff);
             linearLayout.addView(button, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48, 16, 10, 16, 8));
         }
         b.setCustomView(linearLayout);

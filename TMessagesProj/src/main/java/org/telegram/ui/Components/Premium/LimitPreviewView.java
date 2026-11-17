@@ -604,6 +604,10 @@ public class LimitPreviewView extends LinearLayout {
         parentVideForGradient = containerView;
     }
 
+    private static int ratingBlue() {
+        return Theme.isCurrentThemeDark() ? 0xff3e88d0 : 0xff3a8dd5;
+    }
+
     public void setStaticGradinet(PremiumGradient.PremiumGradientTools gradientTools) {
         staticGradient = gradientTools;
     }
@@ -655,7 +659,7 @@ public class LimitPreviewView extends LinearLayout {
         TL_stars.StarGiftUpgradePrice to
     ) {
         drawFromRight = true;
-        ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+        ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
         percent = AndroidUtilities.ilerp(current_stars, from.upgrade_stars, to.upgrade_stars);
         defaultText.setText(LocaleController.formatPluralStringComma("Stars", (int) from.upgrade_stars));
         premiumCount.setText(LocaleController.formatPluralStringComma("Stars", (int) to.upgrade_stars));
@@ -675,7 +679,7 @@ public class LimitPreviewView extends LinearLayout {
 
     public void setStarRating(TL_stars.Tl_starsRating rating) {
         isRatingNegative = false;
-        ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+        ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
         long k = rating.current_level_stars;
         if (rating.stars <= 0) {
             percent = 0.5f;
@@ -710,7 +714,7 @@ public class LimitPreviewView extends LinearLayout {
     public void animateStarRating(TL_stars.Tl_starsRating from, TL_stars.Tl_starsRating to) {
         AndroidUtilities.cancelRunOnUIThread(animateStarRatingRunnable);
         animateStarRatingRunnable = null;
-        ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+        ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
         isRatingNegative = false;
         if (from.level == to.level) {
             if (to.stars <= 0) {
@@ -790,7 +794,7 @@ public class LimitPreviewView extends LinearLayout {
                 }
 
                 isRatingNegative = false;
-                ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+                ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
                 if (to.stars <= 0) {
                     percent = 0;
                     defaultText.setText("");
@@ -837,7 +841,7 @@ public class LimitPreviewView extends LinearLayout {
                 setIconValue((int) to.stars, (int) to.next_level_stars, true, false);
             }, 600);
         } else if (to.level < from.level) {
-            ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+            ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
             isRatingNegative = false;
             if (from.stars <= 0) {
 //                defaultText.setText("");
@@ -884,7 +888,7 @@ public class LimitPreviewView extends LinearLayout {
                     arrowAnimator.cancel();
                 }
                 isRatingNegative = false;
-                ratingPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
+                ratingPaint.setColor(ratingBlue()); // U message: Telegram blue, the ink accent is white
                 if (to.stars <= 0) {
                     percent = 0.5f;
                     defaultText.setText("");

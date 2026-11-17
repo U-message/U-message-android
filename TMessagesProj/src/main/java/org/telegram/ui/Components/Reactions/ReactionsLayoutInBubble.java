@@ -1035,8 +1035,9 @@ public class ReactionsLayoutInBubble {
                     serviceTextColor = 0xFFFFFFFF;
                     serviceBackgroundColor = 0xFFE8AB02;
                 } else {
-                    backgroundColor = Theme.getColor(isOutOwner() ? Theme.key_chat_outReactionButtonBackground : Theme.key_chat_inReactionButtonBackground, resourcesProvider);
-                    textColor = Theme.getColor(isOutOwner() ? Theme.key_chat_outReactionButtonTextSelected : Theme.key_chat_inReactionButtonTextSelected, resourcesProvider);
+                    // U message: the chosen reaction is solid Telegram blue with white text
+                    backgroundColor = Theme.isCurrentThemeDark() ? 0xff3e88d0 : 0xff3a8dd5;
+                    textColor = 0xffffffff;
                     if (parentView instanceof ChatActionCell) {
                         serviceTextColor = Theme.getColor(Theme.key_chat_reactionServiceButtonTextSelected, resourcesProvider);
                         serviceBackgroundColor = Theme.getColor(Theme.key_chat_reactionServiceButtonBackgroundSelected, resourcesProvider);
@@ -1053,8 +1054,8 @@ public class ReactionsLayoutInBubble {
                     serviceBackgroundColor = Color.TRANSPARENT;
                 } else {
                     textColor = Theme.getColor(isOutOwner() ? Theme.key_chat_outReactionButtonText : Theme.key_chat_inReactionButtonText, resourcesProvider);
-                    backgroundColor = Theme.getColor(isOutOwner() ? Theme.key_chat_outReactionButtonBackground : Theme.key_chat_inReactionButtonBackground, resourcesProvider);
-                    backgroundColor = ColorUtils.setAlphaComponent(backgroundColor, (int) (Color.alpha(backgroundColor) * 0.156f));
+                    // U message: a faint Telegram-blue tint, just enough to stand apart from the post; the chosen one is solid blue
+                    backgroundColor = Theme.isCurrentThemeDark() ? 0x2e5aa0e6 : 0x1c3a8dd5;
                     serviceTextColor = Theme.getColor(Theme.key_chat_serviceText, resourcesProvider);
                     serviceBackgroundColor = Color.TRANSPARENT;
                 }
