@@ -7412,6 +7412,16 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
     public void didReceivedNotification(int id, final int account, Object... args) {
         if (id == NotificationCenter.appDidLogout) {
             switchToAvailableAccountOrLogout();
+            if (SharedConfig.passcodeHash.length() == 0) {
+                // the passcode went with the last account: drop a lock screen that is still showing
+                if (passcodeDialog != null && passcodeDialog.isShowing()) {
+                    passcodeDialog.passcodeView.forceUnlock();
+                }
+                for (PasscodeView overlay : new ArrayList<>(overlayPasscodeViews)) {
+                    overlay.forceUnlock();
+                }
+                SharedConfig.isWaitingForPasscodeEnter = false;
+            }
         } else if (id == NotificationCenter.openBoostForUsersDialog) {
             long dialogId = (long) args[0];
             ChatMessageCell chatMessageCell = null;

@@ -1232,6 +1232,21 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
         hide(true);
     }
 
+    /** U message: the passcode was wiped (last account logged out or terminated remotely), so the lock has nothing left to guard. */
+    public void forceUnlock() {
+        if (getVisibility() != VISIBLE || hideAnimator != null) return;
+        SharedConfig.appLocked = false;
+        SharedConfig.saveConfig();
+        onPause();
+        passwordEditText.clearFocus();
+        AndroidUtilities.hideKeyboard(passwordEditText);
+        setOnTouchListener(null);
+        if (delegate != null) {
+            delegate.didAcceptedPassword(this);
+        }
+        hide(false);
+    }
+
     /** Cancels a confirmation view without accepting the passcode or unlocking the app. */
     public void dismiss() {
         if (isAppLock() || dismissing) return;
