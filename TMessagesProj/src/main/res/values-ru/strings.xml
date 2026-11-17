@@ -1444,4 +1444,7 @@
     <string name="UMessageOfficeShareApps">Поделиться в другие приложения</string>
     <string name="UMessageOfficeUnsaved">Изменённый файл ещё не сохранён на телефоне. Сохранить в «Загрузки»?</string>
     <string name="UMessageOfficeSent">Файл отправлен</string>
+    <string name="UMessageInviteText">Привет, я общаюсь в U message. Присоединяйся! Скачать: %1$s</string>
+    <string name="UMessageShareApp">Поделиться U message</string>
+    <string name="UMessageInviteShort">Пригласить в U message</string>
 </resources>

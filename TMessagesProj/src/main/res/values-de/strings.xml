@@ -2111,4 +2111,7 @@
     <string name="UMessageOfficeShareApps">In anderen Apps teilen</string>
     <string name="UMessageOfficeUnsaved">Die bearbeitete Datei ist noch nicht auf deinem Telefon gespeichert. In Downloads speichern?</string>
     <string name="UMessageOfficeSent">Datei gesendet</string>
+    <string name="UMessageInviteText">Hey, ich chatte mit U message. Mach mit! Hier herunterladen: %1$s</string>
+    <string name="UMessageShareApp">U message teilen</string>
+    <string name="UMessageInviteShort">Zu U message einladen</string>
 </resources>

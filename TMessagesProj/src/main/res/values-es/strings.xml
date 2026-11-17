@@ -2052,4 +2052,7 @@
     <string name="UMessageOfficeShareApps">Compartir en otras apps</string>
     <string name="UMessageOfficeUnsaved">El archivo editado aún no está guardado en tu teléfono. ¿Guardarlo en Descargas?</string>
     <string name="UMessageOfficeSent">Archivo enviado</string>
+    <string name="UMessageInviteText">¡Hola! Uso U message para chatear. ¡Únete! Descárgalo aquí: %1$s</string>
+    <string name="UMessageShareApp">Compartir U message</string>
+    <string name="UMessageInviteShort">Invitar a U message</string>
 </resources>

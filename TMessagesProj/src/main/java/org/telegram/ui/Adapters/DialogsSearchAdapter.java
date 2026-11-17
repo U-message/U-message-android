@@ -2050,7 +2050,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
                     }
                     if (!searchContacts.isEmpty()) {
                         if (position == 0) {
-                            title = LocaleController.getString(R.string.InviteToTelegramShort);
+                            title = LocaleController.getString(R.string.UMessageInviteShort);
                         }
                         position -= 1 + searchContacts.size();
                     }

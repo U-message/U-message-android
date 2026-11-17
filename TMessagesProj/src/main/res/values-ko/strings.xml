@@ -1887,4 +1887,7 @@
     <string name="UMessageOfficeShareApps">다른 앱으로 공유</string>
     <string name="UMessageOfficeUnsaved">편집한 파일이 아직 휴대폰에 저장되지 않았습니다. 다운로드에 저장할까요?</string>
     <string name="UMessageOfficeSent">파일을 보냈습니다</string>
+    <string name="UMessageInviteText">안녕하세요, 저는 U message로 채팅해요. 함께해요! 여기서 다운로드하세요: %1$s</string>
+    <string name="UMessageShareApp">U message 공유하기</string>
+    <string name="UMessageInviteShort">U message에 초대</string>
 </resources>

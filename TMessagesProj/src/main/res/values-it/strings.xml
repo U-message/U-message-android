@@ -2303,4 +2303,7 @@
     <string name="UMessageOfficeShareApps">Condividi in altre app</string>
     <string name="UMessageOfficeUnsaved">Il file modificato non è ancora salvato sul telefono. Salvarlo in Download?</string>
     <string name="UMessageOfficeSent">File inviato</string>
+    <string name="UMessageInviteText">Ciao, uso U message per chattare. Unisciti a me! Scaricalo qui: %1$s</string>
+    <string name="UMessageShareApp">Condividi U message</string>
+    <string name="UMessageInviteShort">Invita su U message</string>
 </resources>

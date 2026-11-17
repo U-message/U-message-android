@@ -844,7 +844,7 @@ public class InviteContactsActivity extends BaseFragment implements Notification
             if (viewType == 1) {
                 final TextCell textCell = new TextCell(context);
                 textCell.setColors(Theme.key_windowBackgroundWhiteBlackText, Theme.key_windowBackgroundWhiteBlackText);
-                textCell.setTextAndValueAndIcon(LocaleController.getString(R.string.ShareTelegram2), "", R.drawable.msg_shareout, false);
+                textCell.setTextAndValueAndIcon(LocaleController.getString(R.string.UMessageShareApp), "", R.drawable.msg_shareout, false);
                 view = textCell;
             } else if (viewType == 2) {
                 view = new ShadowSectionCell(context, 12);

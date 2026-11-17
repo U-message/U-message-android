@@ -374,16 +374,8 @@ public class ContactsController extends BaseController {
     }
 
     public String getInviteText(int contacts) {
-        String link = inviteLink == null ? "https://telegram.org/dl" : inviteLink;
-        if (contacts <= 1) {
-            return LocaleController.formatString(R.string.InviteText2, link);
-        } else {
-            try {
-                return String.format(LocaleController.getPluralString("InviteTextNum", contacts), contacts, link);
-            } catch (Exception e) {
-                return LocaleController.formatString(R.string.InviteText2, link);
-            }
-        }
+        // U message: our own text and site, never Telegram's server-provided invite text or telegram.org link
+        return LocaleController.formatString(R.string.UMessageInviteText, "https://u-message.org");
     }
 
     public void checkAppAccount() {

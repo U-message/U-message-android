@@ -1345,4 +1345,7 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageOfficeShareApps">Boshqa ilovalarga ulashish</string>
     <string name="UMessageOfficeUnsaved">Tahrirlangan fayl hali telefoningizga saqlanmadi. Yuklanmalarga saqlaysizmi?</string>
     <string name="UMessageOfficeSent">Fayl yuborildi</string>
+    <string name="UMessageInviteText">Salom, men U message orqali yozishaman. Sen ham qo\'shil! Yuklab olish: %1$s</string>
+    <string name="UMessageShareApp">U message\'ni ulashish</string>
+    <string name="UMessageInviteShort">U message\'ga taklif qilish</string>
 </resources>

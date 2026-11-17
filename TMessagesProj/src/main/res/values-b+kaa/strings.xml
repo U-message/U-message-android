@@ -12353,4 +12353,7 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageOfficeShareApps">Basqa qosımshalarǵa bólisiw</string>
     <string name="UMessageOfficeUnsaved">Ózgertilgen fayl ele telefonıńızǵa saqlanbadı. Júklenbelerge saqlaysız ba?</string>
     <string name="UMessageOfficeSent">Fayl jiberildi</string>
+    <string name="UMessageInviteText">Sálem, men U message arqalı sóylesemen. Sen de qosıl! Júklep alıw: %1$s</string>
+    <string name="UMessageShareApp">U message\'ti bólisiw</string>
+    <string name="UMessageInviteShort">U message\'ke miyman etiw</string>
 </resources>
