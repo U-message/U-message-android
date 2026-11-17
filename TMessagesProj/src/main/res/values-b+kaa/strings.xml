@@ -48,13 +48,8 @@
     <string name="UMessageShazamAgain">Qayta tıńlaw</string>
     <string name="UMessageMusicTitle">Muzıkalar</string>
     <string name="UMessageMusicSearch">Qosıq yamasa atqarıwshını izleń</string>
-    <string name="UMessageMusicTrend">Trendte</string>
     <string name="UMessageMusicUzbek">Ózbekshe</string>
-    <string name="UMessageMusicTikTok">TikTok xitleri</string>
-    <string name="UMessageMusicRussian">Orıssha</string>
-    <string name="UMessageMusicWorld">Dúnya</string>
     <string name="UMessageMusicUse">Tańlaw</string>
-    <string name="UMessageMusicHook">trend bólegi</string>
     <string name="UMessageMusicEmpty">Hesh nárse tabılmadı</string>
     <string name="UMessageMusicError">Baylanıs joq. Qayta urınıw ushın basıń</string>
     <string name="UMessageMusicFiles">Meniń fayllarım</string>
@@ -12347,4 +12342,8 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageFaqFQ_instagram_business">Instagram integraciyası degen ne?</string>
     <string name="UMessageFaqFA_instagram_business">Profilińizge Instagram siltewin qosıw, chatta Instagram postların kóriw hám Instagram Business akkauntıńızdı qosımsha ishinde basqarıw múmkin.</string>
     <string name="UMessageApkFromFiles">Qosımshalar Google Play arqalı ornatıladı. Bul APK-nı ornatıw ushın onı Júklemelerge saqlań hám fayl menedjerinde ashıń.</string>
+    <string name="UMessageMusicPopular">Belgili</string>
+    <string name="UMessageMusicHappy">Quwanıshlı</string>
+    <string name="UMessageMusicChill">Tınısh</string>
+    <string name="UMessageMusicCinematic">Kinematik</string>
 </resources>

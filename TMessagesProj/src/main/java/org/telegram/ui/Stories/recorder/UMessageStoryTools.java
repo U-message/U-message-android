@@ -307,7 +307,7 @@ public class UMessageStoryTools extends FrameLayout {
         updateMusic();
         rebuildEffects();
         // warm the sound list so the sheet opens with it
-        UMessageMusic.load(UMessageMusic.CATEGORY_TREND, (tracks, error) -> {});
+        UMessageMusic.load(UMessageMusic.CATEGORY_POPULAR, (tracks, error) -> {});
     }
 
     /** Original, then the camera effects; face lenses (CameraView.setLens) are off until a face engine is chosen. */
@@ -839,7 +839,28 @@ public class UMessageStoryTools extends FrameLayout {
         if (onOpenSheet != null) {
             onOpenSheet.run();
         }
-        new UMessageMusicSheet(getContext(), null, this::setTrack).show();
+        new UMessageMusicSheet(getContext(), this::openOwnMusic, this::setTrack).show();
+    }
+
+    /** The user's own audio (device files or saved music): their file, their responsibility. */
+    private void openOwnMusic() {
+        new SelectAudioAlert(getContext(), messageObject -> {
+            File file = null;
+            if (!TextUtils.isEmpty(messageObject.messageOwner.attachPath)) {
+                file = new File(messageObject.messageOwner.attachPath);
+            }
+            if (file == null || !file.exists()) {
+                file = org.telegram.messenger.FileLoader.getInstance(messageObject.currentAccount).getPathToMessage(messageObject.messageOwner);
+            }
+            if (file == null || !file.exists()) {
+                return;
+            }
+            final UMessageMusic.Track own = new UMessageMusic.Track();
+            own.title = messageObject.getMusicTitle();
+            own.artist = messageObject.getMusicAuthor();
+            own.preview = file.getAbsolutePath();
+            setTrack(own, file);
+        }, new DarkThemeResourceProvider()).show();
     }
 
     private void setTrack(UMessageMusic.Track track, File file) {

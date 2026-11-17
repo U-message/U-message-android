@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- * Music for stories: trending lists and search from Deezer's public API. Every track comes with a
- * 30 s preview, which is the song's hook (the part that trends), so playback and recording start
- * right there. Tracks Deezer has no preview for here fall back to the iTunes preview of the same song.
+ * Music for stories: a curated library of Pixabay tracks (Pixabay Content License) hosted by our server.
+ * A track is only ever mixed into the user's own story video, never sent or saved as a file on its own
+ * (Pixabay forbids standalone distribution). The user's own music comes from the files picker instead.
  */
 public final class UMessageMusic {
 
@@ -26,17 +26,14 @@ public final class UMessageMusic {
     public static final DispatchQueue queue = new DispatchQueue("umMusic");
     public static final DispatchQueue downloadQueue = new DispatchQueue("umMusicDl");
 
-    public static final int CATEGORY_TREND = 0;
-    public static final int CATEGORY_TIKTOK = 1;
-    public static final int CATEGORY_RUSSIAN = 2;
-    public static final int CATEGORY_WORLD = 3;
+    public static final int CATEGORY_POPULAR = 0;
+    public static final int CATEGORY_HAPPY = 1;
+    public static final int CATEGORY_CHILL = 2;
+    public static final int CATEGORY_CINEMATIC = 3;
     public static final int CATEGORY_COUNT = 4;
 
-    /**
-     * Lists prepared by our server (umessage-premium-server /api/music): this week's Shazam charts (Uzbekistan,
-     * Russia, world) and the newest TikTok hits, each song already with its cover and hook, cached at the edge.
-     */
-    private static final String[] SOURCES = {"trend", "tiktok", "russia", "world"};
+    /** Moods of the library (umessage-premium-server /api/music); "popular" is the whole library in the server's order. */
+    private static final String[] SOURCES = {"popular", "happy", "chill", "cinematic"};
 
     private static final long CACHE_TIME = 30 * 60 * 1000L;
     /** A saved list older than this is refreshed in the background while it is shown. */
@@ -47,8 +44,10 @@ public final class UMessageMusic {
         public String title;
         public String artist;
         public String cover;
-        /** Hook preview url, resolved lazily when Deezer has none. */
+        /** The track's audio url. */
         public volatile String preview;
+        /** Library moods (happy, chill, cinematic...). */
+        public String[] moods = new String[0];
         /** Full song length in seconds. */
         public int duration;
         volatile boolean resolved;
@@ -58,37 +57,66 @@ public final class UMessageMusic {
         void onLoaded(ArrayList<Track> tracks, boolean error);
     }
 
-    private static final ArrayList<Track>[] cache = new ArrayList[CATEGORY_COUNT];
-    private static final long[] cacheTime = new long[CATEGORY_COUNT];
-
     private static android.content.SharedPreferences prefs() {
         return ApplicationLoader.applicationContext.getSharedPreferences("umessage_music", android.content.Context.MODE_PRIVATE);
     }
 
+    private static ArrayList<Track> library;
+    private static long libraryTime;
+
     /**
-     * Shows the list saved from last time right away, then (when it is older than an hour or missing)
+     * Shows the library saved from last time right away, then (when it is older than an hour or missing)
      * the fresh one; the callback can run twice.
      */
     public static void load(int category, Callback callback) {
-        final ArrayList<Track> cached = cache[category];
-        if (cached != null && System.currentTimeMillis() - cacheTime[category] < CACHE_TIME) {
-            callback.onLoaded(cached, false);
+        loadLibrary((all, error) -> callback.onLoaded(filterMood(all, SOURCES[category]), error));
+    }
+
+    /** Title, artist or mood containing the query, within the library. */
+    public static void search(String query, Callback callback) {
+        final String q = query.toLowerCase();
+        loadLibrary((all, error) -> {
+            final ArrayList<Track> found = new ArrayList<>();
+            for (Track t : all) {
+                boolean match = t.title.toLowerCase().contains(q) || t.artist.toLowerCase().contains(q);
+                for (int i = 0; !match && i < t.moods.length; i++) match = t.moods[i].contains(q);
+                if (match) found.add(t);
+            }
+            callback.onLoaded(found, error);
+        });
+    }
+
+    private static ArrayList<Track> filterMood(ArrayList<Track> all, String mood) {
+        if ("popular".equals(mood)) return all;
+        final ArrayList<Track> out = new ArrayList<>();
+        for (Track t : all) {
+            for (String m : t.moods) {
+                if (mood.equals(m)) {
+                    out.add(t);
+                    break;
+                }
+            }
+        }
+        return out;
+    }
+
+    private static void loadLibrary(Callback callback) {
+        if (library != null && System.currentTimeMillis() - libraryTime < CACHE_TIME) {
+            callback.onLoaded(library, false);
             return;
         }
-        final String saved = prefs().getString("list_" + SOURCES[category], null);
-        final long savedTime = prefs().getLong("time_" + SOURCES[category], 0);
+        final String saved = prefs().getString("library", null);
+        final long savedTime = prefs().getLong("library_time", 0);
         boolean shown = false;
         if (saved != null) {
             try {
                 final ArrayList<Track> tracks = parseServer(new JSONObject(saved));
-                if (!tracks.isEmpty()) {
-                    cache[category] = tracks;
-                    cacheTime[category] = savedTime;
-                    callback.onLoaded(tracks, false);
-                    shown = true;
-                    if (System.currentTimeMillis() - savedTime < REFRESH_TIME) {
-                        return;
-                    }
+                library = tracks;
+                libraryTime = savedTime;
+                callback.onLoaded(tracks, false);
+                shown = true;
+                if (System.currentTimeMillis() - savedTime < REFRESH_TIME) {
+                    return;
                 }
             } catch (Exception e) {
                 FileLog.e(e);
@@ -99,7 +127,7 @@ public final class UMessageMusic {
             ArrayList<Track> result = null;
             String body = null;
             try {
-                body = get(UMessagePremiumController.BASE_URL + "/api/music?c=" + SOURCES[category]);
+                body = get(UMessagePremiumController.BASE_URL + "/api/music");
                 result = parseServer(new JSONObject(body));
             } catch (Exception e) {
                 FileLog.e(e);
@@ -107,10 +135,10 @@ public final class UMessageMusic {
             final ArrayList<Track> tracks = result;
             final String json = body;
             AndroidUtilities.runOnUIThread(() -> {
-                if (tracks != null && !tracks.isEmpty()) {
-                    cache[category] = tracks;
-                    cacheTime[category] = System.currentTimeMillis();
-                    prefs().edit().putString("list_" + SOURCES[category], json).putLong("time_" + SOURCES[category], System.currentTimeMillis()).apply();
+                if (tracks != null) {
+                    library = tracks;
+                    libraryTime = System.currentTimeMillis();
+                    prefs().edit().putString("library", json).putLong("library_time", libraryTime).apply();
                     callback.onLoaded(tracks, false);
                 } else if (!alreadyShown) {
                     callback.onLoaded(new ArrayList<>(), true);
@@ -132,70 +160,21 @@ public final class UMessageMusic {
             track.cover = item.optString("cover", null);
             track.duration = item.optInt("duration");
             track.preview = item.optString("preview", null);
-            // the server already picked the hook (Apple's preview when there is one)
-            track.resolved = !TextUtils.isEmpty(track.preview);
-            if (!TextUtils.isEmpty(track.title)) {
+            track.resolved = true;
+            final JSONArray moods = item.optJSONArray("moods");
+            if (moods != null) {
+                track.moods = new String[moods.length()];
+                for (int m = 0; m < moods.length(); m++) track.moods[m] = moods.optString(m).toLowerCase();
+            }
+            if (!TextUtils.isEmpty(track.title) && !TextUtils.isEmpty(track.preview)) {
                 tracks.add(track);
             }
         }
         return tracks;
     }
 
-    public static void search(String query, Callback callback) {
-        queue.postRunnable(() -> {
-            ArrayList<Track> result;
-            boolean error = false;
-            try {
-                result = parseTracks(get("https://api.deezer.com/search?limit=60&q=" + Uri.encode(query)));
-            } catch (Exception e) {
-                FileLog.e(e);
-                result = new ArrayList<>();
-                error = true;
-            }
-            final ArrayList<Track> tracks = result;
-            final boolean failed = error;
-            AndroidUtilities.runOnUIThread(() -> callback.onLoaded(tracks, failed));
-        });
-    }
-
-    /**
-     * Finds the hook; blocking, network. Apple's preview is the part editors picked as the song's hook
-     * (what trends), Deezer's is often just the opening, so Apple comes first and Deezer is the fallback.
-     */
+    /** The track's audio url (from the server, or set by U Music for a recognized song). */
     public static String resolvePreview(Track track) {
-        if (track.resolved) {
-            return track.preview;
-        }
-        try {
-            final JSONObject json = new JSONObject(get("https://itunes.apple.com/search?entity=song&limit=8&term=" + Uri.encode(track.artist + " " + track.title)));
-            final JSONArray results = json.optJSONArray("results");
-            final String title = normalize(track.title);
-            final String artist = normalize(track.artist);
-            String fallback = null;
-            for (int i = 0; results != null && i < results.length(); i++) {
-                final JSONObject song = results.getJSONObject(i);
-                final String url = song.optString("previewUrl", null);
-                if (url == null) {
-                    continue;
-                }
-                final boolean titleMatch = normalize(song.optString("trackName", "")).startsWith(title);
-                final boolean artistMatch = normalize(song.optString("artistName", "")).contains(artist) || artist.contains(normalize(song.optString("artistName", "")));
-                if (titleMatch && artistMatch) {
-                    track.preview = url;
-                    track.resolved = true;
-                    return url;
-                }
-                if (titleMatch && fallback == null) {
-                    fallback = url;
-                }
-            }
-            if (TextUtils.isEmpty(track.preview) && fallback != null) {
-                track.preview = fallback;
-            }
-        } catch (Exception e) {
-            FileLog.e(e);
-        }
-        track.resolved = true;
         return track.preview;
     }
 
@@ -436,35 +415,6 @@ public final class UMessageMusic {
             } catch (Exception ignore) {
             }
         }
-    }
-
-    private static ArrayList<Track> parseTracks(String response) throws Exception {
-        final JSONArray data = new JSONObject(response).optJSONArray("data");
-        final ArrayList<Track> tracks = new ArrayList<>();
-        for (int i = 0; data != null && i < data.length(); i++) {
-            final JSONObject item = data.getJSONObject(i);
-            if (!"track".equals(item.optString("type", "track"))) {
-                continue;
-            }
-            final Track track = new Track();
-            track.id = item.optLong("id");
-            track.title = item.optString("title_short", item.optString("title"));
-            track.duration = item.optInt("duration");
-            track.preview = item.optString("preview", null);
-            if (TextUtils.isEmpty(track.preview)) {
-                track.preview = null;
-            }
-            final JSONObject artist = item.optJSONObject("artist");
-            track.artist = artist != null ? artist.optString("name") : "";
-            final JSONObject album = item.optJSONObject("album");
-            if (album != null) {
-                track.cover = album.optString("cover_medium", null);
-            }
-            if (track.id != 0 && !TextUtils.isEmpty(track.title)) {
-                tracks.add(track);
-            }
-        }
-        return tracks;
     }
 
     private static HttpURLConnection open(String url) throws Exception {

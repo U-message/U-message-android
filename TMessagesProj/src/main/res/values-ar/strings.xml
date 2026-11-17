@@ -1674,13 +1674,8 @@
     <string name="UMessageShazamAgain">استمع مجددًا</string>
     <string name="UMessageMusicTitle">الأصوات</string>
     <string name="UMessageMusicSearch">ابحث عن الأغاني والفنانين</string>
-    <string name="UMessageMusicTrend">الرائج</string>
     <string name="UMessageMusicUzbek">أوزبكية</string>
-    <string name="UMessageMusicTikTok">أغاني تيك توك الرائجة</string>
-    <string name="UMessageMusicRussian">روسية</string>
-    <string name="UMessageMusicWorld">عالمية</string>
     <string name="UMessageMusicUse">استخدام</string>
-    <string name="UMessageMusicHook">المقطع الرائج</string>
     <string name="UMessageMusicEmpty">لم يتم العثور على شيء</string>
     <string name="UMessageMusicError">لا يوجد اتصال. اضغط لإعادة المحاولة</string>
     <string name="UMessageMusicFiles">ملفاتي</string>
@@ -1977,4 +1972,8 @@
     <string name="UMessageChatGuardShare">مشاركة البلاغات</string>
     <string name="UMessageChatGuardShareInfo">إرسال الدردشات التي تبلّغ عنها والدردشات العامة المطابقة لكلمات المشرف المفتاحية إلى خادم U message أيضًا لحماية المستخدمين الآخرين. معطّل افتراضيًا.</string>
     <string name="UMessageApkFromFiles">تُثبَّت التطبيقات من Google Play. لتثبيت ملف APK هذا، احفظه في التنزيلات وافتحه في مدير الملفات.</string>
+    <string name="UMessageMusicPopular">رائج</string>
+    <string name="UMessageMusicHappy">مبهج</string>
+    <string name="UMessageMusicChill">هادئ</string>
+    <string name="UMessageMusicCinematic">سينمائي</string>
 </resources>

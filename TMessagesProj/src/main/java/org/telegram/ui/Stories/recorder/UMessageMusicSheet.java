@@ -61,7 +61,7 @@ public class UMessageMusicSheet extends BottomSheet {
 
     private static final int ACCENT = 0xfffe2c55;
     private static final int[] CATEGORY_NAMES = {
-            R.string.UMessageMusicTrend, R.string.UMessageMusicTikTok, R.string.UMessageMusicRussian, R.string.UMessageMusicWorld
+            R.string.UMessageMusicPopular, R.string.UMessageMusicHappy, R.string.UMessageMusicChill, R.string.UMessageMusicCinematic
     };
 
     private final OnSelected onSelected;
@@ -71,7 +71,7 @@ public class UMessageMusicSheet extends BottomSheet {
     private final RadialProgressView loadingView;
     private final ArrayList<TextView> chips = new ArrayList<>();
     private final ArrayList<UMessageMusic.Track> tracks = new ArrayList<>();
-    private int category = UMessageMusic.CATEGORY_TREND;
+    private int category = UMessageMusic.CATEGORY_POPULAR;
     private String query = "";
     private int requestId;
     private Runnable searchRunnable;
@@ -466,7 +466,8 @@ public class UMessageMusicSheet extends BottomSheet {
             rankView.setText(query.isEmpty() ? String.valueOf(position + 1) : "");
             rankView.setTextColor(query.isEmpty() && position < 3 ? ACCENT : 0x80ffffff);
             titleView.setText(track.title);
-            subtitleView.setText(track.artist + (track.duration > 0 ? " · " + formatDuration(track.duration) : ""));
+            // Pixabay asks for "by [artist] via Pixabay" credit
+            subtitleView.setText(track.artist + " · Pixabay" + (track.duration > 0 ? " · " + formatDuration(track.duration) : ""));
             final android.graphics.Bitmap cached = UMessageMusic.getCachedCover(track.cover);
             coverView.setImageBitmap(cached);
             if (cached == null) {
@@ -483,9 +484,6 @@ public class UMessageMusicSheet extends BottomSheet {
             useButton.setVisibility(playing || downloading ? View.VISIBLE : View.GONE);
             useButton.setText(downloading ? "" : LocaleController.getString(R.string.UMessageMusicUse));
             useProgress.setVisibility(downloading ? View.VISIBLE : View.GONE);
-            if (playing) {
-                subtitleView.setText("🔥 " + LocaleController.getString(R.string.UMessageMusicHook) + " · " + track.artist);
-            }
         }
 
         @Override

@@ -51,13 +51,8 @@
     <string name="UMessageShazamAgain">Yana tinglash</string>
     <string name="UMessageMusicTitle">Musiqalar</string>
     <string name="UMessageMusicSearch">Qo‘shiq yoki ijrochini qidiring</string>
-    <string name="UMessageMusicTrend">Trendda</string>
     <string name="UMessageMusicUzbek">O‘zbekcha</string>
-    <string name="UMessageMusicTikTok">TikTok xitlari</string>
-    <string name="UMessageMusicRussian">Ruscha</string>
-    <string name="UMessageMusicWorld">Dunyo</string>
     <string name="UMessageMusicUse">Tanlash</string>
-    <string name="UMessageMusicHook">trend qismi</string>
     <string name="UMessageMusicEmpty">Hech narsa topilmadi</string>
     <string name="UMessageMusicError">Aloqa yo‘q. Qayta urinish uchun bosing</string>
     <string name="UMessageMusicFiles">Mening fayllarim</string>
@@ -1339,4 +1334,8 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="PrivacyGuardEnrollFinish">Tayyor</string>
     <string name="PrivacyGuardTryAgain">Qayta urinish</string>
     <string name="UMessageApkFromFiles">Ilovalar Google Play orqali o‘rnatiladi. Bu APK’ni o‘rnatish uchun uni Yuklanmalarga saqlang va fayl menejerida oching.</string>
+    <string name="UMessageMusicPopular">Mashhur</string>
+    <string name="UMessageMusicHappy">Quvnoq</string>
+    <string name="UMessageMusicChill">Sokin</string>
+    <string name="UMessageMusicCinematic">Kinematik</string>
 </resources>

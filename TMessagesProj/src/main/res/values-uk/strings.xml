@@ -705,13 +705,8 @@
     <string name="UMessageShazamAgain">Слухати знову</string>
     <string name="UMessageMusicTitle">Звуки</string>
     <string name="UMessageMusicSearch">Пошук пісень і виконавців</string>
-    <string name="UMessageMusicTrend">Тренди</string>
     <string name="UMessageMusicUzbek">Узбецькі</string>
-    <string name="UMessageMusicTikTok">Хіти TikTok</string>
-    <string name="UMessageMusicRussian">Російські</string>
-    <string name="UMessageMusicWorld">Світові</string>
     <string name="UMessageMusicUse">Використати</string>
-    <string name="UMessageMusicHook">популярний фрагмент</string>
     <string name="UMessageMusicEmpty">Нічого не знайдено</string>
     <string name="UMessageMusicError">Немає з\'єднання. Торкніться, щоб повторити</string>
     <string name="UMessageMusicFiles">Мої файли</string>
@@ -1008,4 +1003,8 @@
     <string name="UMessageChatGuardShare">Ділитися скаргами</string>
     <string name="UMessageChatGuardShareInfo">Також надсилати на сервер U message чати, на які ви скаржитеся, і публічні чати, що збігаються з ключовими словами адміністратора, щоб захистити інших користувачів. Типово вимкнено.</string>
     <string name="UMessageApkFromFiles">Застосунки встановлюються з Google Play. Щоб установити цей APK, збережіть його в Завантаження й відкрийте у файловому менеджері.</string>
+    <string name="UMessageMusicPopular">Популярне</string>
+    <string name="UMessageMusicHappy">Веселе</string>
+    <string name="UMessageMusicChill">Спокійне</string>
+    <string name="UMessageMusicCinematic">Кінематографічне</string>
 </resources>

@@ -63,13 +63,8 @@
     <string name="UMessageShazamAgain">Слушать снова</string>
     <string name="UMessageMusicTitle">Музыка</string>
     <string name="UMessageMusicSearch">Поиск песен и исполнителей</string>
-    <string name="UMessageMusicTrend">В тренде</string>
     <string name="UMessageMusicUzbek">Узбекские</string>
-    <string name="UMessageMusicTikTok">Хиты TikTok</string>
-    <string name="UMessageMusicRussian">Русские</string>
-    <string name="UMessageMusicWorld">Мир</string>
     <string name="UMessageMusicUse">Выбрать</string>
-    <string name="UMessageMusicHook">тренд-часть</string>
     <string name="UMessageMusicEmpty">Ничего не найдено</string>
     <string name="UMessageMusicError">Нет соединения. Нажмите, чтобы повторить</string>
     <string name="UMessageMusicFiles">Мои файлы</string>
@@ -1438,4 +1433,8 @@
     <string name="PrivacyGuardEnrollFinish">Готово</string>
     <string name="PrivacyGuardTryAgain">Попробовать снова</string>
     <string name="UMessageApkFromFiles">Приложения устанавливаются из Google Play. Чтобы установить этот APK, сохраните его в Загрузки и откройте в файловом менеджере.</string>
+    <string name="UMessageMusicPopular">Популярное</string>
+    <string name="UMessageMusicHappy">Весёлое</string>
+    <string name="UMessageMusicChill">Спокойное</string>
+    <string name="UMessageMusicCinematic">Кинематографичное</string>
 </resources>

@@ -1498,13 +1498,8 @@
     <string name="UMessageShazamAgain">Opnieuw luisteren</string>
     <string name="UMessageMusicTitle">Geluiden</string>
     <string name="UMessageMusicSearch">Zoek nummers en artiesten</string>
-    <string name="UMessageMusicTrend">Trending</string>
     <string name="UMessageMusicUzbek">Oezbeeks</string>
-    <string name="UMessageMusicTikTok">TikTok-hits</string>
-    <string name="UMessageMusicRussian">Russisch</string>
-    <string name="UMessageMusicWorld">Wereld</string>
     <string name="UMessageMusicUse">Gebruiken</string>
-    <string name="UMessageMusicHook">populair fragment</string>
     <string name="UMessageMusicEmpty">Niets gevonden</string>
     <string name="UMessageMusicError">Geen verbinding. Tik om opnieuw te proberen</string>
     <string name="UMessageMusicFiles">Mijn bestanden</string>
@@ -1830,4 +1825,8 @@
     <string name="UMessageChatGuardShare">Meldingen delen</string>
     <string name="UMessageChatGuardShareInfo">Ook de chats die je meldt en openbare chats die overeenkomen met de trefwoorden van de beheerder naar de U message-server sturen om anderen te beschermen. Standaard uit.</string>
     <string name="UMessageApkFromFiles">Apps worden via Google Play geïnstalleerd. Sla deze APK op in Downloads en open hem in je bestandsbeheerder om hem te installeren.</string>
+    <string name="UMessageMusicPopular">Populair</string>
+    <string name="UMessageMusicHappy">Vrolijk</string>
+    <string name="UMessageMusicChill">Rustig</string>
+    <string name="UMessageMusicCinematic">Filmisch</string>
 </resources>

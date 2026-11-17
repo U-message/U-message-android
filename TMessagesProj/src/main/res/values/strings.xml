@@ -51,13 +51,8 @@
     <string name="UMessageShazamAgain">Listen again</string>
     <string name="UMessageMusicTitle">Sounds</string>
     <string name="UMessageMusicSearch">Search songs and artists</string>
-    <string name="UMessageMusicTrend">Trending</string>
     <string name="UMessageMusicUzbek">Uzbek</string>
-    <string name="UMessageMusicTikTok">TikTok hits</string>
-    <string name="UMessageMusicRussian">Russian</string>
-    <string name="UMessageMusicWorld">World</string>
     <string name="UMessageMusicUse">Use</string>
-    <string name="UMessageMusicHook">trending part</string>
     <string name="UMessageMusicEmpty">Nothing found</string>
     <string name="UMessageMusicError">No connection. Tap to try again</string>
     <string name="UMessageMusicFiles">My files</string>
@@ -12974,4 +12969,8 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageFaqFQ_instagram_business">What is the Instagram integration?</string>
     <string name="UMessageFaqFA_instagram_business">Add your Instagram to your profile, view Instagram posts in chats, and manage an Instagram Business account’s Direct, comments, stats and posting inside the app.</string>
     <string name="UMessageApkFromFiles">Apps are installed from Google Play. To install this APK, save it to Downloads and open it in your file manager.</string>
+    <string name="UMessageMusicPopular">Popular</string>
+    <string name="UMessageMusicHappy">Happy</string>
+    <string name="UMessageMusicChill">Chill</string>
+    <string name="UMessageMusicCinematic">Cinematic</string>
 </resources>

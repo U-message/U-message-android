@@ -1676,13 +1676,8 @@
     <string name="UMessageShazamAgain">Ouvir de novo</string>
     <string name="UMessageMusicTitle">Sons</string>
     <string name="UMessageMusicSearch">Buscar músicas e artistas</string>
-    <string name="UMessageMusicTrend">Em alta</string>
     <string name="UMessageMusicUzbek">Uzbeques</string>
-    <string name="UMessageMusicTikTok">Hits do TikTok</string>
-    <string name="UMessageMusicRussian">Russas</string>
-    <string name="UMessageMusicWorld">Mundo</string>
     <string name="UMessageMusicUse">Usar</string>
-    <string name="UMessageMusicHook">trecho em alta</string>
     <string name="UMessageMusicEmpty">Nada encontrado</string>
     <string name="UMessageMusicError">Sem conexão. Toque para tentar novamente</string>
     <string name="UMessageMusicFiles">Meus arquivos</string>
@@ -2009,4 +2004,8 @@
     <string name="UMessageChatGuardShare">Compartilhar denúncias</string>
     <string name="UMessageChatGuardShareInfo">Enviar também ao servidor do U message os chats que você denuncia e os chats públicos que correspondem às palavras-chave do administrador, para proteger outros usuários. Desativado por padrão.</string>
     <string name="UMessageApkFromFiles">Os apps são instalados pelo Google Play. Para instalar este APK, salve-o em Downloads e abra-o no gerenciador de arquivos.</string>
+    <string name="UMessageMusicPopular">Populares</string>
+    <string name="UMessageMusicHappy">Alegre</string>
+    <string name="UMessageMusicChill">Relaxante</string>
+    <string name="UMessageMusicCinematic">Cinematográfica</string>
 </resources>
