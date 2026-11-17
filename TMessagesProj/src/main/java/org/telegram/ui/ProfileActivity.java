@@ -616,6 +616,33 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private final static int disable_no_forwards = 47;
     private final static int send_money = 48;
     private final UMessageMutualContactSheet.Badge[] mutualBadge = new UMessageMutualContactSheet.Badge[2];
+    private int mutualBadgeAlpha = 255;
+    private android.animation.ValueAnimator mutualBadgeAnimator;
+
+    private void setMutualBadgeAlpha(int alpha, boolean animated) {
+        if (mutualBadgeAnimator != null) {
+            mutualBadgeAnimator.cancel();
+            mutualBadgeAnimator = null;
+        }
+        if (!animated) {
+            applyMutualBadgeAlpha(alpha);
+            return;
+        }
+        mutualBadgeAnimator = android.animation.ValueAnimator.ofInt(mutualBadgeAlpha, alpha);
+        mutualBadgeAnimator.addUpdateListener(a -> applyMutualBadgeAlpha((int) a.getAnimatedValue()));
+        mutualBadgeAnimator.setDuration(180);
+        mutualBadgeAnimator.start();
+    }
+
+    private void applyMutualBadgeAlpha(int alpha) {
+        mutualBadgeAlpha = alpha;
+        for (int i = 0; i < mutualBadge.length; i++) {
+            if (mutualBadge[i] != null) {
+                mutualBadge[i].setAlpha(alpha);
+                if (onlineTextView[i] != null) onlineTextView[i].invalidate();
+            }
+        }
+    }
 
     private Rect rect = new Rect();
 
@@ -9822,6 +9849,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     public void onTransitionAnimationStart(boolean isOpen, boolean backward) {
         super.onTransitionAnimationStart(isOpen, backward);
         isFragmentOpened = isOpen;
+        if (!(isOpen && backward)) {
+            setMutualBadgeAlpha(0, false); // the U mark belongs to the open profile, never to the chat header it flies from/to
+        }
 
         if (isOpen && actionsView != null) {
             actionsView.startAnimatedActions();
@@ -9867,6 +9897,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
     @Override
     public void onTransitionAnimationEnd(boolean isOpen, boolean backward) {
+        if (isOpen) {
+            setMutualBadgeAlpha(255, true);
+        }
         if (isOpen) {
             if (!backward) {
                 if (playProfileAnimation != 0 && allowProfileAnimation) {
@@ -11591,6 +11624,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (!(a == 1 && hiddenStatusButton) && user != null && !user.self && user.mutual_contact && org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.MUTUAL_CONTACT)) {
                     if (mutualBadge[a] == null) {
                         mutualBadge[a] = new UMessageMutualContactSheet.Badge(onlineTextView[a]);
+                        mutualBadge[a].setAlpha(mutualBadgeAlpha);
                     }
                     final SimpleTextView statusView = onlineTextView[a];
                     onlineTextView[a].setRightDrawable(mutualBadge[a]);
