@@ -72,7 +72,7 @@ public class UMessageShazamActivity extends BaseFragment {
     private LogoParticlesView logoView;
     private TextView statusTitle, statusSub;
     private LinearLayout resultView;
-    private TextView titleView, artistView, sendButton, searchButton, againButton;
+    private TextView titleView, artistView, sendButton, againButton;
 
     private final ExecutorService recognizer = Executors.newSingleThreadExecutor();
     /** Bumped to cancel the running listen; threads drop their results once it no longer matches. */
@@ -195,16 +195,15 @@ public class UMessageShazamActivity extends BaseFragment {
 
         resultView.addView(new View(context), LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 0, 1f));
 
-        sendButton = createButton(context, LocaleController.getString(R.string.UMessageShazamSend), true);
-        sendButton.setOnClickListener(v -> pickChatAndSend());
-        resultView.addView(sendButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 52));
-
         if (org.telegram.messenger.ApplicationLoader.isPlayStoreBuild()) {
-            // Play: no song files; the user looks the song up in Telegram's own music search
-            searchButton = createButton(context, LocaleController.getString(R.string.UMessageShazamSearchTelegram), false);
-            searchButton.setOnClickListener(v -> searchInTelegram());
-            resultView.addView(searchButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48, 0, 10, 0, 0));
+            // Play policy: no song files and no links; the song's name can be copied
+            sendButton = createButton(context, LocaleController.getString(R.string.Copy), true);
+            sendButton.setOnClickListener(v -> copySongName());
+        } else {
+            sendButton = createButton(context, LocaleController.getString(R.string.UMessageShazamSend), true);
+            sendButton.setOnClickListener(v -> pickChatAndSend());
         }
+        resultView.addView(sendButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 52));
 
         againButton = createButton(context, LocaleController.getString(R.string.UMessageShazamAgain), false);
         againButton.setOnClickListener(v -> startListening());
@@ -505,16 +504,16 @@ public class UMessageShazamActivity extends BaseFragment {
         org.telegram.messenger.NotificationCenter.getInstance(account).postNotificationName(org.telegram.messenger.NotificationCenter.messagesDeleted, ids, channelId, false);
     }
 
-    /** Telegram's global search on its Music tab, filled with the song: results come from the user's chats and public channels. */
-    private void searchInTelegram() {
+    /** "Title — Artist" to the clipboard (Play build). */
+    private void copySongName() {
         final Prepared song = prepared;
         if (song == null) {
             return;
         }
-        final DialogsActivity search = new DialogsActivity(null);
-        search.setInitialSearchString(song.track.query());
-        search.setInitialSearchType(org.telegram.ui.Adapters.FiltersView.FILTER_TYPE_MUSIC);
-        presentFragment(search);
+        final String text = TextUtils.isEmpty(song.track.artist) ? song.track.title : song.track.title + " — " + song.track.artist;
+        if (AndroidUtilities.addToClipboard(text)) {
+            org.telegram.ui.Components.BulletinFactory.of(this).createCopyBulletin(LocaleController.getString(R.string.TextCopied)).show();
+        }
     }
 
     private void openLink(String url) {
@@ -684,7 +683,6 @@ public class UMessageShazamActivity extends BaseFragment {
         rise(titleView, 1000);
         rise(artistView, 1100);
         rise(sendButton, 1200);
-        if (searchButton != null) rise(searchButton, 1200);
         rise(againButton, 1200);
         loadVideo(result);
     }
