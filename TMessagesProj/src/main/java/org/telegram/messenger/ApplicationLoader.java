@@ -318,12 +318,12 @@ public class ApplicationLoader extends Application {
         }
 
         super.onCreate();
-        UMessageErrorReporter.install();
 
         // The widget engine's isolated process has no files, network or accounts: none of the client starts there.
         if (org.telegram.utils.twidget.WidgetEngineService.isEngineProcess()) {
             return;
         }
+        UMessageErrorReporter.install(); // U message: after the engine check, it needs the client's display and files
 
         // AndroidUtilities must be initialized before FileLog
         final String helloWorld = AndroidUtilities.getHelloWorld();
