@@ -34,6 +34,15 @@ public class UMessageNsfwHiddenDrawable extends Drawable {
     private final Drawable icon;
     private final String title, text;
     private boolean checking;
+    private android.graphics.Bitmap blurSource;
+    private final android.graphics.RectF blurRect = new android.graphics.RectF();
+    private final Paint blurPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
+    private final Paint dimPaint = new Paint();
+
+    /** Already-blurred tiny preview to show behind "Checking…"; null keeps the plain surface. */
+    public void setBlurSource(android.graphics.Bitmap bitmap) {
+        blurSource = bitmap;
+    }
 
     public UMessageNsfwHiddenDrawable(Context context, String title, String text) {
         this.title = title;
@@ -45,6 +54,7 @@ public class UMessageNsfwHiddenDrawable extends Drawable {
         titlePaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setColor(0xb3ffffff);
         textPaint.setTextSize(dp(14));
+        dimPaint.setColor(0x73000000);
         icon = ContextCompat.getDrawable(context, R.drawable.menu_hide_gift).mutate();
         icon.setColorFilter(new PorterDuffColorFilter(0xffffffff, PorterDuff.Mode.SRC_IN));
     }
@@ -52,39 +62,72 @@ public class UMessageNsfwHiddenDrawable extends Drawable {
     @Override
     public void draw(@NonNull Canvas canvas) {
         Rect b = getBounds();
-        canvas.drawRect(b, background);
+        if (checking && blurSource != null && !blurSource.isRecycled()) {
+            // a heavily blurred tiny preview (the stripped thumbnail): shapes and colors only, no detail
+            float scale = Math.max(b.width() / (float) blurSource.getWidth(), b.height() / (float) blurSource.getHeight());
+            float bw = blurSource.getWidth() * scale, bh = blurSource.getHeight() * scale;
+            blurRect.set(b.exactCenterX() - bw / 2f, b.exactCenterY() - bh / 2f, b.exactCenterX() + bw / 2f, b.exactCenterY() + bh / 2f);
+            canvas.drawBitmap(blurSource, null, blurRect, blurPaint);
+            canvas.drawRect(b, dimPaint);
+        } else {
+            canvas.drawRect(b, background);
+        }
         if (checking) {
-            // An opaque neutral loading surface, never a blurred copy of unchecked pixels.
+            // the cell draws its own progress button in the middle; the label sits centered below it
             float cx = b.exactCenterX(), cy = b.exactCenterY();
-            Paint ring = background;
-            int color = ring.getColor();
-            ring.setColor(0xff89939e);
-            ring.setStyle(Paint.Style.STROKE);
-            ring.setStrokeWidth(dp(2));
-            float phase = android.os.SystemClock.elapsedRealtime() % 1200 / 1200f * 360;
-            canvas.drawArc(cx - dp(10), cy - dp(22), cx + dp(10), cy - dp(2), phase, 250, false, ring);
-            if (getCallback() != null) invalidateSelf();
-            ring.setStyle(Paint.Style.FILL);
-            ring.setColor(color);
             textPaint.setTextSize(dp(b.width() < dp(170) ? 11 : 13));
-            String label = android.text.TextUtils.ellipsize(text, textPaint,
-                    Math.max(1, b.width() - dp(20)), android.text.TextUtils.TruncateAt.END).toString();
-            canvas.drawText(label, cx, cy + dp(20), textPaint);
+            int width = Math.max(1, b.width() - dp(16));
+            StaticLayout label = StaticLayoutEx.createStaticLayout(text, textPaint, width, Layout.Alignment.ALIGN_CENTER,
+                    1f, 0f, false, android.text.TextUtils.TruncateAt.END, width, 2);
+            float top = cy + dp(30);
+            if (top + label.getHeight() > b.bottom - dp(4)) {
+                top = Math.max(b.top + dp(4), b.bottom - dp(4) - label.getHeight());
+            }
+            canvas.save();
+            canvas.translate(cx - width / 2f, top);
+            label.draw(canvas);
+            canvas.restore();
             return;
         }
-        int width = Math.max(1, b.width() - dp(64));
-        StaticLayout body = new StaticLayout(text, textPaint, width, Layout.Alignment.ALIGN_CENTER, 1.1f, 0f, false);
-        int iconSize = dp(44);
-        float total = iconSize + dp(14) + titlePaint.getTextSize() + dp(8) + body.getHeight();
+        // Fits any cell: album tiles can be narrow, so sizes shrink, the title is cut with "…",
+        // the description wraps to a few lines and is dropped (then the title) when there is no room.
+        int w = b.width(), h = b.height();
+        boolean small = w < dp(220) || h < dp(220);
+        int pad = small ? dp(12) : dp(32);
+        int width = Math.max(1, w - pad * 2);
+        int iconSize = small ? dp(30) : dp(44);
+        titlePaint.setTextSize(dp(small ? 14 : 18));
+        textPaint.setTextSize(dp(small ? 12 : 14));
+        String shownTitle = android.text.TextUtils.ellipsize(title, titlePaint, width, android.text.TextUtils.TruncateAt.END).toString();
+        float titleH = titlePaint.getTextSize();
+        int gap1 = small ? dp(8) : dp(14), gap2 = small ? dp(4) : dp(8);
+        StaticLayout body = width >= dp(110) ? StaticLayoutEx.createStaticLayout(text, textPaint, width, Layout.Alignment.ALIGN_CENTER,
+                1.1f, 0f, false, android.text.TextUtils.TruncateAt.END, width, small ? 3 : 4) : null;
+        boolean showTitle = w >= dp(90);
+        float total = iconSize + (showTitle ? gap1 + titleH : 0) + (body != null ? gap2 + body.getHeight() : 0);
+        if (body != null && total > h - pad) {
+            total -= gap2 + body.getHeight();
+            body = null;
+        }
+        if (showTitle && total > h - pad) {
+            total -= gap1 + titleH;
+            showTitle = false;
+        }
+        canvas.save();
+        canvas.clipRect(b);
         float cx = b.exactCenterX(), y = b.exactCenterY() - total / 2f;
         icon.setBounds((int) (cx - iconSize / 2f), (int) y, (int) (cx + iconSize / 2f), (int) y + iconSize);
         icon.draw(canvas);
-        y += iconSize + dp(14) + titlePaint.getTextSize();
-        canvas.drawText(title, cx, y, titlePaint);
-        y += dp(8);
-        canvas.save();
-        canvas.translate(cx - width / 2f, y);
-        body.draw(canvas);
+        y += iconSize;
+        if (showTitle) {
+            y += gap1 + titleH;
+            canvas.drawText(shownTitle, cx, y - titlePaint.descent(), titlePaint);
+        }
+        if (body != null) {
+            y += gap2;
+            canvas.translate(cx - width / 2f, y);
+            body.draw(canvas);
+        }
         canvas.restore();
     }
 

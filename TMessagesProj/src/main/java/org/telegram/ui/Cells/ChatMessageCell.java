@@ -29499,6 +29499,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     private org.telegram.ui.Components.UMessageNsfwHiddenDrawable nsfwPlaceholder;
     private boolean nsfwPlaceholderUnavailable;
     private long nsfwLastVisibleCheck;
+    private int nsfwBlurMessageId;
+    private long nsfwBlurDialogId;
+    private android.graphics.Bitmap nsfwBlurBitmap;
 
     private void drawNsfwPlaceholder(Canvas canvas) {
         boolean unavailable = UMessageNsfwFilter.isCheckUnavailable(currentMessageObject);
@@ -29508,6 +29511,19 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     ? org.telegram.ui.Components.UMessageNsfwHiddenDrawable.unavailable(getContext())
                     : org.telegram.ui.Components.UMessageNsfwHiddenDrawable.checking(getContext());
         }
+        if (nsfwBlurMessageId != currentMessageObject.getId() || nsfwBlurDialogId != currentMessageObject.getDialogId()) {
+            nsfwBlurMessageId = currentMessageObject.getId();
+            nsfwBlurDialogId = currentMessageObject.getDialogId();
+            android.graphics.Bitmap blur = null;
+            try {
+                currentMessageObject.createStrippedThumb();
+                if (currentMessageObject.strippedThumb != null && currentMessageObject.strippedThumb.getBitmap() != null) {
+                    blur = Utilities.stackBlurBitmapMax(currentMessageObject.strippedThumb.getBitmap());
+                }
+            } catch (Throwable ignore) {}
+            nsfwBlurBitmap = blur;
+        }
+        nsfwPlaceholder.setBlurSource(nsfwBlurBitmap);
         nsfwPlaceholder.setBounds((int) photoImage.getImageX(), (int) photoImage.getImageY(),
                 (int) photoImage.getImageX2(), (int) photoImage.getImageY2());
         canvas.save();
