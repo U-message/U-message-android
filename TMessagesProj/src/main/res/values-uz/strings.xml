@@ -33,7 +33,7 @@
     <string name="UMessageAdOpen">Ochish</string>
     <string name="UMessageAdLabel">Reklama</string>
     <string name="UMessageUseProxy">U Message proksisidan foydalanish</string>
-    <string name="UMessageUseProxyInfo">U Message proksisi orqali ulanish. Tarmog‘ingizda Telegram ulanmasa, yoqing.</string>
+    <string name="UMessageUseProxyInfo">U Message proksisi orqali ulanish. Tarmog‘ingizda U message ulanmasa, yoqing.</string>
     <string name="UMessageTemplates">Tezkor javoblar</string>
     <string name="UMessageShazamTap">Qo‘shiqni aniqlash uchun bosing</string>
     <string name="UMessageShazamListening">Tinglanmoqda… Telefonni musiqaga yaqinroq tuting</string>
@@ -111,7 +111,7 @@
     <string name="UMessageSectionSecurityInfo">Zararli dastur, firibgarlik va spamdan himoya</string>
     <string name="UMessageAccountAutoSwitch">PIN orqali akkaunt almashtirish</string>
     <string name="UMessageAccountAutoSwitchInfo">Qulf ekranida qaysi PIN terilsa, unga biriktirilgan akkaunt avtomatik ochiladi. Birinchi PIN ilova qulf kodi sifatida ham ishlaydi.</string>
-    <string name="UMessageAccountAutoSwitchNeedTwo">Bu funksiyani sozlash uchun kamida ikkita Telegram akkaunt qoʻshing.</string>
+    <string name="UMessageAccountAutoSwitchNeedTwo">Bu funksiyani sozlash uchun kamida ikkita U message akkaunt qoʻshing.</string>
     <string name="UMessageAccountAutoSwitchAccount">%1$d-akkaunt: %2$s</string>
     <string name="UMessageAccountAutoSwitchPinHint">4 xonali PIN</string>
     <string name="UMessageAccountAutoSwitchFourDigits">Aynan 4 ta raqam kiriting</string>
@@ -257,7 +257,7 @@
     <string name="UMessageMakeupCoral">Marjon jilosi</string>
     <string name="UMessageMakeupClassic">Klassik qizil</string>
     <string name="UMessageMakeupBerry">Rezavor</string>
-    <string name="UMessageSmsUnavailable">Telegram bu raqamga SMS yubormadi. Kodni boshqa qurilmangizdagi Telegram ilovasidan oling.</string>
+    <string name="UMessageSmsUnavailable">U message bu raqamga SMS yubormadi. Kodni boshqa qurilmangizdagi U message ilovasidan oling.</string>
     <string name="UMessageRoundBeauty">Beauty</string>
     <string name="UMessageReadyNaturalGlow">Tabiiy nur</string>
     <string name="UMessageReadySoftPink">Yumshoq pushti</string>

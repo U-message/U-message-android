@@ -148,7 +148,7 @@
     <string name="UMessageFrontCameraInfo">يسجّل رسائل الفيديو بالكاميرا الأمامية. عند الإيقاف: بالكاميرا الخلفية.</string>
     <string name="UMessageRoundEffects">تأثيرات رسائل الفيديو</string>
     <string name="UMessageRoundEffectsInfo">اختر تأثيرًا واضبط شدته. سيتم حفظ اختيارك لرسائل الفيديو القادمة.</string>
-    <string name="UMessageSmsUnavailable">لم يرسل تيليجرام رسالة SMS إلى هذا الرقم. خذ الرمز من تطبيق تيليجرام على جهازك الآخر.</string>
+    <string name="UMessageSmsUnavailable">لم يرسل U message رسالة SMS إلى هذا الرقم. خذ الرمز من تطبيق U message على جهازك الآخر.</string>
     <string name="UMessageRoundBeauty">تجميل</string>
     <string name="UMessageRoundFilter">فلتر</string>
     <string name="UMessageCameraUnavailable">الكاميرا غير متاحة</string>
@@ -192,21 +192,21 @@
     <string name="WrongNumberFormat">صيغة غير صحيحة</string>
     <string name="ShortNumberInfo">الرقم الذي أدخلته قصير جدًا لـ **%1$s**:\n\n**%2$s**\n\nيرجى إدخال الرقم الصحيح مسبوقًا بمفتاح الدولة.</string>
     <string name="EditNumber">تعديل الرقم</string>
-    <string name="DidNotGetTheCodeInfo">إذا لم يصلك الرمز برسالة نصية SMS أو اتصال فيرجى التحقق من **إعدادات البيانات الخلوية** ورقم الهاتف:\n\n**%1$s**\n\nخياراتك المتبقية هي إما تجربة رقم آخر أو التواصل مع دعم تيليجرام. يمكنك الضغط على **مساعدة** لإرسال التفاصيل الفنية إلينا لنتمكن من التعرف على المشكلة.</string>
+    <string name="DidNotGetTheCodeInfo">إذا لم يصلك الرمز برسالة نصية SMS أو اتصال فيرجى التحقق من **إعدادات البيانات الخلوية** ورقم الهاتف:\n\n**%1$s**\n\nخياراتك المتبقية هي إما تجربة رقم آخر أو التواصل مع دعم U message. يمكنك الضغط على **مساعدة** لإرسال التفاصيل الفنية إلينا لنتمكن من التعرف على المشكلة.</string>
     <string name="DidNotGetTheCodeHelpButton">مساعدة</string>
     <string name="DidNotGetTheCodeEditNumberButton">تعديل الرقم</string>
     <!--code enter view-->
     <string name="YourCode">التحقق من الرقم</string>
     <string name="SentSmsCode">قمنا بإرسال رسالة SMS نصية تحتوي على رمز التفعيل لرقمك **%1$s**.</string>
-    <string name="SentAppCode">أرسلنا الرمز إلى تطبيق **تيليجرام** على جهازك الآخر.</string>
-    <string name="SentAppCodeWithPhone">لقد أرسلنا الرمز إلى **تطبيق تيليجرام** للرقم %1$s على جهازك الآخر.</string>
-    <string name="SentAppCodeTitle">يرجى تفقُّد رسائل تيليجرام</string>
+    <string name="SentAppCode">أرسلنا الرمز إلى تطبيق **U message** على جهازك الآخر.</string>
+    <string name="SentAppCodeWithPhone">لقد أرسلنا الرمز إلى **تطبيق U message** للرقم %1$s على جهازك الآخر.</string>
+    <string name="SentAppCodeTitle">يرجى تفقُّد رسائل U message</string>
     <string name="SentFragmentCode">يمكنك الحصول على الرمز لـ %1$s في قسم Anonymous Numbers على Fragment.</string>
     <string name="SentSmsCodeTitle">أدخل الرمز</string>
     <string name="OpenFragment">فتح Fragment</string>
-    <string name="SentCallCode">يتم الاتصال على رقمك **%1$s**.\n\nلا حاجة للرد، سيقوم تليجرام بعملية التفعيل تلقائيًا.</string>
+    <string name="SentCallCode">يتم الاتصال على رقمك **%1$s**.\n\nلا حاجة للرد، سيقوم U message بعملية التفعيل تلقائيًا.</string>
     <string name="SentCallOnly">يتم الاتصال برقمك **%1$s** لإملاء رمز التفعيل.</string>
-    <string name="CallText">سيتصل بك تيليجرام بعد %2$02d:%1$d</string>
+    <string name="CallText">سيتصل بك U message بعد %2$02d:%1$d</string>
     <string name="SmsText">سنرسل لك رسالة نصيّة SMS بعد %1$d:%2$02d</string>
     <string name="Calling">يتم الاتصال بك...</string>
     <string name="SendingSms">يتم إرسال رسالة SMS قصيرة...</string>
@@ -217,7 +217,7 @@
     <string name="DidNotGetTheCodeSms">إرسال الرمز برسالة نصية SMS</string>
     <string name="DidNotGetTheCodeFragment">الحصول على الرمز عبر Fragment</string>
     <string name="CancelAccountReset">إلغاء حذف الحساب</string>
-    <string name="CancelAccountResetInfo2">شخص ما لديه حق الوصول إلى **%1$s** طلب حذف حسابك في تيليجرام وإعادة تعيين كلمة مرور التحقق بخطوتين.\n\n إن لم يكن أنت؛ فيرجى إدخال الرمز الذي أرسلناه إليك للتو عبر الرسائل النصية SMS.\nيمكنك أيضًا إلغاء حذف الحساب عن طريق *تغيير رقم هاتفك*.</string>
+    <string name="CancelAccountResetInfo2">شخص ما لديه حق الوصول إلى **%1$s** طلب حذف حسابك في U message وإعادة تعيين كلمة مرور التحقق بخطوتين.\n\n إن لم يكن أنت؛ فيرجى إدخال الرمز الذي أرسلناه إليك للتو عبر الرسائل النصية SMS.\nيمكنك أيضًا إلغاء حذف الحساب عن طريق *تغيير رقم هاتفك*.</string>
     <string name="ResetAccount">حذف الحساب</string>
     <string name="ResetAccountInfo">بما أن الحساب %1$s نشط ومحمي بكلمة مرور، سيتم حذفه بعد أسبوع واحد. هذا التأخير ضروري لأغراض أمنية.\n\nيمكنك إلغاء هذه العملية في أي وقت.</string>
     <string name="ResetAccountStatus">ستتمكن من حذف حسابك بعد:</string>
@@ -225,7 +225,7 @@
     <string name="CancelLinkExpired">رابط غير صحيح أو منتهي الصلاحية.</string>
     <string name="CancelLinkSuccessTitle">تم!</string>
     <string name="CancelLinkSuccess">تم إلغاء عملية حذف حسابك %1$s.\nيمكنك الآن إغلاق هذه النافذة.</string>
-    <string name="OtherLoginCode">رمز الدخول هو **%1$s**. قم بإدخاله في تطبيق تيليجرام الذي تحاول تسجيل الدخول منه.\n\nلا تعطِ هذا الرمز لأي شخص كان.</string>
+    <string name="OtherLoginCode">رمز الدخول هو **%1$s**. قم بإدخاله في تطبيق U message الذي تحاول تسجيل الدخول منه.\n\nلا تعطِ هذا الرمز لأي شخص كان.</string>
     <string name="SmsAvailableIn">يمكنك طلب رسالة نصية SMS بعد %1$d:%2$02d</string>
     <string name="ResendSmsAvailableIn">يمكنك طلب رسالة نصية جديدة بعد %1$d:%2$02d</string>
     <string name="RequestSmsButton">الحصول على الرمز برسالة نصية SMS</string>
@@ -338,15 +338,15 @@
     <string name="NotificationGroupKickMember">%1$s أزال %3$s من المجموعة %2$s</string>
     <string name="NotificationGroupKickYou">أزالك %1$s من مجموعة %2$s</string>
     <string name="NotificationGroupLeftMember">غادر %1$s مجموعة %2$s</string>
-    <string name="NotificationContactJoined">انضم %1$s لتيليجرام!</string>
+    <string name="NotificationContactJoined">انضم %1$s لU message!</string>
     <string name="NotificationUnrecognizedDevice">%1$s،\nلاحظنا تسجيل دخول إلى حسابك من جهاز جديد في: %2$s\n\nالجهاز: %3$s\nالموقع: %4$s\n\nإن لم يكن أنت من قام بتسجيل الدخول؛ فيمكنك الذهاب إلى الإعدادات &gt; الأجهزة وإنهاء تلك الجلسة.\n\nإن كنت تعتقد أن شخصًا ما قام بتسجيل الدخول دون إذنك؛ فيمكنك تفعيل التحقق بخطوتين في إعدادات الخصوصية والأمان.\n\nتحياتنا،\nفريق تيليجرام</string>
     <string name="NotificationContactNewPhoto">حدّثَ %1$s صورته الشخصية</string>
     <string name="NotificationInvitedToGroupByLink">%1$s انضم للمجموعة %2$s عبر رابط دعوة</string>
     <string name="NotificationGroupFew">أرسل %1$s %3$s لمجموعة %2$s</string>
     <string name="NotificationGroupAlbum">أرسل %1$s حُزمة وسائط لمجموعة %2$s</string>
     <string name="NotificationGroupForwardedFew">أعاد %1$s تحويل %3$s لمجموعة %2$s</string>
-    <string name="NotificationHiddenName">تيليجرام</string>
-    <string name="NotificationHiddenChatName">تيليجرام</string>
+    <string name="NotificationHiddenName">U message</string>
+    <string name="NotificationHiddenChatName">U message</string>
     <string name="NotificationHiddenChatUserName">مستخدم</string>
     <string name="NotificationHiddenMessage">رسالة جديدة</string>
     <string name="Reply">رد</string>
@@ -410,7 +410,7 @@
     <string name="NotificationActionPinnedGeoLiveUser">ثبّت %1$s موقعًا مباشرًا</string>
     <string name="NotificationActionPinnedGifUser">ثبّت %1$s صورة متحركة</string>
     <string name="NotificationActionPinnedMusicUser">ثبّت %1$s ملفًا صوتيًا</string>
-    <string name="SecretChatName">تيليجرام</string>
+    <string name="SecretChatName">U message</string>
     <!--usernames-->
     <string name="Username">اسم المستخدم</string>
     <string name="UsernameAlso">أيضًا %1$s</string>
@@ -591,7 +591,7 @@
     <string name="NotificationsService">التشغيل المستمر في الخلفية</string>
     <string name="NotificationsServiceInfo">إعادة تشغيل التطبيق عند إيقافه. قم بالتفعيل لضمان ظهور الإشعارات.</string>
     <string name="NotificationsServiceConnection">الاتصال في الخلفية</string>
-    <string name="NotificationsServiceConnectionInfo">البقاء على اتصال طفيف مع تيليجرام في الخلفية لضمان ظهور الإشعارات.</string>
+    <string name="NotificationsServiceConnectionInfo">البقاء على اتصال طفيف مع U message في الخلفية لضمان ظهور الإشعارات.</string>
     <string name="SortBy">ترتيب حسب</string>
     <string name="ImportContacts">استيراد جهات الاتصال</string>
     <string name="SortFirstName">الاسم الأول</string>
@@ -800,7 +800,7 @@
     <string name="ClearSelectedCache">مسح المُحددة</string>
     <string name="ClearCacheInfo">"تفريغ بعض المساحة من جهازك؛ ستبقى وسائطك في السحابة. "</string>
     <string name="ClearingCache">يتم مسح التخزين المؤقت</string>
-    <string name="ClearingCacheDescription">يرجى إبقاء النافذة مفتوحة أثناء قيام تيليجرام بتنظيف تخزينك المؤقت.</string>
+    <string name="ClearingCacheDescription">يرجى إبقاء النافذة مفتوحة أثناء قيام U message بتنظيف تخزينك المؤقت.</string>
     <string name="ChangePhoneNumber">تغيير رقم الهاتف</string>
     <string name="ChangePhoneNumberInfo">نقلُ حسابك مع ما يحويه من محادثات ووسائطَ لرقمٍ آخر.</string>
     <string name="ChangePhoneNumberSuccessWithPhone">تم تغيير رقم هاتفك بنجاح إلى %1$s.</string>
@@ -828,8 +828,8 @@
     <string name="AuthAnotherClientInfo1">قم بتنزيل تيليجرام على حاسوبك من *desktop.telegram.org*.</string>
     <string name="AuthAnotherClientInfo2">يرجى فتح تيليجرام على سطح المكتب للحصول على رمز QR.</string>
     <string name="AuthAnotherClientInfo3">امسح رمز الـ QR لربط حسابك.</string>
-    <string name="AuthAnotherClientUrl">يمكن استخدام هذا الرمز للسماح لشخص ما بتسجيل الدخول إلى حسابك في تيليجرام.\n\nلتأكيد عملية تسجيل الدخول؛ يرجى الذهاب إلى الإعدادات &gt; الأجهزة &gt; مسح QR وامسح الرمز.</string>
-    <string name="QRCodePermissionNoCameraWithHint">يحتاج **تيليجرام** الوصول للكاميرا ليتمكن من مسح رموز QR. يرجى الذهاب إلى الإعدادات &gt; الأذونات &gt; تشغيل **الكاميرا**.</string>
+    <string name="AuthAnotherClientUrl">يمكن استخدام هذا الرمز للسماح لشخص ما بتسجيل الدخول إلى حسابك في U message.\n\nلتأكيد عملية تسجيل الدخول؛ يرجى الذهاب إلى الإعدادات &gt; الأجهزة &gt; مسح QR وامسح الرمز.</string>
+    <string name="QRCodePermissionNoCameraWithHint">يحتاج **U message** الوصول للكاميرا ليتمكن من مسح رموز QR. يرجى الذهاب إلى الإعدادات &gt; الأذونات &gt; تشغيل **الكاميرا**.</string>
     <string name="SetProfilePhoto">"تعيين صورة للملف الشخصي "</string>
     <string name="AppUpdate">تحديث تيليجرام</string>
     <string name="AppUpdateVersionAndSize">الإصدار %1$s • %2$s</string>
@@ -872,23 +872,23 @@
     <string name="CheckPhoneNumberYes">نعم</string>
     <string name="CheckPhoneNumberNo">لا</string>
     <!--permissions-->
-    <string name="PermissionStorageWithHint">يحتاج تيليجرام الوصول إلى التخزين للتمكّن من إرسال وحفظ: الصور، الفيديو، الوسائط والمستندات. يرجى تمكين **الملفات والوسائط** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoAudioWithHint">يحتاج تيليجرام الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل الصوتية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoAudioVideoWithHint">يحتاج تيليجرام الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل الصوتية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoCameraWithHint">يحتاج تيليجرام الوصول إلى الكاميرا لتتمكنوا من التقاط الصور والمقاطع المرئية. يرجى تمكين **الكاميرا** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoCameraMicVideo">يحتاج تيليجرام الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل المرئية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoLocation">يحتاج تيليجرام إلى السماح له بتحديد موقعك لتتمكن من مشاركته مع أصدقائك.</string>
-    <string name="PermissionNoLocationStory">يحتاج تيليجرام الوصول إلى موقعك الجغرافي للتمكن من إضافة أداة الطقس إلى قصصك.</string>
-    <string name="PermissionNoLocationFriends">يحتاج **تيليجرام** الوصول إلى الموقع لتتمكنوا من مشاركته مع أصدقائكم. يرجى تمكين **الموقع** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoLocationNavigation">يحتاج **تيليجرام** الوصول إلى الموقع لتتمكنوا من معرفة الاتجاهات. يرجى تمكين **الموقع** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoContactsSharing">يحتاج **تيليجرام** الوصول إلى جهات الاتصال كي تتمكنوا من مشاركتها مع أصدقائكم. يرجى تمكين **جهات الاتصال** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoStorageAvatar">يحتاج تيليجرام الوصول إلى التخزين لتمكينك من رفع صور للملف الشخصي. يرجى تمكين **الملفات والوسائط** في إعدادات الهاتف &gt; الأذونات.</string>
-    <string name="PermissionNoAudioStorageStory">يحتاج **تيليجرام** الوصول إلى الملفات الصوتية لإضافتها إلى قصتك. يرجى الذهاب إلى الإعدادات &gt; الأذونات وتشغيل **الموسيقى والصوت**.</string>
-    <string name="PermissionDrawAboveOtherApps">يحتاج تيليجرام إلى صلاحية الظهور فوق التطبيقات لتشغيل المقاطع المرئية في وضع (صورة في الصورة).</string>
-    <string name="PermissionDrawAboveOtherAppsGroupCall">"يتيح لك الوضع العائم استخدام المايكروفون ومعرفة من الذي يتحدث عندما تكون خارج تيليجرام. "</string>
+    <string name="PermissionStorageWithHint">يحتاج U message الوصول إلى التخزين للتمكّن من إرسال وحفظ: الصور، الفيديو، الوسائط والمستندات. يرجى تمكين **الملفات والوسائط** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoAudioWithHint">يحتاج U message الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل الصوتية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoAudioVideoWithHint">يحتاج U message الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل الصوتية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoCameraWithHint">يحتاج U message الوصول إلى الكاميرا لتتمكنوا من التقاط الصور والمقاطع المرئية. يرجى تمكين **الكاميرا** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoCameraMicVideo">يحتاج U message الوصول إلى المايكروفون لتتمكنوا من إرسال الرسائل المرئية. يرجى تمكين **المايكروفون** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoLocation">يحتاج U message إلى السماح له بتحديد موقعك لتتمكن من مشاركته مع أصدقائك.</string>
+    <string name="PermissionNoLocationStory">يحتاج U message الوصول إلى موقعك الجغرافي للتمكن من إضافة أداة الطقس إلى قصصك.</string>
+    <string name="PermissionNoLocationFriends">يحتاج **U message** الوصول إلى الموقع لتتمكنوا من مشاركته مع أصدقائكم. يرجى تمكين **الموقع** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoLocationNavigation">يحتاج **U message** الوصول إلى الموقع لتتمكنوا من معرفة الاتجاهات. يرجى تمكين **الموقع** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoContactsSharing">يحتاج **U message** الوصول إلى جهات الاتصال كي تتمكنوا من مشاركتها مع أصدقائكم. يرجى تمكين **جهات الاتصال** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoStorageAvatar">يحتاج U message الوصول إلى التخزين لتمكينك من رفع صور للملف الشخصي. يرجى تمكين **الملفات والوسائط** في إعدادات الهاتف &gt; الأذونات.</string>
+    <string name="PermissionNoAudioStorageStory">يحتاج **U message** الوصول إلى الملفات الصوتية لإضافتها إلى قصتك. يرجى الذهاب إلى الإعدادات &gt; الأذونات وتشغيل **الموسيقى والصوت**.</string>
+    <string name="PermissionDrawAboveOtherApps">يحتاج U message إلى صلاحية الظهور فوق التطبيقات لتشغيل المقاطع المرئية في وضع (صورة في الصورة).</string>
+    <string name="PermissionDrawAboveOtherAppsGroupCall">"يتيح لك الوضع العائم استخدام المايكروفون ومعرفة من الذي يتحدث عندما تكون خارج U message. "</string>
     <string name="PermissionOpenSettings">الإعدادات</string>
-    <string name="PermissionXiaomiLockscreen">يرجى السماح لتيليجرام بالظهور على شاشة القفل للتمكن من إجراء المكالمات دون مشاكل.</string>
-    <string name="PermissionBackgroundLocation">"لمشاركة موقعك المباشر في هذه المحادثة؛ يحتاج تيليجرام الوصول إلى موقعك باستمرار، بما في ذلك أثناء عمل التطبيق في الخلفية.\n\n سنستخدم موقعك للمدة التي تختارها أنت فقط ويمكنك التوقف عن مشاركته في أي وقت. لن نستخدم موقعك لأي غرض بخلاف مشاركته في هذه المحادثة. "</string>
+    <string name="PermissionXiaomiLockscreen">يرجى السماح لU message بالظهور على شاشة القفل للتمكن من إجراء المكالمات دون مشاكل.</string>
+    <string name="PermissionBackgroundLocation">"لمشاركة موقعك المباشر في هذه المحادثة؛ يحتاج U message الوصول إلى موقعك باستمرار، بما في ذلك أثناء عمل التطبيق في الخلفية.\n\n سنستخدم موقعك للمدة التي تختارها أنت فقط ويمكنك التوقف عن مشاركته في أي وقت. لن نستخدم موقعك لأي غرض بخلاف مشاركته في هذه المحادثة. "</string>
     <string name="PermissionDrawAboveOtherAppsTitle">صورة داخل&#160;صورة</string>
     <string name="PermissionDrawAboveOtherAppsGroupCallTitle">المحادثة المرئية العائمة</string>
     <!--media view-->
@@ -1318,10 +1318,10 @@
     <string name="SecretLinkPreviewAlert">هل ترغبون في تفعيل معاينة الروابط المطولة في المحادثات السرية؟ مع العلم أن معاينة الروابط يتم توليدها على خوادم تيليجرام.</string>
     <string name="SecretChatContextBotAlert">يرجى ملاحظة أن بوتات المحتوى الاستعلامي يتم تطويرها من مطورين مستقلين. لكي تعمل هذه البوتات، ما تكتبه بعد اسم مستخدم البوت يذهب لمطور البوت.</string>
     <string name="EditMessageError">المعذرة، لا يمكنك تعديل هذه الرسالة.</string>
-    <string name="AllowReadCall">يرجى السماح لتيليجرام باستلام المكالمات ليتمكن من إدخال الرمز لك تلقائيًا.</string>
-    <string name="AllowReadCallAndLog">يرجى السماح لتيليجرام بتلقي وقراءة سجل المكالمات لنتمكن من إدخال الرمز لك تلقائيًا.</string>
-    <string name="AllowReadCallLog">يرجى السماح لتيليجرام بقراءة سجل المكالمات لنتمكن من إدخال الرمز لك تلقائيًا.</string>
-    <string name="AllowFillNumber">يرجى السماح لتيليجرام بتلقي المكالمات لنتمكن من تفعيل رقم هاتفك تلقائيًا.</string>
+    <string name="AllowReadCall">يرجى السماح لU message باستلام المكالمات ليتمكن من إدخال الرمز لك تلقائيًا.</string>
+    <string name="AllowReadCallAndLog">يرجى السماح لU message بتلقي وقراءة سجل المكالمات لنتمكن من إدخال الرمز لك تلقائيًا.</string>
+    <string name="AllowReadCallLog">يرجى السماح لU message بقراءة سجل المكالمات لنتمكن من إدخال الرمز لك تلقائيًا.</string>
+    <string name="AllowFillNumber">يرجى السماح لU message بتلقي المكالمات لنتمكن من تفعيل رقم هاتفك تلقائيًا.</string>
     <string name="UserRestricted">المعذرة، ليس مسموحًا لك القيام بهذا.</string>
     <string name="YouBlockedUser">المعذرة، لا يمكنك إضافة هذا المستخدم أو البوت للمجموعات بسبب أنك قمت بحظره. فضلًا قم بإزالة الحظر للاستمرار.</string>
     <string name="AddAdminErrorNotAMember">لا يمكنك إضافة هذا المستخدم كمشرف لأنه ليس عضوًا في هذه المجموعة وغير مسموح لك بإضافته.</string>
@@ -1349,11 +1349,11 @@
     <string name="ErrorSendRestrictedPrivacyVoiceMessages">عذرًا، لا يمكنك إرسال رسائل صوتية إلى هذا المستخدم بسبب إعدادات الخصوصية لديهم.</string>
     <string name="ErrorSendRestrictedPrivacyVideoMessages">عذرًا، لا يمكنك إرسال رسائل مرئية إلى هذا المستخدم بسبب إعدادات الخصوصية لديهم.</string>
     <string name="UnableForward">غير قادر على التحويل</string>
-    <string name="TosDecline">للأسف، هذا يعني أنه لا يمكنك التسجيل في تيليجرام.\n\nعلى عكس التطبيقات الأخرى؛ لا يستخدم تيليجرام بياناتك لاستهدافك بالإعلانات أو لأغراض تجارية أخرى. يخزن تيليجرام فقط المعلومات التي يحتاجها ليعمل كخدمة سحابية غنية بالميزات. يمكنك ضبط كيفية استخدام بياناتك (مثل حذف جهات الاتصال المزامَنة) في إعدادات الخصوصية والأمان.\n\nإن كنتم غير مرتاحين مع احتياجات تيليجرام المتواضعة؛ لن يكون بإمكاننا تقديم هذه الخدمة.</string>
+    <string name="TosDecline">للأسف، هذا يعني أنه لا يمكنك التسجيل في U message.\n\nعلى عكس التطبيقات الأخرى؛ لا يستخدم U message بياناتك لاستهدافك بالإعلانات أو لأغراض تجارية أخرى. يخزن U message فقط المعلومات التي يحتاجها ليعمل كخدمة سحابية غنية بالميزات. يمكنك ضبط كيفية استخدام بياناتك (مثل حذف جهات الاتصال المزامَنة) في إعدادات الخصوصية والأمان.\n\nإن كنتم غير مرتاحين مع احتياجات U message المتواضعة؛ لن يكون بإمكاننا تقديم هذه الخدمة.</string>
     <string name="TosAgeTitle">التحقق من العمر</string>
     <string name="PrivacyPolicyAndTerms">سياسة الخصوصية وشروط الخدمة</string>
     <string name="TosAgeText">يرجى الضغط على (موافق) لتأكيد أن عمرك %1$s أو أكبر.</string>
-    <string name="TosUpdateDecline">للأسف، لا توجد خيارات أخرى. على عكس التطبيقات الأخرى؛ لا تستخدم تيليجرام بيانات المستخدمين لاستهدافهم بالإعلانات أو لأغراض تجارية أخرى. يخزن تيليجرام فقط المعلومات التي يحتاجها للعمل كخدمة سحابية غنية بالميزات. يمكنك ضبط كيفية استخدام بياناتك في إعدادات الخصوصية والأمان.\n\nإذا لم تكن مرتاحًا لاحتياجات تيليجرام المتواضعة؛ لن نتمكن من تزويدك بهذه الخدمة.</string>
+    <string name="TosUpdateDecline">للأسف، لا توجد خيارات أخرى. على عكس التطبيقات الأخرى؛ لا تستخدم U message بيانات المستخدمين لاستهدافهم بالإعلانات أو لأغراض تجارية أخرى. يخزن U message فقط المعلومات التي يحتاجها للعمل كخدمة سحابية غنية بالميزات. يمكنك ضبط كيفية استخدام بياناتك في إعدادات الخصوصية والأمان.\n\nإذا لم تكن مرتاحًا لاحتياجات U message المتواضعة؛ لن نتمكن من تزويدك بهذه الخدمة.</string>
     <string name="TosDeclineDeleteAccount">تحذير، سيؤدي هذا إلى حذف حسابك في تيليجرام بشكل نهائي بالإضافة لجميع البيانات التي تخزنها في سحابة تيليجرام.\n\nهام: يمكنك الإلغاء الآن وتصدير بياناتك قبل حذف حسابك عوضًا عن خسارتها كلها. (للقيام بذلك، افتح النسخة الأخيرة من تيليجرام لسطح المكتب وتوجه إلى الإعدادات &gt; إعدادات متقدمة &gt; تصدير بيانات تيليجرام).</string>
     <!--Intro view-->
     <string name="Page1Title">تيليجرام</string>
@@ -1364,7 +1364,7 @@
     <string name="Page6Title">تخزين سحابي</string>
     <string name="Page1Message">تطبيق المراسلة **الأسرعُ** عالميًّا.\nإنه **مجانيٌّ** و**آمنٌ** كذلك.</string>
     <string name="Page2Message">**تيليجرام** يوصل الرسائل\nأسرع من أي تطبيق آخر.</string>
-    <string name="Page3Message">**تيليجرام** يقدم تخزينًا سحابيًا مجانيًا\nغير محدود للمحادثات والوسائط.</string>
+    <string name="Page3Message">**U message** يقدم تخزينًا سحابيًا مجانيًا\nغير محدود للمحادثات والوسائط.</string>
     <string name="Page4Message">يحمي **تيليجرام** رسائلك\nمن هجمات المخترقين.</string>
     <string name="Page5Message">لا يفرض **تيليجرام** قيودًا على\nحجم وسائطك ومحادثاتك.</string>
     <string name="Page6Message">**تيليجرام** يتيح لك الوصول\nلرسائلك من أجهزة متعددة.</string>
@@ -1658,7 +1658,7 @@
     <string name="UMessageAdOpen">فتح</string>
     <string name="UMessageAdLabel">إعلان</string>
     <string name="UMessageUseProxy">استخدام بروكسي U Message</string>
-    <string name="UMessageUseProxyInfo">الاتصال عبر بروكسي U Message. فعّله إذا لم يتصل تيليجرام على شبكتك.</string>
+    <string name="UMessageUseProxyInfo">الاتصال عبر بروكسي U Message. فعّله إذا لم يتصل U message على شبكتك.</string>
     <string name="UMessageShazamTap">اضغط للتعرّف على أغنية</string>
     <string name="UMessageShazamListening">جارٍ الاستماع… قرّب الهاتف من الموسيقى</string>
     <string name="UMessageShazamNotFound">تعذّر التعرّف على الأغنية. حاول مرة أخرى</string>
@@ -1721,7 +1721,7 @@
     <string name="UMessageNearbyShareInfo">المس هاتفك بهاتف مستخدم آخر لـ U message لتبادل جهات الاتصال. تظهر البطاقة فقط عندما يتلامس الهاتفان أو يكادان، في كل مرة تقرّبهما فيها.</string>
     <string name="UMessageAccountAutoSwitch">التبديل التلقائي للحساب برمز PIN</string>
     <string name="UMessageAccountAutoSwitchInfo">أدخل أيًّا من رمزي PIN على شاشة قفل التطبيق لفتح الحساب المخصص له تلقائيًا. يصبح رمز PIN الأول أيضًا رمز قفل التطبيق.</string>
-    <string name="UMessageAccountAutoSwitchNeedTwo">أضف حسابين على الأقل في تيليجرام قبل إعداد هذه الميزة.</string>
+    <string name="UMessageAccountAutoSwitchNeedTwo">أضف حسابين على الأقل في U message قبل إعداد هذه الميزة.</string>
     <string name="UMessageAccountAutoSwitchAccount">الحساب %1$d: %2$s</string>
     <string name="UMessageAccountAutoSwitchPinHint">رمز PIN من 4 أرقام</string>
     <string name="UMessageAccountAutoSwitchFourDigits">أدخل 4 أرقام بالضبط</string>

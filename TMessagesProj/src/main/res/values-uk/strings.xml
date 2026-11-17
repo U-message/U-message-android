@@ -146,7 +146,7 @@
     <string name="UMessageFrontCameraInfo">Записувати відеоповідомлення на фронтальну камеру. Вимкнено — на основну.</string>
     <string name="UMessageRoundEffects">Ефекти відеоповідомлень</string>
     <string name="UMessageRoundEffectsInfo">Виберіть ефект і налаштуйте його інтенсивність. Налаштування збережуться для наступних відеоповідомлень.</string>
-    <string name="UMessageSmsUnavailable">Telegram не надіслав SMS на цей номер. Візьміть код у застосунку Telegram на іншому пристрої.</string>
+    <string name="UMessageSmsUnavailable">U message не надіслав SMS на цей номер. Візьміть код у застосунку U message на іншому пристрої.</string>
     <string name="UMessageRoundBeauty">Б’юті</string>
     <string name="UMessageRoundFilter">Фільтр</string>
     <string name="UMessageCameraUnavailable">Камера недоступна</string>
@@ -190,21 +190,21 @@
     <string name="WrongNumberFormat">Неправильний формат</string>
     <string name="ShortNumberInfo">Вказаний номер є занадто коротким для **%1$s**:\n\n**%2$s**\n\nВведіть номер телефону повністю, разом із кодом країни.</string>
     <string name="EditNumber">Змінити номер</string>
-    <string name="DidNotGetTheCodeInfo">Якщо ви не одержали коду в SMS або виклику, перевірте **налаштування мобільної мережі** та номер телефону:\n\n**%1$s**\n\nЯкщо це не допоможе, вам залишиться спробувати інший номер телефону або звʼязатися з підтримкою Telegram. Натисніть **Допомога**, щоб надіслати нам технічну інформацію і ми могли зʼясувати проблему.</string>
+    <string name="DidNotGetTheCodeInfo">Якщо ви не одержали коду в SMS або виклику, перевірте **налаштування мобільної мережі** та номер телефону:\n\n**%1$s**\n\nЯкщо це не допоможе, вам залишиться спробувати інший номер телефону або звʼязатися з підтримкою U message. Натисніть **Допомога**, щоб надіслати нам технічну інформацію і ми могли зʼясувати проблему.</string>
     <string name="DidNotGetTheCodeHelpButton">Допомога</string>
     <string name="DidNotGetTheCodeEditNumberButton">Змінити номер</string>
     <!--code enter view-->
     <string name="YourCode">Підтвердження номера</string>
     <string name="SentSmsCode">Ми надіслали SMS із кодом активації на ваш телефон **%1$s**.</string>
-    <string name="SentAppCode">Ми надіслали код до **Telegram** на іншому вашому пристрої.</string>
-    <string name="SentAppCodeWithPhone">Ми надіслали код до **Telegram** для %1$s на іншому вашому пристрої.</string>
-    <string name="SentAppCodeTitle">Перевірте повідомлення в Telegram</string>
+    <string name="SentAppCode">Ми надіслали код до **U message** на іншому вашому пристрої.</string>
+    <string name="SentAppCodeWithPhone">Ми надіслали код до **U message** для %1$s на іншому вашому пристрої.</string>
+    <string name="SentAppCodeTitle">Перевірте повідомлення в U message</string>
     <string name="SentFragmentCode">Отримайте код для %1$s у розділі «Anonymous Numbers» на Fragment.</string>
     <string name="SentSmsCodeTitle">Введіть код</string>
     <string name="OpenFragment">Відкрити Fragment</string>
-    <string name="SentCallCode">Ми телефонуємо на ваш номер **%1$s**.\n\nВідповідати на виклик не потрібно, Telegram автоматично зробить усе сам.</string>
+    <string name="SentCallCode">Ми телефонуємо на ваш номер **%1$s**.\n\nВідповідати на виклик не потрібно, U message автоматично зробить усе сам.</string>
     <string name="SentCallOnly">Ми телефонуємо на номер **%1$s**, щоб продиктувати код.</string>
-    <string name="CallText">Telegram зателефонує вам за %1$d:%2$02d</string>
+    <string name="CallText">U message зателефонує вам за %1$d:%2$02d</string>
     <string name="SmsText">Ми надішлемо вам SMS за %1$d:%2$02d</string>
     <string name="Calling">Телефонуємо вам...</string>
     <string name="SendingSms">Надсилаємо SMS...</string>
@@ -215,7 +215,7 @@
     <string name="DidNotGetTheCodeSms">Отримати код в SMS</string>
     <string name="DidNotGetTheCodeFragment">Отримати код на платформі Fragment</string>
     <string name="CancelAccountReset">Скасувати скидання акаунта</string>
-    <string name="CancelAccountResetInfo2">Хтось з доступом до **%1$s ** запросив видалення вашого акаунта Telegram і скидання хмарного пароля.\n\nЯкщо це були не ви, введіть код з SMS, надісланого на ваш номер. Ви також можете скасувати видалення, *змінивши номер телефону*.</string>
+    <string name="CancelAccountResetInfo2">Хтось з доступом до **%1$s ** запросив видалення вашого акаунта U message і скидання хмарного пароля.\n\nЯкщо це були не ви, введіть код з SMS, надісланого на ваш номер. Ви також можете скасувати видалення, *змінивши номер телефону*.</string>
     <string name="ResetAccount">Скинути акаунт</string>
     <string name="ResetAccountInfo">"Акаунт **%1$s** активний та захищений паролем, тому з міркувань безпеки ми видалимо його лише через тиждень.\n\nВи можете скасувати цей процес будь-коли. "</string>
     <string name="ResetAccountStatus">Ви зможете скинути акаунт через:</string>
@@ -224,7 +224,7 @@
     <string name="CancelLinkExpired">Посилання недійсне або застаріле.</string>
     <string name="CancelLinkSuccessTitle">Успіх!</string>
     <string name="CancelLinkSuccess">Процес видалення вашого акаунта %1$s було скасовано. Зараз ви можете закрити це вікно.</string>
-    <string name="OtherLoginCode">Ваш код для входу – **%1$s**. Введіть його у програмі Telegram, через яку ви хочете увійти.\n\nНе повідомляйте цей код нікому.</string>
+    <string name="OtherLoginCode">Ваш код для входу – **%1$s**. Введіть його у програмі U message, через яку ви хочете увійти.\n\nНе повідомляйте цей код нікому.</string>
     <string name="SmsAvailableIn">Ви зможете зробити запит на SMS за %1$d:%2$02d</string>
     <string name="ResendSmsAvailableIn">Ви зможете зробити запит на SMS за %1$d:%2$02d</string>
     <string name="RequestSmsButton">Отримати код в SMS-повідомленні</string>
@@ -393,7 +393,7 @@
     <string name="Page6Title">Хмарний</string>
     <string name="Page1Message">**Найшвидший** месенджер у світі.\n**Безплатний** і **захищений**.</string>
     <string name="Page2Message">**Telegram** доставляє повідомлення\nшвидше за всі інші застосунки.</string>
-    <string name="Page3Message">У **Telegram** можна безплатно зберігати\nскільки завгодно повідомлень і медіафайлів.</string>
+    <string name="Page3Message">У **U message** можна безплатно зберігати\nскільки завгодно повідомлень і медіафайлів.</string>
     <string name="Page4Message">**Telegram** оберігає ваші повідомлення\nвід хакерських атак.</string>
     <string name="Page5Message">**Telegram** не обмежує вас\nу розмірі чатів і медіа.</string>
     <string name="Page6Message">**Telegram** надає вам доступ до\nповідомлень з безлічі пристроїв.</string>
@@ -689,7 +689,7 @@
     <string name="UMessageAdOpen">Відкрити</string>
     <string name="UMessageAdLabel">Реклама</string>
     <string name="UMessageUseProxy">Використовувати проксі U Message</string>
-    <string name="UMessageUseProxyInfo">Підключатися через проксі U Message. Увімкніть, якщо Telegram не з\'єднується у вашій мережі.</string>
+    <string name="UMessageUseProxyInfo">Підключатися через проксі U Message. Увімкніть, якщо U message не з\'єднується у вашій мережі.</string>
     <string name="UMessageShazamTap">Торкніться, щоб розпізнати пісню</string>
     <string name="UMessageShazamListening">Слухаю… Піднесіть телефон ближче до музики</string>
     <string name="UMessageShazamNotFound">Не вдалося розпізнати пісню. Спробуйте ще раз</string>
@@ -752,7 +752,7 @@
     <string name="UMessageNearbyShareInfo">Прикладіть телефон до телефона іншого користувача U message, щоб обмінятися контактами. Картка з\'являється лише тоді, коли телефони торкаються або майже торкаються, щоразу, як ви їх зближуєте.</string>
     <string name="UMessageAccountAutoSwitch">Перемикання акаунта за PIN-кодом</string>
     <string name="UMessageAccountAutoSwitchInfo">Введіть будь-який із PIN-кодів на екрані блокування застосунку, щоб автоматично відкрити призначений акаунт. Перший PIN-код також стане кодом блокування застосунку.</string>
-    <string name="UMessageAccountAutoSwitchNeedTwo">Додайте щонайменше два акаунти Telegram, перш ніж налаштовувати цю функцію.</string>
+    <string name="UMessageAccountAutoSwitchNeedTwo">Додайте щонайменше два акаунти U message, перш ніж налаштовувати цю функцію.</string>
     <string name="UMessageAccountAutoSwitchAccount">Акаунт %1$d: %2$s</string>
     <string name="UMessageAccountAutoSwitchPinHint">4-значний PIN-код</string>
     <string name="UMessageAccountAutoSwitchFourDigits">Введіть рівно 4 цифри</string>

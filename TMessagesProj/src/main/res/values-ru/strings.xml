@@ -11,7 +11,7 @@
     <string name="UMessageAccountAutoSwitchDifferent">Два PIN-кода должны отличаться</string>
     <string name="UMessageAccountAutoSwitchFourDigits">Введите ровно 4 цифры</string>
     <string name="UMessageAccountAutoSwitchInfo">Введите любой из PIN-кодов на экране блокировки, чтобы сразу открыть привязанный к нему аккаунт. Первый PIN также становится кодом блокировки приложения.</string>
-    <string name="UMessageAccountAutoSwitchNeedTwo">Сначала добавьте хотя бы два аккаунта Telegram.</string>
+    <string name="UMessageAccountAutoSwitchNeedTwo">Сначала добавьте хотя бы два аккаунта U message.</string>
     <string name="UMessageAccountAutoSwitchPinHint">4-значный PIN</string>
     <string name="UMessageConfigured">Настроено</string>
     <string name="UMessageHiddenFolders">Скрытые папки</string>
@@ -45,7 +45,7 @@
     <string name="UMessageAdOpen">Открыть</string>
     <string name="UMessageAdLabel">Реклама</string>
     <string name="UMessageUseProxy">Прокси U Message</string>
-    <string name="UMessageUseProxyInfo">Подключаться через прокси U Message. Включите, если Telegram не подключается в вашей сети.</string>
+    <string name="UMessageUseProxyInfo">Подключаться через прокси U Message. Включите, если U message не подключается в вашей сети.</string>
     <string name="UMessageTemplates">Быстрые ответы</string>
     <string name="UMessageShazamTap">Нажмите, чтобы распознать песню</string>
     <string name="UMessageShazamListening">Слушаю… Поднесите телефон ближе к музыке</string>
@@ -254,7 +254,7 @@
     <string name="UMessageFrontCameraInfo">Записывать видеосообщения (кружки) на фронтальную камеру. Выключено — на основную.</string>
     <string name="UMessageRoundEffects">Эффекты видеосообщений</string>
     <string name="UMessageRoundEffectsInfo">Выберите эффект и настройте его интенсивность. Выбранные настройки сохранятся для следующих видеосообщений.</string>
-    <string name="UMessageSmsUnavailable">Telegram не отправил SMS на этот номер. Возьмите код в приложении Telegram на другом устройстве.</string>
+    <string name="UMessageSmsUnavailable">U message не отправил SMS на этот номер. Возьмите код в приложении U message на другом устройстве.</string>
     <string name="UMessageRoundBeauty">Бьюти</string>
     <string name="UMessageReadyNaturalGlow">Естественное сияние</string>
     <string name="UMessageReadySoftPink">Нежно-розовый</string>
@@ -355,21 +355,21 @@
     <string name="WrongNumberFormat">Некорректный формат</string>
     <string name="ShortNumberInfo">Указанный номер слишком короткий для региона **%1$s**:\n\n**%2$s**\n\nУбедитесь, что правильно указываете номер. Он должен начинаться с кода страны.</string>
     <string name="EditNumber">Изменить номер</string>
-    <string name="DidNotGetTheCodeInfo">Если Вы не получили звонок или SMS с кодом, проверьте настройки сотовой связи и указанный Вами номер:\n\n**%1$s**\n\nЕсли это не помогло, Вы можете указать другой номер телефона или связаться с командой поддержки Telegram. Чтобы сообщить нам о проблеме и отправить техническую информацию для диагностики, нажмите **Помощь**.</string>
+    <string name="DidNotGetTheCodeInfo">Если Вы не получили звонок или SMS с кодом, проверьте настройки сотовой связи и указанный Вами номер:\n\n**%1$s**\n\nЕсли это не помогло, Вы можете указать другой номер телефона или связаться с командой поддержки U message. Чтобы сообщить нам о проблеме и отправить техническую информацию для диагностики, нажмите **Помощь**.</string>
     <string name="DidNotGetTheCodeHelpButton">Помощь</string>
     <string name="DidNotGetTheCodeEditNumberButton">Другой номер</string>
     <!--code enter view-->
     <string name="YourCode">Проверка телефона</string>
     <string name="SentSmsCode">Мы отправили SMS с кодом проверки на Ваш телефон **%1$s**.</string>
-    <string name="SentAppCode">Мы отправили код в приложение **Telegram** на другом Вашем устройстве.</string>
-    <string name="SentAppCodeWithPhone">Мы отправили код через **Telegram** на другое устройство, где авторизован %1$s.</string>
-    <string name="SentAppCodeTitle">Проверьте сообщения в Telegram</string>
+    <string name="SentAppCode">Мы отправили код в приложение **U message** на другом Вашем устройстве.</string>
+    <string name="SentAppCodeWithPhone">Мы отправили код через **U message** на другое устройство, где авторизован %1$s.</string>
+    <string name="SentAppCodeTitle">Проверьте сообщения в U message</string>
     <string name="SentFragmentCode">Получите код для %1$s в разделе Anonymous Numbers платформы Fragment.</string>
     <string name="SentSmsCodeTitle">Введите код</string>
     <string name="OpenFragment">Перейти к Fragment</string>
-    <string name="SentCallCode">Наш робот звонит на номер **%1$s**.\n\nОтвечать на звонок не требуется, Telegram автоматически получит код для входа.</string>
+    <string name="SentCallCode">Наш робот звонит на номер **%1$s**.\n\nОтвечать на звонок не требуется, U message автоматически получит код для входа.</string>
     <string name="SentCallOnly">Мы звоним Вам по номеру **%1$s**, чтобы продиктовать код.</string>
-    <string name="CallText">Telegram позвонит Вам через %1$d:%2$02d</string>
+    <string name="CallText">U message позвонит Вам через %1$d:%2$02d</string>
     <string name="SmsText">Мы отправим Вам SMS через %1$d:%2$02d</string>
     <string name="Calling">Звоним вам...</string>
     <string name="SendingSms">Отправка SMS...</string>
@@ -380,7 +380,7 @@
     <string name="DidNotGetTheCodeSms">Отправить код через SMS</string>
     <string name="DidNotGetTheCodeFragment">Получить код на платформе Fragment</string>
     <string name="CancelAccountReset">Отмена сброса аккаунта</string>
-    <string name="CancelAccountResetInfo2">Кто-то с доступом к **%1$s** запросил удаление Вашего аккаунта Telegram и сброс пароля двухэтапной аутентификации.\n\nЕсли это были не Вы, введите код из SMS, отправленного на Ваш номер. Вы также можете отменить удаление, *изменив номер телефона*.</string>
+    <string name="CancelAccountResetInfo2">Кто-то с доступом к **%1$s** запросил удаление Вашего аккаунта U message и сброс пароля двухэтапной аутентификации.\n\nЕсли это были не Вы, введите код из SMS, отправленного на Ваш номер. Вы также можете отменить удаление, *изменив номер телефона*.</string>
     <string name="ResetAccount">Сброс аккаунта</string>
     <string name="ResetAccountInfo">Поскольку аккаунт **%1$s** используется и защищён паролем, в целях безопасности мы удалим его только через неделю.\n\nВы можете передумать и остановить отсчёт в любой момент.</string>
     <string name="ResetAccountStatus">Вы сможете сбросить свой аккаунт через:</string>
@@ -389,7 +389,7 @@
     <string name="CancelLinkExpired">Ссылка неверна или устарела.</string>
     <string name="CancelLinkSuccessTitle">Готово</string>
     <string name="CancelLinkSuccess">Удаление аккаунта %1$s отменено. Это окно можно закрыть.</string>
-    <string name="OtherLoginCode">Ваш код для входа: **%1$s**. Укажите его в приложении Telegram, в котором хотите зайти в свой аккаунт.\n\nНикому не передавайте этот код.</string>
+    <string name="OtherLoginCode">Ваш код для входа: **%1$s**. Укажите его в приложении U message, в котором хотите зайти в свой аккаунт.\n\nНикому не передавайте этот код.</string>
     <string name="SmsAvailableIn">Вы сможете запросить SMS через %1$d:%2$02d</string>
     <string name="ResendSmsAvailableIn">Вы сможете повторно запросить SMS через %1$d:%2$02d</string>
     <string name="RequestSmsButton">Получить SMS с кодом</string>
@@ -545,7 +545,7 @@
     <string name="Page6Title">Облачный</string>
     <string name="Page1Message">Самый **быстрый** мессенджер в мире.\n**Бесплатный** и **безопасный**.</string>
     <string name="Page2Message">**Telegram** доставляет сообщения быстрее\nлюбого другого приложения.</string>
-    <string name="Page3Message">**Telegram** предоставляет бесплатное безлимитное облачное хранилище для чатов и медиа.\n</string>
+    <string name="Page3Message">**U message** предоставляет бесплатное безлимитное облачное хранилище для чатов и медиа.\n</string>
     <string name="Page4Message">**Telegram** защищает Вашу переписку от злоумышленников.</string>
     <string name="Page5Message">**Telegram** не ограничивает размер\n Ваших медиафайлов и чатов.</string>
     <string name="Page6Message">В **Telegram** можно переписываться с любого количества устройств.</string>
