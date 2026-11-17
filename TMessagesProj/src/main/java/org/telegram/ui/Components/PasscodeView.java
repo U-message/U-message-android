@@ -1220,6 +1220,7 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
 
         if (isAppLock()) {
             SharedConfig.appLocked = false;
+            if (org.telegram.ui.LaunchActivity.instance != null) org.telegram.ui.LaunchActivity.instance.invalidateFlagSecure();
         }
         SharedConfig.saveConfig();
         if (isAppLock()) {
@@ -1237,6 +1238,7 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
     public void forceUnlock() {
         if (getVisibility() != VISIBLE || hideAnimator != null) return;
         SharedConfig.appLocked = false;
+        if (org.telegram.ui.LaunchActivity.instance != null) org.telegram.ui.LaunchActivity.instance.invalidateFlagSecure();
         SharedConfig.saveConfig();
         onPause();
         passwordEditText.clearFocus();

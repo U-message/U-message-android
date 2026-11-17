@@ -461,7 +461,9 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         getWindow().setBackgroundDrawable(new ActivityWindowEmptyBackgroundDrawable());
         getWindow().setFormat(PixelFormat.OPAQUE);
 
-        flagSecureReason = new FlagSecureReason(getWindow(), () -> SharedConfig.passcodeHash.length() > 0 && !SharedConfig.allowScreenCapture);
+        // U message: a passcode keeps screenshots out only while the lock screen is up; the app itself can be
+        // captured. The hidden chats page and the PIN screens keep their own FLAG_SECURE.
+        flagSecureReason = new FlagSecureReason(getWindow(), () -> SharedConfig.passcodeHash.length() > 0 && !SharedConfig.allowScreenCapture && SharedConfig.appLocked);
         flagSecureReason.attach();
 
         super.onCreate(savedInstanceState);
@@ -1469,6 +1471,13 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         termsOfServiceView.animate().alpha(1f).setDuration(150).setInterpolator(AndroidUtilities.decelerateInterpolator).setListener(null).start();
     }
 
+    /** U message: the lock state changed, so the window's FLAG_SECURE may change too. */
+    public void invalidateFlagSecure() {
+        if (flagSecureReason != null) {
+            flagSecureReason.invalidate();
+        }
+    }
+
     public void showPasscodeActivity(boolean fingerprint, boolean animated, int x, int y, Runnable onShow, Runnable onStart) {
         if (drawerLayoutContainer == null || isFinishing()) {
             return;
@@ -1482,6 +1491,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
             selectAnimatedEmojiDialog = null;
         }
         SharedConfig.appLocked = true;
+        invalidateFlagSecure();
         if (SecretMediaViewer.hasInstance() && SecretMediaViewer.getInstance().isVisible()) {
             SecretMediaViewer.getInstance().closePhoto(false, false);
         } else if (PhotoViewer.hasInstance() && PhotoViewer.getInstance().isVisible()) {
