@@ -4669,6 +4669,11 @@ public class ChatActivity extends BaseFragment implements
             avatarContainer.setActionBar(actionBar);
             topPanelLayout.setVisibility(View.GONE);
         }
+        if (!umPreviewPill && chatMode == 0 && !inPreviewMode && !inBubbleMode && !isInsideContainer && avatarContainer != null) {
+            // U message: the header pill wraps the avatar, name and status and sits centered, apart from back and menu
+            actionBar.setChatAvatarContainer(avatarContainer);
+            avatarContainer.setActionBar(actionBar);
+        }
 
         if (chatMode == MODE_PINNED) {
             actionBar.setChatAvatarContainer(avatarContainer);
@@ -30239,8 +30244,10 @@ public class ChatActivity extends BaseFragment implements
                     umPreviewPill = false;
                     avatarContainer.setPreviewPillMode(false);
                     actionBar.clearForcedMenuWidth();
-                    actionBar.setChatAvatarContainer(null);
-                    avatarContainer.setActionBar(null);
+                    if (chatMode != 0) {
+                        actionBar.setChatAvatarContainer(null);
+                        avatarContainer.setActionBar(null);
+                    }
                     checkUi_topPanelLayoutVisibility();
                     invalidateChatListViewTopPadding();
                 }

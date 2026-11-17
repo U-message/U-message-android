@@ -198,6 +198,7 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
     private boolean glassModeIsForum;
 
     private ChatAvatarContainer chatAvatarContainer;
+    private int lastPillMaxWidth;
 
     public void setGlassOnlyBack() {
         glassOnlyBack = true;
@@ -205,6 +206,7 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
 
     public void setChatAvatarContainer(ChatAvatarContainer chatAvatarContainer) {
         this.chatAvatarContainer = chatAvatarContainer;
+        lastPillMaxWidth = 0;
     }
 
     public void setupGlass(BlurredBackgroundDrawableViewFactory factory, BlurredBackgroundColorProvider colorProvider) {
@@ -2269,7 +2271,15 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
             final int widthDefault = rightDefault - leftDefault;
             final int left, right;
             if (chatAvatarContainer != null) {
-                final int width = lerp(Math.min(widthDefault, (int) animatorAvatarContainerWidth.getFactor() + p * 2), widthDefault, Math.max(searchFactor, actionModeFactor));
+                // keeps a gap to the back and menu pills even for a long name (U message)
+                final int width = lerp(Math.min(widthDefault - p * 2, (int) animatorAvatarContainerWidth.getFactor() + p * 2), widthDefault, Math.max(searchFactor, actionModeFactor));
+                // content starts p + 3dp inside the pill; leave the same room at its right end
+                final int pillMax = widthDefault - p * 2 - (p + dp(3)) * 2 + dp(16);
+                if (pillMax > 0 && pillMax != lastPillMaxWidth) {
+                    lastPillMaxWidth = pillMax;
+                    final ChatAvatarContainer container = chatAvatarContainer;
+                    post(() -> container.setPillMaxWidth(pillMax));
+                }
                 left = (rightDefault + leftDefault - width) / 2;
                 right = left + width;
 

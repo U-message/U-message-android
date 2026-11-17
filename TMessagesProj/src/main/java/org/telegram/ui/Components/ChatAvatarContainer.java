@@ -664,7 +664,8 @@ public class ChatAvatarContainer extends FrameLayout implements FactorAnimator.T
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int width = MeasureSpec.getSize(widthMeasureSpec);
-        final int availableWidth = width - dp((avatarImageView.getVisibility() == VISIBLE ? 54 : 0) + 16);
+        final int contentWidth = pillMaxWidth > 0 ? Math.min(width, pillMaxWidth) : width;
+        final int availableWidth = contentWidth - dp((avatarImageView.getVisibility() == VISIBLE ? 54 : 0) + 16);
         avatarImageView.measure(MeasureSpec.makeMeasureSpec(dp(avatarSizeInDp) - 2, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(dp(avatarSizeInDp) - 2, MeasureSpec.EXACTLY));
         titleTextView.measure(MeasureSpec.makeMeasureSpec(availableWidth, MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(dp(24 + 8), MeasureSpec.AT_MOST));
         if (subtitleTextView != null) {
@@ -762,13 +763,10 @@ public class ChatAvatarContainer extends FrameLayout implements FactorAnimator.T
     private boolean glassMode;
     private boolean previewPillMode;
 
-    /** Chat preview header: title and status centered in a pill, without the avatar. */
+    /** Chat preview header: avatar, title and status in the glass pill, laid out like the chat header. */
     public void setPreviewPillMode(boolean enabled) {
-        if (previewPillMode == enabled) {
-            return;
-        }
-        previewPillMode = enabled;
-        avatarImageView.setVisibility(enabled ? GONE : VISIBLE);
+        // The avatar stays and the regular layout is used; the centered no-avatar layout clipped the status.
+        avatarImageView.setVisibility(VISIBLE);
         if (!enabled) {
             setTranslationX(0);
         }
@@ -1751,17 +1749,34 @@ public class ChatAvatarContainer extends FrameLayout implements FactorAnimator.T
         return avatarImageView != null && avatarImageView.getVisibility() == VISIBLE;
     }
 
+    private static float drawnWidth(SimpleTextView view) {
+        final float text = view.getLayout() != null ? view.getTextWidth() : view.getPaint().measureText(String.valueOf(view.getText()));
+        return text + view.getSideDrawablesSize();
+    }
+
+    private int pillMaxWidth;
+
+    /** U message: the header pill is narrower than this view; name, emoji status and mute icon must stay inside it. */
+    public void setPillMaxWidth(int maxWidth) {
+        if (pillMaxWidth != maxWidth) {
+            pillMaxWidth = maxWidth;
+            requestLayout();
+        }
+    }
+
     public int getVisualWidth() {
         float width = 0;
 
+        // Drawn width: getExactWidthIncludeDrawables() counts the side icons twice (and emoji at system size),
+        // which left an empty gap on the right of the header pill.
         if (titleTextView != null) {
-            width = Math.max(width, titleTextView.getExactWidthIncludeDrawables());
+            width = Math.max(width, drawnWidth(titleTextView));
         }
         if (subtitleTextView != null) {
-            width = Math.max(width, subtitleTextView.getExactWidthIncludeDrawables());
+            width = Math.max(width, drawnWidth(subtitleTextView));
         }
         if (hasVisibleAvatar()) {
-            width += dp(52 + 18);
+            width += dp(62);
         } else {
             width += dp(34);
         }
