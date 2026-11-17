@@ -101,6 +101,17 @@
         <package android:name="air.com.ssdsoftwaresolutions.clickuz"/>
         <!-- U message: share a story to Instagram, open Instagram links in the app -->
         <package android:name="com.instagram.android"/>
+        <!-- U message security: app stores must be visible, or Android hides them as an app's installer and a store install looks unknown -->
+        <package android:name="com.android.vending"/>
+        <package android:name="com.sec.android.app.samsungapps"/>
+        <package android:name="com.huawei.appmarket"/>
+        <package android:name="com.xiaomi.market"/>
+        <package android:name="com.xiaomi.mipicks"/>
+        <package android:name="com.oppo.market"/>
+        <package android:name="com.heytap.market"/>
+        <package android:name="com.vivo.appstore"/>
+        <package android:name="com.amazon.venezia"/>
+        <package android:name="com.aurora.store"/>
         <!-- U message security: see apps that can abuse accessibility, device admin, notifications or SMS -->
         <intent>
             <action android:name="android.accessibilityservice.AccessibilityService"/>

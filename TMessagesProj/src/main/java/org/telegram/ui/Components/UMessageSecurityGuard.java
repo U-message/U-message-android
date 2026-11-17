@@ -237,11 +237,14 @@ public final class UMessageSecurityGuard {
     public static final int INSPECT_FLAGS = PackageManager.GET_PERMISSIONS | PackageManager.GET_SERVICES | PackageManager.GET_RECEIVERS
             | PackageManager.GET_SIGNATURES | PackageManager.GET_SIGNING_CERTIFICATES;
 
-    // Signing certificates (SHA-256) of publishers we know: a partner launcher and U Phone. Our own
-    // certificate is added at runtime. A package signed by one of these is never reported.
+    // Signing certificates (SHA-256) of publishers we know: a partner launcher, U Phone and WhatsApp
+    // (its rotated key on Android 13+ and the original one below it, read from whatsapp.com's APK).
+    // A package signed by one of these is never reported.
     private static final Set<String> TRUSTED_CERTS = new HashSet<>(java.util.Arrays.asList(
             "f70d1601567c8276ba64baf4f6d494cecc8976ff8cbf2b8854b46cdccd17c897",
-            "4590ebbfee380c6caef37a750b0843cd9ffcf571364c7754869261fbe9c6f6ac"));
+            "4590ebbfee380c6caef37a750b0843cd9ffcf571364c7754869261fbe9c6f6ac",
+            "fb920d381bee1b2093f27dc8f13d994da629dc91887d0529b35c9a2dc4f4a6c2",
+            "3987d043d10aefaf5a8710b3671418fe57e0e19b653c9df82558feb5ffce5d44"));
 
     private static String sha256(byte[] data) {
         try {

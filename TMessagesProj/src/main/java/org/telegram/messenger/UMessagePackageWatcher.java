@@ -171,12 +171,13 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
             return;
         }
         boolean fromChatApk = UMessageSecurityGuard.wasOpenedFromChat(installer);
-        // Store installs are not dropper stages; anything via the system installer or another app is inspected.
-        // A package using our name is always inspected: its certificate decides whether it is a fake U message.
-        if (installer != null && TRUSTED_INSTALLERS.contains(installer) && !packageName.startsWith("uz.umessage.app")) {
-            if (!UMessageSecurityGuard.wasOpenedFromChat(packageName)) {
-                return;
-            }
+        // Only apps that came from a chat are inspected: an APK opened here (we are its installer, or it
+        // was opened from a chat) or a second stage that such an APK installed. Everything else on the
+        // phone, from a store or anywhere else, is the user's own business and is left alone.
+        boolean fromChat = context.getPackageName().equals(installer)
+                || UMessageSecurityGuard.wasOpenedFromChat(packageName) || fromChatApk;
+        if (!fromChat) {
+            return;
         }
         PackageInfo info = pm.getPackageInfo(packageName, UMessageSecurityGuard.INSPECT_FLAGS);
         if (isSystemApp(info.applicationInfo)) {
@@ -303,7 +304,11 @@ public class UMessagePackageWatcher extends BroadcastReceiver {
                 if (!TextUtils.isEmpty(originating)) {
                     return originating;
                 }
-                return initiating != null ? initiating : source.getInstallingPackageName();
+                String installing = source.getInstallingPackageName();
+                if (!TextUtils.isEmpty(initiating) || !TextUtils.isEmpty(installing)) {
+                    return !TextUtils.isEmpty(initiating) ? initiating : installing;
+                }
+                // Both hidden (installer not visible to us): the older API may still name the store.
             }
             //noinspection deprecation
             return pm.getInstallerPackageName(packageName);
