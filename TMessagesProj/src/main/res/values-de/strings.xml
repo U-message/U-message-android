@@ -2125,6 +2125,7 @@
     <string name="UMessageHideAccount">Ausblenden</string>
     <string name="UMessageAccountHidden">Konto ausgeblendet</string>
     <string name="UMessageAccountShown">Konto wieder sichtbar</string>
+    <string name="UMessageAccountSwitched">Konto gewechselt</string>
     <string name="UMessageHideWithoutPin">Ohne PIN fortfahren</string>
     <string name="UMessageHideKeypad">Ziffernblock ausblenden</string>
     <string name="UMessageHiddenNothingYet">Noch keine verborgenen Chats</string>

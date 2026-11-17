@@ -358,6 +358,39 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
             final int position = indexToPosition(index);
             tabs[index].setOnClickListener(v -> {
+                if (position == POSITION_PROFILE) {
+                    // U message: double tap on the profile tab switches to the most recent other account (Instagram style).
+                    // From another tab the first tap waits a moment, so a double tap switches without opening the profile page.
+                    final long now = android.os.SystemClock.uptimeMillis();
+                    if (now - lastProfileTabTap < PROFILE_DOUBLE_TAP_MS) {
+                        lastProfileTabTap = 0;
+                        if (pendingProfileOpen != null) {
+                            AndroidUtilities.cancelRunOnUIThread(pendingProfileOpen);
+                            pendingProfileOpen = null;
+                        }
+                        if (switchToRecentAccount()) {
+                            return;
+                        }
+                        // no other account: a plain tap, the profile page opens
+                    } else {
+                        lastProfileTabTap = now;
+                    }
+                    if (viewPager.getCurrentPosition() != POSITION_PROFILE && findRecentAccount() >= 0) {
+                        if (pendingProfileOpen != null) {
+                            AndroidUtilities.cancelRunOnUIThread(pendingProfileOpen);
+                        }
+                        pendingProfileOpen = () -> {
+                            pendingProfileOpen = null;
+                            if (viewPager.isManualScrolling() || viewPager.isTouch() || viewPager.getCurrentPosition() == POSITION_PROFILE) {
+                                return;
+                            }
+                            selectTab(POSITION_PROFILE, true);
+                            viewPager.scrollToPosition(POSITION_PROFILE);
+                        };
+                        AndroidUtilities.runOnUIThread(pendingProfileOpen, PROFILE_DOUBLE_TAP_MS);
+                        return;
+                    }
+                }
                 if (viewPager.isManualScrolling() || viewPager.isTouch()) {
                     return;
                 }
@@ -658,6 +691,48 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             selectTab(POSITION_CHATS, true);
             viewPager.scrollToPosition(POSITION_CHATS);
         }
+    }
+
+    private org.telegram.ui.Components.UMessageHolidayView holidayView;
+    private long lastProfileTabTap;
+    private static final int PROFILE_DOUBLE_TAP_MS = 420; // taps are counted on release, so this is generous
+    private Runnable pendingProfileOpen;
+
+    /** Most recently used visible account other than the current one; hidden accounts are skipped. */
+    private int findRecentAccount() {
+        int best = -1;
+        long bestTime = Long.MIN_VALUE;
+        for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
+            if (a == currentAccount || !UserConfig.getInstance(a).isClientActivated()
+                    || UMessageConfig.isAccountHiddenFromList(a, currentAccount, umHiddenMode)) {
+                continue;
+            }
+            long time = UMessageConfig.getAccountLastUsed(a);
+            if (time == 0) time = UserConfig.getInstance(a).loginTime * 1000L;
+            if (time > bestTime) {
+                bestTime = time;
+                best = a;
+            }
+        }
+        return best;
+    }
+
+    private boolean switchToRecentAccount() {
+        final int account = findRecentAccount();
+        if (account < 0 || LaunchActivity.instance == null) {
+            return false;
+        }
+        try {
+            fragmentView.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS, android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+        } catch (Exception ignore) {}
+        final android.app.Activity activity = getParentActivity();
+        // the switched account always opens on the chats tab
+        LaunchActivity.instance.switchToAccount(account, true);
+        final org.telegram.tgnet.TLRPC.User user = UserConfig.getInstance(account).getCurrentUser();
+        if (activity != null && user != null) {
+            org.telegram.ui.Components.UMessageToggleHud.showAccount(activity, account, user);
+        }
+        return true;
     }
 
     public boolean openAccountSelector(View button) {

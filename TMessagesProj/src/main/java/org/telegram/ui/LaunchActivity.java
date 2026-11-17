@@ -1210,6 +1210,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
             return;
         }
         switchingAccount = true;
+        org.telegram.messenger.UMessageConfig.markAccountUsed(UserConfig.selectedAccount);
 
         ConnectionsManager.getInstance(currentAccount).setAppPaused(true, false);
         UserConfig.selectedAccount = account;

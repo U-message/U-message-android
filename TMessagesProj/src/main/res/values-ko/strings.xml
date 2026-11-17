@@ -1901,6 +1901,7 @@
     <string name="UMessageHideAccount">숨기기</string>
     <string name="UMessageAccountHidden">계정을 숨겼어요</string>
     <string name="UMessageAccountShown">계정이 다시 표시돼요</string>
+    <string name="UMessageAccountSwitched">계정이 전환됐어요</string>
     <string name="UMessageHideWithoutPin">PIN 없이 계속</string>
     <string name="UMessageHideKeypad">키패드 숨기기</string>
     <string name="UMessageHiddenNothingYet">아직 숨긴 채팅이 없어요</string>

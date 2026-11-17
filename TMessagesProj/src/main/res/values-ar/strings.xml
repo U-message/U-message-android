@@ -1997,6 +1997,7 @@
     <string name="UMessageHideAccount">إخفاء</string>
     <string name="UMessageAccountHidden">تم إخفاء الحساب</string>
     <string name="UMessageAccountShown">الحساب مرئي مرة أخرى</string>
+    <string name="UMessageAccountSwitched">تم تبديل الحساب</string>
     <string name="UMessageHideWithoutPin">المتابعة دون رمز PIN</string>
     <string name="UMessageHideKeypad">إخفاء لوحة الأرقام</string>
     <string name="UMessageHiddenNothingYet">لا توجد محادثات مخفية بعد</string>

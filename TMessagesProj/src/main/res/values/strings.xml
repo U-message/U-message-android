@@ -12994,6 +12994,7 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageHideAccount">Hide</string>
     <string name="UMessageAccountHidden">Account hidden</string>
     <string name="UMessageAccountShown">Account is visible again</string>
+    <string name="UMessageAccountSwitched">Account switched</string>
     <string name="UMessageHideWithoutPin">Continue without PIN</string>
     <string name="UMessageHideKeypad">Hide the keypad</string>
     <string name="UMessageHiddenNothingYet">No hidden chats yet</string>

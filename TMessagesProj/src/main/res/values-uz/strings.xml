@@ -1359,6 +1359,7 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageHideAccount">Yashirish</string>
     <string name="UMessageAccountHidden">Akkaunt yashirildi</string>
     <string name="UMessageAccountShown">Akkaunt yana ko\'rinadi</string>
+    <string name="UMessageAccountSwitched">Akkaunt almashtirildi</string>
     <string name="UMessageHideWithoutPin">Parolsiz davom etish</string>
     <string name="UMessageHideKeypad">Tugmalarni yopish</string>
     <string name="UMessageHiddenNothingYet">Hali yashirin chatlar yo\'q</string>

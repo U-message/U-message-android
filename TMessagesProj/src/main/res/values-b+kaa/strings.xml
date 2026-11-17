@@ -12367,6 +12367,7 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageHideAccount">Jasırıw</string>
     <string name="UMessageAccountHidden">Akkaunt jasırıldı</string>
     <string name="UMessageAccountShown">Akkaunt qaytadan kórinedi</string>
+    <string name="UMessageAccountSwitched">Akkaunt almastırıldı</string>
     <string name="UMessageHideWithoutPin">Parolsız dawam etiw</string>
     <string name="UMessageHideKeypad">Túymelerdi jabıw</string>
     <string name="UMessageHiddenNothingYet">Ele jasırın chatlar joq</string>

@@ -1028,6 +1028,7 @@
     <string name="UMessageHideAccount">Приховати</string>
     <string name="UMessageAccountHidden">Акаунт приховано</string>
     <string name="UMessageAccountShown">Акаунт знову видно</string>
+    <string name="UMessageAccountSwitched">Акаунт перемкнено</string>
     <string name="UMessageHideWithoutPin">Продовжити без PIN-коду</string>
     <string name="UMessageHideKeypad">Сховати клавіатуру</string>
     <string name="UMessageHiddenNothingYet">Поки немає прихованих чатів</string>

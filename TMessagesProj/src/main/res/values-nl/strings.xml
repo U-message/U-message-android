@@ -1850,6 +1850,7 @@
     <string name="UMessageHideAccount">Verbergen</string>
     <string name="UMessageAccountHidden">Account verborgen</string>
     <string name="UMessageAccountShown">Account weer zichtbaar</string>
+    <string name="UMessageAccountSwitched">Account gewisseld</string>
     <string name="UMessageHideWithoutPin">Doorgaan zonder pincode</string>
     <string name="UMessageHideKeypad">Toetsenblok verbergen</string>
     <string name="UMessageHiddenNothingYet">Nog geen verborgen chats</string>

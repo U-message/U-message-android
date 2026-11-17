@@ -2029,6 +2029,7 @@
     <string name="UMessageHideAccount">Ocultar</string>
     <string name="UMessageAccountHidden">Conta oculta</string>
     <string name="UMessageAccountShown">Conta visível novamente</string>
+    <string name="UMessageAccountSwitched">Conta trocada</string>
     <string name="UMessageHideWithoutPin">Continuar sem PIN</string>
     <string name="UMessageHideKeypad">Ocultar o teclado</string>
     <string name="UMessageHiddenNothingYet">Ainda não há conversas ocultas</string>

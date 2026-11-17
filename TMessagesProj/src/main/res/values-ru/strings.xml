@@ -1458,6 +1458,7 @@
     <string name="UMessageHideAccount">Скрыть</string>
     <string name="UMessageAccountHidden">Аккаунт скрыт</string>
     <string name="UMessageAccountShown">Аккаунт снова виден</string>
+    <string name="UMessageAccountSwitched">Аккаунт переключён</string>
     <string name="UMessageHideWithoutPin">Продолжить без PIN-кода</string>
     <string name="UMessageHideKeypad">Скрыть клавиатуру</string>
     <string name="UMessageHiddenNothingYet">Пока нет скрытых чатов</string>
