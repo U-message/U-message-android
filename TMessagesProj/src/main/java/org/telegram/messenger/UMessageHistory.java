@@ -146,32 +146,12 @@ public class UMessageHistory {
             }
             final android.graphics.Paint.FontMetricsInt fontMetrics = org.telegram.ui.ActionBar.Theme.chat_msgTextPaint.getFontMetricsInt();
             final boolean dark = org.telegram.ui.ActionBar.Theme.isCurrentThemeDark();
-            final int labelColor = org.telegram.ui.ActionBar.Theme.getColor(messageObject.isOutOwner() ? org.telegram.ui.ActionBar.Theme.key_chat_outTimeText : org.telegram.ui.ActionBar.Theme.key_chat_inTimeText);
-            final JSONObject oldest = versions.optJSONObject(0);
-            final boolean haveOriginal = oldest != null && oldest.optInt("d") == messageObject.messageOwner.date;
             final String currentText = messageObject.messageOwner.message == null ? "" : messageObject.messageOwner.message;
             final JSONObject newestSaved = versions.optJSONObject(versions.length() - 1);
-            // GitHub-style: the message itself shows its last edit (removed words red and struck, added green)
+            // GitHub-style: the bubble shows only its last edit (removed words red and struck, added green);
+            // every older version lives in the "Edit history" dialog.
             final SpannableStringBuilder text = new SpannableStringBuilder(Emoji.replaceEmoji(
                     diff(newestSaved == null ? "" : newestSaved.optString("t"), currentText, dark), fontMetrics, false));
-            for (int i = versions.length() - 1; i >= 0; i--) {
-                final JSONObject version = versions.optJSONObject(i);
-                if (version == null) {
-                    continue;
-                }
-                text.append("\n\n");
-                final int labelStart = text.length();
-                final String label = i == 0
-                        ? LocaleController.getString(haveOriginal ? R.string.UMessageEditOriginal : R.string.UMessageEditOldest)
-                        : LocaleController.formatString(R.string.UMessageEditVersion, haveOriginal ? i : i + 1);
-                text.append("\u270E ").append(label).append(" · ").append(LocaleController.formatDateAudio(version.optInt("d"), true));
-                text.setSpan(new android.text.style.RelativeSizeSpan(0.8f), labelStart, text.length(), SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
-                text.setSpan(new android.text.style.ForegroundColorSpan(labelColor), labelStart, text.length(), SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
-                text.append("\n");
-                final JSONObject previous = i > 0 ? versions.optJSONObject(i - 1) : null;
-                final CharSequence body = previous == null ? version.optString("t") : diff(previous.optString("t"), version.optString("t"), dark);
-                text.append(Emoji.replaceEmoji(body, fontMetrics, false));
-            }
             messageObject.umTextBeforeHistory = messageObject.messageText;
             messageObject.messageText = text;
         }
