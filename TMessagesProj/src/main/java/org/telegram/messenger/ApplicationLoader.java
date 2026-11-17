@@ -243,6 +243,8 @@ public class ApplicationLoader extends Application {
             e.printStackTrace();
         }
 
+        LiteMode.registerBatteryReceiver();
+
         try {
             PowerManager pm = (PowerManager) ApplicationLoader.applicationContext.getSystemService(Context.POWER_SERVICE);
             isScreenOn = pm.isScreenOn();
@@ -296,6 +298,9 @@ public class ApplicationLoader extends Application {
                 DownloadController.getInstance(a);
             }
             BillingController.getInstance().startConnection();
+            // HTML widgets: the isolated engine's process up front, after the app's own (deferred) start, so that
+            // a widget's first frame does not wait for it.
+            Utilities.globalQueue.postRunnable(() -> org.telegram.utils.twidget.WidgetSandboxSession.prewarmEngine(applicationContext));
         }, 5000);
     }
 
@@ -314,6 +319,11 @@ public class ApplicationLoader extends Application {
 
         super.onCreate();
         UMessageErrorReporter.install();
+
+        // The widget engine's isolated process has no files, network or accounts: none of the client starts there.
+        if (org.telegram.utils.twidget.WidgetEngineService.isEngineProcess()) {
+            return;
+        }
 
         // AndroidUtilities must be initialized before FileLog
         final String helloWorld = AndroidUtilities.getHelloWorld();

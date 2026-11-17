@@ -72,6 +72,7 @@ import org.telegram.tgnet.Vector;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.ActionBar.ThemeBind;
 import org.telegram.ui.ActionBar.ThemeColors;
 import org.telegram.ui.ActionBar.ThemeDescription;
 import org.telegram.ui.Components.BottomPagesView;
@@ -412,8 +413,8 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
             if (destroyed) {
                 return;
             }
-            NotificationCenter.getGlobalInstance().addObserver(this, NotificationCenter.suggestedLangpack);
-            NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.configLoaded);
+            NotificationCenter.getGlobalInstance().addWeakObserver(this, NotificationCenter.suggestedLangpack);
+            NotificationCenter.getInstance(currentAccount).addWeakObserver(this, NotificationCenter.configLoaded);
             ConnectionsManager.getInstance(currentAccount).updateDcSettings();
             LocaleController.getInstance().loadRemoteLanguages(currentAccount);
             checkContinueText();
@@ -435,6 +436,7 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
     public void onFragmentDestroy() {
         super.onFragmentDestroy();
         destroyed = true;
+        AndroidUtilities.cancelRunOnUIThread(reloadGlTexturesRunnable);
         NotificationCenter.getGlobalInstance().removeObserver(this, NotificationCenter.suggestedLangpack);
         NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.configLoaded);
         MessagesController.getGlobalMainSettings().edit().putLong("intro_crashed_time", 0).apply();
@@ -552,14 +554,14 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
                 }
             };
 
-            headerTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+            ThemeBind.textColor(headerTextView, Theme.key_windowBackgroundWhiteBlackText);
             headerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
             // U message: intro headings in the brand font
             headerTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.TYPEFACE_UNBOUNDED_BOLD));
             headerTextView.setGravity(Gravity.CENTER);
             frameLayout.addView(headerTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 18, 244, 18, 0));
 
-            messageTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+            ThemeBind.textColor(messageTextView, Theme.key_windowBackgroundWhiteBlackText);
             messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             messageTextView.setLineSpacing(dpf2(2.33f), 1f);
             messageTextView.setGravity(Gravity.CENTER);
@@ -938,6 +940,7 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
         startMessagingButton.setBackground(Theme.createSimpleSelectorRoundRectDrawable(dp(24), Color.TRANSPARENT, Theme.multAlpha(paper, 0.2f)));
         darkThemeDrawable.setColorFilter(new PorterDuffColorFilter(ink, PorterDuff.Mode.SRC_IN));
         bottomPages.invalidate();
+        glTexturesColor = Theme.getColor(Theme.key_windowBackgroundWhite);
         if (fromTheme) {
             for (int i = 0; i < viewPager.getChildCount(); i++) {
                 View ch = viewPager.getChildAt(i);
@@ -946,6 +949,95 @@ public class IntroActivity extends BaseFragment implements NotificationCenter.No
                 TextView messageTextView = ch.findViewWithTag(pagerMessageTag);
                 messageTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             }
+        }
+    }
+
+    private int glTexturesColor;
+    private final Runnable reloadGlTexturesRunnable = new Runnable() {
+        @Override
+        public void run() {
+            reloadGlTextures();
+        }
+    };
+
+    // last colors applied by onThemeColorsChanged(): avoids per-frame allocations
+    private int lastInkColor, lastPaperColor;
+
+    @Override
+    public void onThemeColorsChanged() {
+        try {
+            if (fragmentView == null) {
+                return;
+            }
+            // U message: monochrome — ink on paper, inverted in dark themes (same as updateColors)
+            final int ink = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText);
+            final int paper = Theme.getColor(Theme.key_windowBackgroundWhite);
+            fragmentView.setBackgroundColor(paper);
+            if (ink != lastInkColor || paper != lastPaperColor) {
+                lastInkColor = ink;
+                lastPaperColor = paper;
+                if (startMessagingButtonBackground != null) {
+                    startMessagingButtonBackground.setColors(new int[]{ink, ink});
+                }
+                if (logoView != null) {
+                    logoView.setColor(ink);
+                }
+                if (switchLanguageTextView != null) {
+                    switchLanguageTextView.setTextColor(Theme.multAlpha(ink, 0.6f));
+                }
+                if (startMessagingButton != null) {
+                    startMessagingButton.setTextColor(paper);
+                    Theme.setSelectorDrawableColor(startMessagingButton.getBackground(), Theme.multAlpha(paper, 0.2f), true);
+                }
+                if (darkThemeDrawable != null) {
+                    darkThemeDrawable.setColorFilter(new PorterDuffColorFilter(ink, PorterDuff.Mode.SRC_IN));
+                }
+            }
+            if (bottomPages != null) {
+                bottomPages.invalidate();
+            }
+            if (viewPager != null) {
+                for (int i = 0; i < viewPager.getChildCount(); i++) {
+                    View ch = viewPager.getChildAt(i);
+                    TextView headerTextView = ch.findViewWithTag(pagerHeaderTag);
+                    if (headerTextView != null) {
+                        headerTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+                    }
+                    TextView messageTextView = ch.findViewWithTag(pagerMessageTag);
+                    if (messageTextView != null) {
+                        messageTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+                    }
+                }
+            }
+            if (eglThread != null && glTexturesColor != Theme.getColor(Theme.key_windowBackgroundWhite)) {
+                // textures are heavy: reload once the theme animation settled
+                AndroidUtilities.cancelRunOnUIThread(reloadGlTexturesRunnable);
+                AndroidUtilities.runOnUIThread(reloadGlTexturesRunnable, 100);
+            }
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    private void reloadGlTextures() {
+        try {
+            final int color = Theme.getColor(Theme.key_windowBackgroundWhite);
+            final EGLThread eglThread = this.eglThread;
+            if (eglThread == null || fragmentView == null || glTexturesColor == color) {
+                return;
+            }
+            glTexturesColor = color;
+            eglThread.postRunnable(() -> {
+                eglThread.loadTexture(R.drawable.intro_powerful_mask, 17, color, true);
+                eglThread.updatePowerfulTextures();
+
+                eglThread.loadTexture(eglThread.telegramMaskProvider, 23, true);
+                eglThread.updateTelegramTextures();
+
+                Intro.setBackgroundColor(color);
+            });
+        } catch (Exception e) {
+            FileLog.e(e);
         }
     }
 
