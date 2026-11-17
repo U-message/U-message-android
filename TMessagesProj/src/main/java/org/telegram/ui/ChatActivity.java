@@ -4759,12 +4759,26 @@ public class ChatActivity extends BaseFragment implements
                 }
             }
 
+            private float swipeAnchorY;
+
             private void updateSwipeAction(float y) {
-                int step = AndroidUtilities.dp(46);
-                float d = y - swipeMenuCenterY;
-                int a = SWIPE_REPLY;
-                if (d < -step / 2f && swipeCanForward) a = SWIPE_FORWARD;
-                else if (d > step / 2f && swipeCanCopy) a = SWIPE_COPY;
+                // Reply is the default: the finger's own height when the menu opens is the anchor, and it takes
+                // a deliberate pull up or down to switch, with a smaller band to come back (no flicker at the edge)
+                float d = y - swipeAnchorY;
+                float enter = AndroidUtilities.dp(56), exit = AndroidUtilities.dp(36);
+                int a = swipeAction;
+                if (swipeAction == SWIPE_REPLY) {
+                    if (d < -enter && swipeCanForward) a = SWIPE_FORWARD;
+                    else if (d > enter && swipeCanCopy) a = SWIPE_COPY;
+                } else if (swipeAction == SWIPE_FORWARD) {
+                    if (d > -exit) a = SWIPE_REPLY;
+                } else {
+                    if (d < exit) a = SWIPE_REPLY;
+                }
+                if (a == SWIPE_REPLY) {
+                    if (d < -enter && swipeCanForward) a = SWIPE_FORWARD;
+                    else if (d > enter && swipeCanCopy) a = SWIPE_COPY;
+                }
                 if (a != swipeAction) {
                     swipeAction = a;
                     try {
@@ -5185,6 +5199,7 @@ public class ChatActivity extends BaseFragment implements
                         boolean armed = Math.abs(dx) >= AndroidUtilities.dp(50) && (swipeCanForward || swipeCanCopy) && org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.SWIPE_ACTIONS);
                         if (armed && !swipeMenuShown) {
                             swipeMenuCenterY = UMessageSwipeActionsView.clampCenter(slidingView.getTop() + slidingView.getMeasuredHeight() / 2f, umSwipeVisibleTop(), umSwipeVisibleBottom(), swipeCanForward, swipeCanCopy);
+                            swipeAnchorY = e.getY();
                             swipeAction = SWIPE_REPLY;
                         }
                         swipeMenuShown = armed;
