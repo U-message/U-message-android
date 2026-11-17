@@ -96,6 +96,7 @@ public class UMessageSettingsActivity extends BaseFragment {
     private static final int GHOST_SCOPE = 73;
     private static final int GHOST_USERS = 74;
     private static final int DELETE_SERVER_DATA = 75;
+    private static final int HOLIDAY_FX = 77;
     // Offline chat temporarily disabled; keep the id reserved for restoring it.
     // private static final int OFFLINE_CHAT = 61;
 
@@ -415,6 +416,7 @@ public class UMessageSettingsActivity extends BaseFragment {
             case HIDDEN_PASSWORD: return UMessageModernList.tile(R.drawable.msg_pin_code, UMessageModernList.GRAPHITE);
             // security
             case ACCOUNT_AUTO_SWITCH: return UMessageModernList.tile(R.drawable.msg_openprofile, UMessageModernList.BLUE);
+            case HOLIDAY_FX: return UMessageModernList.tile(R.drawable.msg_gift_premium, UMessageModernList.MINT);
             case STRANGER_CHATS: return UMessageModernList.tile(R.drawable.msg_discussion, UMessageModernList.TEAL);
             // messages
             case KEPT_MEDIA: return UMessageModernList.tile(R.drawable.msg_saved, UMessageModernList.BLUE);
@@ -684,6 +686,27 @@ public class UMessageSettingsActivity extends BaseFragment {
         addToggle(items, UMessageConfig.KEY_HIDE_FOLDER_TABS);
         addToggle(items, UMessageConfig.KEY_ADMIN_FOLDERS);
         items.add(UItem.asShadow(null));
+        items.add(UItem.asButton(HOLIDAY_FX, LocaleController.getString(R.string.UMessageHolidayFx), LocaleController.getString(HOLIDAY_MODES[org.telegram.messenger.UMessageHolidays.getMode()])));
+        items.add(UItem.asShadow(LocaleController.getString(R.string.UMessageHolidayFxInfo)));
+    }
+
+    private static final int[] HOLIDAY_MODES = {R.string.UMessageHolidayAuto, R.string.UMessageHolidayOff, R.string.UMessageHolidaySnow, R.string.UMessageHolidayNavruz, R.string.UMessageHolidayHayit};
+
+    private void showHolidayPicker() {
+        if (getParentActivity() == null) {
+            return;
+        }
+        final CharSequence[] titles = new CharSequence[HOLIDAY_MODES.length];
+        for (int i = 0; i < titles.length; i++) {
+            titles[i] = LocaleController.getString(HOLIDAY_MODES[i]);
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity(), getResourceProvider());
+        builder.setTitle(LocaleController.getString(R.string.UMessageHolidayFx));
+        builder.setItems(titles, (dialog, which) -> {
+            org.telegram.messenger.UMessageHolidays.setMode(which);
+            listView.adapter.update(true);
+        });
+        showDialog(builder.create());
     }
 
     private void fillStories(ArrayList<UItem> items) {
@@ -832,6 +855,9 @@ public class UMessageSettingsActivity extends BaseFragment {
                 break;
             case ACCOUNT_AUTO_SWITCH:
                 showAccountAutoSwitchEditor();
+                break;
+            case HOLIDAY_FX:
+                showHolidayPicker();
                 break;
             case ROUND_EFFECTS:
                 presentFragment(new UMessageRoundEffectsActivity());

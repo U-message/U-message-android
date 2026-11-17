@@ -2030,6 +2030,13 @@
     <string name="UMessageAccountHidden">Conta oculta</string>
     <string name="UMessageAccountShown">Conta visível novamente</string>
     <string name="UMessageAccountSwitched">Conta trocada</string>
+    <string name="UMessageHolidayFx">Decoração festiva</string>
+    <string name="UMessageHolidayFxInfo">Nos feriados a tela de conversas é decorada: neve no inverno, brotos e tulipas no Navruz, luzes e uma lua crescente no Eid. Escolha uma para manter sempre ou desative.</string>
+    <string name="UMessageHolidayAuto">Automático</string>
+    <string name="UMessageHolidayOff">Desativado</string>
+    <string name="UMessageHolidaySnow">Neve de inverno</string>
+    <string name="UMessageHolidayNavruz">Navruz</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Continuar sem PIN</string>
     <string name="UMessageHideKeypad">Ocultar o teclado</string>
     <string name="UMessageHiddenNothingYet">Ainda não há conversas ocultas</string>

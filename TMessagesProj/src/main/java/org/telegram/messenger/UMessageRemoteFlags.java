@@ -92,6 +92,9 @@ public final class UMessageRemoteFlags {
     public static final String UM_PREMIUM = "um_premium";
     public static final String LOCAL_TG_PREMIUM = "local_tg_premium";
     public static final String U_ADS = "u_ads";
+    public static final String HOLIDAY_SNOW = "holiday_snow";
+    public static final String HOLIDAY_NAVRUZ = "holiday_navruz";
+    public static final String HOLIDAY_HAYIT = "holiday_hayit";
 
     private static final String PREFS = "umessage_remote_flags";
     private static final String URL_BASE = UMessagePremiumController.BASE_URL + "/api/settings?route=flags";

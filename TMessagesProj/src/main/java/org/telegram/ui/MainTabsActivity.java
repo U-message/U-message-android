@@ -497,6 +497,26 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             updateLayout.updateAppUpdateViews(currentAccount, false);
         }
 
+        // U message: holiday decorations of the chats screen, above everything and never touchable
+        holidayView = new org.telegram.ui.Components.UMessageHolidayView(context, new org.telegram.ui.Components.UMessageHolidayView.Host() {
+            @Override
+            public float visibility() {
+                if (viewPager == null || dialogsActivity == null) return 0;
+                // the search field and the pill belong to the chats fragment, created after this view
+                holidayView.addLedge(dialogsActivity.umHeaderPill(), 0, 20, false);
+                holidayView.addLedge(dialogsActivity.umSearchField(), 4, 20, false);
+                return viewPager.getPositionVisibility(POSITION_CHATS);
+            }
+
+            @Override
+            public boolean headerGap(float[] out) {
+                return dialogsActivity != null && dialogsActivity.umHeaderGap(out);
+            }
+        });
+        holidayView.addLedge(tabsView, DialogsActivity.MAIN_TABS_MARGIN, DialogsActivity.MAIN_TABS_HEIGHT / 2f, true);
+        holidayView.addLedge(dockActionButton, DialogsActivity.MAIN_TABS_MARGIN, DialogsActivity.MAIN_TABS_HEIGHT / 2f, false);
+        contentView.addView(holidayView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+
         updateLayout();
         checkUnreadCount(false);
         return contentView;

@@ -2318,6 +2318,13 @@
     <string name="UMessageAccountHidden">Account nascosto</string>
     <string name="UMessageAccountShown">Account di nuovo visibile</string>
     <string name="UMessageAccountSwitched">Account cambiato</string>
+    <string name="UMessageHolidayFx">Decorazioni festive</string>
+    <string name="UMessageHolidayFxInfo">Nelle feste la schermata delle chat viene decorata: neve in inverno, germogli e tulipani per il Navruz, luci e mezzaluna per l\'Eid. Scegline una da tenere sempre o disattivale.</string>
+    <string name="UMessageHolidayAuto">Automatico</string>
+    <string name="UMessageHolidayOff">Disattivato</string>
+    <string name="UMessageHolidaySnow">Neve invernale</string>
+    <string name="UMessageHolidayNavruz">Navruz</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Continua senza PIN</string>
     <string name="UMessageHideKeypad">Nascondi il tastierino</string>
     <string name="UMessageHiddenNothingYet">Ancora nessuna chat nascosta</string>

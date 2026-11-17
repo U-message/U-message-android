@@ -1459,6 +1459,13 @@
     <string name="UMessageAccountHidden">Аккаунт скрыт</string>
     <string name="UMessageAccountShown">Аккаунт снова виден</string>
     <string name="UMessageAccountSwitched">Аккаунт переключён</string>
+    <string name="UMessageHolidayFx">Праздничные украшения</string>
+    <string name="UMessageHolidayFxInfo">В праздники экран чатов украшается: зимой снег, на Навруз ростки и тюльпаны, на Хайит огни и полумесяц. Можно выбрать одно украшение постоянно или выключить их.</string>
+    <string name="UMessageHolidayAuto">Автоматически</string>
+    <string name="UMessageHolidayOff">Выключено</string>
+    <string name="UMessageHolidaySnow">Зимний снег</string>
+    <string name="UMessageHolidayNavruz">Навруз</string>
+    <string name="UMessageHolidayHayit">Хайит</string>
     <string name="UMessageHideWithoutPin">Продолжить без PIN-кода</string>
     <string name="UMessageHideKeypad">Скрыть клавиатуру</string>
     <string name="UMessageHiddenNothingYet">Пока нет скрытых чатов</string>

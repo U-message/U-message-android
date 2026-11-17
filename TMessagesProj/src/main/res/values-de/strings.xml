@@ -2126,6 +2126,13 @@
     <string name="UMessageAccountHidden">Konto ausgeblendet</string>
     <string name="UMessageAccountShown">Konto wieder sichtbar</string>
     <string name="UMessageAccountSwitched">Konto gewechselt</string>
+    <string name="UMessageHolidayFx">Feiertagsdekoration</string>
+    <string name="UMessageHolidayFxInfo">An Feiertagen wird die Chatliste geschmückt: Schnee im Winter, Sprossen und Tulpen zu Nouruz, Lichter und ein Halbmond zum Eid. Wähle eine dauerhaft oder schalte sie aus.</string>
+    <string name="UMessageHolidayAuto">Automatisch</string>
+    <string name="UMessageHolidayOff">Aus</string>
+    <string name="UMessageHolidaySnow">Winterschnee</string>
+    <string name="UMessageHolidayNavruz">Nouruz</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Ohne PIN fortfahren</string>
     <string name="UMessageHideKeypad">Ziffernblock ausblenden</string>
     <string name="UMessageHiddenNothingYet">Noch keine verborgenen Chats</string>

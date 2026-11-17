@@ -10657,6 +10657,43 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         savedButton.requestLayout();
     }
 
+    /** Holiday decorations: the header pill and the search field are components snow can lie on. */
+    public View umHeaderPill() {
+        return pillView;
+    }
+
+    public View umSearchField() {
+        return fragmentSearchField;
+    }
+
+    /** Free span of the header between the logo and the first button, in window pixels: {left, right, top}. */
+    public boolean umHeaderGap(float[] out) {
+        if (actionBar == null || fragmentView == null || searching || folderId != 0 || actionBar.isActionModeShowed() || actionBar.isSearchFieldVisible()) {
+            return false;
+        }
+        final SimpleTextView title = actionBar.getTitleTextView();
+        if (title == null || !title.isShown()) {
+            return false;
+        }
+        final int[] l = new int[2];
+        title.getLocationInWindow(l);
+        out[0] = l[0] + title.getTextWidth() + title.getSideDrawablesSize() + dp(10);
+        float right = fragmentView.getWidth();
+        final ActionBarMenu menu = actionBar.createMenu();
+        for (int i = 0; i < menu.getChildCount(); i++) {
+            final View child = menu.getChildAt(i);
+            if (child.getVisibility() != View.VISIBLE || child.getAlpha() < 0.1f || child.getWidth() == 0) {
+                continue;
+            }
+            child.getLocationInWindow(l);
+            right = Math.min(right, l[0]);
+        }
+        out[1] = right - dp(4);
+        actionBar.getLocationInWindow(l);
+        out[2] = l[1] + (actionBar.getOccupyStatusBar() ? AndroidUtilities.statusBarHeight : 0);
+        return true;
+    }
+
     private void createHeaderPill(Context context, ActionBarMenu menu) {
         pillItem = menu.addItemWithWidth(14, 0, dp(132));
         pillItem.setBackground(null);

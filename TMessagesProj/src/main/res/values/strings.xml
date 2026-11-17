@@ -12995,6 +12995,13 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageAccountHidden">Account hidden</string>
     <string name="UMessageAccountShown">Account is visible again</string>
     <string name="UMessageAccountSwitched">Account switched</string>
+    <string name="UMessageHolidayFx">Holiday decorations</string>
+    <string name="UMessageHolidayFxInfo">On holidays the chats screen is decorated: snow in winter, sprouts and tulips on Navruz, lights and a crescent on Eid. Choose one to keep it all the time, or turn them off.</string>
+    <string name="UMessageHolidayAuto">Automatic</string>
+    <string name="UMessageHolidayOff">Off</string>
+    <string name="UMessageHolidaySnow">Winter snow</string>
+    <string name="UMessageHolidayNavruz">Navruz</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Continue without PIN</string>
     <string name="UMessageHideKeypad">Hide the keypad</string>
     <string name="UMessageHiddenNothingYet">No hidden chats yet</string>

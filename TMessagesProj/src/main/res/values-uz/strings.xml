@@ -1360,6 +1360,13 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageAccountHidden">Akkaunt yashirildi</string>
     <string name="UMessageAccountShown">Akkaunt yana ko\'rinadi</string>
     <string name="UMessageAccountSwitched">Akkaunt almashtirildi</string>
+    <string name="UMessageHolidayFx">Bayram bezaklari</string>
+    <string name="UMessageHolidayFxInfo">Bayramlarda chatlar ekrani bezaladi: qishda qor, Navro\'zda maysa va lolalar, hayitda chiroqlar va hilol. Birini tanlasangiz doim turadi, yoki butunlay o\'chirib qo\'yishingiz mumkin.</string>
+    <string name="UMessageHolidayAuto">Avtomatik</string>
+    <string name="UMessageHolidayOff">O\'chiq</string>
+    <string name="UMessageHolidaySnow">Qish qori</string>
+    <string name="UMessageHolidayNavruz">Navro\'z</string>
+    <string name="UMessageHolidayHayit">Hayit</string>
     <string name="UMessageHideWithoutPin">Parolsiz davom etish</string>
     <string name="UMessageHideKeypad">Tugmalarni yopish</string>
     <string name="UMessageHiddenNothingYet">Hali yashirin chatlar yo\'q</string>

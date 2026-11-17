@@ -1851,6 +1851,13 @@
     <string name="UMessageAccountHidden">Account verborgen</string>
     <string name="UMessageAccountShown">Account weer zichtbaar</string>
     <string name="UMessageAccountSwitched">Account gewisseld</string>
+    <string name="UMessageHolidayFx">Feestversiering</string>
+    <string name="UMessageHolidayFxInfo">Op feestdagen wordt het chatscherm versierd: sneeuw in de winter, kiemen en tulpen met Navroez, lichtjes en een halvemaan met Eid. Kies er één om altijd te tonen of zet ze uit.</string>
+    <string name="UMessageHolidayAuto">Automatisch</string>
+    <string name="UMessageHolidayOff">Uit</string>
+    <string name="UMessageHolidaySnow">Wintersneeuw</string>
+    <string name="UMessageHolidayNavruz">Navroez</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Doorgaan zonder pincode</string>
     <string name="UMessageHideKeypad">Toetsenblok verbergen</string>
     <string name="UMessageHiddenNothingYet">Nog geen verborgen chats</string>

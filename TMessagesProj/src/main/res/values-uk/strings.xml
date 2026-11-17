@@ -1029,6 +1029,13 @@
     <string name="UMessageAccountHidden">Акаунт приховано</string>
     <string name="UMessageAccountShown">Акаунт знову видно</string>
     <string name="UMessageAccountSwitched">Акаунт перемкнено</string>
+    <string name="UMessageHolidayFx">Святкові прикраси</string>
+    <string name="UMessageHolidayFxInfo">У свята екран чатів прикрашається: взимку сніг, на Навруз паростки й тюльпани, на Хаїт вогники й півмісяць. Можна обрати одну прикрасу постійно або вимкнути їх.</string>
+    <string name="UMessageHolidayAuto">Автоматично</string>
+    <string name="UMessageHolidayOff">Вимкнено</string>
+    <string name="UMessageHolidaySnow">Зимовий сніг</string>
+    <string name="UMessageHolidayNavruz">Навруз</string>
+    <string name="UMessageHolidayHayit">Хаїт</string>
     <string name="UMessageHideWithoutPin">Продовжити без PIN-коду</string>
     <string name="UMessageHideKeypad">Сховати клавіатуру</string>
     <string name="UMessageHiddenNothingYet">Поки немає прихованих чатів</string>

@@ -12368,6 +12368,13 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageAccountHidden">Akkaunt jasırıldı</string>
     <string name="UMessageAccountShown">Akkaunt qaytadan kórinedi</string>
     <string name="UMessageAccountSwitched">Akkaunt almastırıldı</string>
+    <string name="UMessageHolidayFx">Bayram bezewleri</string>
+    <string name="UMessageHolidayFxInfo">Bayramlarda chatlar ekranı bezeledi: qısta qar, Nawrızda maysa hám lalalar, hayıtta shıraqlar hám hilal. Birewin tańlasańız bárqulla turadı, yamasa pútkilley óshirip qoyıwıńız múmkin.</string>
+    <string name="UMessageHolidayAuto">Avtomat</string>
+    <string name="UMessageHolidayOff">Óshik</string>
+    <string name="UMessageHolidaySnow">Qıs qarı</string>
+    <string name="UMessageHolidayNavruz">Nawrız</string>
+    <string name="UMessageHolidayHayit">Hayıt</string>
     <string name="UMessageHideWithoutPin">Parolsız dawam etiw</string>
     <string name="UMessageHideKeypad">Túymelerdi jabıw</string>
     <string name="UMessageHiddenNothingYet">Ele jasırın chatlar joq</string>

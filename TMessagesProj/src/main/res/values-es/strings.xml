@@ -2067,6 +2067,13 @@
     <string name="UMessageAccountHidden">Cuenta oculta</string>
     <string name="UMessageAccountShown">La cuenta vuelve a ser visible</string>
     <string name="UMessageAccountSwitched">Cuenta cambiada</string>
+    <string name="UMessageHolidayFx">Decoración festiva</string>
+    <string name="UMessageHolidayFxInfo">En las fiestas la pantalla de chats se decora: nieve en invierno, brotes y tulipanes en Navruz, luces y una media luna en el Eid. Elige una para tenerla siempre o desactívalas.</string>
+    <string name="UMessageHolidayAuto">Automático</string>
+    <string name="UMessageHolidayOff">Desactivado</string>
+    <string name="UMessageHolidaySnow">Nieve de invierno</string>
+    <string name="UMessageHolidayNavruz">Navruz</string>
+    <string name="UMessageHolidayHayit">Eid</string>
     <string name="UMessageHideWithoutPin">Continuar sin PIN</string>
     <string name="UMessageHideKeypad">Ocultar el teclado</string>
     <string name="UMessageHiddenNothingYet">Aún no hay chats ocultos</string>

@@ -1998,6 +1998,13 @@
     <string name="UMessageAccountHidden">تم إخفاء الحساب</string>
     <string name="UMessageAccountShown">الحساب مرئي مرة أخرى</string>
     <string name="UMessageAccountSwitched">تم تبديل الحساب</string>
+    <string name="UMessageHolidayFx">زينة الأعياد</string>
+    <string name="UMessageHolidayFxInfo">في الأعياد تُزيَّن شاشة المحادثات: ثلج في الشتاء، براعم وزهور التوليب في النوروز، وأضواء وهلال في العيد. اختر واحدة لتبقى دائمًا أو أوقفها.</string>
+    <string name="UMessageHolidayAuto">تلقائي</string>
+    <string name="UMessageHolidayOff">إيقاف</string>
+    <string name="UMessageHolidaySnow">ثلج الشتاء</string>
+    <string name="UMessageHolidayNavruz">النوروز</string>
+    <string name="UMessageHolidayHayit">العيد</string>
     <string name="UMessageHideWithoutPin">المتابعة دون رمز PIN</string>
     <string name="UMessageHideKeypad">إخفاء لوحة الأرقام</string>
     <string name="UMessageHiddenNothingYet">لا توجد محادثات مخفية بعد</string>

@@ -1902,6 +1902,13 @@
     <string name="UMessageAccountHidden">계정을 숨겼어요</string>
     <string name="UMessageAccountShown">계정이 다시 표시돼요</string>
     <string name="UMessageAccountSwitched">계정이 전환됐어요</string>
+    <string name="UMessageHolidayFx">명절 장식</string>
+    <string name="UMessageHolidayFxInfo">명절에는 채팅 화면이 장식돼요: 겨울에는 눈, 나브루즈에는 새싹과 튤립, 이드에는 조명과 초승달. 하나를 골라 항상 켜 두거나 끌 수 있어요.</string>
+    <string name="UMessageHolidayAuto">자동</string>
+    <string name="UMessageHolidayOff">끄기</string>
+    <string name="UMessageHolidaySnow">겨울 눈</string>
+    <string name="UMessageHolidayNavruz">나브루즈</string>
+    <string name="UMessageHolidayHayit">이드</string>
     <string name="UMessageHideWithoutPin">PIN 없이 계속</string>
     <string name="UMessageHideKeypad">키패드 숨기기</string>
     <string name="UMessageHiddenNothingYet">아직 숨긴 채팅이 없어요</string>
