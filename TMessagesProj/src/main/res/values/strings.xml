@@ -12973,4 +12973,11 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageMusicHappy">Happy</string>
     <string name="UMessageMusicChill">Chill</string>
     <string name="UMessageMusicCinematic">Cinematic</string>
+    <string name="UMessageOfficeTruncated">Only the first %1$d rows and %2$d columns are shown.</string>
+    <string name="UMessageOfficeSaveFailed">Couldn\'t save the changes.</string>
+    <string name="UMessageOfficeChangesSaved">Changes saved</string>
+    <string name="UMessageOfficeSaveAs">Save as…</string>
+    <string name="UMessageOfficeShareApps">Share to other apps</string>
+    <string name="UMessageOfficeUnsaved">Your edited file isn\'t saved on your phone yet. Save it to Downloads?</string>
+    <string name="UMessageOfficeSent">File sent</string>
 </resources>

@@ -2296,4 +2296,11 @@
     <string name="UMessageMusicHappy">Allegra</string>
     <string name="UMessageMusicChill">Rilassante</string>
     <string name="UMessageMusicCinematic">Cinematografica</string>
+    <string name="UMessageOfficeTruncated">Sono mostrate solo le prime %1$d righe e %2$d colonne.</string>
+    <string name="UMessageOfficeSaveFailed">Impossibile salvare le modifiche.</string>
+    <string name="UMessageOfficeChangesSaved">Modifiche salvate</string>
+    <string name="UMessageOfficeSaveAs">Salva come…</string>
+    <string name="UMessageOfficeShareApps">Condividi in altre app</string>
+    <string name="UMessageOfficeUnsaved">Il file modificato non è ancora salvato sul telefono. Salvarlo in Download?</string>
+    <string name="UMessageOfficeSent">File inviato</string>
 </resources>

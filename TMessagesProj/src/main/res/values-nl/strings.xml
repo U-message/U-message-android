@@ -1829,4 +1829,11 @@
     <string name="UMessageMusicHappy">Vrolijk</string>
     <string name="UMessageMusicChill">Rustig</string>
     <string name="UMessageMusicCinematic">Filmisch</string>
+    <string name="UMessageOfficeTruncated">Alleen de eerste %1$d rijen en %2$d kolommen worden getoond.</string>
+    <string name="UMessageOfficeSaveFailed">Wijzigingen konden niet worden opgeslagen.</string>
+    <string name="UMessageOfficeChangesSaved">Wijzigingen opgeslagen</string>
+    <string name="UMessageOfficeSaveAs">Opslaan als…</string>
+    <string name="UMessageOfficeShareApps">Delen met andere apps</string>
+    <string name="UMessageOfficeUnsaved">Het bewerkte bestand is nog niet op je telefoon opgeslagen. Opslaan in Downloads?</string>
+    <string name="UMessageOfficeSent">Bestand verstuurd</string>
 </resources>

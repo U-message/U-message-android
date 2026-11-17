@@ -12346,4 +12346,11 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageMusicHappy">Quwanıshlı</string>
     <string name="UMessageMusicChill">Tınısh</string>
     <string name="UMessageMusicCinematic">Kinematik</string>
+    <string name="UMessageOfficeTruncated">Tek dáslepki %1$d qatar hám %2$d bagana kórsetilgen.</string>
+    <string name="UMessageOfficeSaveFailed">Ózgerislerdi saqlap bolmadı.</string>
+    <string name="UMessageOfficeChangesSaved">Ózgerisler saqlandı</string>
+    <string name="UMessageOfficeSaveAs">Basqasha saqlaw…</string>
+    <string name="UMessageOfficeShareApps">Basqa qosımshalarǵa bólisiw</string>
+    <string name="UMessageOfficeUnsaved">Ózgertilgen fayl ele telefonıńızǵa saqlanbadı. Júklenbelerge saqlaysız ba?</string>
+    <string name="UMessageOfficeSent">Fayl jiberildi</string>
 </resources>

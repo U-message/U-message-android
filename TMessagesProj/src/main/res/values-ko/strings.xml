@@ -1882,4 +1882,9 @@
     <string name="UMessageChatGuardShare">신고 공유</string>
     <string name="UMessageChatGuardShareInfo">신고한 채팅과 관리자 키워드에 맞는 공개 채팅도 다른 사용자를 보호하기 위해 U message 서버로 보냅니다. 기본값은 꺼짐.</string>
     <string name="UMessageApkFromFiles">앱은 Google Play에서 설치됩니다. 이 APK를 설치하려면 다운로드에 저장한 후 파일 관리자에서 여세요.</string>
+    <string name="UMessageOfficeChangesSaved">변경 사항이 저장되었습니다</string>
+    <string name="UMessageOfficeSaveAs">다른 이름으로 저장…</string>
+    <string name="UMessageOfficeShareApps">다른 앱으로 공유</string>
+    <string name="UMessageOfficeUnsaved">편집한 파일이 아직 휴대폰에 저장되지 않았습니다. 다운로드에 저장할까요?</string>
+    <string name="UMessageOfficeSent">파일을 보냈습니다</string>
 </resources>

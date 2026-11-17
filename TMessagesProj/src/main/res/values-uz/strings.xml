@@ -1338,4 +1338,11 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageMusicHappy">Quvnoq</string>
     <string name="UMessageMusicChill">Sokin</string>
     <string name="UMessageMusicCinematic">Kinematik</string>
+    <string name="UMessageOfficeTruncated">Faqat dastlabki %1$d qator va %2$d ustun ko‘rsatilgan.</string>
+    <string name="UMessageOfficeSaveFailed">O‘zgarishlarni saqlab bo‘lmadi.</string>
+    <string name="UMessageOfficeChangesSaved">O‘zgarishlar saqlandi</string>
+    <string name="UMessageOfficeSaveAs">Boshqacha saqlash…</string>
+    <string name="UMessageOfficeShareApps">Boshqa ilovalarga ulashish</string>
+    <string name="UMessageOfficeUnsaved">Tahrirlangan fayl hali telefoningizga saqlanmadi. Yuklanmalarga saqlaysizmi?</string>
+    <string name="UMessageOfficeSent">Fayl yuborildi</string>
 </resources>

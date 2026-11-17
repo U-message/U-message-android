@@ -2629,6 +2629,11 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
 
     }
 
+    /** U message: the comment typed in the sheet, for subclasses that send something of their own. */
+    protected CharSequence getCommentText() {
+        return commentTextView == null ? null : commentTextView.getText();
+    }
+
     protected boolean doSend(LongSparseArray<TLRPC.Dialog> dids, TLRPC.TL_forumTopic topic) {
         return false;
     }

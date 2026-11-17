@@ -2104,4 +2104,11 @@
     <string name="UMessageMusicHappy">Fröhlich</string>
     <string name="UMessageMusicChill">Entspannt</string>
     <string name="UMessageMusicCinematic">Filmisch</string>
+    <string name="UMessageOfficeTruncated">Nur die ersten %1$d Zeilen und %2$d Spalten werden angezeigt.</string>
+    <string name="UMessageOfficeSaveFailed">Änderungen konnten nicht gespeichert werden.</string>
+    <string name="UMessageOfficeChangesSaved">Änderungen gespeichert</string>
+    <string name="UMessageOfficeSaveAs">Speichern unter…</string>
+    <string name="UMessageOfficeShareApps">In anderen Apps teilen</string>
+    <string name="UMessageOfficeUnsaved">Die bearbeitete Datei ist noch nicht auf deinem Telefon gespeichert. In Downloads speichern?</string>
+    <string name="UMessageOfficeSent">Datei gesendet</string>
 </resources>

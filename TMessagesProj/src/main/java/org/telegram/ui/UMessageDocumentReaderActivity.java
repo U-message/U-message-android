@@ -146,7 +146,15 @@ public class UMessageDocumentReaderActivity extends BaseFragment {
         String mime = message.getDocument().mime_type;
         String fileName = message.getDocumentName();
         boolean pdf = "application/pdf".equalsIgnoreCase(mime) || fileName != null && fileName.toLowerCase(Locale.ROOT).endsWith(".pdf");
-        return pdf && resolveFile(message) != null;
+        return (pdf || UMessageOfficeViewerActivity.canOpen(message)) && resolveFile(message) != null;
+    }
+
+    /** The in-app screen for a document {@link #canOpen} accepted: this reader for PDF, the office viewer otherwise. */
+    public static BaseFragment create(MessageObject message) {
+        if (UMessageOfficeViewerActivity.canOpen(message)) {
+            return new UMessageOfficeViewerActivity(message, resolveFile(message));
+        }
+        return new UMessageDocumentReaderActivity(message);
     }
 
     private static File resolveFile(MessageObject message) {

@@ -2045,4 +2045,11 @@
     <string name="UMessageMusicHappy">Alegre</string>
     <string name="UMessageMusicChill">Relajada</string>
     <string name="UMessageMusicCinematic">Cinematográfica</string>
+    <string name="UMessageOfficeTruncated">Solo se muestran las primeras %1$d filas y %2$d columnas.</string>
+    <string name="UMessageOfficeSaveFailed">No se pudieron guardar los cambios.</string>
+    <string name="UMessageOfficeChangesSaved">Cambios guardados</string>
+    <string name="UMessageOfficeSaveAs">Guardar como…</string>
+    <string name="UMessageOfficeShareApps">Compartir en otras apps</string>
+    <string name="UMessageOfficeUnsaved">El archivo editado aún no está guardado en tu teléfono. ¿Guardarlo en Descargas?</string>
+    <string name="UMessageOfficeSent">Archivo enviado</string>
 </resources>

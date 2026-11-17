@@ -4229,7 +4229,7 @@ public class AndroidUtilities {
                     return;
                 }
                 if (parentFragment != null && org.telegram.ui.UMessageDocumentReaderActivity.canOpen(message)) {
-                    parentFragment.presentFragment(new org.telegram.ui.UMessageDocumentReaderActivity(message));
+                    parentFragment.presentFragment(org.telegram.ui.UMessageDocumentReaderActivity.create(message));
                     return;
                 }
                 String realMimeType = null;

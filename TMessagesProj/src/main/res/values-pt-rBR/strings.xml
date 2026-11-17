@@ -2008,4 +2008,11 @@
     <string name="UMessageMusicHappy">Alegre</string>
     <string name="UMessageMusicChill">Relaxante</string>
     <string name="UMessageMusicCinematic">Cinematográfica</string>
+    <string name="UMessageOfficeTruncated">Apenas as primeiras %1$d linhas e %2$d colunas são exibidas.</string>
+    <string name="UMessageOfficeSaveFailed">Não foi possível salvar as alterações.</string>
+    <string name="UMessageOfficeChangesSaved">Alterações salvas</string>
+    <string name="UMessageOfficeSaveAs">Salvar como…</string>
+    <string name="UMessageOfficeShareApps">Compartilhar em outros apps</string>
+    <string name="UMessageOfficeUnsaved">O arquivo editado ainda não foi salvo no seu telefone. Salvar em Downloads?</string>
+    <string name="UMessageOfficeSent">Arquivo enviado</string>
 </resources>

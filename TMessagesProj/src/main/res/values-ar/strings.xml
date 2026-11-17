@@ -1976,4 +1976,11 @@
     <string name="UMessageMusicHappy">مبهج</string>
     <string name="UMessageMusicChill">هادئ</string>
     <string name="UMessageMusicCinematic">سينمائي</string>
+    <string name="UMessageOfficeTruncated">يتم عرض أول %1$d صفًا و%2$d عمودًا فقط.</string>
+    <string name="UMessageOfficeSaveFailed">تعذّر حفظ التغييرات.</string>
+    <string name="UMessageOfficeChangesSaved">تم حفظ التغييرات</string>
+    <string name="UMessageOfficeSaveAs">حفظ باسم…</string>
+    <string name="UMessageOfficeShareApps">مشاركة إلى تطبيقات أخرى</string>
+    <string name="UMessageOfficeUnsaved">لم يُحفظ الملف المعدّل على هاتفك بعد. هل تريد حفظه في التنزيلات؟</string>
+    <string name="UMessageOfficeSent">تم إرسال الملف</string>
 </resources>

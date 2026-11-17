@@ -5,5 +5,6 @@
     <files-path name="cache" path="/cache/"/>
     <cache-path name="umessage_instagram" path="umessage-instagram/"/>
     <cache-path name="umessage_export" path="umessage_export/"/>
+    <cache-path name="umessage_office" path="umessage_office/"/>
     <root-path name="external_files" path="/storage/" />
 </paths>

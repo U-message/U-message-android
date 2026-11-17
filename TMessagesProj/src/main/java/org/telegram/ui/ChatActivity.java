@@ -42585,7 +42585,7 @@ public class ChatActivity extends BaseFragment implements
                     handled = true;
                 }
                 if (!handled && UMessageDocumentReaderActivity.canOpen(message)) {
-                    presentFragment(new UMessageDocumentReaderActivity(message));
+                    presentFragment(UMessageDocumentReaderActivity.create(message));
                     handled = true;
                 }
                 if (!handled) {

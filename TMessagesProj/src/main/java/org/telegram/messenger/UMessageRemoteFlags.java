@@ -227,7 +227,8 @@ public final class UMessageRemoteFlags {
                 || f instanceof org.telegram.ui.UMessageParentalChildActivity) return PARENTAL_CONTROL;
         if (f instanceof org.telegram.ui.UMessageTemplatesActivity
                 || f instanceof org.telegram.ui.UMessageTemplateEditActivity) return TEMPLATES;
-        if (f instanceof org.telegram.ui.UMessageDocumentReaderActivity) return DOCUMENT_READER;
+        if (f instanceof org.telegram.ui.UMessageDocumentReaderActivity
+                || f instanceof org.telegram.ui.UMessageOfficeViewerActivity) return DOCUMENT_READER;
         if (f instanceof org.telegram.ui.UMessageExportViewerActivity) return CHAT_EXPORT;
         if (f instanceof org.telegram.ui.UMessageUsernameActivity) return U_USERNAMES;
         if (f instanceof org.telegram.ui.UMessageOfficialChatActivity

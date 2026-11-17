@@ -1007,4 +1007,11 @@
     <string name="UMessageMusicHappy">Веселе</string>
     <string name="UMessageMusicChill">Спокійне</string>
     <string name="UMessageMusicCinematic">Кінематографічне</string>
+    <string name="UMessageOfficeTruncated">Показано лише перші %1$d рядків і %2$d стовпців.</string>
+    <string name="UMessageOfficeSaveFailed">Не вдалося зберегти зміни.</string>
+    <string name="UMessageOfficeChangesSaved">Зміни збережено</string>
+    <string name="UMessageOfficeSaveAs">Зберегти як…</string>
+    <string name="UMessageOfficeShareApps">Поділитися в інші застосунки</string>
+    <string name="UMessageOfficeUnsaved">Змінений файл ще не збережено на телефоні. Зберегти в «Завантаження»?</string>
+    <string name="UMessageOfficeSent">Файл надіслано</string>
 </resources>
