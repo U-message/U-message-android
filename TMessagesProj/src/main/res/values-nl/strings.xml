@@ -46,8 +46,8 @@
     <string name="UMessageGhostModeOff">Spookmodus staat uit</string>
     <string name="UMessageGhostButton">Spookknop op het hoofdscherm</string>
     <string name="UMessageGhostButtonInfo">Toont een knop naast zoeken om de spookmodus aan en uit te zetten.</string>
-    <string name="UMessageSecretChat">Geheime chats</string>
-    <string name="UMessageSecretChatInfo">Selecteer chats en tik bovenaan op het verbergpictogram. Verborgen chats openen met een pincode op de hieronder gekozen manier en melden niet.</string>
+    <string name="UMessageSecretChat">Verborgen chats &amp; accounts</string>
+    <string name="UMessageSecretChatInfo">Selecteer chats en tik bovenaan op het verbergpictogram, of houd een account in de accountlijst ingedrukt. Ze openen met één pincode op de hieronder gekozen manier en sturen geen meldingen.</string>
     <string name="UMessageHideChat">Chat verbergen</string>
     <string name="UMessageHideSelectChats">Selecteer de chats die je wilt verbergen</string>
     <string name="UMessageHiddenAccessEdit">‘Bewerken’ lang indrukken</string>
@@ -69,7 +69,7 @@
     <string name="UMessageShowChat">Tonen in chatlijst</string>
     <string name="UMessageChatsHidden_one">%1$d chat verborgen</string>
     <string name="UMessageChatsHidden_other">%1$d chats verborgen</string>
-    <string name="UMessageHiddenChats">Verborgen chats</string>
+    <string name="UMessageHiddenChats">Verborgen chats &amp; accounts</string>
     <string name="UMessageHiddenChatsInfo">Houd een chat ingedrukt om hem weer in de chatlijst te tonen.</string>
     <string name="UMessageHiddenChatsEmpty">Geen verborgen chats. Selecteer een chat in de chatlijst en kies ‘Chat verbergen’.</string>
     <string name="UMessageUnhideChat">Tonen in chatlijst</string>
@@ -1841,4 +1841,19 @@
     <string name="UMessageInviteText">Hoi, ik chat via U message. Doe mee! Download het hier: %1$s</string>
     <string name="UMessageShareApp">U message delen</string>
     <string name="UMessageInviteShort">Uitnodigen voor U message</string>
+    <string name="UMessageHideAccountTitle">%1$s verbergen?</string>
+    <string name="UMessageHideRowList">Verdwijnt uit de accountlijsten</string>
+    <string name="UMessageHideRowMute">Stuurt geen meldingen meer</string>
+    <string name="UMessageHideRowFind">Waar je het vindt: houd „Nieuwe chat” ingedrukt, Verborgen chats &amp; accounts openen; houd dan het tabblad Profiel ingedrukt</string>
+    <string name="UMessageHideEnterPin">Voer de pincode van verborgen chats &amp; accounts in</string>
+    <string name="UMessageHideChoosePin">Kies een 4-cijferige pincode voor verborgen chats &amp; accounts</string>
+    <string name="UMessageHideAccount">Verbergen</string>
+    <string name="UMessageAccountHidden">Account verborgen</string>
+    <string name="UMessageAccountShown">Account weer zichtbaar</string>
+    <string name="UMessageHideWithoutPin">Doorgaan zonder pincode</string>
+    <string name="UMessageHideKeypad">Toetsenblok verbergen</string>
+    <string name="UMessageHiddenNothingYet">Nog geen verborgen chats</string>
+    <string name="UMessageHiddenPickHint">Kies chats en verberg ze. Ze openen alleen hier, met je pincode.</string>
+    <string name="UMessageHideChatsButton">Chats verbergen</string>
+    <string name="UMessageHiddenPickNone">Kies chats om te verbergen</string>
 </resources>

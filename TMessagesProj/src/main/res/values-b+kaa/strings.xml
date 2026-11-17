@@ -137,8 +137,8 @@
     <string name="UMessageGhostUsersAdd">Qosıw</string>
     <string name="UMessageGhostScopeInfoOnly">Jazıp atırǵanıńız, oqıldı belgileri hám onlayn halatıńız tek saylanǵan paydalanıwshılardan jasırınadı. Onlayn halat «Sońǵı kóringen waqıt» qupıyalıq sazlaması arqalı jasırınadı, sonıń ushın Premium bolmasa siz de olardıń aktivligin kórmeysiz.</string>
     <string name="UMessageGhostScopeInfoExcept">Arwaq rejimi saylanǵanlardan basqa hámmege isleydi. Onlayn ekenińizdi «Sońǵı kóringen waqıt» sazlaması arqalı tek olar kóredi. Óshirseńiz, óz sazlamańız qaytadı.</string>
-    <string name="UMessageSecretChat">Jasırın sáwbetler</string>
-    <string name="UMessageSecretChatInfo">Sáwbetlerdi tańlap, joqarıdaǵı jasırıw belgisin basıń. Jasırın sáwbetler tómende tańlaǵan usılıńız benen PIN arqalı ashıladı hám xabarlamaydı.</string>
+    <string name="UMessageSecretChat">Jasırın chatlar hám akkauntlar</string>
+    <string name="UMessageSecretChatInfo">Chatlardı belgilep, joqarıdaǵı jasırıw ikonkasın basıń yamasa akkauntlar diziminde akkauntti basıp turıń. Olar bir PIN kod penen tómende tańlanǵan usılda ashıladı hám bildiriw bermeydi.</string>
     <string name="UMessageHideChat">Sáwbetti jasırıw</string>
     <string name="UMessageHideSelectChats">Jasırılatuǵın sáwbetlerdi tańlań</string>
     <string name="UMessageHiddenAccessEdit">«Ózgertiw» túymesin uzaq basıw</string>
@@ -161,7 +161,7 @@
     <string name="UMessageShowChat">Sáwbetler diziminde kórsetiw</string>
     <string name="UMessageChatsHidden_one">%1$d sáwbet jasırıldı</string>
     <string name="UMessageChatsHidden_other">%1$d sáwbet jasırıldı</string>
-    <string name="UMessageHiddenChats">Jasırın sáwbetler</string>
+    <string name="UMessageHiddenChats">Jasırın chatlar hám akkauntlar</string>
     <string name="UMessageHiddenFolders">Jasırın papkalar</string>
     <string name="UMessageHideFolder">Papkanı jasırıw</string>
     <string name="UMessageShowFolder">Papkanı kórsetiw</string>
@@ -12358,4 +12358,19 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageInviteText">Sálem, men U message arqalı sóylesemen. Sen de qosıl! Júklep alıw: %1$s</string>
     <string name="UMessageShareApp">U message\'ti bólisiw</string>
     <string name="UMessageInviteShort">U message\'ke miyman etiw</string>
+    <string name="UMessageHideAccountTitle">%1$s jasırılsın ba?</string>
+    <string name="UMessageHideRowList">Akkauntlar diziminen joǵaladı</string>
+    <string name="UMessageHideRowMute">Bildiriwleri kelmeydi</string>
+    <string name="UMessageHideRowFind">Qay jerden tabıladı: «Jańa chat»tı basıp tursańız, Jasırın chatlar hám akkauntlar ashıladı; keyin Profil tabın basıp turıń</string>
+    <string name="UMessageHideEnterPin">Jasırın chatlar hám akkauntlar kodın kiritiń</string>
+    <string name="UMessageHideChoosePin">Jasırın chatlar hám akkauntlar ushın 4 tańbalı kod tańlań</string>
+    <string name="UMessageHideAccount">Jasırıw</string>
+    <string name="UMessageAccountHidden">Akkaunt jasırıldı</string>
+    <string name="UMessageAccountShown">Akkaunt qaytadan kórinedi</string>
+    <string name="UMessageHideWithoutPin">Parolsız dawam etiw</string>
+    <string name="UMessageHideKeypad">Túymelerdi jabıw</string>
+    <string name="UMessageHiddenNothingYet">Ele jasırın chatlar joq</string>
+    <string name="UMessageHiddenPickHint">Chatlardı tańlap jasırıń. Olar tek usı jerde, kodıńız benen ashıladı.</string>
+    <string name="UMessageHideChatsButton">Chatlardı jasırıw</string>
+    <string name="UMessageHiddenPickNone">Jasırıw ushın chatlardı tańlań</string>
 </resources>

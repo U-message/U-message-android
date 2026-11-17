@@ -116,9 +116,8 @@ public class UMessageLockActivity extends BaseFragment {
 
     private void onAccepted() {
         if (mode == MODE_UNLOCK || openAfter) {
-            Bundle args = new Bundle();
-            args.putBoolean("umessageHidden", true);
-            presentFragment(new DialogsActivity(args), true);
+            // the hidden chats open with the dock: the account list there also holds the hidden accounts
+            presentFragment(MainTabsActivity.forHiddenChats(), true);
         } else {
             finishFragment();
             BaseFragment previous = getParentLayout() != null ? getParentLayout().getLastFragment() : null;

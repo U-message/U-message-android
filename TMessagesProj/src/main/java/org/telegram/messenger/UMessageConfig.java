@@ -625,6 +625,94 @@ public class UMessageConfig {
         version++;
     }
 
+    /* Hidden accounts: left out of every account list until shown again from U message settings. */
+
+    private static final String HIDDEN_ACCOUNTS_KEY = "hidden_account_ids";
+
+    private static java.util.Set<String> hiddenAccountIds() {
+        return new java.util.HashSet<>(prefs().getStringSet(HIDDEN_ACCOUNTS_KEY, java.util.Collections.emptySet()));
+    }
+
+    /** Hidden by the user (by user id, so a reused account slot does not inherit it). */
+    public static boolean isAccountHiddenManually(int account) {
+        if (!UserConfig.isValidAccount(account)) return false;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        return userId != 0 && hiddenAccountIds().contains(String.valueOf(userId));
+    }
+
+    public static void setAccountHidden(int account, boolean hidden) {
+        if (!UserConfig.isValidAccount(account)) return;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        if (userId == 0) return;
+        java.util.Set<String> ids = hiddenAccountIds();
+        if (hidden) ids.add(String.valueOf(userId)); else ids.remove(String.valueOf(userId));
+        prefs().edit().putStringSet(HIDDEN_ACCOUNTS_KEY, ids).apply();
+        version++;
+    }
+
+    private static final String ACCOUNT_LAST_USED_PREFIX = "account_last_used_";
+
+    /** Remembers when an account was last in use (called when leaving it), for the profile-tab quick switch. */
+    public static void markAccountUsed(int account) {
+        if (!UserConfig.isValidAccount(account)) return;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        if (userId != 0) prefs().edit().putLong(ACCOUNT_LAST_USED_PREFIX + userId, System.currentTimeMillis()).apply();
+    }
+
+    public static long getAccountLastUsed(int account) {
+        if (!UserConfig.isValidAccount(account)) return 0;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        return userId == 0 ? 0 : prefs().getLong(ACCOUNT_LAST_USED_PREFIX + userId, 0);
+    }
+
+    /** One of the two accounts bound to the account-switch PINs: each is reached only by its own PIN. */
+    public static boolean isSwitchPinAccount(int account) {
+        if (!hasAccountSwitchPins() || !UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.ACCOUNT_SWITCH_PINS)) return false;
+        return prefs().getInt(ACCOUNT_SWITCH_ACCOUNT_PREFIX + 0, -1) == account || prefs().getInt(ACCOUNT_SWITCH_ACCOUNT_PREFIX + 1, -1) == account;
+    }
+
+    /** Whether {@code account} is left out of the account lists shown while {@code currentAccount} is open. */
+    public static boolean isAccountHiddenFromList(int account, int currentAccount) {
+        return isAccountHiddenFromList(account, currentAccount, false);
+    }
+
+    /**
+     * {@code inHiddenPage}: the account list opened from the hidden chats page, the one place hidden accounts show up
+     * (to switch to them or unhide them). Hiding by hand needs the hidden chats page, so it is ignored while that is off.
+     */
+    public static boolean isAccountHiddenFromList(int account, int currentAccount, boolean inHiddenPage) {
+        if (account == currentAccount || inHiddenPage) return false;
+        return isAccountHidden(account) && UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.HIDDEN_CHATS);
+    }
+
+    /**
+     * Hidden by hand, or bound to an account-switch PIN (those start hidden, so each is reached only by its own PIN)
+     * and not shown again by the user. Either way it is listed, dimmed, in the hidden chats' account list.
+     */
+    public static boolean isAccountHidden(int account) {
+        if (isAccountHiddenManually(account)) return true;
+        return isSwitchPinAccount(account) && !idIn(PIN_SHOWN_KEY, account);
+    }
+
+    private static final String PIN_SHOWN_KEY = "pin_account_shown_ids";
+
+    private static boolean idIn(String key, int account) {
+        if (!UserConfig.isValidAccount(account)) return false;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        return userId != 0 && prefs().getStringSet(key, java.util.Collections.emptySet()).contains(String.valueOf(userId));
+    }
+
+    /** Hide or show an account in the lists, whichever way it got hidden. */
+    public static void setAccountVisible(int account, boolean visible) {
+        if (!UserConfig.isValidAccount(account)) return;
+        long userId = UserConfig.getInstance(account).getClientUserId();
+        if (userId == 0) return;
+        java.util.Set<String> shown = new java.util.HashSet<>(prefs().getStringSet(PIN_SHOWN_KEY, java.util.Collections.emptySet()));
+        if (visible) shown.add(String.valueOf(userId)); else shown.remove(String.valueOf(userId));
+        prefs().edit().putStringSet(PIN_SHOWN_KEY, shown).apply();
+        setAccountHidden(account, !visible);
+    }
+
     /** Returns the mapped active account, or -1 when this is not an account-switch PIN. */
     public static int findAccountForSwitchPin(String pin) {
         if (pin == null || pin.length() != 4 || !UMessageRemoteFlags.isEnabled(UMessageRemoteFlags.ACCOUNT_SWITCH_PINS)) {

@@ -137,6 +137,15 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
     private BlurredBackgroundDrawable tabsViewBackground;
     private View fadeView;
 
+    /** The tabs screen whose chats page is the PIN protected hidden chats list. */
+    public static MainTabsActivity forHiddenChats() {
+        MainTabsActivity tabs = new MainTabsActivity();
+        tabs.umHiddenMode = true;
+        return tabs;
+    }
+
+    public boolean umHiddenMode;
+
     public MainTabsActivity() {
         super();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -415,7 +424,8 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         dockActionButton.setOnClickListener(v -> onDockActionClick());
         dockActionButton.setOnLongClickListener(v -> {
             // U message: long press on "new chat" can open the hidden chats (chosen in Settings)
-            if (viewPager.getCurrentPosition() != POSITION_CHATS || !UMessageConfig.isHiddenAccess(UMessageConfig.HIDDEN_ACCESS_NEW_CHAT_LONG_PRESS)) {
+            // already inside Hidden chats & accounts: nothing to open again
+            if (umHiddenMode || viewPager.getCurrentPosition() != POSITION_CHATS || !UMessageConfig.isHiddenAccess(UMessageConfig.HIDDEN_ACCESS_NEW_CHAT_LONG_PRESS)) {
                 return false;
             }
             v.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS);
@@ -655,7 +665,7 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
         accountNumbers.clear();
         for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
-            if (UserConfig.getInstance(a).isClientActivated()) {
+            if (UserConfig.getInstance(a).isClientActivated() && !org.telegram.messenger.UMessageConfig.isAccountHiddenFromList(a, currentAccount, umHiddenMode)) {
                 accountNumbers.add(a);
             }
         }
@@ -709,6 +719,19 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
                     if (LaunchActivity.instance != null) {
                         LaunchActivity.instance.switchToAccount(account, true);
                     }
+                });
+                final boolean hidden = UMessageConfig.isAccountHidden(account);
+                if (hidden) {
+                    btn.setAlpha(0.6f); // hidden accounts show up only here, dimmed
+                }
+                btn.setOnLongClickListener(v -> {
+                    o.dismiss();
+                    if (hidden) {
+                        UMessageAccountHiding.unhide(this, account);
+                    } else {
+                        UMessageAccountHiding.confirmHide(this, account);
+                    }
+                    return true;
                 });
                 o.addView(btn, LayoutHelper.createLinear(230, 48));
             }
@@ -848,6 +871,9 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         }
 
         bundle.putBoolean("hasMainTabs", true);
+        if (umHiddenMode) {
+            bundle.putBoolean("umessageHidden", true);
+        }
         dialogsActivity = new DialogsActivity(bundle);
         dialogsActivity.setMainTabsActivityController(new MainTabsActivityControllerImpl());
         putFragmentAtPosition(POSITION_CHATS, dialogsActivity);
@@ -875,6 +901,9 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         } else if (position == POSITION_CHATS) {
             Bundle args = new Bundle();
             args.putBoolean("hasMainTabs", true);
+            if (umHiddenMode) {
+                args.putBoolean("umessageHidden", true);
+            }
             dialogsActivity = new DialogsActivity(args);
             dialogsActivity.setMainTabsActivityController(new MainTabsActivityControllerImpl());
             return dialogsActivity;

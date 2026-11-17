@@ -53,8 +53,8 @@
     <string name="UMessageGhostModeOff">Modo fantasma desactivado</string>
     <string name="UMessageGhostButton">Botón fantasma en la pantalla principal</string>
     <string name="UMessageGhostButtonInfo">Muestra un botón junto a la búsqueda para activar y desactivar el modo fantasma.</string>
-    <string name="UMessageSecretChat">Chats secretos</string>
-    <string name="UMessageSecretChatInfo">Selecciona chats y toca el icono de ocultar arriba. Los chats ocultos se abren con un PIN de la forma elegida abajo y no notifican.</string>
+    <string name="UMessageSecretChat">Chats y cuentas ocultos</string>
+    <string name="UMessageSecretChatInfo">Selecciona chats y toca el icono de ocultar arriba, o mantén pulsada una cuenta en la lista. Se abren con un solo PIN de la forma que elijas abajo y no envían notificaciones.</string>
     <string name="UMessageHideChat">Ocultar chat</string>
     <string name="UMessageHideSelectChats">Selecciona los chats que quieres ocultar</string>
     <string name="UMessageHiddenAccessEdit">Mantener pulsado «Editar»</string>
@@ -76,7 +76,7 @@
     <string name="UMessageShowChat">Mostrar en la lista de chats</string>
     <string name="UMessageChatsHidden_one">%1$d chat oculto</string>
     <string name="UMessageChatsHidden_other">%1$d chats ocultos</string>
-    <string name="UMessageHiddenChats">Chats ocultos</string>
+    <string name="UMessageHiddenChats">Chats y cuentas ocultos</string>
     <string name="UMessageHiddenChatsInfo">Mantén pulsado un chat para volver a mostrarlo en la lista de chats.</string>
     <string name="UMessageHiddenChatsEmpty">No hay chats ocultos. Selecciona un chat en la lista y elige «Ocultar chat».</string>
     <string name="UMessageUnhideChat">Mostrar en la lista de chats</string>
@@ -2057,4 +2057,19 @@
     <string name="UMessageInviteText">¡Hola! Uso U message para chatear. ¡Únete! Descárgalo aquí: %1$s</string>
     <string name="UMessageShareApp">Compartir U message</string>
     <string name="UMessageInviteShort">Invitar a U message</string>
+    <string name="UMessageHideAccountTitle">¿Ocultar %1$s?</string>
+    <string name="UMessageHideRowList">Desaparece de las listas de cuentas</string>
+    <string name="UMessageHideRowMute">Deja de enviar notificaciones</string>
+    <string name="UMessageHideRowFind">Dónde encontrarla: mantén pulsado «Nuevo chat», se abren Chats y cuentas ocultos; luego mantén pulsada la pestaña Perfil</string>
+    <string name="UMessageHideEnterPin">Introduce el PIN de chats y cuentas ocultos</string>
+    <string name="UMessageHideChoosePin">Elige un PIN de 4 dígitos para chats y cuentas ocultos</string>
+    <string name="UMessageHideAccount">Ocultar</string>
+    <string name="UMessageAccountHidden">Cuenta oculta</string>
+    <string name="UMessageAccountShown">La cuenta vuelve a ser visible</string>
+    <string name="UMessageHideWithoutPin">Continuar sin PIN</string>
+    <string name="UMessageHideKeypad">Ocultar el teclado</string>
+    <string name="UMessageHiddenNothingYet">Aún no hay chats ocultos</string>
+    <string name="UMessageHiddenPickHint">Elige chats y ocúltalos. Solo se abrirán aquí, con tu PIN.</string>
+    <string name="UMessageHideChatsButton">Ocultar chats</string>
+    <string name="UMessageHiddenPickNone">Elige chats para ocultar</string>
 </resources>

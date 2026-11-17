@@ -53,8 +53,8 @@
     <string name="UMessageGhostModeOff">Режим привида вимкнено</string>
     <string name="UMessageGhostButton">Кнопка привида на головному екрані</string>
     <string name="UMessageGhostButtonInfo">Показує кнопку біля пошуку, щоб вмикати й вимикати режим привида.</string>
-    <string name="UMessageSecretChat">Секретні чати</string>
-    <string name="UMessageSecretChatInfo">Виділіть чати й натисніть значок приховування вгорі. Приховані чати відкриваються за PIN-кодом у вибраний нижче спосіб і не надсилають сповіщень.</string>
+    <string name="UMessageSecretChat">Приховані чати й акаунти</string>
+    <string name="UMessageSecretChatInfo">Виділіть чати й натисніть значок приховування вгорі або утримуйте акаунт у списку акаунтів. Вони відкриваються одним PIN-кодом обраним нижче способом і не надсилають сповіщень.</string>
     <string name="UMessageHideChat">Приховати чат</string>
     <string name="UMessageHideSelectChats">Виділіть чати, які треба приховати</string>
     <string name="UMessageHiddenAccessEdit">Довге натискання «Змінити»</string>
@@ -78,7 +78,7 @@
     <string name="UMessageChatsHidden_few">%1$d чати приховано</string>
     <string name="UMessageChatsHidden_many">%1$d чатів приховано</string>
     <string name="UMessageChatsHidden_other">%1$d чату приховано</string>
-    <string name="UMessageHiddenChats">Приховані чати</string>
+    <string name="UMessageHiddenChats">Приховані чати й акаунти</string>
     <string name="UMessageHiddenChatsInfo">Утримуйте чат, щоб повернути його до списку чатів.</string>
     <string name="UMessageHiddenChatsEmpty">Прихованих чатів немає. Виділіть чат у списку і виберіть «Приховати чат».</string>
     <string name="UMessageUnhideChat">Повернути до списку чатів</string>
@@ -1019,4 +1019,19 @@
     <string name="UMessageInviteText">Привіт, я спілкуюся в U message. Приєднуйся! Завантажити: %1$s</string>
     <string name="UMessageShareApp">Поділитися U message</string>
     <string name="UMessageInviteShort">Запросити в U message</string>
+    <string name="UMessageHideAccountTitle">Приховати %1$s?</string>
+    <string name="UMessageHideRowList">Зникне зі списку акаунтів</string>
+    <string name="UMessageHideRowMute">Сповіщення від нього припиняться</string>
+    <string name="UMessageHideRowFind">Де знайти: утримуйте «Новий чат» — відкриються Приховані чати й акаунти, потім утримуйте вкладку «Профіль»</string>
+    <string name="UMessageHideEnterPin">Введіть PIN-код прихованих чатів і акаунтів</string>
+    <string name="UMessageHideChoosePin">Придумайте 4-значний PIN-код для прихованих чатів і акаунтів</string>
+    <string name="UMessageHideAccount">Приховати</string>
+    <string name="UMessageAccountHidden">Акаунт приховано</string>
+    <string name="UMessageAccountShown">Акаунт знову видно</string>
+    <string name="UMessageHideWithoutPin">Продовжити без PIN-коду</string>
+    <string name="UMessageHideKeypad">Сховати клавіатуру</string>
+    <string name="UMessageHiddenNothingYet">Поки немає прихованих чатів</string>
+    <string name="UMessageHiddenPickHint">Виберіть чати й приховайте їх. Вони відкриватимуться лише тут, за вашим PIN-кодом.</string>
+    <string name="UMessageHideChatsButton">Приховати чати</string>
+    <string name="UMessageHiddenPickNone">Виберіть чати, щоб приховати</string>
 </resources>

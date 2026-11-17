@@ -46,8 +46,8 @@
     <string name="UMessageGhostModeOff">유령 모드가 꺼졌습니다</string>
     <string name="UMessageGhostButton">메인 화면의 유령 버튼</string>
     <string name="UMessageGhostButtonInfo">검색 옆에 유령 모드를 켜고 끄는 버튼을 표시합니다.</string>
-    <string name="UMessageSecretChat">비밀 채팅</string>
-    <string name="UMessageSecretChatInfo">채팅을 선택하고 상단의 숨기기 아이콘을 누르세요. 숨긴 채팅은 아래에서 선택한 방법으로 PIN을 입력해 열리며 알림을 보내지 않습니다.</string>
+    <string name="UMessageSecretChat">숨긴 채팅 및 계정</string>
+    <string name="UMessageSecretChatInfo">채팅을 선택하고 위의 숨기기 아이콘을 누르거나 계정 목록에서 계정을 길게 누르세요. 아래에서 고른 방법과 하나의 PIN으로 열리며 알림을 보내지 않아요.</string>
     <string name="UMessageHideChat">채팅 숨기기</string>
     <string name="UMessageHideSelectChats">숨길 채팅을 선택하세요</string>
     <string name="UMessageHiddenAccessEdit">‘편집’ 길게 누르기</string>
@@ -68,7 +68,7 @@
     <string name="UMessageChatsShown">채팅이 채팅 목록으로 돌아왔습니다</string>
     <string name="UMessageShowChat">채팅 목록에 표시</string>
     <string name="UMessageChatsHidden_other">채팅 %1$d개를 숨겼습니다</string>
-    <string name="UMessageHiddenChats">숨긴 채팅</string>
+    <string name="UMessageHiddenChats">숨긴 채팅 및 계정</string>
     <string name="UMessageHiddenChatsInfo">채팅을 길게 눌러 채팅 목록에 다시 표시하세요.</string>
     <string name="UMessageHiddenChatsEmpty">숨긴 채팅이 없습니다. 채팅 목록에서 채팅을 선택하고 ‘채팅 숨기기’를 누르세요.</string>
     <string name="UMessageUnhideChat">채팅 목록에 표시</string>
@@ -1892,4 +1892,19 @@
     <string name="UMessageInviteText">안녕하세요, 저는 U message로 채팅해요. 함께해요! 여기서 다운로드하세요: %1$s</string>
     <string name="UMessageShareApp">U message 공유하기</string>
     <string name="UMessageInviteShort">U message에 초대</string>
+    <string name="UMessageHideAccountTitle">%1$s을(를) 숨길까요?</string>
+    <string name="UMessageHideRowList">계정 목록에서 사라져요</string>
+    <string name="UMessageHideRowMute">알림이 오지 않아요</string>
+    <string name="UMessageHideRowFind">찾는 곳: «새 채팅»을 길게 누르면 숨긴 채팅 및 계정이 열려요. 그다음 프로필 탭을 길게 누르세요</string>
+    <string name="UMessageHideEnterPin">숨긴 채팅 및 계정 PIN을 입력하세요</string>
+    <string name="UMessageHideChoosePin">숨긴 채팅 및 계정용 4자리 PIN을 정하세요</string>
+    <string name="UMessageHideAccount">숨기기</string>
+    <string name="UMessageAccountHidden">계정을 숨겼어요</string>
+    <string name="UMessageAccountShown">계정이 다시 표시돼요</string>
+    <string name="UMessageHideWithoutPin">PIN 없이 계속</string>
+    <string name="UMessageHideKeypad">키패드 숨기기</string>
+    <string name="UMessageHiddenNothingYet">아직 숨긴 채팅이 없어요</string>
+    <string name="UMessageHiddenPickHint">채팅을 골라 숨기세요. 여기서 PIN으로만 열려요.</string>
+    <string name="UMessageHideChatsButton">채팅 숨기기</string>
+    <string name="UMessageHiddenPickNone">숨길 채팅을 선택하세요</string>
 </resources>

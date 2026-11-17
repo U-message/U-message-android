@@ -53,8 +53,8 @@
     <string name="UMessageGhostModeOff">تم إيقاف وضع الشبح</string>
     <string name="UMessageGhostButton">زر الشبح في الشاشة الرئيسية</string>
     <string name="UMessageGhostButtonInfo">يعرض زرًا بجانب البحث لتشغيل وضع الشبح وإيقافه.</string>
-    <string name="UMessageSecretChat">المحادثات السرية</string>
-    <string name="UMessageSecretChatInfo">حدّد المحادثات واضغط على أيقونة الإخفاء في الأعلى. تُفتح المحادثات المخفية برمز PIN بالطريقة المختارة أدناه ولا تُرسل إشعارات.</string>
+    <string name="UMessageSecretChat">المحادثات والحسابات المخفية</string>
+    <string name="UMessageSecretChatInfo">حدّد المحادثات واضغط أيقونة الإخفاء في الأعلى، أو اضغط مطولًا على حساب في قائمة الحسابات. تُفتح برمز PIN واحد بالطريقة التي تختارها أدناه ولا ترسل إشعارات.</string>
     <string name="UMessageHideChat">إخفاء المحادثة</string>
     <string name="UMessageHideSelectChats">حدّد المحادثات التي تريد إخفاءها</string>
     <string name="UMessageHiddenAccessEdit">ضغط مطوّل على «تعديل»</string>
@@ -80,7 +80,7 @@
     <string name="UMessageChatsHidden_few">تم إخفاء %1$d محادثات</string>
     <string name="UMessageChatsHidden_many">تم إخفاء %1$d محادثة</string>
     <string name="UMessageChatsHidden_other">تم إخفاء %1$d محادثة</string>
-    <string name="UMessageHiddenChats">المحادثات المخفية</string>
+    <string name="UMessageHiddenChats">المحادثات والحسابات المخفية</string>
     <string name="UMessageHiddenChatsInfo">اضغط مطولًا على محادثة لإظهارها مجددًا في قائمة المحادثات.</string>
     <string name="UMessageHiddenChatsEmpty">لا توجد محادثات مخفية. حدّد محادثة في القائمة واختر «إخفاء المحادثة».</string>
     <string name="UMessageUnhideChat">إظهار في قائمة المحادثات</string>
@@ -1988,4 +1988,19 @@
     <string name="UMessageInviteText">مرحبًا، أنا أستخدم U message للدردشة. انضم إلي! نزّله من هنا: %1$s</string>
     <string name="UMessageShareApp">مشاركة U message</string>
     <string name="UMessageInviteShort">دعوة إلى U message</string>
+    <string name="UMessageHideAccountTitle">إخفاء %1$s؟</string>
+    <string name="UMessageHideRowList">يختفي من قوائم الحسابات</string>
+    <string name="UMessageHideRowMute">تتوقف إشعاراته</string>
+    <string name="UMessageHideRowFind">أين تجده: اضغط مطولًا على «محادثة جديدة» فتُفتح المحادثات والحسابات المخفية، ثم اضغط مطولًا على تبويب الملف الشخصي</string>
+    <string name="UMessageHideEnterPin">أدخل رمز PIN للمحادثات والحسابات المخفية</string>
+    <string name="UMessageHideChoosePin">اختر رمز PIN من 4 أرقام للمحادثات والحسابات المخفية</string>
+    <string name="UMessageHideAccount">إخفاء</string>
+    <string name="UMessageAccountHidden">تم إخفاء الحساب</string>
+    <string name="UMessageAccountShown">الحساب مرئي مرة أخرى</string>
+    <string name="UMessageHideWithoutPin">المتابعة دون رمز PIN</string>
+    <string name="UMessageHideKeypad">إخفاء لوحة الأرقام</string>
+    <string name="UMessageHiddenNothingYet">لا توجد محادثات مخفية بعد</string>
+    <string name="UMessageHiddenPickHint">اختر المحادثات وأخفِها. ستُفتح هنا فقط برمز PIN الخاص بك.</string>
+    <string name="UMessageHideChatsButton">إخفاء المحادثات</string>
+    <string name="UMessageHiddenPickNone">اختر محادثات لإخفائها</string>
 </resources>

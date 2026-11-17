@@ -53,8 +53,8 @@
     <string name="UMessageGhostModeOff">Geistmodus ist aus</string>
     <string name="UMessageGhostButton">Geist-Taste auf dem Startbildschirm</string>
     <string name="UMessageGhostButtonInfo">Zeigt neben der Suche eine Taste, um den Geistmodus ein- und auszuschalten.</string>
-    <string name="UMessageSecretChat">Geheime Chats</string>
-    <string name="UMessageSecretChatInfo">Wähle Chats aus und tippe oben auf das Ausblenden-Symbol. Versteckte Chats öffnen sich mit einer PIN auf die unten gewählte Weise und benachrichtigen nicht.</string>
+    <string name="UMessageSecretChat">Verborgene Chats &amp; Konten</string>
+    <string name="UMessageSecretChatInfo">Chats auswählen und oben auf das Ausblenden-Symbol tippen oder ein Konto in der Kontoliste gedrückt halten. Sie öffnen sich mit einer PIN auf die unten gewählte Weise und senden keine Benachrichtigungen.</string>
     <string name="UMessageHideChat">Chat ausblenden</string>
     <string name="UMessageHideSelectChats">Wähle die Chats aus, die ausgeblendet werden sollen</string>
     <string name="UMessageHiddenAccessEdit">„Bearbeiten“ lange drücken</string>
@@ -76,7 +76,7 @@
     <string name="UMessageShowChat">In Chatliste anzeigen</string>
     <string name="UMessageChatsHidden_one">%1$d Chat ausgeblendet</string>
     <string name="UMessageChatsHidden_other">%1$d Chats ausgeblendet</string>
-    <string name="UMessageHiddenChats">Versteckte Chats</string>
+    <string name="UMessageHiddenChats">Verborgene Chats &amp; Konten</string>
     <string name="UMessageHiddenChatsInfo">Halte einen Chat gedrückt, um ihn wieder in der Chatliste anzuzeigen.</string>
     <string name="UMessageHiddenChatsEmpty">Keine versteckten Chats. Wähle einen Chat in der Chatliste aus und tippe auf „Chat ausblenden“.</string>
     <string name="UMessageUnhideChat">In Chatliste anzeigen</string>
@@ -2116,4 +2116,19 @@
     <string name="UMessageInviteText">Hey, ich chatte mit U message. Mach mit! Hier herunterladen: %1$s</string>
     <string name="UMessageShareApp">U message teilen</string>
     <string name="UMessageInviteShort">Zu U message einladen</string>
+    <string name="UMessageHideAccountTitle">%1$s ausblenden?</string>
+    <string name="UMessageHideRowList">Verschwindet aus den Kontolisten</string>
+    <string name="UMessageHideRowMute">Keine Benachrichtigungen mehr</string>
+    <string name="UMessageHideRowFind">So findest du es: „Neuer Chat“ gedrückt halten, Verborgene Chats &amp; Konten öffnen sich; dann den Profil-Tab gedrückt halten</string>
+    <string name="UMessageHideEnterPin">PIN für verborgene Chats &amp; Konten eingeben</string>
+    <string name="UMessageHideChoosePin">Wähle eine 4-stellige PIN für verborgene Chats &amp; Konten</string>
+    <string name="UMessageHideAccount">Ausblenden</string>
+    <string name="UMessageAccountHidden">Konto ausgeblendet</string>
+    <string name="UMessageAccountShown">Konto wieder sichtbar</string>
+    <string name="UMessageHideWithoutPin">Ohne PIN fortfahren</string>
+    <string name="UMessageHideKeypad">Ziffernblock ausblenden</string>
+    <string name="UMessageHiddenNothingYet">Noch keine verborgenen Chats</string>
+    <string name="UMessageHiddenPickHint">Wähle Chats aus und blende sie aus. Sie öffnen sich nur hier, mit deiner PIN.</string>
+    <string name="UMessageHideChatsButton">Chats ausblenden</string>
+    <string name="UMessageHiddenPickNone">Chats zum Ausblenden auswählen</string>
 </resources>

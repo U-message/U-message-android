@@ -147,8 +147,8 @@
     <string name="UMessageGhostUsersAdd">Add</string>
     <string name="UMessageGhostScopeInfoOnly">Typing, read receipts and online status are hidden only from the selected users. Online status is hidden through the Last Seen &amp; Online privacy setting, so without Premium you will not see their last seen either.</string>
     <string name="UMessageGhostScopeInfoExcept">Ghost mode works for everyone except the selected users. Only they will see you online, through the Last Seen &amp; Online privacy setting. Your own setting comes back when you turn this off.</string>
-    <string name="UMessageSecretChat">Secret chats</string>
-    <string name="UMessageSecretChatInfo">Select chats and tap the hide icon at the top. Hidden chats open with a PIN in the way you choose below and do not notify.</string>
+    <string name="UMessageSecretChat">Hidden chats &amp; accounts</string>
+    <string name="UMessageSecretChatInfo">Select chats and tap the hide icon at the top, or long press an account in the account list. They open with one PIN in the way you choose below and do not notify.</string>
     <string name="UMessageHideChat">Hide chat</string>
     <string name="UMessageHideSelectChats">Select the chats to hide</string>
     <string name="UMessageHiddenAccessEdit">Long press “Edit”</string>
@@ -171,7 +171,7 @@
     <string name="UMessageShowChat">Show in chat list</string>
     <string name="UMessageChatsHidden_one">%1$d chat hidden</string>
     <string name="UMessageChatsHidden_other">%1$d chats hidden</string>
-    <string name="UMessageHiddenChats">Hidden chats</string>
+    <string name="UMessageHiddenChats">Hidden chats &amp; accounts</string>
     <string name="UMessageHiddenFolders">Hidden folders</string>
     <string name="UMessageHideFolder">Hide folder</string>
     <string name="UMessageShowFolder">Show folder</string>
@@ -12985,4 +12985,19 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageInviteText">Hey, I\'m using U message to chat. Join me! Download it here: %1$s</string>
     <string name="UMessageShareApp">Share U message</string>
     <string name="UMessageInviteShort">Invite to U message</string>
+    <string name="UMessageHideAccountTitle">Hide %1$s?</string>
+    <string name="UMessageHideRowList">Disappears from the account lists</string>
+    <string name="UMessageHideRowMute">Its notifications stop</string>
+    <string name="UMessageHideRowFind">To find it: long press “New chat”, Hidden chats &amp; accounts open; then long press the Profile tab</string>
+    <string name="UMessageHideEnterPin">Enter the Hidden chats &amp; accounts PIN</string>
+    <string name="UMessageHideChoosePin">Choose a 4-digit PIN for Hidden chats &amp; accounts</string>
+    <string name="UMessageHideAccount">Hide</string>
+    <string name="UMessageAccountHidden">Account hidden</string>
+    <string name="UMessageAccountShown">Account is visible again</string>
+    <string name="UMessageHideWithoutPin">Continue without PIN</string>
+    <string name="UMessageHideKeypad">Hide the keypad</string>
+    <string name="UMessageHiddenNothingYet">No hidden chats yet</string>
+    <string name="UMessageHiddenPickHint">Choose chats and hide them. They will open only here, with your PIN.</string>
+    <string name="UMessageHideChatsButton">Hide chats</string>
+    <string name="UMessageHiddenPickNone">Select chats to hide</string>
 </resources>

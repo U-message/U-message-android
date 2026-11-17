@@ -727,6 +727,14 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
     /** FLAG_SECURE while the hidden chats list is on screen (set on resume, cleared on pause). */
     private org.telegram.messenger.FlagSecureReason umHiddenSecure;
+    private org.telegram.ui.Components.UMessageHiddenEmptyView umHiddenEmpty;
+
+    private void checkHiddenEmpty() {
+        if (umHiddenEmpty == null) return;
+        final boolean empty = getMessagesController().dialogsUMessageHidden.isEmpty();
+        umHiddenEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
+        if (empty) umHiddenEmpty.reload();
+    }
 
     private final static int ARCHIVE_ITEM_STATE_PINNED = 0;
     private final static int ARCHIVE_ITEM_STATE_SHOWED = 1;
@@ -5932,6 +5940,20 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         }
 
 
+        if (umHiddenMode && hasMainTabs) {
+            // nothing hidden yet: say so, and offer the regular chats to tick and hide right here
+            umHiddenEmpty = new org.telegram.ui.Components.UMessageHiddenEmptyView(context, currentAccount, picked -> {
+                UMessageConfig.setChatsHidden(currentAccount, picked, true);
+                BulletinFactory.of(DialogsActivity.this).createSimpleBulletin(R.raw.chats_hide, LocaleController.formatPluralString("UMessageChatsHidden", picked.size())).show();
+                checkHiddenEmpty();
+            });
+            umHiddenEmpty.setPadding(0, AndroidUtilities.statusBarHeight + ActionBar.getCurrentActionBarHeight(), 0, 0);
+            umHiddenEmpty.setBottomInset(additionNavigationBarHeight + AndroidUtilities.navigationBarHeight);
+            final int under = contentView.indexOfChild(actionBar);
+            contentView.addView(umHiddenEmpty, under >= 0 ? under : contentView.getChildCount(), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+            checkHiddenEmpty();
+        }
+
         updateStoriesVisibility(false);
 
         updateFloatingButtonVisibility(false);
@@ -7344,6 +7366,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     @Override
     public void onResume() {
         super.onResume();
+        checkHiddenEmpty();
         if (umHiddenMode && getParentActivity() != null) {
             if (umHiddenSecure == null) umHiddenSecure = new org.telegram.messenger.FlagSecureReason(getParentActivity().getWindow(), () -> true);
             umHiddenSecure.attach();
@@ -7661,6 +7684,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             java.util.List<BaseFragment> stack = new ArrayList<>(parentLayout.getFragmentStack());
             for (int i = stack.size() - 2; i >= 1; i--) {
                 parentLayout.removeFragmentFromStack(stack.get(i));
+            }
+            // inside the hidden tabs screen: close that screen, not just this page of it
+            final BaseFragment last = parentLayout.getLastFragment();
+            if (hasMainTabs && last instanceof MainTabsActivity && last != this) {
+                last.finishFragment();
+                return;
             }
         }
         finishFragment();
@@ -11321,6 +11350,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             return;
         }
         if (id == NotificationCenter.dialogsNeedReload) {
+            checkHiddenEmpty();
             if (viewPages == null || dialogsListFrozen) {
                 return;
             }

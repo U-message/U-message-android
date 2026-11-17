@@ -152,8 +152,8 @@
     <string name="UMessageGhostUsersAdd">Добавить</string>
     <string name="UMessageGhostScopeInfoOnly">Набор текста, отметки о прочтении и онлайн-статус скрываются только от выбранных пользователей. Онлайн-статус скрывается через настройку «Последняя активность», поэтому без Premium вы тоже не увидите их активность.</string>
     <string name="UMessageGhostScopeInfoExcept">Режим призрака работает для всех, кроме выбранных. Онлайн вас увидят только они — через настройку «Последняя активность». При отключении ваша настройка вернётся.</string>
-    <string name="UMessageSecretChat">Секретный чат</string>
-    <string name="UMessageSecretChatInfo">Выделите чаты и нажмите значок скрытия вверху. Скрытые чаты открываются по PIN-коду выбранным ниже способом и не присылают уведомления.</string>
+    <string name="UMessageSecretChat">Скрытые чаты и аккаунты</string>
+    <string name="UMessageSecretChatInfo">Выделите чаты и нажмите значок скрытия вверху или удерживайте аккаунт в списке аккаунтов. Они открываются одним PIN-кодом выбранным ниже способом и не присылают уведомлений.</string>
     <string name="UMessageHideChat">Скрыть чат</string>
     <string name="UMessageHideSelectChats">Выделите чаты, которые нужно скрыть</string>
     <string name="UMessageHiddenAccessEdit">Долгое нажатие «Изменить»</string>
@@ -175,7 +175,7 @@
     <string name="UMessageShowChat">Вернуть в список чатов</string>
     <string name="UMessageChatsHidden_one">%1$d чат скрыт</string>
     <string name="UMessageChatsHidden_other">%1$d чата скрыто</string>
-    <string name="UMessageHiddenChats">Скрытые чаты</string>
+    <string name="UMessageHiddenChats">Скрытые чаты и аккаунты</string>
     <string name="UMessageHiddenChatsInfo">Удерживайте чат, чтобы вернуть его в список чатов.</string>
     <string name="UMessageHiddenChatsEmpty">Скрытых чатов нет. Выделите чат в списке и выберите «Скрыть чат».</string>
     <string name="UMessageUnhideChat">Вернуть в список чатов</string>
@@ -1449,4 +1449,19 @@
     <string name="UMessageInviteText">Привет, я общаюсь в U message. Присоединяйся! Скачать: %1$s</string>
     <string name="UMessageShareApp">Поделиться U message</string>
     <string name="UMessageInviteShort">Пригласить в U message</string>
+    <string name="UMessageHideAccountTitle">Скрыть %1$s?</string>
+    <string name="UMessageHideRowList">Исчезнет из списка аккаунтов</string>
+    <string name="UMessageHideRowMute">Уведомления от него прекратятся</string>
+    <string name="UMessageHideRowFind">Где найти: удерживайте «Новый чат» — откроются Скрытые чаты и аккаунты, затем удерживайте вкладку «Профиль»</string>
+    <string name="UMessageHideEnterPin">Введите PIN-код скрытых чатов и аккаунтов</string>
+    <string name="UMessageHideChoosePin">Придумайте 4-значный PIN-код для скрытых чатов и аккаунтов</string>
+    <string name="UMessageHideAccount">Скрыть</string>
+    <string name="UMessageAccountHidden">Аккаунт скрыт</string>
+    <string name="UMessageAccountShown">Аккаунт снова виден</string>
+    <string name="UMessageHideWithoutPin">Продолжить без PIN-кода</string>
+    <string name="UMessageHideKeypad">Скрыть клавиатуру</string>
+    <string name="UMessageHiddenNothingYet">Пока нет скрытых чатов</string>
+    <string name="UMessageHiddenPickHint">Выберите чаты и скройте их. Они будут открываться только здесь, по вашему PIN-коду.</string>
+    <string name="UMessageHideChatsButton">Скрыть чаты</string>
+    <string name="UMessageHiddenPickNone">Выберите чаты, чтобы скрыть</string>
 </resources>

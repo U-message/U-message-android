@@ -647,7 +647,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
         accountNumbers.clear();
         for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
-            if (UserConfig.getInstance(a).isClientActivated() && currentAccount != a) {
+            if (UserConfig.getInstance(a).isClientActivated() && currentAccount != a && !org.telegram.messenger.UMessageConfig.isAccountHiddenFromList(a, currentAccount)) {
                 accountNumbers.add(a);
             }
         }
@@ -924,6 +924,10 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
     }
 
     private boolean onLongClick(UItem item, View view, int position, float x, float y) {
+        if (item.instanceOf(AccountCell.Factory.class)) {
+            UMessageAccountHiding.confirmHide(this, item.intValue, () -> listView.adapter.update(true));
+            return true;
+        }
         if (item.object instanceof TLRPC.TL_attachMenuBot) {
             TLRPC.TL_attachMenuBot attachMenuBot = (TLRPC.TL_attachMenuBot) item.object;
             BotWebViewSheet.deleteBot(currentAccount, attachMenuBot.bot_id, () -> listView.adapter.update(true));

@@ -141,8 +141,8 @@
     <string name="UMessageGhostUsersAdd">Qoʻshish</string>
     <string name="UMessageGhostScopeInfoOnly">Yozayotganingiz, oʻqildi belgilari va onlayn holatingiz faqat tanlangan foydalanuvchilardan yashiriladi. Onlayn holat «Oxirgi faollik» maxfiylik sozlamasi orqali yashiriladi, shuning uchun Premium boʻlmasa siz ham ularning faolligini koʻrmaysiz.</string>
     <string name="UMessageGhostScopeInfoExcept">Arvoh rejimi tanlangan foydalanuvchilardan tashqari hammaga ishlaydi. Onlayn ekaningizni «Oxirgi faollik» sozlamasi orqali faqat ular koʻradi. Oʻchirsangiz, oʻz sozlamangiz qaytadi.</string>
-    <string name="UMessageSecretChat">Maxfiy chatlar</string>
-    <string name="UMessageSecretChatInfo">Chatlarni belgilab, tepadagi yashirish ikonkasini bosing. Yashirin chatlar quyida tanlangan usulda PIN kod bilan ochiladi va bildirishnoma bermaydi.</string>
+    <string name="UMessageSecretChat">Yashirin chatlar va akkauntlar</string>
+    <string name="UMessageSecretChatInfo">Chatlarni belgilab, tepadagi yashirish ikonkasini bosing yoki akkauntlar ro\'yxatida akkauntni bosib turing. Ular bitta PIN kod bilan quyida tanlangan usulda ochiladi va bildirishnoma bermaydi.</string>
     <string name="UMessageHideChat">Chatni yashirish</string>
     <string name="UMessageHideSelectChats">Yashiriladigan chatlarni belgilang</string>
     <string name="UMessageHiddenAccessEdit">«Tahrirlash»ni uzoq bosish</string>
@@ -165,7 +165,7 @@
     <string name="UMessageShowChat">Chatlar roʻyxatiga qaytarish</string>
     <string name="UMessageChatsHidden_one">%1$d ta chat yashirildi</string>
     <string name="UMessageChatsHidden_other">%1$d ta chat yashirildi</string>
-    <string name="UMessageHiddenChats">Yashirin chatlar</string>
+    <string name="UMessageHiddenChats">Yashirin chatlar va akkauntlar</string>
     <string name="UMessageHiddenFolders">Yashirin folderlar</string>
     <string name="UMessageHideFolder">Folderni yashirish</string>
     <string name="UMessageShowFolder">Folderni qayta ko‘rsatish</string>
@@ -1350,4 +1350,19 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageInviteText">Salom, men U message orqali yozishaman. Sen ham qo\'shil! Yuklab olish: %1$s</string>
     <string name="UMessageShareApp">U message\'ni ulashish</string>
     <string name="UMessageInviteShort">U message\'ga taklif qilish</string>
+    <string name="UMessageHideAccountTitle">%1$s yashirilsinmi?</string>
+    <string name="UMessageHideRowList">Akkauntlar ro\'yxatidan yo\'qoladi</string>
+    <string name="UMessageHideRowMute">Bildirishnomalari kelmaydi</string>
+    <string name="UMessageHideRowFind">Qayerdan topiladi: «Yangi chat»ni bosib tursangiz, Yashirin chatlar va akkauntlar ochiladi; keyin Profil tabini bosib turing</string>
+    <string name="UMessageHideEnterPin">Yashirin chatlar va akkauntlar kodini kiriting</string>
+    <string name="UMessageHideChoosePin">Yashirin chatlar va akkauntlar uchun 4 xonali kod o\'ylang</string>
+    <string name="UMessageHideAccount">Yashirish</string>
+    <string name="UMessageAccountHidden">Akkaunt yashirildi</string>
+    <string name="UMessageAccountShown">Akkaunt yana ko\'rinadi</string>
+    <string name="UMessageHideWithoutPin">Parolsiz davom etish</string>
+    <string name="UMessageHideKeypad">Tugmalarni yopish</string>
+    <string name="UMessageHiddenNothingYet">Hali yashirin chatlar yo\'q</string>
+    <string name="UMessageHiddenPickHint">Chatlarni tanlab yashiring. Ular faqat shu yerda, kodingiz bilan ochiladi.</string>
+    <string name="UMessageHideChatsButton">Chatlarni yashirish</string>
+    <string name="UMessageHiddenPickNone">Yashirish uchun chatlarni tanlang</string>
 </resources>
