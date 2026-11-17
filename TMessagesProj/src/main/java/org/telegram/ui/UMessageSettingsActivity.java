@@ -566,6 +566,7 @@ public class UMessageSettingsActivity extends BaseFragment {
             items.add(UItem.asButton(HIDDEN_PASSWORD, LocaleController.getString(UMessageConfig.hasHiddenPassword() ? R.string.UMessageHiddenPasswordChange : R.string.UMessageHiddenPasswordSet)));
         }
         items.add(UItem.asShadow(null));
+
     }
 
     /**
@@ -605,8 +606,8 @@ public class UMessageSettingsActivity extends BaseFragment {
             items.add(UItem.asButton(ACCOUNT_AUTO_SWITCH,
                     LocaleController.getString(R.string.UMessageAccountAutoSwitch),
                     LocaleController.getString(UMessageConfig.hasAccountSwitchPins() ? R.string.UMessageConfigured : R.string.UMessageNotConfigured)));
-            items.add(UItem.asShadow(null));
         }
+        items.add(UItem.asShadow(null));
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionStrangers)));
         addToggle(items, UMessageConfig.KEY_STRANGER_PROTECTION);
@@ -623,7 +624,6 @@ public class UMessageSettingsActivity extends BaseFragment {
             items.add(UItem.asShadow(null));
         }
         addToggle(items, UMessageConfig.KEY_SAVE_VIEW_ONCE);
-        if (on(org.telegram.messenger.UMessageRemoteFlags.VIEW_ONCE_SAVE)) items.add(UItem.asButton(KEPT_MEDIA, R.drawable.msg_saved, LocaleController.getString(R.string.UMessageLocalCacheSize)));
         items.add(UItem.asShadow(null));
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionAutoReply)));
