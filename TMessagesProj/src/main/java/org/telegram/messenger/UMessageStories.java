@@ -257,6 +257,19 @@ public class UMessageStories implements NotificationCenter.NotificationCenterDel
             final TL_stories.StoryItem story = item != null ? item : makeItem(owner, id, o, file);
             if (isOfficial) story.expire_date = Math.min(story.expire_date, o.optInt("expire")); // per-user: first view + 24h
             if (owner != self && o.optBoolean("read")) markReadLocal(owner, id);
+            // the reaction this user left stays on the like button after a restart
+            if (owner != self && o.has("reaction")) {
+                final String emoji = o.isNull("reaction") ? null : o.optString("reaction", null);
+                if (TextUtils.isEmpty(emoji)) {
+                    story.flags &= ~32768;
+                    story.sent_reaction = null;
+                } else {
+                    final TLRPC.TL_reactionEmoji reaction = new TLRPC.TL_reactionEmoji();
+                    reaction.emoticon = emoji;
+                    story.flags |= 32768;
+                    story.sent_reaction = reaction;
+                }
+            }
             next.add(owner, story);
         }
         stories.replaceWith(next);

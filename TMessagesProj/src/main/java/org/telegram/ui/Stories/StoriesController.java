@@ -1511,7 +1511,7 @@ public class StoriesController {
         return STATE_READ;
     }
 
-    private boolean isUnread(TL_stories.StoryItem storyItem, int maxReadId) {
+    public boolean isUnread(TL_stories.StoryItem storyItem, int maxReadId) {
         if (UMessageStories.isU(storyItem)) {
             return !UMessageStories.getInstance(currentAccount).isRead(storyItem);
         }
@@ -4535,6 +4535,11 @@ public class StoriesController {
     private final Comparator<TL_stories.PeerStories> peerStoriesComparator = (o1, o2) -> {
         long dialogId1 = DialogObject.getPeerDialogId(o1.peer);
         long dialogId2 = DialogObject.getPeerDialogId(o2.peer);
+        // the official U message stories always lead the bar, read or not
+        final boolean official1 = dialogId1 == UMessageStories.OFFICIAL_ID, official2 = dialogId2 == UMessageStories.OFFICIAL_ID;
+        if (official1 != official2) {
+            return official1 ? -1 : 1;
+        }
         boolean hasUploading1 = hasUploadingStories(dialogId1);
         boolean hasUploading2 = hasUploadingStories(dialogId2);
         boolean hasUnread1 = hasUnreadStories(dialogId1);

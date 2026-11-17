@@ -526,7 +526,8 @@ public class StoriesUtilities {
                 } else {
                     if (i >= userStories.stories.size()) {
                         segmentPaint = unreadPaint;
-                    } else if (userStories.stories.get(i).justUploaded || userStories.stories.get(i).id > maxUnread) {
+                    } else if (userStories.stories.get(i).justUploaded || storiesController.isUnread(userStories.stories.get(i), maxUnread)) {
+                        // isUnread: U message stories keep their own read state, their ids are above any max_read_id
                         if (userStories.stories.get(i).media instanceof TLRPC.TL_messageMediaVideoStream) {
                             segmentPaint = livePaint;
                         } else if (userStories.stories.get(i).close_friends) {

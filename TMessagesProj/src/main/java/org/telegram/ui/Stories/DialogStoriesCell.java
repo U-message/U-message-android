@@ -1656,7 +1656,8 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
                     textView.setTextSize(11);
                     String name = user.first_name == null ? "" : user.first_name.trim();
                     int index = name.indexOf(" ");
-                    if (index > 0) {
+                    // the official account keeps its whole name: "U message", never just "U"
+                    if (index > 0 && user.id != org.telegram.messenger.UMessageStories.OFFICIAL_ID) {
                         name = name.substring(0, index);
                     }
                     if (user.verified) {
