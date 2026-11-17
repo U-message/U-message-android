@@ -10598,10 +10598,11 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             for (int i = 0; i < editBar.getChildCount(); i++) {
                 View child = editBar.getChildAt(i);
                 if (child instanceof TextView) {
-                    ((TextView) child).setTextColor(getThemedColor(Theme.key_windowBackgroundWhiteBlackText));
-                    child.setBackground(Theme.createSimpleSelectorRoundRectDrawable(dp(24), getThemedColor(Theme.key_windowBackgroundWhite), getThemedColor(Theme.key_listSelector)));
+                    ((TextView) child).setTextColor(getThemedColor(child == editDeleteButton ? Theme.key_text_RedBold : Theme.key_windowBackgroundWhiteBlackText));
+                    child.setBackground(Theme.createRadSelectorDrawable(getThemedColor(Theme.key_listSelector), 24, 24));
                 }
             }
+            editBar.setBackground(createEditBarBackground());
         }
     }
 
@@ -10623,8 +10624,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         savedButton.setScaleX(0.6f + 0.4f * progress);
         savedButton.setScaleY(0.6f + 0.4f * progress);
         savedButton.setVisibility(savedWidth > 0 ? View.VISIBLE : View.GONE);
-        pillItem.getLayoutParams().width = dp(88) + savedWidth;
-        pillItem.requestLayout();
+        updatePillWidth();
         savedButton.requestLayout();
     }
 
@@ -10662,6 +10662,16 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         savedButton.setOnClickListener(v -> presentFragment(new UMessageFriendMapActivity(new Bundle())));
         pill.addView(savedButton, LayoutHelper.createLinear(44, 40));
     }
+
+    private void updatePillWidth() {
+        if (pillItem == null) {
+            return;
+        }
+        final int savedWidth = savedButton != null && savedButton.getVisibility() == View.VISIBLE ? savedButton.getLayoutParams().width : 0;
+        pillItem.getLayoutParams().width = dp(88) + savedWidth;
+        pillItem.requestLayout();
+    }
+
 
     /** Main tabs dock action button on the chats tab: new message. */
     public void onMainTabsActionClick() {
@@ -10711,11 +10721,20 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             }
         });
 
-        editBar.addView(editReadButton, LayoutHelper.createLinear(0, 48, 1f));
-        editBar.addView(new View(context), LayoutHelper.createLinear(8, 1));
-        editBar.addView(editArchiveButton, LayoutHelper.createLinear(0, 48, 1f));
-        editBar.addView(new View(context), LayoutHelper.createLinear(8, 1));
-        editBar.addView(editDeleteButton, LayoutHelper.createLinear(0, 48, 1f));
+        // One iOS-style capsule holding three equal actions (Delete in red), the same size as the main tabs.
+        editBar.setPadding(dp(4), dp(MAIN_TABS_MARGIN + 4), dp(4), dp(MAIN_TABS_MARGIN + 4));
+        editBar.setBackground(createEditBarBackground());
+        editBar.setOutlineProvider(new android.view.ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, android.graphics.Outline outline) {
+                outline.setRoundRect(0, dp(MAIN_TABS_MARGIN), view.getWidth(), view.getHeight() - dp(MAIN_TABS_MARGIN), dp(MAIN_TABS_HEIGHT / 2f));
+            }
+        });
+        editBar.setElevation(dp(4));
+        editBar.addView(editReadButton, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+        editBar.addView(editArchiveButton, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+        editBar.addView(editDeleteButton, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+        editDeleteButton.setTextColor(getThemedColor(Theme.key_text_RedBold));
         contentView.addView(editBar, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, MAIN_TABS_HEIGHT_WITH_MARGINS, Gravity.BOTTOM, 16, 0, 16, 0));
     }
 
@@ -10723,19 +10742,24 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         TextView button = new TextView(context);
         button.setText(text);
         button.setGravity(Gravity.CENTER);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         button.setTypeface(AndroidUtilities.bold());
-        button.setSingleLine(true);
+        button.setMaxLines(1);
+        button.setEllipsize(TextUtils.TruncateAt.END);
         button.setIncludeFontPadding(false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            button.setAutoSizeTextTypeUniformWithConfiguration(11, 16, 1, TypedValue.COMPLEX_UNIT_SP);
-        }
-        button.setPadding(dp(12), 0, dp(12), 0);
+        button.setPadding(dp(6), 0, dp(6), 0);
         button.setTextColor(getThemedColor(Theme.key_windowBackgroundWhiteBlackText));
-        button.setBackground(Theme.createSimpleSelectorRoundRectDrawable(dp(24), getThemedColor(Theme.key_windowBackgroundWhite), getThemedColor(Theme.key_listSelector)));
-        button.setElevation(dp(3));
+        button.setBackground(Theme.createRadSelectorDrawable(getThemedColor(Theme.key_listSelector), 24, 24));
         ScaleStateListAnimator.apply(button);
         return button;
+    }
+
+    private Drawable createEditBarBackground() {
+        android.graphics.drawable.GradientDrawable pill = new android.graphics.drawable.GradientDrawable();
+        pill.setCornerRadius(dp(MAIN_TABS_HEIGHT / 2f));
+        pill.setColor(getThemedColor(Theme.key_windowBackgroundWhite));
+        pill.setStroke(Math.max(1, dp(0.66f)), getThemedColor(Theme.key_divider));
+        return new android.graphics.drawable.InsetDrawable(pill, 0, dp(MAIN_TABS_MARGIN), 0, dp(MAIN_TABS_MARGIN));
     }
 
     private void setEditMode(boolean enabled) {
