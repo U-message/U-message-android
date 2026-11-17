@@ -623,7 +623,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private final static int enable_no_forwards = 46;
     private final static int disable_no_forwards = 47;
     private final static int send_money = 48;
-    private final UMessageMutualContactSheet.Badge[] mutualBadge = new UMessageMutualContactSheet.Badge[2];
+    private UMessageMutualContactSheet.Badge mutualBadge;
     private int mutualBadgeAlpha = 255;
     private android.animation.ValueAnimator mutualBadgeAnimator;
 
@@ -644,11 +644,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
     private void applyMutualBadgeAlpha(int alpha) {
         mutualBadgeAlpha = alpha;
-        for (int i = 0; i < mutualBadge.length; i++) {
-            if (mutualBadge[i] != null) {
-                mutualBadge[i].setAlpha(alpha);
-                if (onlineTextView[i] != null) onlineTextView[i].invalidate();
-            }
+        if (mutualBadge != null) {
+            mutualBadge.setAlpha(alpha);
+            if (onlineTextView != null) onlineTextView.invalidate();
         }
     }
 
@@ -11893,14 +11891,14 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     }, resourcesProvider);
                 } : null);
                 // U message: a quiet logo after the status of someone who has you in contacts too
-                if (!(a == 1 && hiddenStatusButton) && user != null && !user.self && user.mutual_contact && org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.MUTUAL_CONTACT)) {
-                    if (mutualBadge[a] == null) {
-                        mutualBadge[a] = new UMessageMutualContactSheet.Badge(onlineTextView[a]);
-                        mutualBadge[a].setAlpha(mutualBadgeAlpha);
+                if (!hiddenStatusButton && user != null && !user.self && user.mutual_contact && org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.MUTUAL_CONTACT)) {
+                    if (mutualBadge == null) {
+                        mutualBadge = new UMessageMutualContactSheet.Badge(onlineTextView);
+                        mutualBadge.setAlpha(mutualBadgeAlpha);
                     }
-                    final SimpleTextView statusView = onlineTextView[a];
-                    onlineTextView[a].setRightDrawable(mutualBadge[a]);
-                    onlineTextView[a].setRightDrawableOnClick(v -> UMessageMutualContactSheet.show(this, currentAccount, user, statusView, resourcesProvider));
+                    final SimpleTextView statusView = onlineTextView;
+                    onlineTextView.setRightDrawable(mutualBadge);
+                    onlineTextView.setRightDrawableOnClick(v -> UMessageMutualContactSheet.show(this, currentAccount, user, statusView, resourcesProvider));
                 }
                 Drawable leftIcon = currentEncryptedChat != null ? getLockIconDrawable() : null;
                 boolean rightIconIsPremium = false, rightIconIsStatus = false;

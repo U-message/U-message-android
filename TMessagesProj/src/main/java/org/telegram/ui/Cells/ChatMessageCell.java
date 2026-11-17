@@ -15713,7 +15713,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             return LocaleController.formatSmallDateChat(current.realDate) + ", " + LocaleController.getInstance().getFormatterDay().format((long) (current.realDate) * 1000);
         } else if (current.isRepostPreview) {
             return LocaleController.formatSmallDateChat(message.messageOwner.date) + ", " + LocaleController.getInstance().getFormatterDay().format((long) (message.messageOwner.date) * 1000);
-        } else if (edited && !(UMessageConfig.isSaveEdited() && !currentMessageObject.isSponsored())) {
+        } else if (edited && !(UMessageConfig.isSaveEdited() && !current.isSponsored())) {
             if (AppGlobalConfig.getInstance(current.currentAccount).messagePrimaryEditedDate.get()) {
                 if (editDate == 0 && current.isEditing()) {
                     editDate = ConnectionsManager.getInstance(current.currentAccount).getCurrentTime();

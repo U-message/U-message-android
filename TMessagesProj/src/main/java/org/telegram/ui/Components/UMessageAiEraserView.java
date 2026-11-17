@@ -532,8 +532,8 @@ public class UMessageAiEraserView extends FrameLayout {
                 drawImage(c);
                 imageNode.endRecording();
                 float r = dp(36) * Math.min(1f, appear);
-                glass.update(card.left, card.top, card.right, card.bottom, r, r, r, r,
-                    dp(16), 0.9f * Math.min(1f, appear), 1.5f, ColorUtils.setAlphaComponent(0xff101014, (int) (0x66 * Math.min(1f, appear))));
+                glass.update(card.width(), card.height(), card.left, card.top, r, r, r, r,
+                    dp(16), 0.9f * Math.min(1f, appear), 1.5f, ColorUtils.setAlphaComponent(0xff101014, (int) (0x66 * Math.min(1f, appear))), 0, 0, 1);
                 canvas.drawRenderNode(imageNode);
             } else {
                 drawImage(canvas);

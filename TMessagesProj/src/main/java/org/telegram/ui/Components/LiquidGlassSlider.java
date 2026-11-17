@@ -195,8 +195,8 @@ public class LiquidGlassSlider extends View {
             final Canvas c = trackNode.beginRecording();
             drawTrack(c, x, cy);
             trackNode.endRecording();
-            glass.update(rect.left, rect.top, rect.right, rect.bottom, radius, radius, radius, radius,
-                    Math.max(1f, Math.min(dp(12), kh / 2.6f)), 0.25f + p * 0.6f, 1.5f, 0);
+            glass.update(rect.width(), rect.height(), rect.left, rect.top, radius, radius, radius, radius,
+                    Math.max(1f, Math.min(dp(12), kh / 2.6f)), 0.25f + p * 0.6f, 1.5f, 0, 0, 0, 1);
             canvas.drawRenderNode(trackNode);
         } else {
             drawTrack(canvas, x, cy);
