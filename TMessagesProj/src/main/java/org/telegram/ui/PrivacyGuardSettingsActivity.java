@@ -106,7 +106,7 @@ public class PrivacyGuardSettingsActivity extends BaseFragment {
     private void fillRows(ArrayList<UItem> items) {
         final boolean supported = PrivacyGuardSettings.isSupported();
         final boolean enrolled = OwnerFaceStore.hasOwner();
-        final boolean enabled = PrivacyGuardSettings.isEnabled() && enrolled;
+        final boolean enabled = PrivacyGuardSettings.isSwitchedOn() && enrolled;
 
         items.add(UItem.asCheck(ENABLED, LocaleController.getString(R.string.PrivacyGuard)).setChecked(enabled).setEnabled(supported));
         items.add(UItem.asShadow(LocaleController.getString(supported ? R.string.PrivacyGuardAbout : R.string.PrivacyGuardUnsupported)));
@@ -171,7 +171,7 @@ public class PrivacyGuardSettingsActivity extends BaseFragment {
                 if (!PrivacyGuardSettings.isSupported()) {
                     return;
                 }
-                if (PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner()) {
+                if (PrivacyGuardSettings.isSwitchedOn() && OwnerFaceStore.hasOwner()) {
                     PrivacyGuardSettings.setEnabled(false);
                     update();
                 } else {

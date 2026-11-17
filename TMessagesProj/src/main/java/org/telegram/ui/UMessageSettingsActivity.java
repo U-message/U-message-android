@@ -547,7 +547,7 @@ public class UMessageSettingsActivity extends BaseFragment {
         if (on(org.telegram.messenger.UMessageRemoteFlags.PRIVACY_GUARD)) {
             items.add(UItem.asHeader(LocaleController.getString(R.string.UMessageSectionProtection)));
             items.add(UItem.asButton(PRIVACY_GUARD, LocaleController.getString(R.string.PrivacyGuard),
-                    LocaleController.getString(PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff)));
+                    LocaleController.getString(PrivacyGuardSettings.isSwitchedOn() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff)));
             items.add(UItem.asShadow(null));
         }
 

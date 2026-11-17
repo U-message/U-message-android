@@ -23,6 +23,7 @@ public final class PrivacyGuardSettings {
 
     private static final String PREFS = "umessage_privacy_guard";
     private static final String KEY_ENABLED = "enabled";
+    private static final String KEY_PAUSED = "paused";
     private static final String KEY_PASSCODE_HASH = "passcode_hash";
     private static final String KEY_PASSCODE_SALT = "passcode_salt";
     private static final String KEY_MODE = "mode";
@@ -45,13 +46,28 @@ public final class PrivacyGuardSettings {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
+    /** Switched on in settings and not paused from the chats screen: the guard is actually watching. */
     public static boolean isEnabled() {
+        return isSwitchedOn() && !isPaused();
+    }
+
+    /** The settings switch; while on, the chats screen shows a shield to pause and resume the guard. */
+    public static boolean isSwitchedOn() {
         if (!org.telegram.messenger.UMessageRemoteFlags.isEnabled(org.telegram.messenger.UMessageRemoteFlags.PRIVACY_GUARD)) return false;
         return isSupported() && prefs().getBoolean(KEY_ENABLED, false);
     }
 
     public static void setEnabled(boolean enabled) {
-        prefs().edit().putBoolean(KEY_ENABLED, enabled).apply();
+        prefs().edit().putBoolean(KEY_ENABLED, enabled).putBoolean(KEY_PAUSED, false).apply();
+        PrivacyGuardController.getInstance().onSettingsChanged();
+    }
+
+    public static boolean isPaused() {
+        return prefs().getBoolean(KEY_PAUSED, false);
+    }
+
+    public static void setPaused(boolean paused) {
+        prefs().edit().putBoolean(KEY_PAUSED, paused).apply();
         PrivacyGuardController.getInstance().onSettingsChanged();
     }
 

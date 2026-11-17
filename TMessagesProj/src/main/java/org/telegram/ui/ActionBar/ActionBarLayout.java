@@ -2512,6 +2512,7 @@ public class ActionBarLayout extends FrameLayout implements INavigationLayout, F
             onFragmentStackChangedListener.run();
         }
         ImageLoader.getInstance().onFragmentStackChanged();
+        org.telegram.messenger.privacyguard.PrivacyGuardController.getInstance().wake(); // U message
         checkBlackScreen(action);
     }
 

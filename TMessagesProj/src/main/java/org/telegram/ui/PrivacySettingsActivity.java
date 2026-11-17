@@ -1391,7 +1391,7 @@ public class PrivacySettingsActivity extends BaseFragment implements Notificatio
                         }
                         textCell2.setTextAndValueAndIcon(getString(R.string.Passcode), value, true, icon, true);
                     } else if (position == privacyGuardRow) {
-                        value = getString(PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff);
+                        value = getString(PrivacyGuardSettings.isSwitchedOn() && OwnerFaceStore.hasOwner() ? R.string.PasswordOn : R.string.PasswordOff);
                         textCell2.setTextAndValueAndIcon(getString(R.string.PrivacyGuard), value, true, R.drawable.outline_shield_check, true);
                     } else if (position == blockedRow) {
                         int totalCount = getMessagesController().totalBlockedCount;

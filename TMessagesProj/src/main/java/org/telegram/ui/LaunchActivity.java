@@ -8682,9 +8682,38 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         return false;
     }
 
+    private long lastVolumeUpTime;
+
+    /** U message: two quick volume-up presses pause or resume Privacy Guard (only while it is switched on in settings). */
+    private void checkPrivacyGuardVolumeToggle() {
+        final long now = android.os.SystemClock.uptimeMillis();
+        final boolean doublePress = now - lastVolumeUpTime < 450;
+        lastVolumeUpTime = doublePress ? 0 : now;
+        if (!doublePress || VoIPService.getSharedInstance() != null
+                || !org.telegram.messenger.privacyguard.PrivacyGuardSettings.isSwitchedOn()
+                || !org.telegram.messenger.privacyguard.OwnerFaceStore.hasOwner()) {
+            return;
+        }
+        final boolean pause = !org.telegram.messenger.privacyguard.PrivacyGuardSettings.isPaused();
+        if (!pause && !org.telegram.messenger.privacyguard.PrivacyGuardController.hasCameraPermission()) {
+            presentFragment(new PrivacyGuardSettingsActivity());
+            return;
+        }
+        org.telegram.messenger.privacyguard.PrivacyGuardSettings.setPaused(pause);
+        try {
+            getWindow().getDecorView().performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS, android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+        } catch (Exception ignore) {}
+        org.telegram.ui.Components.UMessageToggleHud.show(this, pause ? R.drawable.outline_shield_plain_24 : R.drawable.outline_shield_check,
+                LocaleController.getString(R.string.PrivacyGuard),
+                LocaleController.getString(pause ? R.string.PrivacyGuardPaused : R.string.PrivacyGuardResumed), !pause);
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         int keyCode = event.getKeyCode();
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+            checkPrivacyGuardVolumeToggle();
+        }
         if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) {
             BaseFragment baseFragment = getLastFragment();
             if (baseFragment != null && baseFragment.getLastStoryViewer() != null) {

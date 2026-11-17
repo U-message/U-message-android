@@ -12980,6 +12980,8 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageOfficeShareApps">Share to other apps</string>
     <string name="UMessageOfficeUnsaved">Your edited file isn\'t saved on your phone yet. Save it to Downloads?</string>
     <string name="UMessageOfficeSent">File sent</string>
+    <string name="PrivacyGuardPaused">Privacy Guard paused</string>
+    <string name="PrivacyGuardResumed">Privacy Guard is on</string>
     <string name="UMessageInviteText">Hey, I\'m using U message to chat. Join me! Download it here: %1$s</string>
     <string name="UMessageShareApp">Share U message</string>
     <string name="UMessageInviteShort">Invite to U message</string>

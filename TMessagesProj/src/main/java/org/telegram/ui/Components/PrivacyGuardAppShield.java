@@ -177,6 +177,7 @@ public class PrivacyGuardAppShield extends FrameLayout implements PrivacyGuardCo
         attached = false;
         AndroidUtilities.cancelRunOnUIThread(releaseHold);
         removePasscode();
+        PrivacyGuardController.getInstance().setHoldAwake(false);
         PrivacyGuardController.getInstance().detach(this);
         PrivacyGuardController.getInstance().setAppShieldActive(false);
         if (flagSecure != null) {
@@ -239,6 +240,7 @@ public class PrivacyGuardAppShield extends FrameLayout implements PrivacyGuardCo
             return;
         }
         hidden = hide;
+        PrivacyGuardController.getInstance().setHoldAwake(hide);
         updatePillText();
         if (animator != null) {
             animator.cancel();

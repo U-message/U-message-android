@@ -2015,6 +2015,8 @@
     <string name="UMessageOfficeShareApps">Compartilhar em outros apps</string>
     <string name="UMessageOfficeUnsaved">O arquivo editado ainda não foi salvo no seu telefone. Salvar em Downloads?</string>
     <string name="UMessageOfficeSent">Arquivo enviado</string>
+    <string name="PrivacyGuardPaused">Privacy Guard pausado</string>
+    <string name="PrivacyGuardResumed">Privacy Guard ativado</string>
     <string name="UMessageInviteText">Oi, estou usando o U message para conversar. Junte-se a mim! Baixe aqui: %1$s</string>
     <string name="UMessageShareApp">Compartilhar U message</string>
     <string name="UMessageInviteShort">Convidar para o U message</string>

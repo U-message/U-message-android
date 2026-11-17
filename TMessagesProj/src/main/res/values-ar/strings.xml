@@ -1983,6 +1983,8 @@
     <string name="UMessageOfficeShareApps">مشاركة إلى تطبيقات أخرى</string>
     <string name="UMessageOfficeUnsaved">لم يُحفظ الملف المعدّل على هاتفك بعد. هل تريد حفظه في التنزيلات؟</string>
     <string name="UMessageOfficeSent">تم إرسال الملف</string>
+    <string name="PrivacyGuardPaused">تم إيقاف حارس الخصوصية مؤقتًا</string>
+    <string name="PrivacyGuardResumed">حارس الخصوصية مفعّل</string>
     <string name="UMessageInviteText">مرحبًا، أنا أستخدم U message للدردشة. انضم إلي! نزّله من هنا: %1$s</string>
     <string name="UMessageShareApp">مشاركة U message</string>
     <string name="UMessageInviteShort">دعوة إلى U message</string>

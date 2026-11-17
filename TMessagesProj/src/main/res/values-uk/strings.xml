@@ -1014,6 +1014,8 @@
     <string name="UMessageOfficeShareApps">Поділитися в інші застосунки</string>
     <string name="UMessageOfficeUnsaved">Змінений файл ще не збережено на телефоні. Зберегти в «Завантаження»?</string>
     <string name="UMessageOfficeSent">Файл надіслано</string>
+    <string name="PrivacyGuardPaused">Захист від чужих очей призупинено</string>
+    <string name="PrivacyGuardResumed">Захист від чужих очей увімкнено</string>
     <string name="UMessageInviteText">Привіт, я спілкуюся в U message. Приєднуйся! Завантажити: %1$s</string>
     <string name="UMessageShareApp">Поділитися U message</string>
     <string name="UMessageInviteShort">Запросити в U message</string>

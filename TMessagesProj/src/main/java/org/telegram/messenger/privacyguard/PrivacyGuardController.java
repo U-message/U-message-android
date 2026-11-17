@@ -48,6 +48,12 @@ public final class PrivacyGuardController {
     private boolean enrollmentActive;
     private boolean appShieldActive;
     private BroadcastReceiver screenReceiver;
+    // App-wide guard: the camera runs only for a short check after the app opens or the page changes,
+    // and keeps running while the cover is up so the owner's face can still open it.
+    private static final long WAKE_MS = 4000;
+    private boolean sleeping;
+    private boolean holdAwake;
+    private final Runnable sleepRunnable = this::trySleep;
 
     private PrivacyGuardController() {
     }
@@ -56,6 +62,8 @@ public final class PrivacyGuardController {
     public void attach(Host host) {
         this.host = host;
         registerScreenReceiver();
+        sleeping = false;
+        scheduleSleep();
         update();
         host.onPrivacyGuardStatus(status);
     }
@@ -66,6 +74,8 @@ public final class PrivacyGuardController {
             return;
         }
         this.host = null;
+        AndroidUtilities.cancelRunOnUIThread(sleepRunnable);
+        sleeping = false;
         unregisterScreenReceiver();
         update();
     }
@@ -91,6 +101,52 @@ public final class PrivacyGuardController {
         appShieldActive = active;
     }
 
+    /** The page changed: let the camera take one more look, if it is not already running. */
+    public void wake() {
+        if (host == null || !appShieldActive) {
+            return;
+        }
+        scheduleSleep();
+        if (sleeping) {
+            sleeping = false;
+            update();
+        }
+    }
+
+    /** The cover is up: keep the camera on until it is lifted. */
+    public void setHoldAwake(boolean hold) {
+        if (holdAwake == hold) {
+            return;
+        }
+        holdAwake = hold;
+        if (!hold) {
+            scheduleSleep();
+        } else if (sleeping) {
+            sleeping = false;
+            update();
+        }
+    }
+
+    private void scheduleSleep() {
+        AndroidUtilities.cancelRunOnUIThread(sleepRunnable);
+        AndroidUtilities.runOnUIThread(sleepRunnable, WAKE_MS);
+    }
+
+    private void trySleep() {
+        if (host == null || !appShieldActive || sleeping) {
+            return;
+        }
+        if (holdAwake || status.isProtected() || status.state != PrivacyGuardStateMachine.State.SAFE_OWNER_ONLY && engine != null) {
+            // no clear "owner only" verdict yet: look a little longer
+            if (!holdAwake) {
+                scheduleSleep();
+            }
+            return;
+        }
+        sleeping = true;
+        update();
+    }
+
     public boolean isAppShieldActive() {
         return appShieldActive;
     }
@@ -104,7 +160,7 @@ public final class PrivacyGuardController {
     }
 
     private void update() {
-        final boolean shouldRun = host != null && screenOn && !enrollmentActive
+        final boolean shouldRun = host != null && screenOn && !enrollmentActive && !sleeping
                 && PrivacyGuardSettings.isEnabled() && OwnerFaceStore.hasOwner() && hasCameraPermission();
         if (shouldRun) {
             if (engine == null) {
@@ -136,7 +192,10 @@ public final class PrivacyGuardController {
             engine.stop();
             engine = null;
             OwnerFaceStore.clearCache();
-            setStatus(PrivacyGuardStatus.DISABLED);
+            // asleep between checks: keep the last verdict so the cover does not change
+            if (!sleeping) {
+                setStatus(PrivacyGuardStatus.DISABLED);
+            }
         } else {
             setStatus(PrivacyGuardStatus.DISABLED);
         }
