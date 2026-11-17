@@ -2139,4 +2139,5 @@
     <string name="UMessageHiddenPickHint">Wähle Chats aus und blende sie aus. Sie öffnen sich nur hier, mit deiner PIN.</string>
     <string name="UMessageHideChatsButton">Chats ausblenden</string>
     <string name="UMessageHiddenPickNone">Chats zum Ausblenden auswählen</string>
+    <string name="UMessageAccountPinFor">PIN für %1$s</string>
 </resources>

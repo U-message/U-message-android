@@ -1864,4 +1864,5 @@
     <string name="UMessageHiddenPickHint">Kies chats en verberg ze. Ze openen alleen hier, met je pincode.</string>
     <string name="UMessageHideChatsButton">Chats verbergen</string>
     <string name="UMessageHiddenPickNone">Kies chats om te verbergen</string>
+    <string name="UMessageAccountPinFor">Pincode voor %1$s</string>
 </resources>

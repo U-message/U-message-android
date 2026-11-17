@@ -13008,4 +13008,5 @@ GitHub Pages will be turned on and one file, %4$s, will be committed to this bra
     <string name="UMessageHiddenPickHint">Choose chats and hide them. They will open only here, with your PIN.</string>
     <string name="UMessageHideChatsButton">Hide chats</string>
     <string name="UMessageHiddenPickNone">Select chats to hide</string>
+    <string name="UMessageAccountPinFor">PIN for %1$s</string>
 </resources>

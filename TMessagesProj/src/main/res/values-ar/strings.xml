@@ -2011,4 +2011,5 @@
     <string name="UMessageHiddenPickHint">اختر المحادثات وأخفِها. ستُفتح هنا فقط برمز PIN الخاص بك.</string>
     <string name="UMessageHideChatsButton">إخفاء المحادثات</string>
     <string name="UMessageHiddenPickNone">اختر محادثات لإخفائها</string>
+    <string name="UMessageAccountPinFor">رمز PIN لـ %1$s</string>
 </resources>

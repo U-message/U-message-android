@@ -1472,4 +1472,5 @@
     <string name="UMessageHiddenPickHint">Выберите чаты и скройте их. Они будут открываться только здесь, по вашему PIN-коду.</string>
     <string name="UMessageHideChatsButton">Скрыть чаты</string>
     <string name="UMessageHiddenPickNone">Выберите чаты, чтобы скрыть</string>
+    <string name="UMessageAccountPinFor">PIN-код для %1$s</string>
 </resources>

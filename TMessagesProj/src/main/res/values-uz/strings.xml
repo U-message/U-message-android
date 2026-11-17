@@ -1373,4 +1373,5 @@ GitHub Pages yoqiladi va shu branch’ga bitta fayl commit qilinadi: %4$s</strin
     <string name="UMessageHiddenPickHint">Chatlarni tanlab yashiring. Ular faqat shu yerda, kodingiz bilan ochiladi.</string>
     <string name="UMessageHideChatsButton">Chatlarni yashirish</string>
     <string name="UMessageHiddenPickNone">Yashirish uchun chatlarni tanlang</string>
+    <string name="UMessageAccountPinFor">%1$s uchun kod</string>
 </resources>

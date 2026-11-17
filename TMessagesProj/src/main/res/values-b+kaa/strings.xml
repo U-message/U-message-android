@@ -12381,4 +12381,5 @@ GitHub Pages qosıladı hám usı branch’qa bir fayl commit etiledi: %4$s</str
     <string name="UMessageHiddenPickHint">Chatlardı tańlap jasırıń. Olar tek usı jerde, kodıńız benen ashıladı.</string>
     <string name="UMessageHideChatsButton">Chatlardı jasırıw</string>
     <string name="UMessageHiddenPickNone">Jasırıw ushın chatlardı tańlań</string>
+    <string name="UMessageAccountPinFor">%1$s ushın kod</string>
 </resources>

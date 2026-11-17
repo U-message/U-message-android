@@ -2331,4 +2331,5 @@
     <string name="UMessageHiddenPickHint">Scegli le chat e nascondile. Si apriranno solo qui, con il tuo PIN.</string>
     <string name="UMessageHideChatsButton">Nascondi chat</string>
     <string name="UMessageHiddenPickNone">Scegli le chat da nascondere</string>
+    <string name="UMessageAccountPinFor">PIN per %1$s</string>
 </resources>

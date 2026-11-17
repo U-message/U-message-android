@@ -1042,4 +1042,5 @@
     <string name="UMessageHiddenPickHint">Виберіть чати й приховайте їх. Вони відкриватимуться лише тут, за вашим PIN-кодом.</string>
     <string name="UMessageHideChatsButton">Приховати чати</string>
     <string name="UMessageHiddenPickNone">Виберіть чати, щоб приховати</string>
+    <string name="UMessageAccountPinFor">PIN-код для %1$s</string>
 </resources>
